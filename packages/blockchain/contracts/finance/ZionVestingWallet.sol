@@ -2,11 +2,11 @@
 // OpenZeppelin Contracts v4.3.2 (finance/VestingWallet.sol)
 pragma solidity ^0.8.0;
 
-import "../oz/token/ERC20/utils/SafeERC20.sol";
-import "../oz/utils/Address.sol";
-import "../oz/utils/Context.sol";
-import "../oz/utils/math/Math.sol";
-import "../oz/utils/introspection/ERC165.sol";
+import "../token/ERC20/utils/SafeERC20.sol";
+import "../utils/Address.sol";
+import "../utils/Context.sol";
+import "../utils/math/Math.sol";
+import "../utils/introspection/ERC165.sol";
 
 import "./IZionVestingWallet.sol";
 
@@ -24,7 +24,6 @@ import "hardhat/console.sol";
  * be immediately releasable.
  */
 contract ZionVestingWallet is IZionVestingWallet, ERC165, Context {
-
     uint256 private _released;
     mapping(address => uint256) private _erc20Released;
     address private immutable _beneficiary;
@@ -39,16 +38,25 @@ contract ZionVestingWallet is IZionVestingWallet, ERC165, Context {
         uint64 startTimestamp,
         uint64 durationSeconds
     ) {
-        require(beneficiaryAddress != address(0), "VestingWallet: beneficiary is zero address");
+        require(
+            beneficiaryAddress != address(0),
+            "VestingWallet: beneficiary is zero address"
+        );
         _beneficiary = beneficiaryAddress;
         _start = startTimestamp;
         _duration = durationSeconds;
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165) returns(bool) {
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(ERC165)
+        returns (bool)
+    {
         return
-        interfaceId == type(IZionVestingWallet).interfaceId ||
-        super.supportsInterface(interfaceId);
+            interfaceId == type(IZionVestingWallet).interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 
     /**
@@ -75,7 +83,13 @@ contract ZionVestingWallet is IZionVestingWallet, ERC165, Context {
     /**
      * @dev Amount of token already released
      */
-    function released(address token) public view virtual override returns (uint256) {
+    function released(address token)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
         return _erc20Released[token];
     }
 
@@ -85,7 +99,8 @@ contract ZionVestingWallet is IZionVestingWallet, ERC165, Context {
      * Emits a {TokensReleased} event.
      */
     function release(address token) public virtual override {
-        uint256 releasable = vestedAmount(token, uint64(block.timestamp)) - released(token);
+        uint256 releasable = vestedAmount(token, uint64(block.timestamp)) -
+            released(token);
         _erc20Released[token] += releasable;
         emit ERC20Released(token, releasable);
         SafeERC20.safeTransfer(IERC20(token), beneficiary(), releasable);
@@ -94,15 +109,30 @@ contract ZionVestingWallet is IZionVestingWallet, ERC165, Context {
     /**
      * @dev Calculates the amount of tokens that has already vested. Default implementation is a linear vesting curve.
      */
-    function vestedAmount(address token, uint64 timestamp) public view virtual override returns (uint256) {
-        return _vestingSchedule(IERC20(token).balanceOf(address(this)) + released(token), timestamp);
+    function vestedAmount(address token, uint64 timestamp)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
+        return
+            _vestingSchedule(
+                IERC20(token).balanceOf(address(this)) + released(token),
+                timestamp
+            );
     }
 
     /**
      * @dev Virtual implementation of the vesting formula. This returns the amout vested, as a function of time, for
      * an asset given its total historical allocation.
      */
-    function _vestingSchedule(uint256 totalAllocation, uint64 timestamp) internal view virtual returns (uint256) {
+    function _vestingSchedule(uint256 totalAllocation, uint64 timestamp)
+        internal
+        view
+        virtual
+        returns (uint256)
+    {
         if (timestamp < start()) {
             return 0;
         } else if (timestamp > start() + duration()) {

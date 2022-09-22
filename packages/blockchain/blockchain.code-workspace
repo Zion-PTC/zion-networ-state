@@ -1,0 +1,60 @@
+{
+  "folders": [
+    {
+      "name": "blockchain",
+      "path": "."
+    },
+    {
+      "name": "src",
+      "path": "src"
+    },
+    {
+      "name": "test",
+      "path": "test"
+    },
+    {
+      "name": "scripts",
+      "path": "scripts"
+    },
+    {
+      "name": "access",
+      "path": "contracts/access"
+    },
+    {
+      "name": "finance",
+      "path": "contracts/finance"
+    },
+    {
+      "name": "governance",
+      "path": "contracts/governance"
+    },
+    {
+      "name": "interfaces",
+      "path": "contracts/interfaces"
+    },
+    {
+      "name": "marketplace",
+      "path": "contracts/marketplace"
+    },
+    {
+      "name": "security",
+      "path": "contracts/security"
+    },
+    {
+      "name": "token",
+      "path": "contracts/token"
+    },
+    {
+      "name": "utils",
+      "path": "contracts/utils"
+    },
+    {
+      "name": "zion",
+      "path": "contracts/zion"
+    },
+    {
+      "path": "contracts/remix"
+    }
+  ],
+  "settings": {}
+}

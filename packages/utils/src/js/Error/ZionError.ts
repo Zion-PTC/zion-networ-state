@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+// TODO create a mixin which makes a class mongoosable
 
 export interface ZionError {
   name: string;
@@ -31,14 +32,14 @@ export class ZionError extends Error {
   }
 }
 
-let zionErrorSchema = new mongoose.Schema({
-  message: String,
-  name: String,
-  cause: Object,
-  args: Object,
-});
+// let zionErrorSchema = new mongoose.Schema({
+//   message: String,
+//   name: String,
+//   cause: Object,
+//   args: Object,
+// });
 
-zionErrorSchema.loadClass(ZionError);
-export let ZionErrorDoc = mongoose.model("Error", zionErrorSchema);
+// zionErrorSchema.loadClass(ZionError);
+// export let ZionErrorDoc = mongoose.model("Error", zionErrorSchema);
 
 export default ZionError;

@@ -4,9 +4,9 @@
 pragma solidity ^0.8.0;
 
 import "./draft-ERC1155Permit.sol";
-import "../../../oz/utils/math/Math.sol";
-import "../../../oz/utils/math/SafeCast.sol";
-import "../../../oz/utils/cryptography/ECDSA.sol";
+import "../../../utils/math/Math.sol";
+import "../../../utils/math/SafeCast.sol";
+import "../../../utils/cryptography/ECDSA.sol";
 import "./ERC1155Supply.sol";
 
 abstract contract ERC1155Votes is ERC1155Permit, ERC1155Supply {
@@ -14,14 +14,6 @@ abstract contract ERC1155Votes is ERC1155Permit, ERC1155Supply {
         uint256 fromBlock;
         uint224 votes;
     }
-
-    bytes32 private constant _DELEGATION_TYPEHASH =
-        keccak256("Delegation(address delegatee,uint256 nonce,uint256 expiry)");
-
-    mapping(address => mapping(uint256 => address)) private _delegatesId;
-    mapping(address => mapping(uint256 => Checkpoint[]))
-        private _checkpointsOfIds;
-    mapping(uint256 => Checkpoint[]) private _idsTotalSupplyCheckpoints;
 
     event DelegateChanged(
         address indexed delegator,
@@ -36,6 +28,14 @@ abstract contract ERC1155Votes is ERC1155Permit, ERC1155Supply {
         uint256 previousBalance,
         uint256 newBalance
     );
+
+    bytes32 private constant _DELEGATION_TYPEHASH =
+        keccak256("Delegation(address delegatee,uint256 nonce,uint256 expiry)");
+
+    mapping(address => mapping(uint256 => address)) private _delegatesId;
+    mapping(address => mapping(uint256 => Checkpoint[]))
+        private _checkpointsOfIds;
+    mapping(uint256 => Checkpoint[]) private _idsTotalSupplyCheckpoints;
 
     function checkpoints(
         address account,
@@ -149,7 +149,7 @@ abstract contract ERC1155Votes is ERC1155Permit, ERC1155Supply {
         uint256 id,
         uint256 amount,
         bytes memory data
-    ) internal virtual override {
+    ) internal virtual override(ERC1155Struct) {
         super._mint(to, id, amount, data);
         require(
             totalSupply(id) <= _maxSupply(),
@@ -170,19 +170,24 @@ abstract contract ERC1155Votes is ERC1155Permit, ERC1155Supply {
         _writeCheckpoint(_idsTotalSupplyCheckpoints[id], _subtract, amount);
     }
 
-    function _afterTokenTransfer(TokenTransfer memory newTransfer)
+    function _afterTokenTransfer(ZionLib.TokenTransfer memory newTransfer)
         internal
         virtual
         override
     {
         super._afterTokenTransfer(newTransfer);
-        _moveVotingPower(delegates(newTransfer.from, newTransfer.ids[0]), delegates(newTransfer.to, newTransfer.ids[0]), newTransfer.ids[0], newTransfer.amounts[0]);
+        _moveVotingPower(
+            delegates(newTransfer.from, newTransfer.ids[0]),
+            delegates(newTransfer.to, newTransfer.ids[0]),
+            newTransfer.ids[0],
+            newTransfer.amounts[0]
+        );
     }
 
-    function _beforeTokenTransfer(TokenTransfer memory newTransfer)
+    function _beforeTokenTransfer(ZionLib.TokenTransfer memory newTransfer)
         internal
         virtual
-        override(ERC1155, ERC1155Supply)
+        override(ERC1155Supply, ERC1155Struct)
     {
         super._beforeTokenTransfer(newTransfer);
     }
@@ -230,13 +235,7 @@ abstract contract ERC1155Votes is ERC1155Permit, ERC1155Supply {
         Checkpoint[] storage ckpts,
         function(uint256, uint256) view returns (uint256) op,
         uint256 delta
-    )
-        private
-        returns (
-            uint256 oldWeight,
-            uint256 newWeight
-        )
-    {
+    ) private returns (uint256 oldWeight, uint256 newWeight) {
         uint256 pos = ckpts.length;
         oldWeight = pos == 0 ? 0 : ckpts[pos - 1].votes;
         newWeight = op(oldWeight, delta);

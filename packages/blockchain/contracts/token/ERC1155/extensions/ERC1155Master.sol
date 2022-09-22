@@ -3,9 +3,9 @@
 
 pragma solidity ^0.8.0;
 
-import "../../../oz/utils/Arrays.sol";
-import "../../../oz/utils/Counters.sol";
-import "../../../oz/access/Ownable.sol";
+import "../../../utils/Arrays.sol";
+import "../../../utils/Counters.sol";
+import "../../../access/Ownable.sol";
 
 import "./ERC1155Snapshot.sol";
 import "hardhat/console.sol";
@@ -20,15 +20,15 @@ abstract contract ERC1155Master is ERC1155Snapshot, Ownable {
         COPIES
     }
 
-    string private _secretLink;
-    mapping(TokensId => uint256) private _supply;
-    Counters.Counter internal _copiesSupply;
-    address internal _tokenShop;
-
     event UriSet(string newuri);
     event MasterDeposited(uint256 id);
     event TokenShopSet(address tokenShop);
     event CopyMinted(address to);
+
+    string private _secretLink;
+    mapping(TokensId => uint256) private _supply;
+    Counters.Counter internal _copiesSupply;
+    address internal _tokenShop;
 
     constructor(uint256 sharesAmount) {
         _mintMaster();
@@ -93,12 +93,32 @@ abstract contract ERC1155Master is ERC1155Snapshot, Ownable {
         currentSnapshotId = _getCurrentSnapshotId();
     }
 
-    function getAccountBalanceOfShareSnapshot(address account) external view OnlyTokenShop returns(Snapshots memory accountBalanceOfSharesSnapshot){
-        accountBalanceOfSharesSnapshot = _accountBalanceOfIdsSnapshots[account][1];
+    function getAccountBalanceOfShareSnapshot(address account)
+        external
+        view
+        OnlyTokenShop
+        returns (Snapshots memory accountBalanceOfSharesSnapshot)
+    {
+        accountBalanceOfSharesSnapshot = _accountBalanceOfIdsSnapshots[account][
+            1
+        ];
     }
 
     function sharesSupply() public view returns (uint256) {
         return _supply[TokensId.SHARES];
+    }
+
+    function setURI(string memory newuri) public onlyOwner {
+        _setURI(newuri);
+        emit UriSet(newuri);
+    }
+
+    function totalSharesSupply() public view returns (uint256) {
+        return _supply[TokensId.SHARES];
+    }
+
+    function totalCopiesSupply() public view returns (uint256) {
+        return _supply[TokensId.COPIES];
     }
 
     function _mintMaster() internal virtual returns (string memory) {
@@ -119,29 +139,17 @@ abstract contract ERC1155Master is ERC1155Snapshot, Ownable {
         _supply[TokensId.COPIES] = _copiesSupply._value;
     }
 
-    function setURI(string memory newuri) public onlyOwner {
-        _setURI(newuri);
-        emit UriSet(newuri);
-    }
-
-    function totalSharesSupply() public view returns (uint256) {
-        return _supply[TokensId.SHARES];
-    }
-
-    function totalCopiesSupply() public view returns (uint256) {
-        return _supply[TokensId.COPIES];
-    }
-
-    function _beforeTokenTransfer(TokenTransfer memory newTransfer)
+    function _beforeTokenTransfer(ZionLib.TokenTransfer memory newTransfer)
         internal
         virtual
         override
     {
         super._beforeTokenTransfer(newTransfer);
-        if (newTransfer.from == address(0)) {}
-        else if (newTransfer.ids[0] == 1) {
+        if (newTransfer.from == address(0)) {} else if (
+            newTransfer.ids[0] == 1
+        ) {
             // console.log("ERC1155Master:: called _beforeTokenTransfer()");
-                snapshotOnTransfer();
+            snapshotOnTransfer();
         } else {}
     }
 }

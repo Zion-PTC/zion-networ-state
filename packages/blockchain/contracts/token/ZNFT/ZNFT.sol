@@ -3,28 +3,40 @@
 
 pragma solidity ^0.8.0;
 
-import "../../oz/access/Ownable.sol";
-import "../../oz/utils/Context.sol";
-import "../../oz/governance/Governor.sol";
-import "../ERC1155/extensions/ERC1155Votes.sol";
-import "./IZNFT.sol";
+import "../ERC1155/zERC1155/zERC1155.sol";
+import "../ERC1155/extensions/IERC1155Receiver.sol";
 
-abstract contract ZNFT is IZNFT, Governor, Ownable {
-
-    address private _ERC20TotalSupplyLock;
-    address private _ERC1155ShareSupplyLock;
-
-    address private _znftGovernor;
-    address private _creatorsGovernor;
-    address private _teamGovernor;
-    address private _daoGovernor;
-
-    address private _shareStake;
-    address private _creatorsStake;
-    address private _teamStake;
-    address private _daoStake;
-
-    address private _ERC20TokenShop;
-    address private _ERC1155ShareTokenShop;
+// Product
+abstract contract C is zERC1155 {
 
 }
+
+// SubProduct
+abstract contract Z is zERC1155, IERC1155Receiver {
+    // type tuple is [address,uint256]
+    C[] public baseContracts;
+    mapping(C => uint256[]) baseContractsIds;
+}
+
+interface IGovernance {}
+
+// Creator
+abstract contract P is zERC1155, IGovernance, IERC1155Receiver {
+    C[] public baseContracts;
+    mapping(C => uint256[]) baseContractsIds;
+    Z[] public baseZContracts;
+    mapping(Z => uint256[]) baseZContractsIds;
+    IGovernance governance;
+
+    function addBaseContract() public virtual;
+}
+
+abstract contract PPro is zERC1155, IGovernance, IERC1155Receiver {
+    mapping(C => uint256[]) baseContractsIds;
+    mapping(Z => uint256[]) baseZContractsIds;
+    IGovernance governance;
+
+    function create() public virtual;
+}
+
+contract ZNFT {}

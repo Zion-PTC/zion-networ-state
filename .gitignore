@@ -132,3 +132,7 @@ dist
 # TernJS port file
 .tern-port
 
+packages/_testpack
+packages/blockchain/giacomo
+packages/blockchain/cache
+packages/blockchain/artifacts

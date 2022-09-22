@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "src/js"
+    },
+    {
+      "path": "src/node"
+    }
+  ],
+  "settings": {}
+}

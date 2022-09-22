@@ -8,12 +8,11 @@ interface IERC1155Master {
         uint256[] ids;
         uint256[] values;
     }
-    
+
     function balanceOf(address account, uint256 id)
         external
         view
         returns (uint256);
-    
 
     function balanceOfAt(
         address account,
@@ -21,8 +20,10 @@ interface IERC1155Master {
         uint256 snapshotId
     ) external view returns (uint256);
 
-
-    function getAccountBalanceOfShareSnapshot(address account) external view returns(Snapshots memory accountBalanceOfSharesSnapshot);
+    function getAccountBalanceOfShareSnapshot(address account)
+        external
+        view
+        returns (Snapshots memory accountBalanceOfSharesSnapshot);
 
     function totalSupply(uint256 id) external view returns (uint256);
 

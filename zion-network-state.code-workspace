@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "zion-network-state",
+      "path": "."
+    },
+    {
+      "name": "apps",
+      "path": "apps"
+    },
+    {
+      "name": "packages",
+      "path": "packages"
+    }
+  ],
+  "settings": {}
+}

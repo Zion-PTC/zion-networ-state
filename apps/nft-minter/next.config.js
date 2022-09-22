@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+import { config } from "dotenv";
+config();
+
 export default {
   eslint: {
     ignoreDuringBuilds: true,
@@ -7,4 +10,5 @@ export default {
   compiler: {
     styledComponents: true,
   },
+  env: { infura: process.env.INFURA },
 };

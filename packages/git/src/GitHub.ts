@@ -1,5 +1,5 @@
-import { Octokit } from "@octokit/rest";
-import { OctokitOptions } from "./Types/index.js";
+import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
+import { OctokitOptions } from "./Types/Oktokit";
 
 enum Owners {
   giacomogagliano = "giacomogagliano",
@@ -12,9 +12,22 @@ export interface IZionGitHub {
   createRepoForAuthUser(name: string): Promise<void>;
   createRepoForOrg(org: OwnersType, name: string): Promise<void>;
   deleteRepo(owner: OwnersType, repo: string): Promise<void>;
+  editRepo(owner: OwnersType, repo: string, name: string): Promise<void>;
+  getAuthenticatedUser(
+    params?: RestEndpointMethodTypes["users"]["getAuthenticated"]["parameters"]
+  ): Promise<RestEndpointMethodTypes["users"]["getAuthenticated"]["response"]>;
+  getUserByUserName(
+    username: string,
+    baseUrl?: string
+  ): Promise<RestEndpointMethodTypes["users"]["getAuthenticated"]["response"]>;
 }
-
-export class ZionGitHub implements OctokitOptions, IZionGitHub {
+/**
+ * Usage:
+ * ```js
+ * const github = new ZionGitHub(process.env.TOKEN);
+ * ```
+ */
+export class ZionGitHub implements IZionGitHub {
   zionOctoKit: Octokit;
   options: OctokitOptions;
   /**
@@ -79,5 +92,16 @@ export class ZionGitHub implements OctokitOptions, IZionGitHub {
   }
   async editRepo(owner: OwnersType, repo: string, name: string) {
     await this.zionOctoKit.repos.update({ owner: Owners[owner], repo, name });
+  }
+  async getAuthenticatedUser(
+    params?: RestEndpointMethodTypes["users"]["getAuthenticated"]["parameters"]
+  ) {
+    if (params) return await this.zionOctoKit.users.getAuthenticated(params);
+    return await this.zionOctoKit.users.getAuthenticated();
+  }
+  async getUserByUserName(username: string, baseUrl?: string) {
+    const getByUsername = this.zionOctoKit.users.getByUsername;
+    if (baseUrl) return getByUsername({ username, baseUrl });
+    return await getByUsername({ username });
   }
 }

@@ -2,9 +2,9 @@
 // Copyright Giacomo Gagliano and Zion Protocol contributors
 
 pragma solidity ^0.8.0;
-import "../oz/access/Ownable.sol";
-import "../oz/token/ERC20/IERC20.sol";
-import "../oz/utils/math/SafeMath.sol";
+import "../access/Ownable.sol";
+import "../token/ERC20/IERC20.sol";
+import "../utils/math/SafeMath.sol";
 
 import "../token presets/ERC1155/Membership.sol";
 
@@ -69,7 +69,14 @@ contract TokenShop is Ownable {
         tokenContract = tokenContract_;
         price = price_;
         transferOwnership(owner);
-        emit ShopCreated(address(this), owner, membership, tokenUsedForPayement, tokenContract, price);
+        emit ShopCreated(
+            address(this),
+            owner,
+            membership,
+            tokenUsedForPayement,
+            tokenContract,
+            price
+        );
     }
 
     /// @dev modifier which checks if msg sender has a membership token.
@@ -138,13 +145,9 @@ contract TokenShop is Ownable {
         return (true, amount);
     }
 
-    function withdrawRaisedCapital()
-        public
-        onlyOwner
-        returns (bool)
-    {
+    function withdrawRaisedCapital() public onlyOwner returns (bool) {
         _beforeWithdrawRaisedCapital();
-        
+
         tokenUsedForPayement.transfer(msg.sender, raisedCapital);
         emit CapitalWithdrawal(msg.sender, raisedCapital);
         return true;

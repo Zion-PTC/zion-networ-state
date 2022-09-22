@@ -3,8 +3,8 @@
 
 pragma solidity ^0.8.0;
 
-import "../oz/utils/Context.sol";
-import "../oz/token/ERC20/IERC20.sol";
+import "../utils/Context.sol";
+import "../token/ERC20/IERC20.sol";
 
 import "../token/ERC721/IERC721.sol";
 import "./IERC721Staking.sol";
@@ -55,8 +55,8 @@ contract ERC721Staking is IERC721Staking, Context {
 
     function earned(address account) public view override returns (uint256) {
         return
-            (_balances[account] *
-                (rewardPerToken() - userRewardPerTokenPaid[account]) / 1e18) +
+            ((_balances[account] *
+                (rewardPerToken() - userRewardPerTokenPaid[account])) / 1e18) +
             rewards[account];
     }
 

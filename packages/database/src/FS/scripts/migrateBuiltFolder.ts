@@ -2,12 +2,13 @@
 import fs from "fs";
 import { jsconfigJSON, tsconfigJSON } from "../lib/types/index.js";
 import { join } from "path";
-import { js } from "@zionstate/utils";
+import { js, node } from "@zionstate/utils";
 import { deleteFolder } from "../lib/deleteFolder.js";
 import { writeFile } from "../lib/writeFile.js";
 import { getKnownData } from "../lib/getKnownData.js";
 import { changePackJson, changeTsConfig } from "../lib/edit.js";
-import { runProcess } from "../../IPFS/lib/runProcess.js";
+
+const runProcess = node.process.runProcess;
 
 const { ZionRegexp } = js;
 const { ZionRegExp } = ZionRegexp;

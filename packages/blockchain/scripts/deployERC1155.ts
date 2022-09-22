@@ -1,7 +1,10 @@
 import { ethers } from "hardhat";
+import "@nomiclabs/hardhat-ethers";
 import { calculateTxCost } from "../src/lib/calculateTxCost";
 import { printDeployLog } from "../src/lib/printDeployLog";
 import { retrieveTxDatas } from "../src/lib/retrieveTxDatas";
+import type { erc1155IndividualUriSol } from "../typechain-types/zion/test";
+type ERC1155IndividualURI = erc1155IndividualUriSol.ERC1155IndividualURI;
 
 const CONTRACTNAME = "ERC1155IndividualURI";
 const FILEPATH = "./contract-deployment-ERC1155IndividualURI.json";
@@ -18,8 +21,7 @@ async function main() {
   console.log(DEPLOYMESS + deployer.address);
   console.log(BALANCEMESS + balance);
   const Contract = await ethers.getContractFactory(CONTRACTNAME);
-  const instance = await Contract.deploy("");
-  console.log(instance);
+  const instance = (await Contract.deploy("")) as ERC1155IndividualURI;
   const data = retrieveTxDatas(instance.deployTransaction);
   const { chainId, gasPrice, blockHash, blockNumber, from, hash, gasLimit } =
     data;
@@ -36,6 +38,7 @@ async function main() {
     gasLimit,
     txCost
   );
+  instance.functions;
   console.log(ADDMESS + instance.address);
   console.log(SUCCESSMESS + FILEPATH);
   console.log(log);

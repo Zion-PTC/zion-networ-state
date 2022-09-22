@@ -3,12 +3,12 @@
 
 pragma solidity ^0.8.0;
 
-import "../oz/governance/Governor.sol";
-import "../oz/governance/IGovernor.sol";
-import "../oz/governance/extensions/GovernorSettings.sol";
-import "../oz/governance/extensions/GovernorCountingSimple.sol";
-import "../oz/governance/extensions/GovernorVotes.sol";
-import "../oz/governance/extensions/GovernorVotesQuorumFraction.sol";
+import "./Governor.sol";
+import "./IGovernor.sol";
+import "./extensions/GovernorSettings.sol";
+import "./extensions/GovernorCountingSimple.sol";
+import "./extensions/GovernorVotes.sol";
+import "./extensions/GovernorVotesQuorumFraction.sol";
 
 contract ZionDao is
     Governor,
@@ -97,13 +97,13 @@ contract ZionDao is
         return super.proposalThreshold();
     }
 
-    function voteSucceded(uint256 proposalId) public view returns(bool) {
+    function voteSucceded(uint256 proposalId) public view returns (bool) {
         return _voteSucceeded(proposalId);
     }
 
-    function quorumReached(uint256 proposalId) public view returns(bool) {
+    function quorumReached(uint256 proposalId) public view returns (bool) {
         return _quorumReached(proposalId);
-    } 
+    }
 
     function executor() public view returns (address) {
         return _executor();

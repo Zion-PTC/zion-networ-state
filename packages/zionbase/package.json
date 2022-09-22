@@ -1,0 +1,24 @@
+{
+  "name": "@zionstate/zionbase",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Zion zionbase",
+  "source": "src/index.ts",
+  "main": "dist/zionstate-zionbase.cjs.js",
+  "module": "dist/zionstate-zionbase.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "preconstruct": {
+    "entrypoint": [
+      "src/index.ts"
+    ]
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "run-p build:*",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit"
+  }
+}

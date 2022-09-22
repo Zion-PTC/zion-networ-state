@@ -5,7 +5,7 @@
 
 pragma solidity ^0.8.0;
 
-import "../oz/utils/Context.sol";
+import "../utils/Context.sol";
 
 import "../token/ERC1155/IERC1155.sol";
 import "./IERC1155Staking.sol";

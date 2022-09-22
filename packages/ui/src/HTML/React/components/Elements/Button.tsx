@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { ButtonProps } from "./types";
+import { ButtonStyle } from "./Types";
 
-// TODO button props
-export const Button = styled.button<{ props?: ButtonProps<{}> }>`
+export const Button = styled.button<{ props?: ButtonStyle<{}> }>`
   display: grid;
   line-height: 1.2;
   font-size: 70%;

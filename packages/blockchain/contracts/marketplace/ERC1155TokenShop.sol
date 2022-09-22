@@ -3,13 +3,13 @@
 
 pragma solidity ^0.8.0;
 
-import "../oz/token/ERC1155/utils/ERC1155Receiver.sol";
-import "../oz/token/ERC20/IERC20.sol";
-import "../oz/token/ERC1155/IERC1155.sol";
-import "../oz/utils/math/SafeMath.sol";
-import "../oz/utils/Context.sol";
+import "../token/ERC1155/extensions/ERC1155Receiver.sol";
+import "../token/ERC20/IERC20.sol";
+import "../token/ERC1155/IERC1155.sol";
+import "../utils/math/SafeMath.sol";
+import "../utils/Context.sol";
 
-import "../token presets/ERC1155/Membership.sol";
+import "../zion_contracts/Membership.sol";
 import "./IERC1155TokenShop.sol";
 
 contract ERC1155TokenShop is IERC1155TokenShop, ERC1155Receiver, Context {
@@ -94,7 +94,12 @@ contract ERC1155TokenShop is IERC1155TokenShop, ERC1155Receiver, Context {
         return _price;
     }
 
-    function getRaisedCapital() public view override returns (uint256 raisedCapital) {
+    function getRaisedCapital()
+        public
+        view
+        override
+        returns (uint256 raisedCapital)
+    {
         return _getRaisedCapital();
     }
 
@@ -118,7 +123,11 @@ contract ERC1155TokenShop is IERC1155TokenShop, ERC1155Receiver, Context {
         return (true, amount);
     }
 
-    function withdrawRaisedCapital(uint256 amount) public override returns (bool) {
+    function withdrawRaisedCapital(uint256 amount)
+        public
+        override
+        returns (bool)
+    {
         address claimer = _msgSender();
 
         _beforeWithdrawRaisedCapital(claimer, amount);
@@ -148,7 +157,7 @@ contract ERC1155TokenShop is IERC1155TokenShop, ERC1155Receiver, Context {
         return this.onERC1155BatchReceived.selector;
     }
 
-    function _getRaisedCapital() internal view returns(uint256 raisedCapital) {
+    function _getRaisedCapital() internal view returns (uint256 raisedCapital) {
         raisedCapital = _raisedCapital;
     }
 
@@ -173,7 +182,10 @@ contract ERC1155TokenShop is IERC1155TokenShop, ERC1155Receiver, Context {
 
         // (bool executed, Status status) = _setShopStatus(id);
 
-        require(getShopStatus() == Status.ACTIVE, "Token sale is Currently closed");
+        require(
+            getShopStatus() == Status.ACTIVE,
+            "Token sale is Currently closed"
+        );
         uint256 cost = amount * _price;
         tokensBoughtByBuyer[msg.sender][id] += amount;
         _tokenUsedForPayement.transferFrom(msg.sender, address(this), cost);

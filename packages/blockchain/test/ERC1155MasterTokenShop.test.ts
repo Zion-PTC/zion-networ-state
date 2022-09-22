@@ -1,3 +1,5 @@
+import "@nomicfoundation/hardhat-toolbox";
+import "@nomiclabs/hardhat-ethers";
 import { time, loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import { expect } from "chai";
@@ -12,7 +14,7 @@ import {
   ProvaMaster__factory,
   USDC,
   USDC__factory,
-} from "../typechain-types";
+} from "../src/types/contracts/";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 let ERC1155MasterTokenShop: ERC1155MasterTokenShop__factory,
@@ -33,15 +35,19 @@ let ERC1155MasterTokenShop: ERC1155MasterTokenShop__factory,
 
 beforeEach("SetUp", async () => {
   [prod1, prod2, prod3, buyer1, buyer2, buyer3, _] = await ethers.getSigners();
-  ProvaMaster = await ethers.getContractFactory("ProvaMaster");
+  ProvaMaster = (await ethers.getContractFactory(
+    "ProvaMaster"
+  )) as ProvaMaster__factory;
   provaMaster = await ProvaMaster.deploy();
-  USDC = await ethers.getContractFactory("USDC");
+  USDC = (await ethers.getContractFactory("USDC")) as USDC__factory;
   usdc = await USDC.deploy();
-  Membership = await ethers.getContractFactory("Membership");
+  Membership = (await ethers.getContractFactory(
+    "Membership"
+  )) as Membership__factory;
   membership = await Membership.deploy();
-  ERC1155MasterTokenShop = await ethers.getContractFactory(
+  ERC1155MasterTokenShop = (await ethers.getContractFactory(
     "ERC1155MasterTokenShop"
-  );
+  )) as ERC1155MasterTokenShop__factory;
   erc1155masterShop = await ERC1155MasterTokenShop.deploy(
     provaMaster.address,
     1,

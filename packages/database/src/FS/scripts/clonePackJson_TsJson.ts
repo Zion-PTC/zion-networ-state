@@ -3,7 +3,9 @@ import { jsconfigJSON, tsconfigJSON } from "../lib/types/index.js";
 import { join } from "path";
 import { changeJson, changePackJson } from "../lib/edit.js";
 import { writeFile } from "../lib/writeFile.js";
-import { runProcess } from "../../IPFS/lib/runProcess.js";
+import { node } from "@zionstate/utils";
+
+const runProcess = node.process.runProcess;
 
 const source = "/Users/WAW/Documents/Projects/ZION/packages/@zionstate/newui";
 const target = "/Users/WAW/Documents/Projects/ZION/packages/@zionstate/ui";

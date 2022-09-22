@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "src/HTML/React"
+    },
+    {
+      "path": "src/HTML/Next"
+    }
+  ],
+  "settings": {}
+}

@@ -1,4 +1,3 @@
-export * from "./Card";
 export * from "./Landscape";
 export * from "./Portrait";
 export * from "./Resource";

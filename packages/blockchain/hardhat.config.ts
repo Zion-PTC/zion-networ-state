@@ -1,5 +1,8 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "@typechain/hardhat";
+import "@nomiclabs/hardhat-ethers";
+import "./tasks/index.ts";
 import { config as dotenv } from "dotenv";
 dotenv();
 
@@ -18,6 +21,15 @@ const config: HardhatUserConfig = {
       url: INFURA_GOERLI_URI,
       accounts: [PRIVATE_KEY],
     },
+  },
+  typechain: {
+    outDir: "src/types/contracts",
+  },
+  paths: {
+    sources: "./contracts/zion_contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
   },
 };
 

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../oz/token/ERC1155/IERC1155.sol";
-import "../oz/utils/Context.sol";
+import "../token/ERC1155/IERC1155.sol";
+import "../utils/Context.sol";
 
 abstract contract MembershipAccess is Context {
     modifier onlyTokenHolders(uint256 id) {

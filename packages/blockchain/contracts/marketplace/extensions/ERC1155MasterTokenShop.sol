@@ -3,10 +3,10 @@
 
 pragma solidity ^0.8.0;
 
-import "../../oz/token/ERC20/ERC20.sol";
-import "../../oz/utils/Arrays.sol";
-import "../../oz/utils/Counters.sol";
-import "../../oz/utils/math/SafeMath.sol";
+import "../../token/ERC20/ERC20.sol";
+import "../../utils/Arrays.sol";
+import "../../utils/Counters.sol";
+import "../../utils/math/SafeMath.sol";
 
 import "../../token/ERC1155/extensions/IERC1155Snapshot.sol";
 import "../../token/ERC1155/extensions/IERC1155Master.sol";
@@ -88,16 +88,18 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
         _;
     }
 
-    function getCurrentDividendId() public view override OnlyShareholders returns(uint256){
+    function getCurrentDividendId()
+        public
+        view
+        override
+        OnlyShareholders
+        returns (uint256)
+    {
         return _getCurrentDividendId();
     }
 
     /// @dev function which sets the state of the crowd sale, it is called .
-    function setShopStatus(uint256 status)
-        public
-        override
-        OnlyShareholders
-    {
+    function setShopStatus(uint256 status) public override OnlyShareholders {
         _setShopStatus(status);
     }
 
@@ -130,9 +132,7 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
             _accountDividends[account]
         );
 
-        uint256 accountCapitalShare = _calculateCapitalShare(
-            account
-        );
+        uint256 accountCapitalShare = _calculateCapitalShare(account);
         return divided ? value : accountCapitalShare;
     }
 
@@ -207,7 +207,8 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
         /// di cosa avrei bisogno
         super._beforeWithdrawRaisedCapital(claimer, claimedAmount);
         uint256 accountCapitalShare = _calculateCapitalShare(claimer);
-        uint256 claimableAmount = accountCapitalShare - _accountClaimedAmounts[claimer];
+        uint256 claimableAmount = accountCapitalShare -
+            _accountClaimedAmounts[claimer];
         _accountClaimedAmounts[claimer] += claimedAmount;
         // console.log(
         //     "MSTRTKNSHOP:: _beforeWithdrawRaisedCapital():: accountCapitalShare:"
@@ -222,7 +223,10 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
         //     ,claimableAmount
         // );
 
-        require(claimedAmount <= claimableAmount,"ERC1155MasterTokenShop:: amount exceeds balance of account");
+        require(
+            claimedAmount <= claimableAmount,
+            "ERC1155MasterTokenShop:: amount exceeds balance of account"
+        );
     }
 
     function _valueAt(uint256 dividendId, Dividends storage dividends)
@@ -256,7 +260,6 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
     function _updateAccountDividend(address account, uint256 claimableAmount)
         private
     {
-
         _updateDividend(_accountDividends[account], claimableAmount);
     }
 
@@ -264,10 +267,9 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
         _updateDividend(_totalCapitalDividends, totalCapitalAtId);
     }
 
-    function _updateDividend(
-        Dividends storage dividends,
-        uint256 currentValue
-    ) private {
+    function _updateDividend(Dividends storage dividends, uint256 currentValue)
+        private
+    {
         uint256 currentId = _getCurrentDividendId();
         if (_lastDividendId(dividends.ids) < currentId) {
             dividends.ids.push(currentId);
@@ -287,25 +289,39 @@ contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
         }
     }
 
-    function _calculateCapitalShare(
-        address account
-    ) internal view returns (uint256 capitalShare) {
-
+    function _calculateCapitalShare(address account)
+        internal
+        view
+        returns (uint256 capitalShare)
+    {
         uint256 capitalShare_;
-        
-        for (uint256 id = 1; id <=( _getCurrentDividendId()); id++) {
-            uint256 accountShareBalanceX100 = ierc1155master.balanceOfAt(account, 1, id) * 100;
+
+        for (uint256 id = 1; id <= (_getCurrentDividendId()); id++) {
+            uint256 accountShareBalanceX100 = ierc1155master.balanceOfAt(
+                account,
+                1,
+                id
+            ) * 100;
             uint256 totalShareSupplyAtId = ierc1155master.totalSupplyAt(1, id);
-            (bool successAccountShareBalance, uint256 _accountShareBalance) = accountShareBalanceX100.tryDiv(totalShareSupplyAtId);
-            uint256 accountShareAtId = successAccountShareBalance ? _accountShareBalance : 0;
+            (
+                bool successAccountShareBalance,
+                uint256 _accountShareBalance
+            ) = accountShareBalanceX100.tryDiv(totalShareSupplyAtId);
+            uint256 accountShareAtId = successAccountShareBalance
+                ? _accountShareBalance
+                : 0;
             uint256 totalCapitaAtId = totalCapitalAt(id);
             uint256 accountCapitalShareAtIdX100;
             uint256 accountCapitalShareAtId;
-            if (totalCapitaAtId == 0) {}
-            else {
-                accountCapitalShareAtIdX100 = totalCapitaAtId * accountShareAtId;
-                (bool success, uint256 value) = accountCapitalShareAtIdX100.tryDiv(100);
-                if (success) {accountCapitalShareAtId = value;}
+            if (totalCapitaAtId == 0) {} else {
+                accountCapitalShareAtIdX100 =
+                    totalCapitaAtId *
+                    accountShareAtId;
+                (bool success, uint256 value) = accountCapitalShareAtIdX100
+                    .tryDiv(100);
+                if (success) {
+                    accountCapitalShareAtId = value;
+                }
             }
             capitalShare_ = accountCapitalShareAtId;
         }

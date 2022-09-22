@@ -1,7 +1,8 @@
 import fs from "fs";
 import { OpenSeaMetadata } from "../lib/types.js";
-import { js } from "@zionstate/utils";
-import { runProcess } from "../../IPFS/lib/runProcess.js";
+import { js, node } from "@zionstate/utils";
+
+const runProcess = node.process.runProcess;
 
 const { ZionRegexp } = js;
 const { ZionRegExp } = ZionRegexp;

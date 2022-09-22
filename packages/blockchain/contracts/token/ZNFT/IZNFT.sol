@@ -3,39 +3,12 @@
 
 pragma solidity ^0.8.0;
 
-import "../../oz/access/Ownable.sol";
+import "../../access/Ownable.sol";
+import "../../zion/lib/ZionLib.sol";
+import "../../token/ERC1155/IERC1155.sol";
 
-interface IZNFT  {
+interface IZNFT is IERC1155 {
+    function baseContract() external view returns (IERC1155);
 
-    enum TokenTypes {
-        MEMBERSHIP,
-        SHARES,
-        CREATORS,
-        TEAM,
-        DAO
-    }
-
-    enum Types {
-        PROFILE,
-        PRODUCT
-    }
-
-    enum Profile {
-        USER,
-        CREATOR,
-        PROJECT
-    }
-
-    enum Promotion {
-        INVITATION,
-        SHAREVOUCER
-    }
-
-    struct zNFT {
-        address owner;
-        Types znftType;
-    }
-
-    function mintMembership(address recipient) external;
-
+    function assignedIds() external view returns (ZionLib.DefinedId memory);
 }

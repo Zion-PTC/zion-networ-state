@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import { Dimensions, utility } from "../../../lib";
 
-export const Area = styled.div<{
+type AreaStyle = {
   width: number;
   height: number;
   blockSize: number;
   columns: number;
-}>`
+  css?: utility.ZionCss<Dimensions, true>;
+};
+
+export const Area = styled.div<AreaStyle>`
   border: 1px solid;
   width: ${(props) => props.width}px;
   height: 100%;
   display: grid;
   place-self: center;
-  grid-template-rows: ${(props) => props.blockSize + "px"};
+  grid-auto-rows: ${(props) => props.blockSize + "px"};
   grid-template-columns: repeat(
     ${(props) => props.columns},
     ${(props) => props.blockSize + "px"}

@@ -1,30 +1,12 @@
-import { NftPfp } from "./CardTypes/NftPfp";
-import { NftPfp as NftPfpTypes } from "./types";
+import { Card } from "./Card";
+import { ICards } from "./Types/Cards";
 
-export interface CardsProps {
-  children: NftPfpTypes.NftPfpProps[];
-  small?: boolean;
-  mid?: boolean;
-  big?: boolean;
-}
-
-export interface Cards {
-  (props: CardsProps): JSX.Element;
-}
-
-export const Cards: Cards = (props: CardsProps): JSX.Element => {
-  const { children, small, mid, big } = props;
+export const Cards: ICards = (props) => {
+  const { children } = props;
   return (
     <>
-      {children.map((child) => (
-        <NftPfp
-          small={small}
-          mid={mid}
-          big={big}
-          {...child}
-          key={child.slug}
-          src={child.src}
-        ></NftPfp>
+      {children.map((child, i) => (
+        <Card key={i} {...props} {...child} />
       ))}
     </>
   );

@@ -1,0 +1,107 @@
+# What's inside
+
+This application is meant to be the interface for minting
+methods of Smart Contract standard tokens and the specific
+functions of each Contract type that the application will be
+able to handle.
+
+# Content
+
+- [Technical](#technical)
+  - [Run the project](#run-the-project)
+  - [Open VsCode workspace](#open-vscode-workspace)
+  - [Work on the UI library](#work-on-the-ui-library)
+- [Contents](#contents)
+  - [Contract types](#contract-types)
+    - [Discography Album](#discography-album)
+    - [Pfp](#pfp)
+    - [...](#more)
+  - [Description](#description)
+    - [Pfp](#pfp-1)
+    - [Disclaimer](#disclaimer)
+
+# Technical
+
+## Run the project.
+
+Once downloaded the monorepo, run:
+
+```sh
+bolt
+```
+
+which is the equivalent of running `npm i`.
+Then run this:
+
+```sh
+bolt build
+```
+
+This will start the building applications and packages.
+
+> At the moment there is a bug with the building of next
+> application which is related to the API call which happens
+> in the `getStaticProps` function. This should be solved
+> once the calls to retrieve datas will be forwarded to the
+> blockchain.
+
+In the root of the monorepo run `bolt nft-minter`.
+
+## Open VsCode workspace
+
+In the the folder of the application, at the relative root
+level, there is a file `nft-minter.code-workspace` which is
+convienent selection of folder to work on the nft-minter
+application.
+It contains:
+
+- **nft-minter**: the package's root folder
+- **pages**: the pages folder of the Next® application
+  `src/pages`
+- **lib**: the library folder `src/lib`
+- **components**: the components folder `src/components`
+- **ui**: the entire @zionstate/ui package folder, in order to
+  quickly operate on the library itself.
+
+## Work on the UI library
+
+Working on the library requires a little extra-work:
+each time we make a change and we wish to have it reflecting
+in the browser we need to perform the following (in the
+project's root folder, NOT in the monorepo root folder):
+
+- `yarn preconstruct build`
+- `yarn build`
+
+I created a convinient script which can be found at:
+`./bin/build.sh`, so by running `sh bin/build.sh` at the
+project's root level folder, you can run both commands
+easily.
+
+# Contents
+
+## Contract types
+
+### Discography Album
+
+### Pfp
+
+### ...more
+
+## Description
+
+### Pfp
+
+This contract type is, for example, the one which we will
+use to distribute the Elsewhere© and Underlords© projects.
+
+### Disclaimer
+
+why it doesnt work
+
+> At the moment the applications is on a early stage, we are
+> working on displaying the data realitive to the Elsewhere
+> and Gotek's Discography contracts. At it's completion the
+> application will work by receiving withing the URL the
+> address of the contract which it will display, like
+> `...ourdns.com/api/<token_address>`.

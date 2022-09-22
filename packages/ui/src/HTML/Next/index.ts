@@ -1,1 +1,1 @@
-export * as staticProps from "./static/index";
+export * as staticProps from "./static/";

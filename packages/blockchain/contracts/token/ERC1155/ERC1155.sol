@@ -4,12 +4,14 @@
 
 pragma solidity ^0.8.0;
 
+import "../../../oz/token/ERC1155/ERC1155.sol";
+
 import "./IERC1155.sol";
-import "./extensions/IERC1155MetadataURI.sol";
-import "../../oz/token/ERC1155/IERC1155Receiver.sol";
-import "../../oz/utils/Address.sol";
-import "../../oz/utils/Context.sol";
-import "../../oz/utils/introspection/ERC165.sol";
+import "../../zion/lib/ZionLib.sol";
+import "./extensions/IERC1155Receiver.sol";
+import "../../utils/Address.sol";
+import "../../utils/Context.sol";
+import "../../utils/introspection/ERC165.sol";
 import "hardhat/console.sol";
 
 /**
@@ -17,7 +19,7 @@ import "hardhat/console.sol";
  * See https://eips.ethereum.org/EIPS/eip-1155
  * Originally based on code by Enjin: https://github.com/enjin/erc-1155
  *
- * 
+ *
  * This version has been adapted to be able to support an ERC1155Snapshot token type,
  * inspired by Open Zeppelin's ERC20Snapshot token. While working with the original
  * version, I encountered some problems due to storage collision. The datas returned
@@ -26,11 +28,11 @@ import "hardhat/console.sol";
  * which gathers the keys needed to call a _beforeTokenTransfer method. This solved
  * the previous encountered bug while also giving a nicer style to the code. It has
  * required the editing of the underlying ERC1155 contract. I addeded the data field
- * in the <burn>, <mint> and <transfer> methods. This may lead to but, it shall be 
+ * in the <burn>, <mint> and <transfer> methods. This may lead to but, it shall be
  * considered to add an if function to prevent bus with versions which differs from
  * this one.
  */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+contract ERC1155Struct is Context, ERC165, IERC1155, IERC1155MetadataURI {
     using Address for address;
 
     // Mapping from token ID to account balances
@@ -209,7 +211,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
         address operator = _msgSender();
 
-        TokenTransfer memory newTransfer = createTokenTransfer(
+        ZionLib.TokenTransfer memory newTransfer = createTokenTransfer(
             operator,
             to,
             from,
@@ -230,7 +232,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         }
         _balances[id][to] += amount;
 
-        emit TransferSingle(operator, from, to, id, amount);
+        emit ERC1155Lib.TransferSingle(operator, from, to, id, amount);
 
         _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);
     }
@@ -260,7 +262,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
         address operator = _msgSender();
 
-        TokenTransfer memory newTransfer = createTokenTransfer(
+        ZionLib.TokenTransfer memory newTransfer = createTokenTransfer(
             operator,
             to,
             from,
@@ -286,7 +288,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
             _balances[id][to] += amount;
         }
 
-        emit TransferBatch(operator, from, to, ids, amounts);
+        emit ERC1155Lib.TransferBatch(operator, from, to, ids, amounts);
 
         _doSafeBatchTransferAcceptanceCheck(
             operator,
@@ -346,12 +348,19 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         ids[0] = id;
         amounts[0] = amount;
 
-        TokenTransfer memory newTransfer = createTokenTransfer(operator, to, address(0), ids, amounts, data);
+        ZionLib.TokenTransfer memory newTransfer = createTokenTransfer(
+            operator,
+            to,
+            address(0),
+            ids,
+            amounts,
+            data
+        );
 
         _beforeTokenTransfer(newTransfer);
 
         _balances[id][to] += amount;
-        emit TransferSingle(operator, address(0), to, id, amount);
+        emit ERC1155Lib.TransferSingle(operator, address(0), to, id, amount);
 
         _doSafeTransferAcceptanceCheck(
             operator,
@@ -386,7 +395,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
         address operator = _msgSender();
 
-        TokenTransfer memory newTransfer = createTokenTransfer(
+        ZionLib.TokenTransfer memory newTransfer = createTokenTransfer(
             operator,
             to,
             address(0),
@@ -401,7 +410,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
             _balances[ids[i]][to] += amounts[i];
         }
 
-        emit TransferBatch(operator, address(0), to, ids, amounts);
+        emit ERC1155Lib.TransferBatch(operator, address(0), to, ids, amounts);
 
         _doSafeBatchTransferAcceptanceCheck(
             operator,
@@ -431,7 +440,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
         address operator = _msgSender();
 
-        TokenTransfer memory newTransfer = createTokenTransfer(
+        ZionLib.TokenTransfer memory newTransfer = createTokenTransfer(
             operator,
             address(0),
             from,
@@ -448,7 +457,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
             _balances[id][from] = fromBalance - amount;
         }
 
-        emit TransferSingle(operator, from, address(0), id, amount);
+        emit ERC1155Lib.TransferSingle(operator, from, address(0), id, amount);
     }
 
     /**
@@ -472,7 +481,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
         address operator = _msgSender();
 
-        TokenTransfer memory newTransfer = createTokenTransfer(
+        ZionLib.TokenTransfer memory newTransfer = createTokenTransfer(
             operator,
             address(0),
             from,
@@ -497,7 +506,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
             }
         }
 
-        emit TransferBatch(operator, from, address(0), ids, amounts);
+        emit ERC1155Lib.TransferBatch(operator, from, address(0), ids, amounts);
     }
 
     /**
@@ -512,7 +521,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     ) internal virtual {
         require(owner != operator, "ERC1155: setting approval status for self");
         _operatorApprovals[owner][operator] = approved;
-        emit ApprovalForAll(owner, operator, approved);
+        emit ERC1155Lib.ApprovalForAll(owner, operator, approved);
     }
 
     /**
@@ -536,11 +545,21 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
 
-    function _afterTokenTransfer(
-        TokenTransfer memory newTransfer
+    function _afterTokenTransfer(ZionLib.TokenTransfer memory newTransfer)
+        internal
+        virtual
+    {}
+
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
     ) internal virtual {}
-    
-    function _beforeTokenTransfer(TokenTransfer memory newtransfer)
+
+    function _beforeTokenTransfer(ZionLib.TokenTransfer memory newtransfer)
         internal
         virtual
     {}
@@ -647,8 +666,8 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
-    ) private pure returns (TokenTransfer memory) {
-        TokenTransfer memory newTransfer;
+    ) private pure returns (ZionLib.TokenTransfer memory) {
+        ZionLib.TokenTransfer memory newTransfer;
         newTransfer.operator = operator;
         newTransfer.from = from;
         newTransfer.to = to;

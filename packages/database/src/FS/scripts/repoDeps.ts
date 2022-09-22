@@ -1,5 +1,6 @@
-import { runProcess } from "../../IPFS/lib/runProcess";
+import { node } from "@zionstate/utils";
 
+const runProcess = node.process.runProcess;
 // TODO importare gli script dall'altro folder
 const packages = "packages";
 const apps = "apps";

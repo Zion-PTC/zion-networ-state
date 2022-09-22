@@ -39,6 +39,7 @@ export class ZionRegExp extends RegExp implements IZionRegExp {
   static fileExtensionWithPoint = /(\..*)/g;
   static betterAllTsComments = /(\/\/\**.*\*\/)|(?<=\s)\/\**.*\*\//g;
   static filenameFromPath = /[\w-_]+(?=\.)/g;
+  static excludeGetAnd_ = /(?![get])(.*?)(?=_)/g;
   static uuid =
     /[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/g;
   static firstAndLastDyn = (string = "", span: number) => {

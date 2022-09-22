@@ -6,9 +6,10 @@
 pragma solidity ^0.8.0;
 
 import "../ERC1155.sol";
-import "../../../oz/utils/Arrays.sol";
-import "../../../oz/utils/Counters.sol";
+import "../../../utils/Arrays.sol";
+import "../../../utils/Counters.sol";
 import "hardhat/console.sol";
+import "../../../zion/lib/ZionLib.sol";
 
 /**
  * @dev This contract extends an ERC20 token with a snapshot mechanism. When a snapshot is created, the balances and
@@ -42,7 +43,7 @@ import "hardhat/console.sol";
  * transfers will have normal cost until the next snapshot, and so on.
  */
 
-abstract contract ERC1155Snapshot is ERC1155 {
+abstract contract ERC1155Snapshot is ERC1155Struct {
     // Inspired by Jordi Baylina's MiniMeToken to record historical balances:
     // https://github.com/Giveth/minimd/blob/ea04d950eea153a04c51fa510b068b9dded390cb/contracts/MiniMeToken.sol
 
@@ -149,20 +150,33 @@ abstract contract ERC1155Snapshot is ERC1155 {
 
     // Update balance and/or total supply snapshots before the values are modified. This is implemented
     // in the _beforeTokenTransfer hook, which is executed for _mint, _burn, and _transfer operations.
-    function _beforeTokenTransfer(
-        TokenTransfer memory newTransfer
-    ) internal virtual override {
+    function _beforeTokenTransfer(ZionLib.TokenTransfer memory newTransfer)
+        internal
+        virtual
+        override
+    {
         super._beforeTokenTransfer(newTransfer);
 
         if (newTransfer.from == address(0)) {
             // mint
             if (newTransfer.ids.length == 1) {
                 _totalSupply[newTransfer.ids[0]] += newTransfer.amounts[0];
-                _updateAccountSnapshot(newTransfer.to, _asArraySingleton(newTransfer.ids));
-                _updateTotalSupplySnapshot(_asArraySingleton(newTransfer.ids));
+                _updateAccountSnapshot(
+                    newTransfer.to,
+                    ZionLib._asArraySingleton(newTransfer.ids)
+                );
+                _updateTotalSupplySnapshot(
+                    ZionLib._asArraySingleton(newTransfer.ids)
+                );
             } else {
-                for (uint256 index = 0; index < newTransfer.ids.length; index++) {
-                    _totalSupply[newTransfer.ids[index]] += newTransfer.amounts[index];
+                for (
+                    uint256 index = 0;
+                    index < newTransfer.ids.length;
+                    index++
+                ) {
+                    _totalSupply[newTransfer.ids[index]] += newTransfer.amounts[
+                        index
+                    ];
                 }
                 _updateAccountSnapshotBatch(newTransfer.to, newTransfer.ids);
                 _updateTotalSupplySnapshotBatch(newTransfer.ids);
@@ -171,11 +185,22 @@ abstract contract ERC1155Snapshot is ERC1155 {
             // burn
             if (newTransfer.ids.length == 1) {
                 _totalSupply[newTransfer.ids[0]] -= newTransfer.amounts[0];
-                _updateAccountSnapshot(newTransfer.to, _asArraySingleton(newTransfer.ids));
-                _updateTotalSupplySnapshot(_asArraySingleton(newTransfer.ids));
+                _updateAccountSnapshot(
+                    newTransfer.to,
+                    ZionLib._asArraySingleton(newTransfer.ids)
+                );
+                _updateTotalSupplySnapshot(
+                    ZionLib._asArraySingleton(newTransfer.ids)
+                );
             } else {
-                for (uint256 index = 0; index < newTransfer.ids.length; index++) {
-                    _totalSupply[newTransfer.ids[index]] -= newTransfer.amounts[index];
+                for (
+                    uint256 index = 0;
+                    index < newTransfer.ids.length;
+                    index++
+                ) {
+                    _totalSupply[newTransfer.ids[index]] -= newTransfer.amounts[
+                        index
+                    ];
                 }
                 _updateAccountSnapshotBatch(newTransfer.from, newTransfer.ids);
                 _updateTotalSupplySnapshotBatch(newTransfer.ids);
@@ -183,8 +208,14 @@ abstract contract ERC1155Snapshot is ERC1155 {
         } else {
             // transfer
             if (newTransfer.ids.length == 1) {
-                _updateAccountSnapshot(newTransfer.from, _asArraySingleton(newTransfer.ids));
-                _updateAccountSnapshot(newTransfer.to, _asArraySingleton(newTransfer.ids));
+                _updateAccountSnapshot(
+                    newTransfer.from,
+                    ZionLib._asArraySingleton(newTransfer.ids)
+                );
+                _updateAccountSnapshot(
+                    newTransfer.to,
+                    ZionLib._asArraySingleton(newTransfer.ids)
+                );
             } else {
                 _updateAccountSnapshotBatch(newTransfer.from, newTransfer.ids);
                 _updateAccountSnapshotBatch(newTransfer.to, newTransfer.ids);
@@ -262,7 +293,7 @@ abstract contract ERC1155Snapshot is ERC1155 {
             uint256 tokenId = ids[i];
             _updateSnapshot(
                 _totalSupplyOfIdSnapshots[tokenId],
-                totalSupply(_asArraySingleton(ids))
+                totalSupply(ZionLib._asArraySingleton(ids))
             );
         }
     }
