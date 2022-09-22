@@ -1,0 +1,33 @@
+{
+  "name": "@zionstate/utils",
+  "version": "0.0.1",
+  "private": true,
+  "source": "src/index.ts",
+  "main": "dist/zionstate-utils.cjs.js",
+  "module": "dist/zionstate-utils.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "preconstruct": {
+    "entrypoint": [
+      "src/index.ts"
+    ]
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "run-p build:*",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "dotenv": "^16.0.2",
+    "mongoose": "^6.5.2",
+    "util": "^0.12.4"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.2",
+    "mongoose": "^6.5.2",
+    "util": "^0.12.4"
+  }
+}

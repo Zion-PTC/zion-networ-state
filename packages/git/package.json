@@ -1,0 +1,37 @@
+{
+  "name": "@zionstate/git",
+  "version": "0.0.1",
+  "private": true,
+  "source": "src/index.ts",
+  "main": "dist/zionstate-git.cjs.js",
+  "module": "dist/zionstate-git.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "preconstruct": {
+    "entrypoint": [
+      "src/index.ts"
+    ]
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "run-p build:*",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@octokit/rest": "^18.12.0",
+    "@zionstate/database": "0.0.1",
+    "@zionstate/utils": "0.0.1",
+    "dotenv": "^16.0.2",
+    "simple-git": "^3.10.0"
+  },
+  "devDependencies": {
+    "@octokit/rest": "^18.12.0",
+    "@zionstate/database": "0.0.1",
+    "@zionstate/utils": "0.0.1",
+    "dotenv": "^16.0.2",
+    "simple-git": "^3.10.0"
+  }
+}
