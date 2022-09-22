@@ -1,4 +1,4 @@
-import { ButtonProps } from "../types";
+import { ButtonStyle } from "../Types";
 
-export type ThemeButtonProps<T> = ButtonProps<T> & {};
-export type ConnectionButtonProps<T> = ButtonProps<T> & {};
+export type ThemeButtonProps<T> = ButtonStyle<T> & {};
+export type ConnectionButtonProps<T> = ButtonStyle<T> & {};

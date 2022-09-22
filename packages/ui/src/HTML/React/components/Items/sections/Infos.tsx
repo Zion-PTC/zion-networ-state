@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { TextArea } from "./TextArea";
-import { InfosProps } from "./types";
+import { InfosProps } from "./Types";
 
 const Area = styled.div`
   border-left: 1px solid;
@@ -20,10 +20,8 @@ const Area = styled.div`
 `;
 
 export const Infos = (props: InfosProps) => {
-  // TODO aggiungto cosi
-  props;
   return (
-    <Area>
+    <Area {...props}>
       <TextArea gridArea="main"></TextArea>
       <TextArea gridArea="secondary"></TextArea>
     </Area>

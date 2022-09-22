@@ -1,2 +1,3 @@
-export * as util from "./util/index";
-export * as process from "./process/index";
+export * as util from "./util/";
+export * as process from "./process/";
+export * as fetch from "./fetch/";

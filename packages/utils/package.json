@@ -26,6 +26,7 @@
     "util": "^0.12.4"
   },
   "devDependencies": {
+    "@zionstate/test": "0.0.1",
     "dotenv": "^16.0.2",
     "mongoose": "^6.5.2",
     "util": "^0.12.4"

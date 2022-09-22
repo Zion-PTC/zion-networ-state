@@ -1,26 +1,20 @@
 // import { StaticImageData } from "next/image";
 import { Album } from "./CardTypes/Album";
 import { NftPfp } from "./CardTypes/NftPfp";
-import { Card as CardTypes } from "./types";
+import { CardProps } from "./Types/Card";
 
-export function Card(props: CardTypes.CardProps) {
-  let { type, backgroundColor } = props;
+export function Card<T>(props: CardProps<T>) {
+  let { type } = props;
   let Element: () => JSX.Element;
   switch (type) {
     case "nft-pfp":
-      Element = () => (
-        <NftPfp src={props.src} backgroundColor={backgroundColor}></NftPfp>
-      );
+      Element = () => <NftPfp {...props}></NftPfp>;
       break;
     case "album":
-      Element = () => (
-        <Album src={props.src} backgroundColor={backgroundColor}></Album>
-      );
+      Element = () => <Album {...props}></Album>;
       break;
     default:
-      Element = () => (
-        <NftPfp src={props.src} backgroundColor={backgroundColor}></NftPfp>
-      );
+      Element = () => <NftPfp {...props}></NftPfp>;
       break;
   }
   return <Element></Element>;

@@ -13,10 +13,27 @@ world.
 - [Constitution](#constitution)
   - [Foundations](#foundations)
 - [Technical Secion](#technical-section)
+  - [Achitectural Design](#architectural-design)
   - [Contents](#contents)
   - [Apps](#apps)
     - [Nft Minter](#nft-minter)
+    - [Scripts](#scripts)
     - [Social](#social)
+  - [Packages](#packages)
+    - [Blockchain](#blockachain)
+    - [Database](#database)
+    - [Git](#git)
+    - [testpack](#testpack)
+    - [Ui](#ui)
+    - [Utils](#utils)
+- [How it works](#how-it-works)
+  - [Install bolt and manypkg](#install-bolt-and-manypkg)
+  - [Start](#start)
+  - [Build](#build)
+  - [Dev](#dev)
+  - [Application](#application)
+  - [Packages](#packages-1)
+  - [Prod](#prod)
 
 ## About the Repo
 
@@ -33,10 +50,17 @@ just a first small step towards the ambitious goal.</br>
 > engagement of the community, so expect some plain html on
 > some pages!
 
-# Constitution
+# Constitution \*
 
 > Zion constitution will be realized through a collective
 > effort and it will be deployed on the blockchain.
+
+\* This section can be moved, but I liked the idea of mixing
+up the political part of Zion with the actual building of
+it. As we shall one day be appearing in the
+[networkstate]('thenetworkstate.com') dashboard panel, it
+would be nice that our actual constitution could sit in our
+Git repo (Github, Gitlab or whatever)
 
 ## Foundations
 
@@ -129,6 +153,25 @@ that we may want to offer with some form of contribution,
 fee, stake or whatever the DLT technologies can inspire us
 with.
 
+### scripts
+
+This application is used to write simple scripts which call
+our own packages, in order to quickly test and create some
+easy script for users.
+
+Scripts shall be written in a way that they can accept user
+inputs when called from the console or when called from a
+client script/application.
+
+By script I mean a `async function main(){....` function in
+which we perform several action which tehorically shall be
+invoked on classes or methods coming from our own packages.
+This async function is passed in a `runProcess()` methods
+which avoids us the hassle of always wrapping the code into
+a `try {} catch {}` statement.
+
+In this way we can also quickly test our code and
+
 ### social
 
 The social application will enable users to interact with
@@ -155,13 +198,172 @@ contents:
   - administrative
   - .....
 
+## Packages
+
+### blockchain
+
+This package has a different folder strcture than the other
+as it implements a tool to build TS interfaces for smart
+contracts and tools to test smart contract.
+It also has a layer of utility classes, functions and
+scripts which we will use to easily interact with the
+blockchain from frontend applications.
+
+- contracts
+- scripts
+- src (this one is still a little bit messy)
+  - Class
+  - lib
+  - Models (this should be moved to database probably)
+  - types
+  - utils
+
+### database
+
+This package contains utilities classes, methods and scripts
+to provide easier methos to front-end developers. The
+ambitious goal of this package is to enable the
+interactions with data systems in a unified way, so that in
+order to perform the same action (write a file), in the
+moment of creating an actual appication, one can have a
+uniform way of calling the same thing.
+
+We will achieve this by creating an abstraction level
+between the individual databasbe divers and what the clients
+of the package will consume.
+
+At the moment we are working on the definition of the
+interface that the Database classe shall have. In the repo
+we can put a collection of methods which where used in
+different occasions, and, by creating overload for every
+function call which actully calls the same type of CRUD
+operation, we can provide a broader spectrum of interaction
+to each method.
+
+We will work this package in a way that it accept a
+middleware function created by the consumer of the package.
+This way we enable compasability and extensibility to the
+classes provided by the package.
+
+- FS
+- IPFS
+- RAM
+
+to be added:
+
+- MongodDb
+- Neo4j
+- Redis
+- Elastic Search
+
+### git
+
+This repo contains utility functions to interact with the
+git systems. Therefore it starts providing a Git class which
+can work as a facade for the several different commands that
+git accepts. Then we start building a class which handles
+the connection to a git manager system. We start with Github
+but we shall build, in the similar manner as for the Database
+class, a class which manages several types of git managers.
+Then we have some tools which enables an interface to
+interact with our own Monorepo and repos, so that we can
+build User Interfaces to interact with some aspects of the
+repos like:
+
+- dependencies management
+- api description
+- documentation
+
+At the moment this are the classes / methods exported by the package
+
+- Git\*
+- GitManager
+  - Github\*
+  - Gitlab
+- Monorepo\*\*
+- Repo\*\*
+
+\* currently implemented\
+\*\* not yet working correctly
+
+### testpack
+
+We are using this package to make tests on the behave of
+bolt and the way it exports and bundes the code we write. As
+soon as we have a decent knowledge on how it works, we will
+delete this package.
+
+-
+
+### ui
+
+This package is meant to be and easy access point for
+front-end developers to build cool interfaces quickly. At
+the moment it contains only React components but I will
+share the code I worked on for Telegram bots and we can put
+code for Discord bots here.
+
+- bot\*\*
+  - telegram
+  - discord
+- cli\*\*
+  - terminal
+  - logs
+- html\*
+  - Next\*
+  - React\*
+  - VanillaJS\*\*
+- max-msp\*\*
+
+\* currently implemented\
+\*\* to be implemented, i have some code for it, that I will share
+
+### utils
+
+This package contains utilities which are related to
+handling of frequents situation when creating codes. For the
+moment it holds helper codes for JS and Node, but we can
+extend this to any other language we want. Let's say it is
+sort of a \_lodash but DIY.
+
+- js
+  - Error
+  - Regexp
+- node
+  - process
+  - util
+  - crypto\*
+
+\* to be implemented
+
 # How it works
 
-## Install bolt
+This is a monorepo which, as said earlied, it is managed by
+`bolt`. We also use precontruct which basically builds the
+endpoints and configures the type of exports for
+compatibility with older browsers when dealing with DOM.
+Basically it creates node_js packages which can be imported
+in both ways: `import` or `require`.
+
+## Install bolt and manypkg \*
+
+Firts thing we need to install bolt which is our monorepo
+package manager.
+
+Run this commands in the monorepo root.
 
 ```sh
 npm i -g bolt
 ```
+
+```sh
+yarn add @manypkg/cli \*\*
+```
+
+\* if you are using Linux, use `sudo` before running this
+command.
+\*\* I am not sure if it is @manypkg/cli or manypkg alone. I
+know that to call it we need to do `yarn manypkg fix` for example.
 
 ## Start
 
@@ -181,6 +383,8 @@ bolt build
 
 ## Dev
 
+## application
+
 In order to start the a development server with the target
 application at the moment you need to pass one of this two
 commands:
@@ -198,7 +402,11 @@ bolt social
 This will start both applcations in development mode and
 create a local server.
 
-# Prod
+## Packages
+
+In order to test packages we need to import them
+
+## Prod
 
 In order to be able to deploy the applications on the
 kubernetes system we need to create a `DOCKERFILE` for each

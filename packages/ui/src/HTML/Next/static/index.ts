@@ -1,5 +1,5 @@
-export * from "./geStaticPropsWithPath";
 export * from "./getStatic";
-export * from "./getStaticProps";
-export * from "./getStaticPropsHandler";
-export * as types from "./types";
+export * from "./handleFetch";
+export * from "./narrowGenericObject";
+export * from "./ram";
+export * as Types from "./Types/";
