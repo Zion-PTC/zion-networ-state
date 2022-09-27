@@ -49,6 +49,7 @@ export const Nft: (
   console.log(data);
 
   return (
+    // TODO import the profile layout from /packages/ui/src/HTML/React/components/Pages/Item.tsx
     <Layout {...layout} nft>
       <h1>Nft:</h1>
       <ContentArea id="nft-page-area">

@@ -17,7 +17,9 @@ const text = `<h2>Hello, world!</h2>
 
 export default function TestMds2(props) {
   const result = useProcessor(text);
-  const MdELement = () => result;
+  const MdELement = () => {
+    return result;
+  };
   console.log(result);
 
   return (

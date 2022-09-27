@@ -3,19 +3,13 @@ import { darkTheme, lightTheme, GlobalStyles } from "../components/theme";
 import React, { useEffect, useRef, useState } from "react";
 import { LayoutProps } from "../components/Types/";
 
-export type AppConfig = {
-  slug: string;
-  name: string;
-  shortname: string;
-  description: string[];
-};
-
 export type BasePropsFromApp = {
   layout: LayoutProps;
-  appConfig: AppConfig;
 };
 
-const App = styled.div<{ height: number }>`
+type AppStyle = { height: number };
+
+const App = styled.div<AppStyle>`
   height: ${(props) => props.height}px;
   width: 100vw;
 `;
@@ -56,9 +50,6 @@ function Application({ Component, pageProps }) {
   pageProps.contentArea = contentArea;
   pageProps.columns = columns;
   //
-  pageProps.navbar = navbar;
-  pageProps.footer = footer;
-  pageProps.handleClick = toggleTheme;
   pageProps.layout = {};
   pageProps.layout.contentArea = contentArea;
   pageProps.layout.navbar = navbar;

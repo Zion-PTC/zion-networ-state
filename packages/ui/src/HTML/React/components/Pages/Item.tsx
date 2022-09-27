@@ -59,6 +59,7 @@ export function Item<T extends BasicCardProps>(props: ItemProps<T>) {
           </Social>
           <H1 id="title">CYBERDOG #010 - THE RIPPER</H1>
           <P id="description">
+            {/* TODO lift static parts, make them variable in the file then create props so that this component can receive them from the client application */}
             WARNING! This cyberdog is out of control! He is very dangerous, he
             takes apart cyberdogs that enter his territory. He came here to find
             a partner in the gang.

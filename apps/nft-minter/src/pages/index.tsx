@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "../components/layout";
-import { AppConfig, BasePropsFromApp } from "./_app";
+import { BasePropsFromApp } from "./_app";
 import { HTML } from "@zionstate/ui";
 const getStatic = HTML.Next.staticProps.getStatic;
 
-export type LandingProps = BasePropsFromApp;
-
-export type LandingGetStaticPropsReturn = {
-  props: {
-    appConfig: AppConfig;
-  };
+export type LandingProps = {
+  slug: string;
+  name: string;
+  shortname: string;
+  description: string[];
 };
 
-const appConfig: AppConfig = {
+const data: LandingProps = {
   slug: "underlords",
   name: "The Underlords", // used for Token long name
   shortname: "Underlords", // used for sorter displays
@@ -27,16 +26,27 @@ const appConfig: AppConfig = {
   ],
 };
 
-const { getStaticProps: gsp } = getStatic<AppConfig>(
+// TODO make sure that the length of the array containing
+// datas for the landing page is long1. We also should make
+// sure that the datas received are in the right format. I
+// think that in order to work this out correctly we need to
+// build a mixin library with all methods require built in
+// the mixin to create composable classes to manage datas
+// correctly.
+const { getStaticProps: gsp } = getStatic<LandingProps>(
   "RAM",
-  { appConfig: [appConfig] },
-  "appConfig",
-  [appConfig]
+
+  // TODO make an overload that acceps a single object, not
+  // in a list. This may happen when the loaded page doesn't
+  // need to show a list of datas.
+  { data: [data] },
+  "data",
+  [data]
 );
 export const getStaticProps = gsp;
 
 interface Landing {
-  (props: LandingProps): JSX.Element;
+  (props: BasePropsFromApp & { data: LandingProps }): JSX.Element;
 }
 
 const Pis = (props: { children: string[] }): JSX.Element => {
@@ -50,8 +60,8 @@ const Pis = (props: { children: string[] }): JSX.Element => {
   );
 };
 
-const Landing: Landing = function Landing({ appConfig, layout }) {
-  const { name, description } = appConfig[0];
+const Landing: Landing = function Landing({ data, layout }) {
+  const { name, description } = data[0];
   return (
     <Layout landing {...layout}>
       <div className="landing-page">

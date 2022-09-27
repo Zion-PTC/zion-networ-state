@@ -109,80 +109,10 @@ export default function Collection(props: CollectionProps) {
   // } = useInfiniteScroll(props.data);
   let data = props.data;
 
-  type User = {
-    name: string;
-  };
-
-  type propsObj = {
-    bottomSpace: {
-      social: { likes: User[]; more: any[] };
-      title: string;
-      description: string;
-      bid: {
-        highest: number;
-      };
-      avatar: {
-        image: string;
-        id: string;
-      };
-    };
-  };
-
-  const testProps: propsObj = {
-    bottomSpace: {
-      avatar: { id: "collection_id", image: "" },
-      bid: { highest: 100 },
-      description: "",
-      social: { likes: [{ name: "cia" }], more: [] },
-      title: "",
-    },
-  };
-
   return (
     <Layout {...props.layout}>
       <ProfileArea>
-        <div id="background">
-          <div id="upper"></div>
-          <div id="bottom"></div>
-          {/* <h1 id="title">Collection</h1> */}
-          <div id="upper-space"></div>
-          <div id="image"></div>
-          <div id="bottom-space" {...testProps.bottomSpace}>
-            <div id="social1">
-              <a>like</a> <a>more</a>
-            </div>
-            <h1 id="title">CYBERDOG #010 - THE RIPPER</h1>
-            <p id="description">
-              WARNING! This cyberdog is out of control! He is very dangerous, he
-              takes apart cyberdogs that enter his territory. He came here to
-              find a partner in the gang.
-            </p>
-            <p id="bid">highest bid</p>
-            <div id="info-section">
-              <InfoSub>
-                <TextArea>
-                  <P bold>Creator</P>
-                  <P dimmed>10% Royalties</P>
-                </TextArea>
-                <InfoSubDetails id="link">
-                  <Avatar>
-                    <Circle />
-                  </Avatar>
-                  <ProfileId></ProfileId>
-                </InfoSubDetails>
-              </InfoSub>
-              <InfoSub>
-                <P bold>Collection</P>
-                <InfoSubDetails>
-                  <Avatar>
-                    <Circle></Circle>
-                  </Avatar>
-                  <ProfileId></ProfileId>
-                </InfoSubDetails>
-              </InfoSub>
-            </div>
-          </div>
-        </div>
+        <div>Collection</div>
         <ContentArea id="collection-area">
           <Area
             width={props.width}

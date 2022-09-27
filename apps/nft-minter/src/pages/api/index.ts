@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { AppConfig } from "../_app";
+import { LandingProps } from "..";
 
-const appConfig: AppConfig = {
+const data: LandingProps = {
   slug: "underlords",
   name: "The Underlords", // used for Token long name
   shortname: "Underlords", // used for sorter displays
@@ -18,9 +18,9 @@ const appConfig: AppConfig = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<[AppConfig]>
+  res: NextApiResponse<[LandingProps]>
 ) {
   // const handler = new NextApiHandler("ram");
-  res.send([appConfig]);
+  res.send([data]);
   // handler.strategy(req, res, database);
 }
