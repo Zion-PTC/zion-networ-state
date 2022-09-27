@@ -7,37 +7,12 @@ import {
   SimpleGitTaskCallback,
   TaskOptions,
   Options,
-  InitResult,
   StatusResult,
 } from "simple-git";
 import { FS } from "@zionstate/database";
 import {} from "@zionstate/utils";
+import { IZionGit } from "./Types/Git";
 const { system } = FS;
-
-export type isRepo = (
-  action?: CheckRepoActions,
-  callback?: SimpleGitTaskCallback<boolean, GitError>
-) => Promise<boolean>;
-
-export type initRepo = (
-  bare: boolean,
-  options?: TaskOptions<Options>
-) => SimpleGit & Promise<InitResult>;
-
-export type repoStatus = (
-  options?: TaskOptions<Options>,
-  callback?: SimpleGitTaskCallback<StatusResult, GitError>
-) => Promise<StatusResult>;
-
-export interface IZionGit {
-  options: Partial<SimpleGitOptions>;
-  isRepo: isRepo;
-  init: initRepo;
-  status: repoStatus;
-  hasRemote(): any;
-  // TODO add lastupdate
-  // latestUpdate(): Promise<Date | undefined>;
-}
 
 export class ZionGit implements IZionGit {
   #options: Partial<SimpleGitOptions> = {
@@ -201,10 +176,12 @@ export async function repoHasRemote(path: string[] | string): Promise<boolean> {
   return await git.hasRemote();
 }
 
+// TODO move this function to utils library
 function splitPath(path: string) {
   return path.split("/").filter(conditionNoEmptyString);
 }
 
+// TODO move this to conditions in utils?
 function conditionNoEmptyString(string: string) {
   return string !== "";
 }

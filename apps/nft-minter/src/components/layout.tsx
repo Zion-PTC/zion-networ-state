@@ -43,9 +43,6 @@ const Layout: ILayout = function ({
           <p>Switch p Theme</p>
         </ThemeButton>
       </NavBar>
-      {/** we catch a reference of the main in order
-       * to be able to compute its height.
-       */}
       <Main ref={contentArea}>
         {landing ? Welcome : ""}
         {children}

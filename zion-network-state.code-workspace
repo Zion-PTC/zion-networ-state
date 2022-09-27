@@ -11,14 +11,6 @@
     {
       "name": "packages",
       "path": "packages"
-    },
-    {
-      "name": "_oldZion",
-      "path": "../_oldZion"
-    },
-    {
-      "name": "tutorial-blog-next-js",
-      "path": "../_tests/tutorial-blog-next-js"
     }
   ],
   "settings": {}

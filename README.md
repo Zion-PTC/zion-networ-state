@@ -26,6 +26,8 @@ world.
     - [testpack](#testpack)
     - [Ui](#ui)
     - [Utils](#utils)
+  - [Bin](#bin)
+    - []()
 - [How it works](#how-it-works)
   - [Install bolt and manypkg](#install-bolt-and-manypkg)
   - [Start](#start)
@@ -34,6 +36,15 @@ world.
   - [Application](#application)
   - [Packages](#packages-1)
   - [Prod](#prod)
+- [Contribute](#contribute)
+  - [Todo's](#todos)
+  - [Hot to contribute](#how-to-contribute)
+    - [find a todo](#find-a-todo)
+    - [create a todo](#create-a-todo)
+  - [About Github issues integration in Vscode](#about-github-issues-integration-in-vscode)
+    - [tackle a todo with Github issues](#tackle-a-todo-with-github-issues)
+    - [tackle a todo without Githut issues](#tackle-a-todo-without-githut-issues)
+- [Version Control](#version-control)
 
 ## About the Repo
 
@@ -336,6 +347,20 @@ sort of a \_lodash but DIY.
 
 \* to be implemented
 
+## Bin
+
+### Git
+
+- deleteGitFolder.sh
+
+- build.sh
+- dev.sh
+- makeFileExecutable.sh
+- prebuild.sh
+- prod.sh
+
+The bin folder contains some useful script.
+
 # How it works
 
 This is a monorepo which, as said earlied, it is managed by
@@ -413,3 +438,138 @@ kubernetes system we need to create a `DOCKERFILE` for each
 application. Once the docker file has been tested and it
 works correctly it can be deployed on the k8s system and
 replicated as needed.
+
+# Contribute
+
+The best way to contribute to the code base is to download
+the monorepo, install it and push code changes to the github
+Zion Organization account.
+
+> In order to make life easier with working with git, we (me
+> and Arianna), suggest to usage of
+> [git-fork]('https://git-fork.com/'), a simple which helps
+> visualize the git-tree. Here a
+> [blog]('https://thomasventurini.com/articles/the-best-way-to-work-with-todos-in-vscode/')
+> where he explain some best practices for using TodoTree in
+> a project.
+
+## Todo's
+
+In each file we can put a comment `// \TODO` (i am escaping
+it now because, otherwise, it would create an actual to do in
+the codespace.) and describe the type of action which is
+needed to be taken. I am using a VC plugin which is called
+[Todo Tree]('Gruntfuggly.todo-tree'), which shows all the
+\TODO which are written in the code base, sorted by folder
+opened in the VC workspace. I am including a `workspace`
+file in each folder (root, apps and packages) in order to
+make this simplier.
+
+\*[back to index](#in-this-document)
+
+## How to contribute
+
+\TODOs in visual code have an action menu (the little yellow
+bulb light which appears sometimes next to the code we
+write). This enable the creation of an issue on GitHub which
+enable developers to leverage some built-in functionalities
+of Visual Code.
+There can be actually two ways to tackle this:
+
+1. find or create a \TODO, then
+   [create]('https://code.visualstudio.com/blogs/2020/05/06/github-issues-integration#_creating-an-issue-from-anywhere)
+   an issue on Github
+2. find or create a \TODO make changements and push the code
+   to a newly created branch (pushing to main branches shall
+   be not-allowed to anyone, we shall create a team of
+   people who are responsible for this).
+
+Contribution can be tackled in both ways.
+
+> Creating a Gthub issue should be considered the best
+> practice, in this way every contribution has is own little
+> environment and a reason to be. We shall work on a way to
+> integrate Github issues into a Roadmap workflow as well as
+> into a token reward system which can calculate the tokens a
+> developer shall be rewarded with for contributing to the
+> open-source code base.
+
+\*[back to index](#in-this-document)
+
+### find a todo
+
+- Open a project workspace with Visual Studio code, and browse
+  the TODOs which are shown in the [Todo
+  Tree]('https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-treee')
+  application for Visual Studio Code.
+- make the needed changes
+- create a new branch in the git
+- upload the code and send a message on Discord to tell that
+  you did it!
+
+### create a todo
+
+Not all issues have obviously already been found out in the
+code base, so, if you find an issue with the code,create a
+\TODO and push the code in a new git branch, and announce it
+in the Discord chat. Normally, when pushing a new branch on
+Github, they get retrieved when preforming a fetch.
+
+> This practice shall be replaced with an healthier Github
+> issue (or relative) creation as soon as we have found a
+> durable solution on where to store the code base. There
+> are many solutions fasdfasf asfd asdf asdf
+>
+> - Github
+> - Gitlab
+> - [Codebase]('https://codebase.org/') (decentralized
+>   solution still in waitlist though)
+
+## About Github issues integration in Vscode
+
+Vscode comes with prebuilt Github issue integration for
+creating Github issues. This works by writing a comment in
+the code base with one of the followin escaped words:
+
+- \TODO
+- \FIXME
+- \BUG
+- \HACK
+
+When writing `// <one_of_the_above_keywords>` in the code
+base, Vscode show a little yellow bulb which, when clicked,
+shows a drop down menu with an option to start the creation
+of an issue on Github. When doing this we are lead into a
+code editor where we can specify the details of the issue:
+
+- make an assignement to a team member.
+- describe the issue and what shall be done.
+
+[here]('https://code.visualstudio.com/blogs/2020/05/06/github-issues-integration#_working-on-issues')
+
+### tackle a todo with Github issues
+
+- the github issue exixsts
+  - issue is assigned to you
+  - issue is assigned to someone else
+  - issue is not assigned
+- the github issue does not exist.
+
+### tackle a todo without Githut issues
+
+# Version control.
+
+At the moment version control on zion is run on Github. In
+the future we may switch to decentralized opensource version
+controlling system. Here a brief list of the choice that the
+market offer us at the moment:
+
+- centralized
+  - Github
+  - Gitlab
+- decentralized
+  - normal
+    - Codebase
+  - IPFS based:
+    - [Radible]('https://radicle.xyz/')
+    - [Pando]('https://github.com/pandonetwork/pando')

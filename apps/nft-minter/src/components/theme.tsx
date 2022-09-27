@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import { Theme } from "./Types/index";
 import { Temporary } from "./types";
 
+// TODO find where
+
 const black = "#090909";
 const white = "#fafafa";
 
@@ -19,7 +21,6 @@ export const lightTheme: Temporary = {
   borderColor: "#090909",
 };
 
-// TODO add footer and navbar dimensions
 export const GlobalStyles = createGlobalStyle<{
   theme: Theme;
 }>`

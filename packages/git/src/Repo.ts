@@ -1,8 +1,8 @@
 import { FS } from "@zionstate/database";
 import { ZionGit } from "./Git.js";
 import { ZionGitHub } from "./GitHub.js";
-import { IRepo, RepoTypes } from "./types.js";
 import { js } from "@zionstate/utils";
+import { IRepo, RepoTypes } from "./Types/Repo.js";
 
 const { ZionError: ze } = js;
 const { ZionError } = ze;

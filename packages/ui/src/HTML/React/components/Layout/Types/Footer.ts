@@ -1,1 +1,3 @@
-export type FooterProps = {};
+import { BasicLayoutProps } from ".";
+
+export type FooterProps = BasicLayoutProps & {};

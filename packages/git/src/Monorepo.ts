@@ -25,9 +25,9 @@ export class Monorepo implements IMonorepo {
     public id: string,
     public name: string,
     public path: string,
-    public organization: Organization,
-    public appFolder: string,
-    public packagesFolder: string
+    public appFolder?: string,
+    public packagesFolder?: string,
+    public organization?: Organization
   ) {
     Monorepo.monorepos.push(this);
   }
