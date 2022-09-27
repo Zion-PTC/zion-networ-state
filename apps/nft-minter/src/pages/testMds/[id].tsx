@@ -4,6 +4,17 @@ import Head from "next/head";
 import Date from "../../components/date";
 import styled from "styled-components";
 
+// This file uses a custom function which itself uses
+// [unified]("https://www.npmjs.com/package/unified") which
+// is a tool which generates syntax trees by parsing several
+// type of input formats (mds, yaml).
+
+// It parses the `.md` file and create a valid HTML content.
+
+// Currentlty I am working on extending this process and
+// transform the md in React nodes, which shall probably be
+// the most secure way to create html our of a text.
+
 const Article = styled.article`
   #headingXl {
     font-size: 2rem;
@@ -20,8 +31,6 @@ const Article = styled.article`
 
 export default function Post(props) {
   const { postData } = props;
-  console.log(postData);
-
   return (
     <Layout nft {...props.layout}>
       <Head>

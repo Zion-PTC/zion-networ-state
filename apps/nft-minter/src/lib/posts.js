@@ -10,6 +10,8 @@ import rehypeHighlight from "rehype-highlight";
 import { visit } from "unist-util-visit";
 import rehypeStringify from "rehype-stringify";
 import dockerfile from "highlight.js/lib/languages/dockerfile";
+import { readAndParseFiles } from "./readAndParseFiles";
+import { mdParser } from "./mdParser";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 const simplepost = path.join(postsDirectory, "simple-post.md");
@@ -61,29 +63,7 @@ export function getAllPostIds() {
 }
 
 export async function getPostData(id) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-
-  // Use remark to convert markdown into HTML string
-  const processedContent = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .data("settings", { fragment: true })
-    .use(rehypeHighlight, { languages: { dockerfile } })
-    .use(rehypeStringify)
-    // log the html created by the script
-    .use(() => {
-      return (tree) => {
-        visit(tree, "code", (pre) => {
-          console.log(pre);
-        });
-      };
-    })
-    .process(matterResult.content);
-  let contentHtml = processedContent.toString();
+  var { contentHtml, matterResult } = await getAllPosts(id, postsDirectory);
 
   // Combine the data with the id and contentHtml
   return {
@@ -93,4 +73,17 @@ export async function getPostData(id) {
     // down to the component which will consume it.
     ...matterResult.data,
   };
+}
+
+async function getAllPosts(id, _postsDirectory) {
+  const fileContents = readAndParseFiles(_postsDirectory, id);
+
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents);
+
+  // Use remark to convert markdown into HTML string
+  const processedContent = await mdParser(matterResult);
+
+  let contentHtml = processedContent.toString();
+  return { contentHtml, matterResult };
 }
