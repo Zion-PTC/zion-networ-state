@@ -1,5 +1,21 @@
 import { createGlobalStyle } from "styled-components";
 
+export type BasicProps = {
+  color: string;
+  backgroundColor: string;
+  borderColor: string;
+};
+
+export type Theme = {
+  body: string;
+  textColor: string;
+  backgroundColor: string;
+  borderColor: string;
+  headingColor: string;
+  primary: BasicProps;
+  secondary: BasicProps;
+};
+
 export const darkTheme = {
   body: "#000",
   textColor: "#fff",
@@ -10,13 +26,14 @@ export const lightTheme = {
   textColor: "#000",
   headingColor: "#d23669",
 };
-export const GlobalStyles = createGlobalStyle`
-   body {
+
+export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
+  body {
     background: ${(props) => props.theme.body};
     color: ${(props) => props.theme.textColor};
     transition: .3s ease;
-   }
-   h2{
-     color: ${(props) => props.theme.headingColor};
-   }
-  `;
+  }
+  h2{
+    color: ${(props) => props.theme.headingColor};
+  }
+`;

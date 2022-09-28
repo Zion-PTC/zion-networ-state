@@ -1,4 +1,4 @@
-import { UseInfiniteScroll } from "../../../../../_oldZion/apps/pfp_minter/src/lib/hooks/useInfiniteScroll";
+import { UseInfiniteScroll } from "../lib/hooks/useInfiniteScroll";
 
 type LoaderProps<T> = Pick<
   UseInfiniteScroll<T>,

@@ -406,6 +406,15 @@ then build the applications and packages:
 bolt build
 ```
 
+> At the moment the build process runs fine but there is one
+> error which occurs:
+>
+> > `FetchError: request to http://localhost:3000/api/products failed, reason: connect ECONNREFUSED 127.0.0.1:3000`. <br/>
+
+> This happens cause the test
+> tries to connect to the servers created by Next, but they
+> are not running, hence not reachable.
+
 ## Dev
 
 ## application
