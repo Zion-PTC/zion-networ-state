@@ -36,7 +36,7 @@
     "@fastify/mysql": "^4.0.0",
     "@fastify/postgres": "^5.0.0",
     "@fastify/redis": "^6.0.0",
-    "@manypkg/cli": "^0.19.1",
+    "@manypkg/cli": "^0.19.2",
     "@mdx-js/mdx": "^2.1.1",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
