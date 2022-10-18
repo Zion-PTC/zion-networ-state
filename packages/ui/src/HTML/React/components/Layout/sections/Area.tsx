@@ -10,7 +10,6 @@ type AreaStyle = {
 };
 
 export const Area = styled.div<AreaStyle>`
-  border: 1px solid;
   width: ${(props) => props.width}px;
   height: 100%;
   display: grid;
