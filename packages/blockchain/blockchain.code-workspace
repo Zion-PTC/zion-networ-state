@@ -54,6 +54,9 @@
     },
     {
       "path": "contracts/remix"
+    },
+    {
+      "path": "contracts/zion_contracts"
     }
   ],
   "settings": {}

@@ -132,12 +132,18 @@ library ZionLib {
 
     ///////ENUMS /////////////////////////////////////////////
 
-    enum TokenTypes {
+    enum TokenIdsTypes {
         MEMBERSHIP,
         SHARES,
         CREATORS,
         TEAM,
-        DAO
+        DAO,
+        MINT_ACCESS,
+        FREE_MINT_ACCESS
+    }
+
+    enum TokenIdZnft {
+        SHARES
     }
 
     enum Types {
