@@ -37,7 +37,6 @@ const ProfileArea = styled.div`
   grid-template-rows: 1fr 8fr 0.5fr;
   height: 100%;
   position: relative;
-  background-color: red;
 `;
 
 export default function Collection(props: CollectionProps) {

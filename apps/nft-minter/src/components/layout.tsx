@@ -3,12 +3,12 @@ import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
-import { Button } from "@zionstate/ui/dist/HTML/React/components/Elements";
 
 const components = HTML.React.components;
 // Components
 const ConnectionButton = components.Elements.ButtonTypes.ConnectionButton;
 const ThemeButton = components.Elements.ButtonTypes.ThemeButton;
+const ScrollToTopButton = components.Elements.ButtonTypes.ScrollToTopButton;
 const NavBar = components.Layout.NavBar;
 const Footer = components.Layout.Footer;
 
@@ -20,30 +20,11 @@ const Collection = <Link href="/collection">Collection</Link>;
 const Main = styled.main`
   overflow: scroll;
 `;
-
-export const BackToTopButton = styled.button`
+const Logo = styled.img`
   width: 50px;
   height: 50px;
-  position: fixed;
-  bottom: 20%;
-  right: 20%;
-  background: transparent;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 5px 10px #ccc;
-  padding: 0;
-  margin: 0;
-  &:hover {
-    background: red;
-  }
-  &:first-child {
-    display: grid;
-    justify-content: center;
-    justify-items: center;
-    justify-self: center;
-    width: 100%;
-    height: 100%;
-  }
+  border: 1px solid black;
+  border-radius: 100%;
 `;
 
 const Layout: ILayout = function ({
@@ -65,6 +46,10 @@ const Layout: ILayout = function ({
         {nft && Collection}
         {!landing && !nft && Home}
         {!connect && landing && ConnectWallet}
+        <Logo
+          src="https://ipfs.io/ipfs/QmWizN7HKYLpd85ifuNtbKBv2mYeyRxgHHnor8mKm3sZaF?filename=Logo_Zion.png"
+          alt="LOGO_ZION"
+        ></Logo>
         <ConnectionButton onClick={metamask.handleClick}>
           <p>{metamask.buttonMess}</p>
         </ConnectionButton>
@@ -77,7 +62,7 @@ const Layout: ILayout = function ({
         {children}
       </Main>
       {showButton && (
-        <BackToTopButton onClick={backToTopHandleClick}></BackToTopButton>
+        <ScrollToTopButton onClick={backToTopHandleClick}></ScrollToTopButton>
       )}
       <Footer ref={footer}>ciao</Footer>
     </>
