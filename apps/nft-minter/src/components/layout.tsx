@@ -3,6 +3,7 @@ import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
+import { Button } from "@zionstate/ui/dist/HTML/React/components/Elements";
 
 const components = HTML.React.components;
 // Components
@@ -20,6 +21,31 @@ const Main = styled.main`
   overflow: scroll;
 `;
 
+export const BackToTopButton = styled.button`
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 20%;
+  right: 20%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 5px 10px #ccc;
+  padding: 0;
+  margin: 0;
+  &:hover {
+    background: red;
+  }
+  &:first-child {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const Layout: ILayout = function ({
   children,
   landing,
@@ -30,13 +56,15 @@ const Layout: ILayout = function ({
   footer,
   handleClick,
   metamask,
+  backToTopHandleClick,
+  showButton,
 }) {
   return (
     <>
       <NavBar ref={navbar}>
-        {nft ? Collection : ""}
-        {!landing && !nft ? Home : ""}
-        {!connect && landing ? ConnectWallet : ""}
+        {nft && Collection}
+        {!landing && !nft && Home}
+        {!connect && landing && ConnectWallet}
         <ConnectionButton onClick={metamask.handleClick}>
           <p>{metamask.buttonMess}</p>
         </ConnectionButton>
@@ -45,9 +73,12 @@ const Layout: ILayout = function ({
         </ThemeButton>
       </NavBar>
       <Main ref={contentArea}>
-        {landing ? Welcome : ""}
+        {landing && Welcome}
         {children}
       </Main>
+      {showButton && (
+        <BackToTopButton onClick={backToTopHandleClick}></BackToTopButton>
+      )}
       <Footer ref={footer}>ciao</Footer>
     </>
   );

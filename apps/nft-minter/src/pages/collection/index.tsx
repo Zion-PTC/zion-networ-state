@@ -32,6 +32,8 @@ export const getStaticProps = gsp;
 
 const ProfileArea = styled.div`
   display: grid;
+
+  // TODO covertire in numeri relativi
   grid-template-rows: 1fr 8fr 0.5fr;
   height: 100%;
   position: relative;
@@ -52,10 +54,11 @@ export default function Collection(props: CollectionProps) {
 
   return (
     <Layout {...props.layout}>
-      <ProfileArea>
-        <div>Collection</div>
-        <ContentArea id="collection-area">
+      <ProfileArea id="profile-area">
+        <div id="collection-area">Collection</div>
+        <ContentArea id="content-area">
           <Area
+            id="area-area"
             width={props.collection.width}
             height={props.collection.height}
             blockSize={props.collection.blockSize}

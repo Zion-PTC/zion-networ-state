@@ -11,6 +11,8 @@ export type LayoutProps = {
   footer?: React.MutableRefObject<HTMLDivElement>;
   contentArea?: React.MutableRefObject<HTMLDivElement>;
   handleClick?: () => void;
+  backToTopHandleClick?: () => void;
+  showButton: boolean;
   metamask: {
     buttonMess: string;
     handleClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

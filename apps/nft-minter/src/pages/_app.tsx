@@ -45,9 +45,17 @@ function Application(props: ApplicationProps) {
   const [height, setHeight] = useState(0);
   const [blockSize, setBlockSize] = useState(0);
   const contentArea = useRef<HTMLDivElement>();
+  const [showButton, setShowButton] = useState(false);
 
   const toggleTheme = () => {
     theme == "light" ? setTheme("dark") : setTheme("light");
+  };
+
+  const scrollToTop = () => {
+    contentArea.current.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const collection = {
@@ -70,6 +78,8 @@ function Application(props: ApplicationProps) {
     landing: undefined,
     nft: undefined,
     metamask: useEthereum(),
+    backToTopHandleClick: scrollToTop,
+    showButton: showButton,
   };
   pageProps.layout = layout;
 
@@ -106,6 +116,22 @@ function Application(props: ApplicationProps) {
     setBlockSize(height / rows);
     setWidth((height / rows) * columns);
   }, [height]);
+
+  useEffect(() => {
+    contentArea.current.addEventListener("scroll", () => {
+      let profileAreaY = window.document
+        .getElementById("profile-area")
+        .getBoundingClientRect().y;
+      let contentAreaY = contentArea.current.getBoundingClientRect().y;
+      let scrollPosition = contentAreaY - profileAreaY;
+
+      if (scrollPosition > 1000) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    });
+  }, []);
 
   return (
     <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
