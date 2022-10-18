@@ -12,7 +12,6 @@ import "../../token/ERC1155/extensions/IERC1155Snapshot.sol";
 import "../../token/ERC1155/extensions/IERC1155Master.sol";
 import "./IERC1155MasterTokenShop.sol";
 import "../ERC1155TokenShop.sol";
-import "../../token presets/ERC1155/Membership.sol";
 
 import "hardhat/console.sol";
 
