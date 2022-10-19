@@ -70,7 +70,13 @@ const Layout: ILayout = function ({
       {showButton && (
         <ScrollToTopButton onClick={backToTopHandleClick}></ScrollToTopButton>
       )}
-      <Footer ref={footer}>ciao</Footer>
+      <Footer ref={footer}>
+        <a>freccias</a>
+        <a>frecciad</a>
+        <a>home</a>
+        <a>cuore</a>
+        <a>account</a>
+      </Footer>
     </>
   );
 };

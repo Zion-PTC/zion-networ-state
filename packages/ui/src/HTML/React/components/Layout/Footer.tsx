@@ -4,8 +4,8 @@ import { FooterProps } from "./Types";
 export const Footer = styled.footer<FooterProps>`
   position: fixed;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". . . .";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "freccias Frecciad home cuore account";
   text-align: center;
   bottom: 0;
   min-height: ${(props) => (props.minHeight ? props.minHeight : "4rem")};
