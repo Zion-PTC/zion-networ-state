@@ -10,6 +10,8 @@ export const Footer = styled.footer<FooterProps>`
   bottom: 0;
   min-height: ${(props) => (props.minHeight ? props.minHeight : "4rem")};
   width: 100%;
-  background-color: white;
   z-index: 2;
+  background-color: black;
+  border-color: 1px solid white;
+  color: white;
 `;

@@ -27,6 +27,7 @@ export const GlobalStyles = createGlobalStyle<{
   body {
     background: ${(props) => props.theme.body};
     color: ${(props) => props.theme.textColor};
+    border-color: ${(props) => props.theme.borderColor};
     transition: .3s ease;
     margin:0;
     box-sizing: border-box;
@@ -37,5 +38,15 @@ export const GlobalStyles = createGlobalStyle<{
   }
   main{
     height:100%;
+  }
+  Button{
+    background: ${(props) => props.theme.body};
+    border-color: ${(props) => props.theme.borderColor};
+    color: ${(props) => props.theme.textColor};
+  }
+  img{
+    border-color: ${(props) => props.theme.borderColor};
+  }
+  Footer{
   }
 `;

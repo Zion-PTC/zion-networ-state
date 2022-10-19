@@ -9,8 +9,10 @@ const components = HTML.React.components;
 const ConnectionButton = components.Elements.ButtonTypes.ConnectionButton;
 const ThemeButton = components.Elements.ButtonTypes.ThemeButton;
 const ScrollToTopButton = components.Elements.ButtonTypes.ScrollToTopButton;
+const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = components.Layout.NavBar;
 const Footer = components.Layout.Footer;
+const TestButton = components.Elements.Button;
 
 const Welcome = <p>Welcome</p>;
 const Home = <Link href="/">Home</Link>;
@@ -23,7 +25,7 @@ const Main = styled.main`
 const Logo = styled.img`
   width: 50px;
   height: 50px;
-  border: 0.1px solid black;
+  border: 0.1px solid;
   border-radius: 100%;
   place-self: center;
 `;
@@ -44,10 +46,12 @@ const Layout: ILayout = function ({
   return (
     <>
       <NavBar ref={navbar}>
-        {nft && Collection}
-        {!landing && !nft && Home}
-        {!connect && landing && ConnectWallet}
-        <span></span>
+        <HomeButton>
+          {nft && Collection}
+          {!landing && !nft && Home}
+          {!connect && landing && ConnectWallet}
+        </HomeButton>
+        <TestButton></TestButton>
         <Logo
           src="https://ipfs.io/ipfs/QmWizN7HKYLpd85ifuNtbKBv2mYeyRxgHHnor8mKm3sZaF?filename=Logo_Zion.png"
           alt="LOGO_ZION"
