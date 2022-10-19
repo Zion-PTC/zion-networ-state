@@ -23,8 +23,9 @@ const Main = styled.main`
 const Logo = styled.img`
   width: 50px;
   height: 50px;
-  border: 1px solid black;
+  border: 0.1px solid black;
   border-radius: 100%;
+  place-self: center;
 `;
 
 const Layout: ILayout = function ({
@@ -46,6 +47,7 @@ const Layout: ILayout = function ({
         {nft && Collection}
         {!landing && !nft && Home}
         {!connect && landing && ConnectWallet}
+        <span></span>
         <Logo
           src="https://ipfs.io/ipfs/QmWizN7HKYLpd85ifuNtbKBv2mYeyRxgHHnor8mKm3sZaF?filename=Logo_Zion.png"
           alt="LOGO_ZION"
