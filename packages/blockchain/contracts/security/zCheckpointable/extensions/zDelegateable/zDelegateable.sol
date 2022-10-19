@@ -3,11 +3,9 @@
 
 pragma solidity ^0.8.0;
 
-import "./IzDelegateable.sol";
-import "../PrivatezDelegateable.sol";
-import "../../../../utils/cryptography/ECDSA.sol";
+import "./interfaces/IzDelegateable.sol";
+import "./secure/PrivatezDelegateable.sol";
 
-// TODO unabstract this
 abstract contract zDelegateable is IzDelegateable, PrivatezDelegateable {
     function delegates(address account) public view virtual returns (address) {
         return _delegates(account);

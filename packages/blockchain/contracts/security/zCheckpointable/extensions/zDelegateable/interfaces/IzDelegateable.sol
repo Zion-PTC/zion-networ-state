@@ -3,7 +3,7 @@
 
 pragma solidity ^0.8.0;
 
-import "../IPrivatezDelegateable.sol";
+import "../secure/IPrivatezDelegateable.sol";
 
 interface IzDelegateable is IPrivatezDelegateable {
     function delegates(address account) external view returns (address);

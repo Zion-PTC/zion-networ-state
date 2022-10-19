@@ -4,14 +4,11 @@
 pragma solidity ^0.8.0;
 
 import "./APrivatezDelegateable.sol";
-import "../extensions/zCheckpointable.sol";
-import "../../../zion/lib/zMaths.sol";
-import "../../../zion/interfaces/OpenZeppelin.sol";
 
 // TODO unabstract this
 abstract contract PrivatezDelegateable is
-    APrivatezDelegateable,
-    zCheckpointable
+    zCheckpointable,
+    APrivatezDelegateable
 {
     IERC20 baseContract;
     mapping(address => address) private __delegates;

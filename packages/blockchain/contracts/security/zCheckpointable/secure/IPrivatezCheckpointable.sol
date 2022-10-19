@@ -3,6 +3,9 @@
 
 pragma solidity ^0.8.0;
 
+import "../../../utils/math/SafeCast.sol";
+import "../../../utils/math/Math.sol";
+
 interface IPrivatezCheckpointable {
     struct Checkpoint {
         uint32 fromBlock;

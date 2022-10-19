@@ -3,6 +3,6 @@
 
 pragma solidity ^0.8.0;
 
-import '../IPrivatezPausable.sol';
+import '../secure/IPrivatezCheckpointable.sol';
 
-interface IzPausable is IPrivatezPausable {}
+interface IzCheckpointable is IPrivatezCheckpointable {}

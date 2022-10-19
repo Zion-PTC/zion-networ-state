@@ -4,8 +4,6 @@
 pragma solidity ^0.8.0;
 
 import "./APrivatezCheckpointable.sol";
-import "../../utils/math/SafeCast.sol";
-import "../../utils/math/Math.sol";
 
 contract PrivatezCheckpointable is APrivatezCheckpointable {
     mapping(address => Checkpoint[]) private checkpoints;

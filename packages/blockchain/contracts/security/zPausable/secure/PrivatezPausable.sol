@@ -4,7 +4,6 @@
 pragma solidity ^0.8.0;
 
 import "./APrivatezPausable.sol";
-import "../../utils/Context.sol";
 
 contract PrivatezPausable is Context, APrivatezPausable {
     bool private paused;

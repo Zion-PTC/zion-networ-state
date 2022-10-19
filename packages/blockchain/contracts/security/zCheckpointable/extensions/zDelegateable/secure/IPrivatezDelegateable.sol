@@ -3,6 +3,11 @@
 
 pragma solidity ^0.8.0;
 
+import "../../../../../zion/lib/zMaths.sol";
+import "../../../../../zion/interfaces/OpenZeppelin.sol";
+import "../../../../../utils/cryptography/ECDSA.sol";
+import "../../../zCheckpointable.sol";
+
 interface IPrivatezDelegateable {
     event DelegateChanged(
         address indexed delegator,

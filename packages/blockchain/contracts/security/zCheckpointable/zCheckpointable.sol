@@ -3,7 +3,7 @@
 
 pragma solidity ^0.8.0;
 
-import './IzCheckpointable.sol';
-import '../PrivatezCheckpointable.sol';
+import './interfaces/IzCheckpointable.sol';
+import './secure/PrivatezCheckpointable.sol';
 
 contract zCheckpointable is IzCheckpointable, PrivatezCheckpointable {}
