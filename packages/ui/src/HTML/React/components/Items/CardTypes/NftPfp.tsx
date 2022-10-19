@@ -12,7 +12,7 @@ const Area = styled(Portrait)`
 `;
 
 const CardArea = styled.div`
-  background-color: #fafafa;
+  background-color: transparent;
   height: 90%;
   width: 90%;
   display: grid;

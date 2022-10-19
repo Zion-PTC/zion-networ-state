@@ -16,12 +16,11 @@ const Area = styled.div<ImageAreaCss>`
   border: 1px solid black;
   z-index: 2;
   place-self: center;
-  background-color: #fcdde3;
+  background-color: transparent;
   //
   border-bottom: 1px solid;
   border-left: 1px solid;
   border-right: 1px solid;
-  background-color: #e5e5e5;
   display: grid;
   place-items: center;
   grid-template-columns: 100%;

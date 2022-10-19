@@ -3,6 +3,7 @@ import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
+import LeftArrow from "../../images/svg/leftarrow.svg";
 
 const components = HTML.React.components;
 // Components
@@ -13,6 +14,7 @@ const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = components.Layout.NavBar;
 const Footer = components.Layout.Footer;
 const TestButton = components.Elements.Button;
+const LogoImage = components.GlobalSections.Image;
 
 const Welcome = <p>Welcome</p>;
 const Home = <Link href="/">Home</Link>;
@@ -42,6 +44,7 @@ const Layout: ILayout = function ({
   metamask,
   backToTopHandleClick,
   showButton,
+  theme,
 }) {
   return (
     <>
@@ -71,8 +74,15 @@ const Layout: ILayout = function ({
         <ScrollToTopButton onClick={backToTopHandleClick}></ScrollToTopButton>
       )}
       <Footer ref={footer}>
-        <a>freccias</a>
-        <a>frecciad</a>
+        <a>
+          <img
+            src={require("../../images/svg/leftarrow.svg").default}
+            alt="LeftArrow"
+          />
+        </a>
+        <a>
+          <img src="rightarrow.svg" alt="RightArrow"></img>
+        </a>
         <a>home</a>
         <a>cuore</a>
         <a>account</a>

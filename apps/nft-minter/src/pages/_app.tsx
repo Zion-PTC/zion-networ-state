@@ -80,6 +80,7 @@ function Application(props: ApplicationProps) {
     metamask: useEthereum(),
     backToTopHandleClick: scrollToTop,
     showButton: showButton,
+    theme: theme == "light" ? lightTheme : darkTheme,
   };
   pageProps.layout = layout;
 

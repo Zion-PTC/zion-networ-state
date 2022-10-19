@@ -1,4 +1,5 @@
 import { IEVMweb } from "@zionstate/database/EVM";
+import { Theme } from "./theme";
 
 export type ILayout = (props: LayoutProps) => JSX.Element;
 
@@ -18,4 +19,5 @@ export type LayoutProps = {
     handleClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     evm: IEVMweb | undefined;
   };
+  theme: Theme;
 };

@@ -7,18 +7,32 @@ import { Temporary } from "./types";
 const black = "#090909";
 const white = "#fafafa";
 
-export const darkTheme: Temporary = {
+export const darkTheme: Theme = {
   body: black,
   textColor: white,
   backgroundColor: black,
   borderColor: "#fafafa",
+  headingColor: "",
+  primary: { backgroundColor: black, borderColor: "#fafafa", color: white },
+  secondary: { backgroundColor: white, borderColor: black, color: black },
 };
 
-export const lightTheme: Temporary = {
+export const lightTheme: Theme = {
   body: "#fafafa",
   textColor: "#090909",
   backgroundColor: "#fafafa",
   borderColor: "#090909",
+  headingColor: "",
+  primary: {
+    backgroundColor: "#fafafa",
+    borderColor: "#090909",
+    color: "#090909",
+  },
+  secondary: {
+    backgroundColor: "#090909",
+    borderColor: "#fafafa",
+    color: "#fafafa",
+  },
 };
 
 export const GlobalStyles = createGlobalStyle<{
