@@ -30,6 +30,18 @@ const Home = <Link href="/">Home</Link>;
 const ConnectWallet = <Link href="/connect-wallet">Connect Wallet</Link>;
 const Collection = <Link href="/collection">Collection</Link>;
 
+const AIconsFooter = (props: { icons: string[] }) => {
+  return <>{props.icons.map((icon) => AIconFooter({ src: icon }))}</>;
+};
+
+const AIconFooter = (props: { src: string }) => {
+  return (
+    <a>
+      <IconaFooter src={props.src} />
+    </a>
+  );
+};
+
 const IconaFooter = styled.img`
   width: 35px;
   height: 35px;
@@ -62,6 +74,8 @@ const Layout: ILayout = function ({
   showButton,
   theme,
 }) {
+  const ICONS = [ARROWLEFT, ARROWRIGHT, HOME, CUORE, ACCOUNT];
+
   return (
     <>
       <NavBar ref={navbar}>
@@ -90,21 +104,7 @@ const Layout: ILayout = function ({
         <ScrollToTopButton onClick={backToTopHandleClick}></ScrollToTopButton>
       )}
       <Footer ref={footer}>
-        <a>
-          <IconaFooter src={ARROWLEFT} />
-        </a>
-        <a>
-          <IconaFooter src={ARROWRIGHT} />
-        </a>
-        <a>
-          <IconaFooter src={HOME} />
-        </a>
-        <a>
-          <IconaFooter src={CUORE} />
-        </a>
-        <a>
-          <IconaFooter src={ACCOUNT} />
-        </a>
+        <AIconsFooter icons={ICONS} />
       </Footer>
     </>
   );
