@@ -54,7 +54,7 @@ export default function Collection(props: CollectionProps) {
   return (
     <Layout {...props.layout}>
       <ProfileArea id="profile-area">
-        <div id="collection-area">Collection</div>
+        <h1 id="collection-area">Collection</h1>
         <ContentArea id="content-area">
           <Area
             id="area-area"

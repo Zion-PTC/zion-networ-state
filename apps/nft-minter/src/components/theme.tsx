@@ -61,6 +61,4 @@ export const GlobalStyles = createGlobalStyle<{
   img{
     border-color: ${(props) => props.theme.borderColor};
   }
-  Footer{
-  }
 `;
