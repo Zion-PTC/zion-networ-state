@@ -39,6 +39,7 @@ export const GlobalStyles = createGlobalStyle<{
   theme: Theme;
 }>`
   body {
+    font-family: 'Epilogue', sans-serif;
     background: ${(props) => props.theme.body};
     color: ${(props) => props.theme.textColor};
     border-color: ${(props) => props.theme.borderColor};
