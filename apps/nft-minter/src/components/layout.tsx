@@ -4,6 +4,11 @@ import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
 
+const ICON1 =
+  "https://ipfs.io/ipfs/QmY65zzivWgvu7KHCtghz6ZaUtXLLtoehPk4nMHuLgWjEC?filename=arrowleft_white.png";
+const ICON2 =
+  "https://ipfs.io/ipfs/QmRjd7bcAef7Pfg1Go1KXna68FmFLBPzQ5X1hnkt9rbVP3?filename=arrowright_white.png";
+
 const components = HTML.React.components;
 // Components
 const ConnectionButton = components.Elements.ButtonTypes.ConnectionButton;
@@ -80,12 +85,13 @@ const Layout: ILayout = function ({
       )}
       <Footer ref={footer}>
         <a>
-          <IconaFooter src="https://ipfs.io/ipfs/QmY65zzivWgvu7KHCtghz6ZaUtXLLtoehPk4nMHuLgWjEC?filename=arrowleft_white.png" />
+          <IconaFooter src={ICON1} />
         </a>
         <a>
-          <IconaFooter src="https://ipfs.io/ipfs/QmRjd7bcAef7Pfg1Go1KXna68FmFLBPzQ5X1hnkt9rbVP3?filename=arrowright_white.png" />
+          <IconaFooter src={ICON2} />
         </a>
         <a>
+          {/** // TODO porta fuori la string */}
           <IconaFooter src="https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png" />
         </a>
         <a>
