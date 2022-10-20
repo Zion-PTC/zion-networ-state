@@ -4,10 +4,16 @@ import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
 
-const ICON1 =
+const ARROWLEFT =
   "https://ipfs.io/ipfs/QmY65zzivWgvu7KHCtghz6ZaUtXLLtoehPk4nMHuLgWjEC?filename=arrowleft_white.png";
-const ICON2 =
+const ARROWRIGHT =
   "https://ipfs.io/ipfs/QmRjd7bcAef7Pfg1Go1KXna68FmFLBPzQ5X1hnkt9rbVP3?filename=arrowright_white.png";
+const HOME =
+  "https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png";
+const CUORE =
+  "https://ipfs.io/ipfs/QmdNx8VYWL8C4e1qFNCy5UWpstrtQ3sHLgF2dsFkD7En9i?filename=cuore.png";
+const ACCOUNT =
+  "https://ipfs.io/ipfs/QmR7uMi2vxb1VAqfb1Ex8k754A5XngnCZ82hc6m9dQt8dv?filename=utente.png";
 
 const components = HTML.React.components;
 // Components
@@ -85,20 +91,19 @@ const Layout: ILayout = function ({
       )}
       <Footer ref={footer}>
         <a>
-          <IconaFooter src={ICON1} />
+          <IconaFooter src={ARROWLEFT} />
         </a>
         <a>
-          <IconaFooter src={ICON2} />
+          <IconaFooter src={ARROWRIGHT} />
         </a>
         <a>
-          {/** // TODO porta fuori la string */}
-          <IconaFooter src="https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png" />
+          <IconaFooter src={HOME} />
         </a>
         <a>
-          <IconaFooter src="https://ipfs.io/ipfs/QmdNx8VYWL8C4e1qFNCy5UWpstrtQ3sHLgF2dsFkD7En9i?filename=cuore.png" />
+          <IconaFooter src={CUORE} />
         </a>
         <a>
-          <IconaFooter src="https://ipfs.io/ipfs/QmR7uMi2vxb1VAqfb1Ex8k754A5XngnCZ82hc6m9dQt8dv?filename=utente.png" />
+          <IconaFooter src={ACCOUNT} />
         </a>
       </Footer>
     </>
