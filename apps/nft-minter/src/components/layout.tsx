@@ -3,7 +3,6 @@ import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
-import LeftArrow from "../../images/svg/leftarrow.svg";
 
 const components = HTML.React.components;
 // Components
@@ -14,12 +13,15 @@ const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = components.Layout.NavBar;
 const Footer = components.Layout.Footer;
 const TestButton = components.Elements.Button;
-const LogoImage = components.GlobalSections.Image;
 
 const Welcome = <p>Welcome</p>;
 const Home = <Link href="/">Home</Link>;
 const ConnectWallet = <Link href="/connect-wallet">Connect Wallet</Link>;
 const Collection = <Link href="/collection">Collection</Link>;
+
+const IconaFooter = styled.img`
+  color: white;
+`;
 
 const Main = styled.main`
   overflow: scroll;
@@ -75,13 +77,10 @@ const Layout: ILayout = function ({
       )}
       <Footer ref={footer}>
         <a>
-          <img
-            src={require("../../images/svg/leftarrow.svg").default}
-            alt="LeftArrow"
-          />
+          <IconaFooter src="https://ipfs.io/ipfs/QmY65zzivWgvu7KHCtghz6ZaUtXLLtoehPk4nMHuLgWjEC?filename=arrowleft_white.png" />
         </a>
         <a>
-          <img src="rightarrow.svg" alt="RightArrow"></img>
+          <IconaFooter src="https://ipfs.io/ipfs/QmRjd7bcAef7Pfg1Go1KXna68FmFLBPzQ5X1hnkt9rbVP3?filename=arrowright_white.png" />
         </a>
         <a>home</a>
         <a>cuore</a>
