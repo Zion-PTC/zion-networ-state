@@ -20,7 +20,10 @@ const ConnectWallet = <Link href="/connect-wallet">Connect Wallet</Link>;
 const Collection = <Link href="/collection">Collection</Link>;
 
 const IconaFooter = styled.img`
-  color: white;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  margin: 0;
 `;
 
 const Main = styled.main`
@@ -82,9 +85,15 @@ const Layout: ILayout = function ({
         <a>
           <IconaFooter src="https://ipfs.io/ipfs/QmRjd7bcAef7Pfg1Go1KXna68FmFLBPzQ5X1hnkt9rbVP3?filename=arrowright_white.png" />
         </a>
-        <a>home</a>
-        <a>cuore</a>
-        <a>account</a>
+        <a>
+          <IconaFooter src="https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png" />
+        </a>
+        <a>
+          <IconaFooter src="https://ipfs.io/ipfs/QmdNx8VYWL8C4e1qFNCy5UWpstrtQ3sHLgF2dsFkD7En9i?filename=cuore.png" />
+        </a>
+        <a>
+          <IconaFooter src="https://ipfs.io/ipfs/QmR7uMi2vxb1VAqfb1Ex8k754A5XngnCZ82hc6m9dQt8dv?filename=utente.png" />
+        </a>
       </Footer>
     </>
   );

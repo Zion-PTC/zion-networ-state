@@ -14,4 +14,5 @@ export const Footer = styled.footer<FooterProps>`
   background-color: black;
   border-color: 1px solid white;
   color: white;
+  place-items: center;
 `;
