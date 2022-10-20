@@ -48,11 +48,31 @@ export const GlobalStyles = createGlobalStyle<{
     box-sizing: border-box;
     position:fixed;
   }
+  h1{
+    font-weight: 900;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem ;
+    margin-right: 0.5rem ;
+  }
   h2{
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem ;
+    margin-right: 0.5rem ;
     color: ${(props) => props.theme.headingColor};
   }
   main{
     height:100%;
+    font-weight: 500;
+  }
+  p{
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem ;
+    margin-right: 0.5rem ;
   }
   Button{
     background: ${(props) => props.theme.body};
