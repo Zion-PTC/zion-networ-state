@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as access from "./access";
 export type { access };
+import type * as governance from "./governance";
+export type { governance };
 import type * as token from "./token";
 export type { token };
 import type * as utils from "./utils";
