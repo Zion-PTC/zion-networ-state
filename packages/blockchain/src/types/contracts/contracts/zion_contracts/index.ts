@@ -4,3 +4,5 @@
 export type { Membership } from "./Membership";
 export type { ProvaMaster } from "./ProvaMaster";
 export type { USDC } from "./USDC";
+export type { ZionDao } from "./ZionDao";
+export type { ZionGovernor } from "./ZionGovernor";
