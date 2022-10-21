@@ -47,20 +47,31 @@ const IconaFooter = styled.img`
   height: 35px;
   padding: 0;
   margin: 0;
+  cursor: pointer;
 `;
 
 const Main = styled.main`
   overflow: scroll;
 `;
+
+const LogoNav = () => {
+  return (
+    <Logo
+      src="https://ipfs.io/ipfs/QmWizN7HKYLpd85ifuNtbKBv2mYeyRxgHHnor8mKm3sZaF?filename=Logo_Zion.png"
+      alt="LOGO_ZION"
+    />
+  );
+};
+
 const Logo = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 100%;
   place-self: center;
-  -webkit-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
-  -moz-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
-  -o-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
-  box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  -webkit-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
+  -moz-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
+  -o-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
+  box-shadow: 0px 0px 1px 0.1px #8a8a8a;
 `;
 
 const Layout: ILayout = function ({
@@ -88,10 +99,7 @@ const Layout: ILayout = function ({
           {!connect && landing && ConnectWallet}
         </HomeButton>
         <TestButton></TestButton>
-        <Logo
-          src="https://ipfs.io/ipfs/QmWizN7HKYLpd85ifuNtbKBv2mYeyRxgHHnor8mKm3sZaF?filename=Logo_Zion.png"
-          alt="LOGO_ZION"
-        ></Logo>
+        <LogoNav />
         <ConnectionButton onClick={metamask.handleClick}>
           <p>{metamask.buttonMess}</p>
         </ConnectionButton>
