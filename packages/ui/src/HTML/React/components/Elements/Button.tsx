@@ -14,6 +14,11 @@ export const Button = styled.button<{ props?: ButtonStyle<{}> }>`
   overflow: hidden;
   padding: 0;
   border: 1px solid aquamarine;
+
+  -webkit-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  -moz-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  -o-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  box-shadow: 0px 0px 4px 0.1px #8a8a8a;
   &:hover {
     cursor: pointer;
   }

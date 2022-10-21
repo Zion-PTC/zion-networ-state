@@ -55,9 +55,12 @@ const Main = styled.main`
 const Logo = styled.img`
   width: 50px;
   height: 50px;
-  border: 0.1px solid;
   border-radius: 100%;
   place-self: center;
+  -webkit-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  -moz-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  -o-box-shadow: 0px 0px 4px 0.1px #8a8a8a;
+  box-shadow: 0px 0px 4px 0.1px #8a8a8a;
 `;
 
 const Layout: ILayout = function ({
