@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 
 import "./APrivatezGovernorVotes.sol";
 import "../../../zGovernor.sol";
-import "../../../../lib/ERC20Votes.sol";
+import "../../../../../token/ERC20/extensions/ERC20Votes.sol";
 
 abstract contract PrivatezGovernorVotes is zGovernor, APrivatezGovernorVotes {
     // TODO usare zERC20Votes
