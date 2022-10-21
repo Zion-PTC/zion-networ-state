@@ -64,12 +64,6 @@ const Pis = (props: { children: string[] }): JSX.Element => {
 const Landing: Landing = function Landing({ data, layout }) {
   const { name, description } = data[0];
 
-  useEffect(() => {
-    fetchMd({
-      src: "https://raw.githubusercontent.com/newsbubbles/elsewhere/main/README.md",
-    }).then((res) => console.log(res));
-  });
-
   return (
     <Layout landing {...layout}>
       <div className="landing-page">
