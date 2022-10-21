@@ -4,3 +4,5 @@
 export type { ERC1155Master } from "./ERC1155Master";
 export type { ERC1155Receiver } from "./ERC1155Receiver";
 export type { ERC1155Snapshot } from "./ERC1155Snapshot";
+export type { IERC1155Master } from "./IERC1155Master";
+export type { IERC1155Snapshot } from "./IERC1155Snapshot";
