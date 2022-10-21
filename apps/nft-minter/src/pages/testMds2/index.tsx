@@ -12,8 +12,13 @@ import { useProcessor } from "../../lib/hooks/useProcessor";
 // It is also possible to write React components directly
 // inside the `.md` file, by using the `.mdx` extension.
 
-const text = `<h2>Hello, world!</h2>
-<p>Welcome to my page 👀</p>`;
+const text = `
+<h1>Hello, world!</h1>
+<h2>Hello, world!</h2>
+<h3>Hello, world!</h3>
+<text> Hello, world! </text>
+<p>Welcome to my page 👀</p>
+<Button>button</Button>`;
 
 export default function TestMds2(props) {
   const result = useProcessor(text);
