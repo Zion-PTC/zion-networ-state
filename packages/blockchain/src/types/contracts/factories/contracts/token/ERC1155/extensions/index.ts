@@ -4,3 +4,5 @@
 export { ERC1155Master__factory } from "./ERC1155Master__factory";
 export { ERC1155Receiver__factory } from "./ERC1155Receiver__factory";
 export { ERC1155Snapshot__factory } from "./ERC1155Snapshot__factory";
+export { IERC1155Master__factory } from "./IERC1155Master__factory";
+export { IERC1155Snapshot__factory } from "./IERC1155Snapshot__factory";
