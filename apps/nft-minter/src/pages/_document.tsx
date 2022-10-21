@@ -1,6 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
+  // TODO #2 l'import crea una richiesta ad una pagina /& che
+  // ritorna un errore. capire da dove proviene il bug.
   return (
     <Html>
       <Head>
