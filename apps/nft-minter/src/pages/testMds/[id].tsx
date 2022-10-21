@@ -3,6 +3,7 @@ import { getAllPostIds, getPostData } from "../../lib/posts";
 import Head from "next/head";
 import Date from "../../components/date";
 import styled from "styled-components";
+import MDContent from "../../components/MDContent";
 
 // This file uses a custom function which itself uses
 // [unified]("https://www.npmjs.com/package/unified") which
@@ -41,7 +42,7 @@ export default function Post(props) {
         <div id="lightText">
           <Date dateString={postData.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <MDContent contentHtml={postData.contentHtml} />
       </Article>
     </Layout>
   );

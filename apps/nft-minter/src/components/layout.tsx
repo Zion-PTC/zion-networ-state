@@ -31,7 +31,13 @@ const ConnectWallet = <Link href="/connect-wallet">Connect Wallet</Link>;
 const Collection = <Link href="/collection">Collection</Link>;
 
 const AIconsFooter = (props: { icons: string[] }) => {
-  return <>{props.icons.map((icon) => AIconFooter({ src: icon }))}</>;
+  return (
+    <>
+      {props.icons.map((icon, idx) => (
+        <AIconFooter src={icon} key={idx} />
+      ))}
+    </>
+  );
 };
 
 const AIconFooter = (props: { src: string }) => {
