@@ -13,7 +13,7 @@ import "../../token/ERC1155/extensions/IERC1155Master.sol";
 import "./IERC1155MasterTokenShop.sol";
 import "../ERC1155TokenShop.sol";
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 contract ERC1155MasterTokenShop is IERC1155MasterTokenShop, ERC1155TokenShop {
     IERC1155Master public ierc1155master;

@@ -6,7 +6,7 @@ import "../access/Ownable.sol";
 import "../token/ERC20/IERC20.sol";
 import "../utils/math/SafeMath.sol";
 
-import "../token presets/ERC1155/Membership.sol";
+import "../zion_contracts/Membership.sol";
 
 /**
  * @title TokenShop Contract v 0.0.1, proto version of a marketplace smart contract of the ZION® protocol.
