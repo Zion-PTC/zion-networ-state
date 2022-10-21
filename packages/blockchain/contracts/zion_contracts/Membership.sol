@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "../access/Ownable.sol";
-import "../security/zPausable/index.sol";
+import "../security/zPausable/zPausable.sol";
 import "../token/ERC1155/ERC1155.sol";
 
 /**
