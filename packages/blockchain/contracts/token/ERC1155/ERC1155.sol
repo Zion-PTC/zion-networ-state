@@ -12,7 +12,8 @@ import "./extensions/IERC1155Receiver.sol";
 import "../../utils/Address.sol";
 import "../../utils/Context.sol";
 import "../../utils/introspection/ERC165.sol";
-import "hardhat/console.sol";
+
+// import "hardhat/console.sol";
 
 /**
  * @dev Implementation of the basic standard multi-token.
