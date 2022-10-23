@@ -11,7 +11,7 @@ import "../utils/Address.sol";
 import "../utils/Context.sol";
 import "../utils/Timers.sol";
 import "./IGovernor.sol";
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 /**
  * @dev Core of the governance system, designed to be extended though various modules.
