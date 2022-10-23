@@ -7,13 +7,6 @@ import "../secure/IPrivatezGovernor.sol";
 import "../../../zion/interfaces/Methods.sol";
 import "../../Governor.sol";
 
-interface State {
-    function state(uint256 proposalId)
-        external
-        view
-        returns (Governor.ProposalState);
-}
-
 interface IzGovernorPartial is
     IPrivatezGovernor,
     Name,
