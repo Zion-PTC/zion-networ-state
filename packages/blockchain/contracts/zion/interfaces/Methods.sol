@@ -23,6 +23,7 @@ import "./Methods/Propose.sol";
 import "./Methods/Quorum.sol";
 import "./Methods/SafeTokenTransfer.sol";
 import "./Methods/SetApprovalForAll.sol";
+import "./Methods/State.sol";
 import "./Methods/Symbol.sol";
 import "./Methods/TokenURI.sol";
 import "./Methods/TotalSupply.sol";
