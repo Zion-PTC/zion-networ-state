@@ -22,8 +22,9 @@ export const Button = styled.button<{ props?: ButtonStyle<{}> }>`
   &:hover {
     cursor: pointer;
   }
-  p {
+  text {
     margin: 0;
     place-self: center;
+    font-size: x-small;
   }
 `;

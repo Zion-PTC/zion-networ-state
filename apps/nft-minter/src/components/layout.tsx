@@ -107,10 +107,10 @@ const Layout: ILayout = function ({
         <TestButton></TestButton>
         <LogoNav />
         <ConnectionButton onClick={metamask.handleClick}>
-          <p>{metamask.buttonMess}</p>
+          <text>{metamask.buttonMess}</text>
         </ConnectionButton>
         <ThemeButton onClick={handleClick}>
-          <p>Switch p Theme</p>
+          <text>Switch p Theme</text>
         </ThemeButton>
       </NavBar>
       <Main ref={contentArea}>
