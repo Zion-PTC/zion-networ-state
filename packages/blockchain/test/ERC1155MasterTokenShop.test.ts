@@ -6,8 +6,8 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import { zionUtils } from "./utils/test-utils";
 import {
-  ERC1155MasterTokenShop,
-  ERC1155MasterTokenShop__factory,
+  ZERC1155MasterTokenShop,
+  ZERC1155MasterTokenShop__factory,
   Membership,
   Membership__factory,
   ProvaMaster,
@@ -17,8 +17,8 @@ import {
 } from "../src/types/contracts/";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
-let ERC1155MasterTokenShop: ERC1155MasterTokenShop__factory,
-  erc1155masterShop: ERC1155MasterTokenShop,
+let ZERC1155MasterTokenShop: ZERC1155MasterTokenShop__factory,
+  zerc1155masterShop: ZERC1155MasterTokenShop,
   buyer1: SignerWithAddress,
   buyer2: SignerWithAddress,
   buyer3: SignerWithAddress,
@@ -45,10 +45,10 @@ beforeEach("SetUp", async () => {
     "Membership"
   )) as Membership__factory;
   membership = await Membership.deploy();
-  ERC1155MasterTokenShop = (await ethers.getContractFactory(
-    "ERC1155MasterTokenShop"
-  )) as ERC1155MasterTokenShop__factory;
-  erc1155masterShop = await ERC1155MasterTokenShop.deploy(
+  ZERC1155MasterTokenShop = (await ethers.getContractFactory(
+    "zERC1155MasterTokenShop"
+  )) as ZERC1155MasterTokenShop__factory;
+  zerc1155masterShop = await ZERC1155MasterTokenShop.deploy(
     provaMaster.address,
     1,
     prod1.address,
@@ -57,9 +57,9 @@ beforeEach("SetUp", async () => {
     usdc.address,
     10
   );
-  let openShop = await erc1155masterShop.setShopStatus(1);
+  let openShop = await zerc1155masterShop.setShopStatus(1);
   const members = [buyer1, buyer2, buyer3];
-  await provaMaster.setTokenShop(erc1155masterShop.address);
+  await provaMaster.setTokenShop(zerc1155masterShop.address);
   members.forEach(async (member) => {
     await membership.mint(member.address);
     await usdc.mint(member.address, 1000);
@@ -80,8 +80,8 @@ beforeEach("SetUp", async () => {
     "0x00"
   );
   members.forEach(async (member) => {
-    await usdc.connect(member).approve(erc1155masterShop.address, 10);
-    await erc1155masterShop.connect(member).buyTokens("0x00");
+    await usdc.connect(member).approve(zerc1155masterShop.address, 10);
+    await zerc1155masterShop.connect(member).buyTokens("0x00");
   });
 });
 
@@ -92,11 +92,11 @@ describe.only("Master Token Shop", () => {
       "ProvaMaster:: gas required to deploy the contract:"
     );
     await zionUtils.getGasUsed(
-      await erc1155masterShop.setShopStatus(1),
+      await zerc1155masterShop.setShopStatus(1),
       "ERC1155MasterShop:: gas used to open shop:"
     );
     await zionUtils.getGasUsed(
-      await erc1155masterShop.connect(prod2).dividend(),
+      await zerc1155masterShop.connect(prod2).dividend(),
       "ERC1155MasterShop:: gas used to call dividen():"
     );
     await zionUtils.getGasUsed(
@@ -106,48 +106,48 @@ describe.only("Master Token Shop", () => {
       "ProvaMaster:: gas used to transfer share tokens:"
     );
     await zionUtils.getGasUsed(
-      await erc1155masterShop.connect(prod1).withdrawRaisedCapital(1),
+      await zerc1155masterShop.connect(prod1).withdrawRaisedCapital(1),
       "ERC1155MasterShop:: gas used to withdraw capital:"
     );
     await zionUtils.getGasUsed(
-      await usdc.connect(buyer1).approve(erc1155masterShop.address, 10),
+      await usdc.connect(buyer1).approve(zerc1155masterShop.address, 10),
       "ERC20:: gas use to approve token"
     );
     await zionUtils.getGasUsed(
-      await erc1155masterShop.connect(buyer1).buyTokens("0x00"),
+      await zerc1155masterShop.connect(buyer1).buyTokens("0x00"),
       "ERC1155MasterShop:: gas used to buy tokens:"
     );
   });
   it("Should return raised capital 30 USCD", async () => {
-    await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+    await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
     expect(
       (
-        await erc1155masterShop.totalCapitalAt(
+        await zerc1155masterShop.totalCapitalAt(
           (
-            await erc1155masterShop.connect(prod3).getCurrentDividendId()
+            await zerc1155masterShop.connect(prod3).getCurrentDividendId()
           ).toNumber()
         )
       ).toNumber()
     ).to.be.equal(30);
   }),
     it("Should let prod1 claim 10usdc", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       expect(
         (
-          await erc1155masterShop.totalCapitalAt(
+          await zerc1155masterShop.totalCapitalAt(
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
       ).to.be.equal(30);
-      await erc1155masterShop.withdrawRaisedCapital(10);
+      await zerc1155masterShop.withdrawRaisedCapital(10);
       expect((await usdc.balanceOf(prod1.address)).toNumber()).to.be.equal(10);
     }),
     it("Should not let prod2 withdraw 7 dollars", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
-      await expect(erc1155masterShop.connect(prod2).withdrawRaisedCapital(7)).to
-        .be.reverted;
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await expect(zerc1155masterShop.connect(prod2).withdrawRaisedCapital(7))
+        .to.be.reverted;
     }),
     it("Should let prod2 transfer 50 shares to prod3", async () => {
       await provaMaster
@@ -159,14 +159,14 @@ describe.only("Master Token Shop", () => {
     }),
     it("Should return share of prod1, prod2, prod3 with 700,200,100 respectively", async () => {
       expect(
-        (await erc1155masterShop.getRaisedCapital()).toNumber()
+        (await zerc1155masterShop.getRaisedCapital()).toNumber()
       ).to.be.equal(30);
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       expect(
         (
-          await erc1155masterShop.totalCapitalAt(
+          await zerc1155masterShop.totalCapitalAt(
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
@@ -183,9 +183,9 @@ describe.only("Master Token Shop", () => {
     }),
     it("Should return 700,200,100 at dividend 3 and 700,150,150 at dividend 4, as prod2 sends 50 shares to prod3", async () => {
       expect(
-        (await erc1155masterShop.getRaisedCapital()).toNumber()
+        (await zerc1155masterShop.getRaisedCapital()).toNumber()
       ).to.be.equal(30);
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       await provaMaster
         .connect(prod2)
         .safeTransferFrom(prod2.address, prod3.address, 1, 50, "0x00"); /// dividend 4 ////////////////////////////////////////////
@@ -204,7 +204,7 @@ describe.only("Master Token Shop", () => {
             prod1.address,
             1,
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
@@ -215,7 +215,7 @@ describe.only("Master Token Shop", () => {
             prod2.address,
             1,
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
@@ -226,76 +226,76 @@ describe.only("Master Token Shop", () => {
             prod3.address,
             1,
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
       ).to.be.equal(150);
     }),
     it("Should return 0,0,30,30 at dividend 1,2,3,4 for the value of the total capital", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       await provaMaster
         .connect(prod2)
         .safeTransferFrom(prod2.address, prod3.address, 1, 50, "0x00"); /// dividend 4 ////////////////////////////////////////////
       expect(
-        (await erc1155masterShop.totalCapitalAt(1)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(1)).toNumber()
       ).to.be.equal(0);
       expect(
-        (await erc1155masterShop.totalCapitalAt(2)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(2)).toNumber()
       ).to.be.equal(0);
       expect(
-        (await erc1155masterShop.totalCapitalAt(3)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(3)).toNumber()
       ).to.be.equal(30);
       expect(
         (
-          await erc1155masterShop.totalCapitalAt(
+          await zerc1155masterShop.totalCapitalAt(
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
       ).to.be.equal(30);
     }),
     it("3 tokens are bought at 10usdc, it should return 0,0,30,30,60 at dividends 1,2,3,4,5", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       await provaMaster
         .connect(prod2)
         .safeTransferFrom(prod2.address, prod3.address, 1, 50, "0x00"); /// dividend 4 ////////////////////////////////////////////
-      await usdc.connect(buyer1).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer1).buyTokens("0x00");
-      await usdc.connect(buyer2).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer2).buyTokens("0x00");
-      await usdc.connect(buyer3).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer3).buyTokens("0x00");
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
+      await usdc.connect(buyer1).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer1).buyTokens("0x00");
+      await usdc.connect(buyer2).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer2).buyTokens("0x00");
+      await usdc.connect(buyer3).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer3).buyTokens("0x00");
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
       expect(
-        (await erc1155masterShop.totalCapitalAt(1)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(1)).toNumber()
       ).to.be.equal(0);
       expect(
-        (await erc1155masterShop.totalCapitalAt(2)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(2)).toNumber()
       ).to.be.equal(0);
       expect(
-        (await erc1155masterShop.totalCapitalAt(3)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(3)).toNumber()
       ).to.be.equal(30);
       expect(
-        (await erc1155masterShop.totalCapitalAt(4)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(4)).toNumber()
       ).to.be.equal(30);
       expect(
         (
-          await erc1155masterShop.totalCapitalAt(
+          await zerc1155masterShop.totalCapitalAt(
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
       ).to.be.equal(60);
     }),
     it("Should return the right balance of shares for prod1, prod2, prod3 after various dividends and share tokens transfer", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       await provaMaster
         .connect(prod2)
         .safeTransferFrom(prod2.address, prod3.address, 1, 50, "0x00"); /// dividend 4 ////////////////////////////////////////////
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
       expect(
         (await provaMaster.balanceOfAt(prod1.address, 1, 3)).toNumber()
       ).to.be.equal(700);
@@ -320,7 +320,7 @@ describe.only("Master Token Shop", () => {
             prod1.address,
             1,
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
@@ -331,7 +331,7 @@ describe.only("Master Token Shop", () => {
             prod2.address,
             1,
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
@@ -342,71 +342,71 @@ describe.only("Master Token Shop", () => {
             prod3.address,
             1,
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
       ).to.be.equal(150);
     }),
     it("Should return 30,60,90 as total capital at dividends 4,5,6", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       await provaMaster
         .connect(prod2)
         .safeTransferFrom(prod2.address, prod3.address, 1, 50, "0x00"); /// dividend 4 ////////////////////////////////////////////
-      await usdc.connect(buyer1).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer1).buyTokens("0x00");
-      await usdc.connect(buyer2).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer2).buyTokens("0x00");
-      await usdc.connect(buyer3).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer3).buyTokens("0x00");
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
-      await usdc.connect(buyer1).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer1).buyTokens("0x00");
-      await usdc.connect(buyer2).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer2).buyTokens("0x00");
-      await usdc.connect(buyer3).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer3).buyTokens("0x00");
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 6 /////////////////////////////////////////////////////////////////////////////////////////
+      await usdc.connect(buyer1).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer1).buyTokens("0x00");
+      await usdc.connect(buyer2).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer2).buyTokens("0x00");
+      await usdc.connect(buyer3).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer3).buyTokens("0x00");
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
+      await usdc.connect(buyer1).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer1).buyTokens("0x00");
+      await usdc.connect(buyer2).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer2).buyTokens("0x00");
+      await usdc.connect(buyer3).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer3).buyTokens("0x00");
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 6 /////////////////////////////////////////////////////////////////////////////////////////
       expect(
-        (await erc1155masterShop.totalCapitalAt(4)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(4)).toNumber()
       ).to.be.equal(30);
       expect(
-        (await erc1155masterShop.totalCapitalAt(5)).toNumber()
+        (await zerc1155masterShop.totalCapitalAt(5)).toNumber()
       ).to.be.equal(60);
       expect(
         (
-          await erc1155masterShop.totalCapitalAt(
+          await zerc1155masterShop.totalCapitalAt(
             (
-              await erc1155masterShop.connect(prod3).getCurrentDividendId()
+              await zerc1155masterShop.connect(prod3).getCurrentDividendId()
             ).toNumber()
           )
         ).toNumber()
       ).to.be.equal(90);
     }),
     it("let prod1 withdraw 1usdc. prod2 2 usda and should not let prod3 withdraw 14 as his available balance is 13", async () => {
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 3 /////////////////////////////////////////////////////////////////////////////////////////
       await provaMaster
         .connect(prod2)
         .safeTransferFrom(prod2.address, prod3.address, 1, 50, "0x00"); /// dividend 4 ////////////////////////////////////////////
-      await usdc.connect(buyer1).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer1).buyTokens("0x00");
-      await usdc.connect(buyer2).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer2).buyTokens("0x00");
-      await usdc.connect(buyer3).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer3).buyTokens("0x00");
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
-      await usdc.connect(buyer1).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer1).buyTokens("0x00");
-      await usdc.connect(buyer2).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer2).buyTokens("0x00");
-      await usdc.connect(buyer3).approve(erc1155masterShop.address, 10);
-      await erc1155masterShop.connect(buyer3).buyTokens("0x00");
-      await erc1155masterShop.connect(prod2).dividend(); /// dividend 6 /////////////////////////////////////////////////////////////////////////////////////////
-      await erc1155masterShop.connect(prod1).withdrawRaisedCapital(1);
-      await erc1155masterShop.connect(prod2).withdrawRaisedCapital(2);
-      await erc1155masterShop.connect(prod3).withdrawRaisedCapital(3);
-      await erc1155masterShop.connect(prod3).withdrawRaisedCapital(7);
-      await expect(erc1155masterShop.connect(prod3).withdrawRaisedCapital(4)).to
-        .be.reverted;
+      await usdc.connect(buyer1).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer1).buyTokens("0x00");
+      await usdc.connect(buyer2).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer2).buyTokens("0x00");
+      await usdc.connect(buyer3).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer3).buyTokens("0x00");
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 5 /////////////////////////////////////////////////////////////////////////////////////////
+      await usdc.connect(buyer1).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer1).buyTokens("0x00");
+      await usdc.connect(buyer2).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer2).buyTokens("0x00");
+      await usdc.connect(buyer3).approve(zerc1155masterShop.address, 10);
+      await zerc1155masterShop.connect(buyer3).buyTokens("0x00");
+      await zerc1155masterShop.connect(prod2).dividend(); /// dividend 6 /////////////////////////////////////////////////////////////////////////////////////////
+      await zerc1155masterShop.connect(prod1).withdrawRaisedCapital(1);
+      await zerc1155masterShop.connect(prod2).withdrawRaisedCapital(2);
+      await zerc1155masterShop.connect(prod3).withdrawRaisedCapital(3);
+      await zerc1155masterShop.connect(prod3).withdrawRaisedCapital(7);
+      await expect(zerc1155masterShop.connect(prod3).withdrawRaisedCapital(4))
+        .to.be.reverted;
     });
 });

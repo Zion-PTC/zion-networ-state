@@ -3,4 +3,6 @@
 /* eslint-disable */
 import type * as iGovernorSol from "./IGovernor.sol";
 export type { iGovernorSol };
+import type * as extensions from "./extensions";
+export type { extensions };
 export type { Governor } from "./Governor";

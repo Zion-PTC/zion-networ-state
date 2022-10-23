@@ -7,7 +7,6 @@ import "./APrivatezERC1155TokenShop.sol";
 
 abstract contract PrivatezERC1155TokenShop is
     Context,
-    IERC1155TokenShop,
     APrivatezERC1155TokenShop
 {
     ////////////////////

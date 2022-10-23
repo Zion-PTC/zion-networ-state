@@ -10,9 +10,13 @@ import "../../../utils/math/SafeMath.sol";
 import "../../../utils/Context.sol";
 
 import "../../../zion_contracts/Membership.sol";
-import "../../IERC1155TokenShop.sol";
 
 interface IPrivatezERC1155TokenShop {
+    enum Status {
+        CLOSED,
+        ACTIVE,
+        SUSPENDED
+    }
     event ShopCreated(
         address shopAddress,
         address owner,

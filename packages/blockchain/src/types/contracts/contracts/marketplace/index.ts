@@ -3,5 +3,7 @@
 /* eslint-disable */
 import type * as extensions from "./extensions";
 export type { extensions };
+import type * as zErc1155TokenShop from "./zERC1155TokenShop";
+export type { zErc1155TokenShop };
 export type { ERC1155TokenShop } from "./ERC1155TokenShop";
 export type { IERC1155TokenShop } from "./IERC1155TokenShop";

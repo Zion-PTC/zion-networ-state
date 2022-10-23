@@ -13,22 +13,6 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "GovernorCountingSimple",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.GovernorCountingSimple__factory>;
-    getContractFactory(
-      name: "GovernorSettings",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.GovernorSettings__factory>;
-    getContractFactory(
-      name: "GovernorVotes",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.GovernorVotes__factory>;
-    getContractFactory(
-      name: "GovernorVotesQuorumFraction",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.GovernorVotesQuorumFraction__factory>;
-    getContractFactory(
       name: "ERC1155TokenShop",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC1155TokenShop__factory>;
@@ -45,29 +29,49 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC1155TokenShop__factory>;
     getContractFactory(
-      name: "APrivatezPausable",
+      name: "IzERC1155MasterTokenShop",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.APrivatezPausable__factory>;
+    ): Promise<Contracts.IzERC1155MasterTokenShop__factory>;
+    getContractFactory(
+      name: "APrivatezERC1155MasterTokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.APrivatezERC1155MasterTokenShop__factory>;
+    getContractFactory(
+      name: "IPrivatezERC1155MasterTokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPrivatezERC1155MasterTokenShop__factory>;
+    getContractFactory(
+      name: "PrivatezERC1155MasterTokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivatezERC1155MasterTokenShop__factory>;
+    getContractFactory(
+      name: "ZERC1155MasterTokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZERC1155MasterTokenShop__factory>;
+    getContractFactory(
+      name: "IzERC1155TokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IzERC1155TokenShop__factory>;
+    getContractFactory(
+      name: "APrivatezERC1155TokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.APrivatezERC1155TokenShop__factory>;
+    getContractFactory(
+      name: "IPrivatezERC1155TokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPrivatezERC1155TokenShop__factory>;
+    getContractFactory(
+      name: "PrivatezERC1155TokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivatezERC1155TokenShop__factory>;
+    getContractFactory(
+      name: "ZERC1155TokenShop",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZERC1155TokenShop__factory>;
     getContractFactory(
       name: "IzPausable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IzPausable__factory>;
-    getContractFactory(
-      name: "ZPausable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ZPausable__factory>;
-    getContractFactory(
-      name: "IzPausable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IzPausable__factory>;
-    getContractFactory(
-      name: "IPrivatezPausable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IPrivatezPausable__factory>;
-    getContractFactory(
-      name: "PrivatezPausable",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.PrivatezPausable__factory>;
     getContractFactory(
       name: "APrivatezPausable",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -141,6 +145,22 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Ownable__factory>;
     getContractFactory(
+      name: "GovernorCountingSimple",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GovernorCountingSimple__factory>;
+    getContractFactory(
+      name: "GovernorSettings",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GovernorSettings__factory>;
+    getContractFactory(
+      name: "GovernorVotes",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GovernorVotes__factory>;
+    getContractFactory(
+      name: "GovernorVotesQuorumFraction",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GovernorVotesQuorumFraction__factory>;
+    getContractFactory(
       name: "Governor",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Governor__factory>;
@@ -210,26 +230,6 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.IERC165__factory>;
 
     getContractAt(
-      name: "GovernorCountingSimple",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.GovernorCountingSimple>;
-    getContractAt(
-      name: "GovernorSettings",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.GovernorSettings>;
-    getContractAt(
-      name: "GovernorVotes",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.GovernorVotes>;
-    getContractAt(
-      name: "GovernorVotesQuorumFraction",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.GovernorVotesQuorumFraction>;
-    getContractAt(
       name: "ERC1155TokenShop",
       address: string,
       signer?: ethers.Signer
@@ -250,35 +250,60 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC1155TokenShop>;
     getContractAt(
-      name: "APrivatezPausable",
+      name: "IzERC1155MasterTokenShop",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.APrivatezPausable>;
+    ): Promise<Contracts.IzERC1155MasterTokenShop>;
+    getContractAt(
+      name: "APrivatezERC1155MasterTokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.APrivatezERC1155MasterTokenShop>;
+    getContractAt(
+      name: "IPrivatezERC1155MasterTokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPrivatezERC1155MasterTokenShop>;
+    getContractAt(
+      name: "PrivatezERC1155MasterTokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivatezERC1155MasterTokenShop>;
+    getContractAt(
+      name: "ZERC1155MasterTokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZERC1155MasterTokenShop>;
+    getContractAt(
+      name: "IzERC1155TokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IzERC1155TokenShop>;
+    getContractAt(
+      name: "APrivatezERC1155TokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.APrivatezERC1155TokenShop>;
+    getContractAt(
+      name: "IPrivatezERC1155TokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPrivatezERC1155TokenShop>;
+    getContractAt(
+      name: "PrivatezERC1155TokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivatezERC1155TokenShop>;
+    getContractAt(
+      name: "ZERC1155TokenShop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZERC1155TokenShop>;
     getContractAt(
       name: "IzPausable",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IzPausable>;
-    getContractAt(
-      name: "ZPausable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ZPausable>;
-    getContractAt(
-      name: "IzPausable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IzPausable>;
-    getContractAt(
-      name: "IPrivatezPausable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IPrivatezPausable>;
-    getContractAt(
-      name: "PrivatezPausable",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.PrivatezPausable>;
     getContractAt(
       name: "APrivatezPausable",
       address: string,
@@ -369,6 +394,26 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "GovernorCountingSimple",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GovernorCountingSimple>;
+    getContractAt(
+      name: "GovernorSettings",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GovernorSettings>;
+    getContractAt(
+      name: "GovernorVotes",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GovernorVotes>;
+    getContractAt(
+      name: "GovernorVotesQuorumFraction",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GovernorVotesQuorumFraction>;
     getContractAt(
       name: "Governor",
       address: string,

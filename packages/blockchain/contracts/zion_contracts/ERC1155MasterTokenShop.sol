@@ -3,4 +3,4 @@
 
 pragma solidity ^0.8.0;
 
-import "../marketplace/extensions/ERC1155MasterTokenShop.sol";
+import "../marketplace/zERC1155TokenShop/extensions/zERC1155MasterTokenShop/zERC1155MasterTokenShop.sol";

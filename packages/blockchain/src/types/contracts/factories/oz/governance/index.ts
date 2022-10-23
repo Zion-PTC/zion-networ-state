@@ -2,4 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as iGovernorSol from "./IGovernor.sol";
+export * as extensions from "./extensions";
 export { Governor__factory } from "./Governor__factory";
