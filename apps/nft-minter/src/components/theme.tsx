@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import { Theme } from "./Types/index";
-import { Temporary } from "./types";
 
 // TODO find where
 
@@ -46,57 +45,37 @@ export const GlobalStyles = createGlobalStyle<{
     transition: .3s ease;
     margin:0;
     box-sizing: border-box;
+    width: 100%;
     position:fixed;
   }
   h1{
     font-family: 'Epilogue', sans-serif;
     font-weight: 900;
     font-size: -webkit-xxx-large;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem ;
-    margin-right: 2rem ;
   }
   h2{
     font-family: 'Epilogue', sans-serif;
     font-weight: 800;
     font-size: xx-large;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem ;
-    margin-right: 2rem ;
     color: ${(props) => props.theme.headingColor};
   }
   h3{
     font-family: 'Epilogue', sans-serif;
     font-weight: 700;
     font-size: x-large;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem ;
-    margin-right: 2rem ;
   }
   text{
     font-weight: 600;
     font-size: large;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem ;
-    margin-right: 2rem ;
   }
   main{
     height:100%;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    width: fit-content;
   }
   p{
     font-family: 'Epilogue', sans-serif;
     font-size:x-large;
     font-weight: 500;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem ;
-    margin-right: 2rem 
   }
   Button{
     background: ${(props) => props.theme.body};
