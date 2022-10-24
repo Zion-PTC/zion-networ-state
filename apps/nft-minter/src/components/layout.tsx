@@ -57,7 +57,7 @@ const IconaFooter = styled.img`
 `;
 
 const Main = styled.main`
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const LogoNav = () => {
