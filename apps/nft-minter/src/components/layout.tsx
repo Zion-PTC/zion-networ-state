@@ -25,31 +25,33 @@ const ARROWLEFT =
   "https://ipfs.io/ipfs/QmY65zzivWgvu7KHCtghz6ZaUtXLLtoehPk4nMHuLgWjEC?filename=arrowleft_white.png";
 const ARROWRIGHT =
   "https://ipfs.io/ipfs/QmRjd7bcAef7Pfg1Go1KXna68FmFLBPzQ5X1hnkt9rbVP3?filename=arrowright_white.png";
-////const HOME =
-////  "https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png";
+const HOME =
+  "https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png";
 const CUORE =
   "https://ipfs.io/ipfs/QmdNx8VYWL8C4e1qFNCy5UWpstrtQ3sHLgF2dsFkD7En9i?filename=cuore.png";
 const ACCOUNT =
   "https://ipfs.io/ipfs/QmR7uMi2vxb1VAqfb1Ex8k754A5XngnCZ82hc6m9dQt8dv?filename=utente.png";
 
 class FooterLink {
-  src;
-  link;
-  constructor(link, src) {
+  src: string;
+  link: string;
+  constructor(link: string, src: string) {
     this.link = link;
     this.src = src;
   }
 }
 
-const HOME = new FooterLink(
-  "https://ipfs.io/ipfs/QmZdkHiWkE9J9RTJDfAX6oQ7BtcuHVdtgGSUv6edLqwn68?filename=homepage_white.png",
-  Home
-);
-const AIconsFooter = (props: { icons: string[] }) => {
+const HomeFooterLink = new FooterLink(HOME, "/");
+const ArrowLeftFooterLink = new FooterLink(ARROWLEFT, "/");
+const ArrowRightFooterLink = new FooterLink(ARROWRIGHT, "/");
+const CuoreFooterLink = new FooterLink(CUORE, "/");
+const AccountFooterLink = new FooterLink(ACCOUNT, "/");
+
+const AIconsFooter = (props: { footerLinks: FooterLink[] }) => {
   return (
     <>
-      {props.icons.map((icon, idx, link) => (
-        <AIconFooter src={icon} key={idx} link={link} />
+      {props.footerLinks.map((footerLink, idx) => (
+        <AIconFooter src={footerLink.src} key={idx} link={footerLink.link} />
       ))}
     </>
   );
@@ -62,7 +64,14 @@ const AIconFooter = (props: { src: string; link: string }) => {
     </a>
   );
 };
-const ICONS = [ARROWLEFT, ARROWRIGHT, HOME, CUORE, ACCOUNT];
+
+const FOOTERLINKS = [
+  ArrowLeftFooterLink,
+  ArrowRightFooterLink,
+  HomeFooterLink,
+  CuoreFooterLink,
+  AccountFooterLink,
+];
 
 const IconaFooter = styled.img`
   width: 35px;
@@ -147,7 +156,7 @@ const Layout: ILayout = function ({
         <ScrollToTopButton onClick={backToTopHandleClick}></ScrollToTopButton>
       )}
       <Footer ref={footer}>
-        <AIconsFooter icons={ICONS} />
+        <AIconsFooter footerLinks={FOOTERLINKS} />
       </Footer>
     </>
   );
