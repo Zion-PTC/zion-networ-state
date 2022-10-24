@@ -78,6 +78,21 @@ const Logo = styled.img`
   -moz-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
   -o-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
   box-shadow: 0px 0px 1px 0.1px #8a8a8a;
+  overflow: hidden;
+  transition-duration: 0.8s;
+  transition-property: transform;
+  &:hover {
+    transform: rotate(360deg);
+  }
+
+  @keyframes ruota {
+    from {
+      top: 0px;
+    }
+    to {
+      top: 1200px;
+    }
+  }
 `;
 
 const Layout: ILayout = function ({
