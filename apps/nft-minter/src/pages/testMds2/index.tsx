@@ -18,7 +18,8 @@ const text = `
 <h3>Hello, world!</h3>
 <text> Hello, world! </text>
 <p>Welcome to my page 👀</p>
-<Button>button</Button>`;
+<Button>button</Button>
+`;
 
 export default function TestMds2(props) {
   const result = useProcessor(text);
