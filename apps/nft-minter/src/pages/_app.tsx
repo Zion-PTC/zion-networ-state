@@ -87,6 +87,19 @@ function Application(props: ApplicationProps) {
   // Catches the dimensions of footer and header and set
   // container height to be the diff with window height
   useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setTheme("dark");
+    }
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        const newColorScheme = event.matches ? "dark" : "light";
+        console.log("changedtheme");
+        setTheme(newColorScheme);
+      });
     setAppHeight(window.visualViewport.height);
     setComponentAreaHeight(
       window.visualViewport.height -
