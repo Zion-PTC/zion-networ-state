@@ -35,7 +35,7 @@ const ACCOUNT =
 class FooterLink {
   src: string;
   link: string;
-  constructor(link: string, src: string) {
+  constructor(src: string, link: string) {
     this.link = link;
     this.src = src;
   }
@@ -59,7 +59,7 @@ const AIconsFooter = (props: { footerLinks: FooterLink[] }) => {
 
 const AIconFooter = (props: { src: string; link: string }) => {
   return (
-    <a>
+    <a href={props.link}>
       <IconaFooter src={props.src} />
     </a>
   );
