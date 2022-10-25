@@ -36,6 +36,7 @@ const ProfileArea = styled.div`
   // TODO covertire in numeri relativi
   grid-template-rows: 1fr 8fr 0.5fr;
   height: 100%;
+  width: 100vw;
   position: relative;
 `;
 
