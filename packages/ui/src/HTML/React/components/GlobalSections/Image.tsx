@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ImageProps } from "../Items/sections/Types";
 import type { utility } from "../../lib/global.types";
+import { LoadingWaves } from "../Icons/LoadingTypes";
 
 export type ImageCss = utility.ZionCss<undefined, true, "display" | "maxWidth">;
 
@@ -11,11 +12,7 @@ export type ImageAreaCss = {
 };
 
 const Area = styled.div<ImageAreaCss>`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border: 1px solid black;
   z-index: 2;
-  place-self: center;
   background-color: transparent;
   //
   border-bottom: 1px solid;
@@ -33,14 +30,23 @@ const Img = styled.img<ImageCss>`
 `;
 
 export const Image = (props: ImageProps & ImageAreaCss) => {
+  let displayStatus = props.imageLoaded ? "block" : "none";
+  let loadingDisplayStatus = props.imageLoaded ? "none" : "block";
   return (
     <Area
       width={props.width}
       height={props.height}
       css={{ height: "", width: "" }}
     >
-      <Img src={props.src} alt="nft"></Img>
-      <div></div>
+      <Img
+        onLoad={() => {
+          if (props.handleisLoading) props.handleisLoading(false);
+        }}
+        src={props.src}
+        alt="nft"
+        display={displayStatus}
+      ></Img>
+      <LoadingWaves display={loadingDisplayStatus}></LoadingWaves>
     </Area>
   );
 };

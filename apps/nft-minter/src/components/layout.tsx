@@ -3,6 +3,7 @@ import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
+import { ScrollToTop } from "./SVGs";
 
 const components = HTML.React.components;
 // Components
@@ -153,7 +154,11 @@ const Layout: ILayout = function ({
         {children}
       </Main>
       {showButton && (
-        <ScrollToTopButton onClick={backToTopHandleClick}></ScrollToTopButton>
+        <ScrollToTopButton
+          handleClick={backToTopHandleClick}
+          svg={ScrollToTop({ stroke: theme.primary.borderColor })}
+          position={{ bottom: "10%", right: "4%" }}
+        ></ScrollToTopButton>
       )}
       <Footer ref={footer}>
         <AIconsFooter footerLinks={FOOTERLINKS} />

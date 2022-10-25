@@ -20,7 +20,8 @@
       {
         "ssr": true
       }
-    ]
+    ],
+    "inline-react-svg"
   ],
   "babelrcRoots": ["*"]
 }

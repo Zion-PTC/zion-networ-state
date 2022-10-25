@@ -5,6 +5,7 @@ import { Infos } from "../sections/Infos";
 import { Social } from "../sections/Social";
 import { Portrait } from "../Shapes/Portrait";
 import { NftPfpProps } from "./Types/NftPfp";
+import { useEffect, useState } from "react";
 
 const Area = styled(Portrait)`
   height: 100%;
@@ -22,6 +23,13 @@ const CardArea = styled.div`
 
 export function NftPfp(props: NftPfpProps) {
   let { backgroundColor } = props;
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    !isLoading ? setImageLoaded(true) : setImageLoaded(false);
+  }, [isLoading]);
+
   return (
     <Area
       backgroundColor={backgroundColor}
@@ -29,7 +37,14 @@ export function NftPfp(props: NftPfpProps) {
     >
       <CardArea>
         <Head />
-        <Image src={props.src ? props.src : ""} width="auto" height="auto" />
+        <Image
+          handleisLoading={setIsLoading}
+          src={props.src ? props.src : ""}
+          width="100%"
+          height="100%"
+          display={imageLoaded ? "block" : "none"}
+          imageLoaded={imageLoaded}
+        />
         <Infos />
         <Social />
       </CardArea>

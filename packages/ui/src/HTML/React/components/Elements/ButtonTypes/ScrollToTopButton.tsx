@@ -1,22 +1,20 @@
 import styled from "styled-components";
 import { Button } from "../Button";
+import { Position } from "../Types";
 
-export const ScrollToTopButton = styled(Button)`
-  width: 50px;
-  height: 50px;
+const ScrollToTopButtonArea = styled(Button)`
+  width: auto;
+  height: auto;
   z-index: 2;
-  position: fixed;
-  bottom: 20%;
-  right: 20%;
-  background: transparent;
+  background-color: transparent;
+  position: ${(props) => (props.position ? "fixed" : "relative")};
+  bottom: ${(props) =>
+    props.position?.bottom ? props.position?.bottom : "10%"};
+  right: ${(props) => (props.position?.right ? props.position?.right : "7%")};
   cursor: pointer;
   border: none;
-  box-shadow: 0 5px 10px #ccc;
   padding: 0;
   margin: 0;
-  &:hover {
-    background: red;
-  }
   &:first-child {
     display: grid;
     justify-content: center;
@@ -26,3 +24,18 @@ export const ScrollToTopButton = styled(Button)`
     height: 100%;
   }
 `;
+
+export function ScrollToTopButton(props: {
+  svg?: JSX.IntrinsicElements["svg"];
+  handleClick?: () => void;
+  position?: Position;
+}) {
+  return (
+    <ScrollToTopButtonArea
+      onClick={props.handleClick}
+      position={props.position}
+    >
+      <>{props.svg}</>
+    </ScrollToTopButtonArea>
+  );
+}
