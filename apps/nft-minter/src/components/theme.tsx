@@ -75,7 +75,7 @@ export const GlobalStyles = createGlobalStyle<{
   p{
     font-family: 'Epilogue', sans-serif;
     font-size:x-large;
-    font-weight: 500;
+    font-weight: 300;
   }
   Button{
     background: ${(props) => props.theme.body};
