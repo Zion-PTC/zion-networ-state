@@ -15,4 +15,7 @@ export type ButtonStyle<T> = {
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   position?: Position;
+  zIndex?: string;
+  gridArea?: string;
+  child?: { justifySelf?: string };
 };
