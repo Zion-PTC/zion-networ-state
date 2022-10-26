@@ -81,6 +81,7 @@ export const ItemPage = styled.div`
 `;
 
 type ItemProps<T extends BasicCardProps = BasicCardProps> = ItemStyle & {
+  likeIcon: JSX.IntrinsicElements["svg"];
   contentArea: { data: T[] };
 };
 
@@ -137,7 +138,9 @@ export function Item<T extends BasicCardProps>(props: ItemProps<T>) {
           blockSize={props.contentArea.blockSize}
           columns={props.contentArea.columns}
         >
-          <Cards type="nft-pfp">{props.contentArea.data}</Cards>
+          <Cards likeIcon={props.likeIcon} type="nft-pfp">
+            {props.contentArea.data}
+          </Cards>
         </Area>
         {/*this here under is the infinte scroll loader, we need to create a pagination method and send it a paginated result of the nfts */}
         {/* <Loader
