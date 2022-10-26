@@ -1,24 +1,38 @@
-import Link from "next/link";
+// import Link from "next/link";
 import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
-import { ScrollToTop } from "./SVGs";
+import {
+  Account,
+  ArrowLeft,
+  ArrowRight,
+  FilterAlt,
+  Like,
+  Moon,
+  ScrollToTop,
+  Search,
+  Sun,
+} from "./Icons";
+import { Home } from "./Icons";
+import { SVGButtonProps } from "./Icons/Types";
 
 const components = HTML.React.components;
 // Components
 const ConnectionButton = components.Elements.ButtonTypes.ConnectionButton;
-const ThemeButton = components.Elements.ButtonTypes.ThemeButton;
+const ThemeButton = components.Elements.ButtonTypes.SVGButton;
+const FilterAltButton = components.Elements.ButtonTypes.SVGButton;
+const SearchButton = components.Elements.ButtonTypes.SVGButton;
 const ScrollToTopButton = components.Elements.ButtonTypes.ScrollToTopButton;
-const HomeButton = components.Elements.ButtonTypes.HomeButton;
+// const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = components.Layout.NavBar;
 const Footer = components.Layout.Footer;
-const TestButton = components.Elements.Button;
+// const TestButton = components.Elements.Button;
 
 const Welcome = <p>Welcome</p>;
-const Home = <Link href="/">Home</Link>;
-const ConnectWallet = <Link href="/connect-wallet">Connect Wallet</Link>;
-const Collection = <Link href="/collection">Collection</Link>;
+// const Home = <Link href="/">Home</Link>;
+// const ConnectWallet = <Link href="/connect-wallet">Connect Wallet</Link>;
+// const Collection = <Link href="/collection">Collection</Link>;
 
 ///FOOTER LINKS///////////////////////////////////////////////////////////////////////////////////////
 
@@ -36,37 +50,45 @@ const ACCOUNT =
 class FooterLink {
   src: string;
   link: string;
-  constructor(src: string, link: string) {
+  svg: (props: SVGButtonProps) => JSX.Element;
+  constructor(
+    src: string,
+    link: string,
+    svg: (props: SVGButtonProps) => JSX.Element
+  ) {
     this.link = link;
     this.src = src;
+    this.svg = svg;
   }
 }
 
-const HomeFooterLink = new FooterLink(HOME, "/");
-const ArrowLeftFooterLink = new FooterLink(ARROWLEFT, "/");
-const ArrowRightFooterLink = new FooterLink(ARROWRIGHT, "/");
-const CuoreFooterLink = new FooterLink(CUORE, "/");
-const AccountFooterLink = new FooterLink(ACCOUNT, "/");
+const HomeFooterLink = new FooterLink(HOME, "/", Home);
+const ArrowLeftFooterLink = new FooterLink(ARROWLEFT, "/", ArrowLeft);
+const ArrowRightFooterLink = new FooterLink(ARROWRIGHT, "/", ArrowRight);
+const CuoreFooterLink = new FooterLink(CUORE, "/", Like);
+const AccountFooterLink = new FooterLink(ACCOUNT, "/", Account);
 
-const AIconsFooter = (props: { footerLinks: FooterLink[] }) => {
+const AIconsFooter = (props: { footerLinks: FooterLink[]; fill: string }) => {
   return (
     <>
       {props.footerLinks.map((footerLink, idx) => (
-        <AIconFooter src={footerLink.src} key={idx} link={footerLink.link} />
+        <AIconFooter key={idx} footerLink={footerLink} fill={props.fill} />
       ))}
     </>
   );
 };
 
-const AIconFooter = (props: { src: string; link: string }) => {
+const AIconFooter = (props: { footerLink: FooterLink; fill: string }) => {
+  const { link, src, svg: SVG } = props.footerLink;
   return (
-    <a href={props.link}>
-      <IconaFooter src={props.src} />
+    <a href={link}>
+      {/* <IconaFooter src={src} /> */}
+      <SVG fill={props.fill} />
     </a>
   );
 };
 
-const FOOTERLINKS = [
+const FOOTERLINKS: FooterLink[] = [
   ArrowLeftFooterLink,
   ArrowRightFooterLink,
   HomeFooterLink,
@@ -105,6 +127,7 @@ const Logo = styled.img`
   overflow: hidden;
   transition-duration: 0.8s;
   transition-property: transform;
+  grid-area: logo;
   &:hover {
     transform: rotate(360deg);
   }
@@ -131,23 +154,58 @@ const Layout: ILayout = function ({
   backToTopHandleClick,
   showButton,
   theme,
+  isLightTheme,
 }) {
+  const MoonSvg = Moon({
+    fill: theme.primary.borderColor,
+    width: "24",
+    height: "24",
+  });
+
+  const SunSvg = Sun({
+    stroke: theme.primary.borderColor,
+    width: "24",
+    height: "24",
+  });
+
+  const ThemeSvg = isLightTheme ? MoonSvg : SunSvg;
   return (
     <>
-      <NavBar ref={navbar}>
-        <HomeButton>
+      <NavBar
+        ref={navbar}
+        gridTemplateAreas="'. home search logo web3 theme menu'"
+        gridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr 1fr"
+      >
+        {/* <HomeButton>
           {nft && Collection}
           {!landing && !nft && Home}
           {!connect && landing && ConnectWallet}
-        </HomeButton>
-        <TestButton></TestButton>
+        </HomeButton> */}
+        <SearchButton
+          svg={Search({
+            stroke: theme.primary.borderColor,
+            width: "20",
+            height: "20",
+          })}
+          gridArea="search"
+        />
         <LogoNav />
         <ConnectionButton onClick={metamask.handleClick}>
           <text>{metamask.buttonMess}</text>
         </ConnectionButton>
-        <ThemeButton onClick={handleClick}>
-          <text>Switch p Theme</text>
-        </ThemeButton>
+        <ThemeButton
+          svg={ThemeSvg}
+          handleClick={handleClick}
+          gridArea="theme"
+        />
+        <FilterAltButton
+          svg={FilterAlt({
+            fill: theme.primary.borderColor,
+            width: "24",
+            height: "24",
+          })}
+          gridArea="menu"
+        />
       </NavBar>
       <Main ref={contentArea}>
         {landing && Welcome}
@@ -156,12 +214,16 @@ const Layout: ILayout = function ({
       {showButton && (
         <ScrollToTopButton
           handleClick={backToTopHandleClick}
-          svg={ScrollToTop({ stroke: theme.primary.borderColor })}
+          svg={ScrollToTop({
+            stroke: theme.primary.borderColor,
+            width: "51",
+            height: "51",
+          })}
           position={{ bottom: "10%", right: "4%" }}
         ></ScrollToTopButton>
       )}
       <Footer ref={footer}>
-        <AIconsFooter footerLinks={FOOTERLINKS} />
+        <AIconsFooter footerLinks={FOOTERLINKS} fill={theme.palette.white} />
       </Footer>
     </>
   );
