@@ -1,29 +1,61 @@
 import styled from "styled-components";
+import { SVGButton } from "../../Elements/ButtonTypes";
 import { TextArea } from "./TextArea";
 import { InfosProps } from "./Types";
+
+const NftTitle = TextArea;
+const FloorPrice = TextArea;
+const PlaceBid = TextArea;
+const Likes = TextArea;
 
 const Area = styled.div`
   border-left: 1px solid;
   border-right: 1px solid;
+  border-bottom: 1px solid;
   display: grid;
-  grid-template-columns: 3px 1fr 5fr 1fr;
-  grid-template-rows: 1fr 0.7fr;
-  grid-template-areas:
-    ". main main ."
-    ". . secondary .";
-  align-items: center;
-  a {
-    margin: 0;
-    padding: 0;
-    margin: 0;
-  }
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+`;
+
+const InfosArea = styled.div`
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 2fr 1fr 1fr;
+  place-items: center;
+`;
+
+const SocialArea = styled.div`
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: ". ." "like count";
+  place-items: center;
+`;
+
+const LikeIcon = styled.div`
+  width: 100%;
+  grid-area: like;
+  display: grid;
+  place-items: end;
 `;
 
 export const Infos = (props: InfosProps) => {
   return (
     <Area {...props}>
-      <TextArea gridArea="main"></TextArea>
-      <TextArea gridArea="secondary"></TextArea>
+      <InfosArea>
+        <NftTitle></NftTitle>
+        <FloorPrice></FloorPrice>
+        <PlaceBid></PlaceBid>
+      </InfosArea>
+      <SocialArea>
+        <LikeIcon>
+          <SVGButton svg={props.likeIcon} justifySelf="end" />
+        </LikeIcon>
+        <Likes gridArea="count"></Likes>
+      </SocialArea>
     </Area>
   );
 };
