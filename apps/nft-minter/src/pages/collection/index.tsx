@@ -4,6 +4,7 @@ import Layout from "../../components/layout";
 import { Data, NftData } from "../nft/[id]";
 import { BasePropsFromApp } from "../_app";
 import { HTML } from "@zionstate/ui";
+import { Like } from "../../components/Icons";
 
 const components = HTML.React.components;
 const ContentArea = components.Layout.ContentArea;
@@ -51,6 +52,7 @@ export default function Collection(props: CollectionProps) {
   //   isLastPage,
   // } = useInfiniteScroll(props.data);
   let data = props.data;
+  const LikeIcon = Like({ fill: props.layout.theme.primary.borderColor });
 
   return (
     <Layout {...props.layout}>
@@ -64,7 +66,9 @@ export default function Collection(props: CollectionProps) {
             blockSize={props.collection.blockSize}
             columns={props.collection.columns}
           >
-            <Cards type="nft-pfp">{data}</Cards>
+            <Cards likeIcon={LikeIcon} type="nft-pfp">
+              {data}
+            </Cards>
           </Area>
           {/*this here under is the infinte scroll loader, we need to create a pagination method and send it a paginated result of the nfts */}
           {/* <Loader
