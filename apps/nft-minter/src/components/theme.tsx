@@ -14,6 +14,7 @@ export const darkTheme: Theme = {
   headingColor: "",
   primary: { backgroundColor: black, borderColor: "#fafafa", color: white },
   secondary: { backgroundColor: white, borderColor: black, color: black },
+  palette: { white: "#fcfcfc" },
 };
 
 export const lightTheme: Theme = {
@@ -32,6 +33,7 @@ export const lightTheme: Theme = {
     borderColor: "#fafafa",
     color: "#fafafa",
   },
+  palette: { white: "#fcfcfc" },
 };
 
 export const GlobalStyles = createGlobalStyle<{
