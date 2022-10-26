@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Head } from "../sections/Head";
 import { Image } from "../../GlobalSections/Image";
 import { Infos } from "../sections/Infos";
-import { Social } from "../sections/Social";
 import { Portrait } from "../Shapes/Portrait";
 import { NftPfpProps } from "./Types/NftPfp";
 import { useEffect, useState } from "react";
@@ -18,7 +17,7 @@ const CardArea = styled.div`
   width: 90%;
   display: grid;
   place-self: center;
-  grid-template-rows: 1.4fr 9fr 1.5fr 1.3fr;
+  grid-template-rows: 1.4fr 9fr 2.8fr;
 `;
 
 export function NftPfp(props: NftPfpProps) {
@@ -45,8 +44,7 @@ export function NftPfp(props: NftPfpProps) {
           display={imageLoaded ? "block" : "none"}
           imageLoaded={imageLoaded}
         />
-        <Infos />
-        <Social />
+        <Infos likeIcon={props.likeIcon} />
       </CardArea>
     </Area>
   );

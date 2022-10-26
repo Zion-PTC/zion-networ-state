@@ -26,7 +26,12 @@ export function Album(props: AlbumProps) {
       <CardArea>
         <Head />
         <Image src={props.src ? props.src : ""} width="auto" height="auto" />
-        <Infos collection="CBBBB" id="#10" creator="THE RIPPER" />
+        <Infos
+          likeIcon={props.likeIcon}
+          collection="CBBBB"
+          id="#10"
+          creator="THE RIPPER"
+        />
         <Social />
       </CardArea>
     </Area>

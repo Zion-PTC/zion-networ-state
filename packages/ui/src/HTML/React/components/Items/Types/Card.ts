@@ -20,6 +20,7 @@ export enum CardShapesEnum {
 export type CardShapesTypes = keyof typeof CardShapesEnum;
 
 export type CardProps<Data> = {
+  likeIcon: JSX.IntrinsicElements["svg"];
   datas?: Data[];
   type: "nft-pfp" | "album";
   backgroundColor?: string;
