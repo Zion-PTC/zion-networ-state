@@ -19,6 +19,8 @@ type AppStyle = { height: number };
 const App = styled.div<AppStyle>`
   height: ${(props) => props.height}px;
   width: 100vw;
+  display: grid;
+  grid-template-rows: 1fr 10fr 1fr;
 `;
 
 const rows = 14;
@@ -81,6 +83,7 @@ function Application(props: ApplicationProps) {
     backToTopHandleClick: scrollToTop,
     showButton: showButton,
     theme: theme == "light" ? lightTheme : darkTheme,
+    isLightTheme: theme == "light" ? true : false,
   };
   pageProps.layout = layout;
 
