@@ -20,4 +20,5 @@ export type LayoutProps = {
     evm: IEVMweb | undefined;
   };
   theme: Theme;
+  isLightTheme: boolean;
 };
