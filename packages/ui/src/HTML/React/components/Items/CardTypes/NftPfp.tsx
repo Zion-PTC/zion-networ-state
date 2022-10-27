@@ -35,7 +35,7 @@ export function NftPfp(props: NftPfpProps) {
       onClick={() => console.log("clicked" + props.id)}
     >
       <CardArea>
-        <Head />
+        <Head menuIcon={props.menuIcon} />
         <Image
           handleisLoading={setIsLoading}
           src={props.src ? props.src : ""}

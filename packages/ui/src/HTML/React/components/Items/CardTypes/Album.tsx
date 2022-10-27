@@ -24,7 +24,7 @@ export function Album(props: AlbumProps) {
   return (
     <Area backgroundColor={backgroundColor}>
       <CardArea>
-        <Head />
+        <Head menuIcon={props.menuIcon} />
         <Image src={props.src ? props.src : ""} width="auto" height="auto" />
         <Infos
           likeIcon={props.likeIcon}

@@ -36,6 +36,7 @@ objs.forEach(async (obj, i) => {
     name: obj.name,
     slug: i.toString(),
     src: obj.image,
+    description: obj.description,
   };
 });
 

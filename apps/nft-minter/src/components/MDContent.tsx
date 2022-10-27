@@ -18,7 +18,7 @@ export default function MDContent(props: { contentHtml: string }) {
       // id "profile-area", ma questa cosa sarebbe da
       // cambiare, probabilmente la miglior cosa è dargli un
       // nome più generico
-      id="profile-area"
+      id="page"
     />
   );
 }

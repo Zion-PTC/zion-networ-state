@@ -137,7 +137,7 @@ function Application(props: ApplicationProps) {
   useEffect(() => {
     contentArea.current.addEventListener("scroll", () => {
       let profileAreaY = window.document
-        .getElementById("profile-area")
+        .getElementById("page")
         .getBoundingClientRect().y;
       let contentAreaY = contentArea.current.getBoundingClientRect().y;
       let scrollPosition = contentAreaY - profileAreaY;

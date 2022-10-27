@@ -5,4 +5,5 @@ export type ImageProps = {
   imageLoaded?: boolean;
   handleisLoading?: Dispatch<SetStateAction<boolean>>;
   display?: string;
+  fullBorder?: boolean;
 };

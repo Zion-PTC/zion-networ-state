@@ -9,14 +9,22 @@ type BottomSpaceStyle = {
     | "gridTemplateRows"
     | "placeItems"
     | "margin"
+    | "gridArea"
   >;
 };
 
-export const BottomSpace = styled.div<BottomSpaceStyle>`
+type BottomSpaceCss = {
+  gridArea: string;
+};
+
+export const BottomSpace = styled.div<BottomSpaceStyle & BottomSpaceCss>`
   text-align: center;
   z-index: 2;
   display: grid;
-  grid-template-rows: 2rem 2.8rem 4rem 3rem 5rem;
+  grid-template-rows: 2rem auto 5rem;
   place-items: center;
   margin: 0;
+  ${(props) => {
+    if (props.gridArea) return `grid-area: ${props.gridArea};`;
+  }}
 `;

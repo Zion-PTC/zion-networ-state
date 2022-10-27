@@ -15,11 +15,14 @@ type BackgroundAreaStyle = {
     upper: utility.ZionCss<backgroundAreas, true>;
     bottom: utility.ZionCss<backgroundAreas, true>;
   };
+  bottomBackgroundColor?: string;
 };
 
 export const BackgroundArea = styled.div<BackgroundAreaStyle>`
   display: grid;
-  grid-template-rows: 1rem 20rem auto;
+  grid-template-rows: 1.5rem 90vw auto;
+  grid-template-columns: 1fr 90vw 1fr;
+  grid-template-areas: ". . ." ". image ." ". infos .";
   position: relative;
   height: 100%;
   background-color: blue;
@@ -33,7 +36,8 @@ export const BackgroundArea = styled.div<BackgroundAreaStyle>`
   #bottom {
     position: absolute;
     top: 50%;
-    background-color: white;
+    background-color: ${(props) =>
+      props.bottomBackgroundColor ? props.bottomBackgroundColor : "#fffffa"};
     height: 50%;
     width: 100%;
     z-index: 1;
@@ -45,7 +49,7 @@ export type BackgroundProps = BasicComponentProps<BackgroundAreaStyle>;
 export const Background = (props: BackgroundProps) => {
   const { children } = props;
   return (
-    <BackgroundArea>
+    <BackgroundArea bottomBackgroundColor={props.bottomBackgroundColor}>
       <div id="upper"></div>
       <div id="bottom"></div>
       <div id="upper-space"></div>

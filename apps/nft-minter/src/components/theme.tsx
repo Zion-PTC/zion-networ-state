@@ -50,7 +50,7 @@ export const GlobalStyles = createGlobalStyle<{
     width: 100%;
     position:fixed;
   }
-  h1{
+  /* h1{
     font-family: 'Epilogue', sans-serif;
     font-weight: 900;
     font-size: -webkit-xxx-large;
@@ -78,7 +78,7 @@ export const GlobalStyles = createGlobalStyle<{
     font-family: 'Epilogue', sans-serif;
     font-size:x-large;
     font-weight: 300;
-  }
+  } */
   Button{
     background: ${(props) => props.theme.body};
     border-color: ${(props) => props.theme.borderColor};

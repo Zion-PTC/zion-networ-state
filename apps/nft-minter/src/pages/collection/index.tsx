@@ -4,7 +4,7 @@ import Layout from "../../components/layout";
 import { Data, NftData } from "../nft/[id]";
 import { BasePropsFromApp } from "../_app";
 import { HTML } from "@zionstate/ui";
-import { Like } from "../../components/Icons";
+import { Like, More_Normal } from "../../components/Icons";
 
 const components = HTML.React.components;
 const ContentArea = components.Layout.ContentArea;
@@ -35,10 +35,17 @@ const ProfileArea = styled.div`
   display: grid;
 
   // TODO covertire in numeri relativi
-  grid-template-rows: 1fr 8fr 0.5fr;
+  grid-template-rows: auto auto;
   height: 100%;
   width: 100vw;
   position: relative;
+`;
+
+const ProfileInfos = styled.div`
+  margin: 0;
+  h1 {
+    margin: 0;
+  }
 `;
 
 export default function Collection(props: CollectionProps) {
@@ -53,11 +60,16 @@ export default function Collection(props: CollectionProps) {
   // } = useInfiniteScroll(props.data);
   let data = props.data;
   const LikeIcon = Like({ fill: props.layout.theme.primary.borderColor });
+  const More_NormalIcon = More_Normal({
+    fill: props.layout.theme.primary.borderColor,
+  });
 
   return (
     <Layout {...props.layout}>
-      <ProfileArea id="profile-area">
-        <h1 id="collection-area">Collection</h1>
+      <ProfileArea id="page">
+        <ProfileInfos>
+          <h1 id="collection-area">Collection</h1>
+        </ProfileInfos>
         <ContentArea id="content-area">
           <Area
             id="area-area"
@@ -66,7 +78,11 @@ export default function Collection(props: CollectionProps) {
             blockSize={props.collection.blockSize}
             columns={props.collection.columns}
           >
-            <Cards likeIcon={LikeIcon} type="nft-pfp">
+            <Cards
+              likeIcon={LikeIcon}
+              menuIcon={More_NormalIcon}
+              type="nft-pfp"
+            >
               {data}
             </Cards>
           </Area>

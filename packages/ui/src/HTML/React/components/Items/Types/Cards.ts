@@ -9,6 +9,7 @@ export type BasicCardProps = {
 
 export interface CardsProps<T extends BasicCardProps> {
   likeIcon: JSX.IntrinsicElements["svg"];
+  menuIcon: JSX.IntrinsicElements["svg"];
   children: T[];
   type: "nft-pfp" | "album";
   small?: boolean;

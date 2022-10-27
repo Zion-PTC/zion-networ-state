@@ -1,13 +1,44 @@
 import { StaticImageData } from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { CollectionPropsFromApp } from "../collection";
 import { HTML } from "@zionstate/ui";
 import Layout from "../../components/layout";
 import { OpenSeaMetadata } from "../api/Types/nfts";
+import { BasePropsFromApp } from "../_app";
+import styled from "styled-components";
+import { FilterAlt, Like } from "../../components/Icons";
+
+const TITLE = "CYBERDOG #010 - THE RIPPER";
+const DESCRIPTION = `WARNING! This cyberdog is out of control! He is very dangerous, he
+takes apart cyberdogs that enter his territory. He came here to find
+a partner in the gang.`;
+const HIGHESTBID = "highest bid:";
+const INFOSUB = "Collection";
+const INFOSUBCREATORFIELD = "Creator";
+const INFOSUBROYALTIES = "10% Royalties";
+
+const propsObj = {
+  title: TITLE,
+  description: DESCRIPTION,
+  highestBid: HIGHESTBID,
+  infosub: {
+    info: INFOSUB,
+    creatorField: INFOSUBCREATORFIELD,
+    royalties: INFOSUBROYALTIES,
+  },
+};
 
 const components = HTML.React.components;
 const ContentArea = components.Layout.ContentArea;
+const Image = components.GlobalSections.Image;
+const Item = components.Pages.Item;
 const getStatic = HTML.Next.staticProps.getStatic;
 
 export interface NftsData {
@@ -40,23 +71,71 @@ export const getStaticProps = gsp;
 
 type dataByPath<T> = { data: T };
 
+const LikeIcon = Like();
+const MenuIcon = FilterAlt();
+
+const Img = styled.img`
+  width: 10rem;
+  height: auto;
+  display: "block";
+`;
+
+const Divdiv = styled.div``;
+
 export const Nft: (
-  props: dataByPath<OpenSeaMetadata> & { layout: CollectionPropsFromApp }
+  props: dataByPath<OpenSeaMetadata> & BasePropsFromApp
 ) => JSX.Element = function (props) {
   const { data, layout } = props;
-
   const { name, image } = data;
-  console.log(data);
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [src, setSrc] = useState("");
+  // console.log(data);
+
+  useEffect(() => {
+    !isLoading ? setImageLoaded(true) : setImageLoaded(false);
+    setSrc(props.data.image);
+  }, [isLoading]);
+
+  console.log(isLoading);
+
+  const backgroundProps = {
+    image: { backgroundColor: "#fafafa" },
+    bottomBackgroundColor: props.layout.theme.secondary.color,
+    bottomSpace: {
+      infoSection: {
+        infosubs: [
+          {
+            infoSubDetails: {
+              avatar: {
+                circle: {
+                  borderColor: props.layout.theme.primary.borderColor,
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  };
 
   return (
     // TODO import the profile layout from /packages/ui/src/HTML/React/components/Pages/Item.tsx
     <Layout {...layout} nft>
-      <h1>Nft:</h1>
-      <ContentArea id="nft-page-area">
-        <p>{name}</p>
-        <p>{image}</p>
-      </ContentArea>
-      <Link href="/mint">Mint</Link>
+      <Divdiv id="page">
+        <Item
+          data={{
+            title: props.data.name,
+            description: props.data.description,
+            highestBid: propsObj.highestBid,
+            infosub: propsObj.infosub,
+          }}
+          src={props.data.image}
+          likeIcon={LikeIcon}
+          menuIcon={MenuIcon}
+          background={backgroundProps}
+        ></Item>
+      </Divdiv>
     </Layout>
   );
 };

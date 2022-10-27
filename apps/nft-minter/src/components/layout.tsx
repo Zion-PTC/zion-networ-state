@@ -16,6 +16,7 @@ import {
 } from "./Icons";
 import { Home } from "./Icons";
 import { SVGButtonProps } from "./Icons/Types";
+import Head from "next/head";
 
 const components = HTML.React.components;
 // Components
@@ -171,6 +172,10 @@ const Layout: ILayout = function ({
   const ThemeSvg = isLightTheme ? MoonSvg : SunSvg;
   return (
     <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <title>Bombotaitol</title>
+      </Head>
       <NavBar
         ref={navbar}
         gridTemplateAreas="'. home search logo web3 theme menu'"

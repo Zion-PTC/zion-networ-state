@@ -1,6 +1,8 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { js } from "@zionstate/utils";
+import { HeadProps } from "./Types/Head";
+import { SVGButton } from "../../Elements/ButtonTypes";
 
 const { ZionError: ze } = js;
 const { ZionError } = ze;
@@ -24,9 +26,9 @@ const Circle = styled.div`
   background-color: #e5e5e5;
 `;
 
-const Menu = styled.div``;
+const MenuIcon = styled.div``;
 
-export const Head = () => {
+export const Head = (props: HeadProps) => {
   const parent = useRef<HTMLDivElement>() as RefObject<HTMLDivElement>;
   const [avatarSize, setAvatarSize] = useState(0);
 
@@ -39,7 +41,9 @@ export const Head = () => {
     <Area ref={parent} avatarSize={avatarSize}>
       <Circle />
       <div></div>
-      <Menu>menu</Menu>
+      <MenuIcon>
+        <SVGButton svg={props.menuIcon} />
+      </MenuIcon>
     </Area>
   );
 };

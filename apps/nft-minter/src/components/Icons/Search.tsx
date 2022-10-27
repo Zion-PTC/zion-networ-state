@@ -10,13 +10,13 @@ export function Search(props: SVGButtonProps = defaultProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="10" cy="10" r="7" stroke={props.stroke} stroke-width="2" />
+      <circle cx="10" cy="10" r="7" stroke={props.stroke} strokeWidth="2" />
       <path
         d="M15 15L21 21"
         stroke={props.stroke}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
