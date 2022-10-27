@@ -32,7 +32,10 @@ export function NftPfp(props: NftPfpProps) {
   return (
     <Area
       backgroundColor={backgroundColor}
-      onClick={() => console.log("clicked" + props.id)}
+      onClick={() =>
+        (window.location.href = `http://localhost:3000/nft/${props.id}`)
+      }
+      // onClick={() => console.log("clicked" + props.id)}
     >
       <CardArea>
         <Head menuIcon={props.menuIcon} />
