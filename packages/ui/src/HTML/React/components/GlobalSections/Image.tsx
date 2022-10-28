@@ -21,7 +21,7 @@ export type ImageAreaCss = {
 };
 
 const Area = styled.div<ImageAreaCss>`
-  z-index: 2;
+  z-index: 1;
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : "transparent"};
   //
@@ -63,8 +63,6 @@ export const Image = (props: ImageProps & ImageAreaCss) => {
     >
       <Img
         onLoad={() => {
-          console.log("loaded");
-
           if (props.handleisLoading) props.handleisLoading(false);
         }}
         src={props.src}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import checkCss from "../../lib/util/checkCss";
 import { ButtonStyle } from "./Types";
 
 export const Button = styled.button<ButtonStyle<{}>>`
@@ -15,7 +16,7 @@ export const Button = styled.button<ButtonStyle<{}>>`
   margin: 0;
   cursor: pointer;
   display: grid;
-  ${(props) => props.gridArea && `grid-area: ${props.gridArea};`}
+  ${(props) => checkCss("gridArea", props)}
   border: 1px solid ${(props) => props.theme.primary.borderColor};
   ${(props) => props.zIndex && `z-index: ${props.zIndex};`}
   position: ${(props) => (props.position ? "fixed" : "static")};

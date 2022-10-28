@@ -8,6 +8,7 @@ const { ZionError: ze } = js;
 const { ZionError } = ze;
 
 const Area = styled.div<{ avatarSize: number }>`
+  z-index: 1;
   display: grid;
   grid-template-columns: ${(props) => props.avatarSize}px 4fr 1fr;
   grid-template-rows: 1fr;

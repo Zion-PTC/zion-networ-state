@@ -3,14 +3,23 @@ import { darkTheme, lightTheme, GlobalStyles } from "../components/theme";
 import React, { useEffect, useRef, useState } from "react";
 import { LayoutProps } from "../components/Types/";
 import { HTML } from "@zionstate/ui";
-import { CollectionPropsFromApp } from "./collection";
-import { MintPropsFromApp } from "./mint";
 
 const useEthereum = HTML.React.lib.hooks.useEthereum;
 
+export type ProfilePropsFromApp = {
+  parentWidth: number;
+  parentHeight: number;
+  width: number;
+  height: number;
+  blockSize: number;
+  columns: number;
+};
+
+export type MintPropsFromApp = {};
+
 export type BasePropsFromApp = {
   layout: LayoutProps;
-  collection: CollectionPropsFromApp;
+  profile: ProfilePropsFromApp;
   mint: MintPropsFromApp;
 };
 
@@ -60,7 +69,7 @@ function Application(props: ApplicationProps) {
     });
   };
 
-  const collection = {
+  const profile = {
     parentWidth,
     parentHeight,
     width,
@@ -68,7 +77,7 @@ function Application(props: ApplicationProps) {
     blockSize,
     columns,
   };
-  pageProps.collection = collection;
+  pageProps.profile = profile;
 
   const layout: LayoutProps = {
     contentArea,

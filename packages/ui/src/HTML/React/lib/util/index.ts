@@ -1,2 +1,2 @@
-export * from "./checkPropsAndSetDefault";
-export * from "./checkSize";
+export * from "./checkCss";
+export * from "./checkProps";

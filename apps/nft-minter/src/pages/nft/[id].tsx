@@ -13,7 +13,7 @@ import Layout from "../../components/layout";
 import { OpenSeaMetadata } from "../api/Types/nfts";
 import { BasePropsFromApp } from "../_app";
 import styled from "styled-components";
-import { FilterAlt, Like } from "../../components/Icons";
+import { FilterAlt, Like, More_Normal } from "../../components/Icons";
 
 const TITLE = "CYBERDOG #010 - THE RIPPER";
 const DESCRIPTION = `WARNING! This cyberdog is out of control! He is very dangerous, he
@@ -71,9 +71,6 @@ export const getStaticProps = gsp;
 
 type dataByPath<T> = { data: T };
 
-const LikeIcon = Like();
-const MenuIcon = FilterAlt();
-
 const Img = styled.img`
   width: 10rem;
   height: auto;
@@ -90,7 +87,10 @@ export const Nft: (
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [src, setSrc] = useState("");
-  // console.log(data);
+
+  const fill = { fill: props.layout.theme.primary.borderColor };
+  const LikeIcon = Like(fill);
+  const More = More_Normal(fill);
 
   useEffect(() => {
     !isLoading ? setImageLoaded(true) : setImageLoaded(false);
@@ -132,7 +132,7 @@ export const Nft: (
           }}
           src={props.data.image}
           likeIcon={LikeIcon}
-          menuIcon={MenuIcon}
+          menuIcon={More}
           background={backgroundProps}
         ></Item>
       </Divdiv>

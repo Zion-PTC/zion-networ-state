@@ -7,7 +7,6 @@ import { BasePropsFromApp } from "../_app";
 
 const TextArea = HTML.React.components.Pages.sections.TextArea;
 
-export type MintPropsFromApp = {};
 export type MintProps = Data<{}> & BasePropsFromApp;
 
 export default function Mint(props: MintProps) {

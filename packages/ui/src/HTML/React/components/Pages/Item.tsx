@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { H1 } from "../Elements/H1";
 import { P } from "../Elements/P";
 import { Image } from "../GlobalSections/Image";
-import { Like } from "../Icons/Like";
-import { More } from "../Icons/More";
+// import { Like } from "../Icons/Like";
+// import { More } from "../Icons/More";
 // import { Cards } from "../Items";
 // import { BasicCardProps } from "../Items/Types";
 // import { ContentArea } from "../Layout";
@@ -18,6 +18,7 @@ import { InfoSection } from "./sections/InfoSection";
 import { InfoSubDetails } from "./sections/InfoSubDetails";
 import { ProfileId } from "./sections/ProfileId";
 import { Social } from "./sections/Social";
+import { SVGButton } from "../Elements/ButtonTypes";
 
 export type ItemStyle = {
   src: string;
@@ -126,6 +127,7 @@ export function Item(props: ItemProps) {
   return (
     <ItemPage>
       <Background
+        item
         bottomBackgroundColor={props.background?.bottomBackgroundColor}
       >
         <Image
@@ -141,10 +143,10 @@ export function Item(props: ItemProps) {
         <BottomSpace gridArea="infos">
           <Social>
             {/* TODO like and more svg icon */}
-            <Like>like</Like>
-            <More>more</More>
+            <SVGButton svg={props.likeIcon}></SVGButton>
+            <SVGButton svg={props.menuIcon}></SVGButton>
           </Social>
-          <TextArea css={{ display: "block" }}>
+          <TextArea css_={{ display: "block" }}>
             <H1>{props.data.title}</H1>
             <P>{props.data.description}</P>
             <P>{props.data.highestBid}</P>
@@ -176,29 +178,6 @@ export function Item(props: ItemProps) {
           </InfoSection>
         </BottomSpace>
       </Background>
-      {/* <ContentArea> */}
-      {/* list this values in contentArea and stick Area directly in content Area. I think thas also the CARDS component shall be included inside the content area. */}
-      {/* <Area
-          width={props.contentArea.width}
-          height={props.contentArea.height}
-          blockSize={props.contentArea.blockSize}
-          columns={props.contentArea.columns}
-        >
-          <Cards
-            likeIcon={props.likeIcon}
-            menuIcon={props.menuIcon}
-            type="nft-pfp"
-          >
-            {props.contentArea.data}
-          </Cards>
-        </Area> */}
-      {/*this here under is the infinte scroll loader, we need to create a pagination method and send it a paginated result of the nfts */}
-      {/* <Loader
-        isLoading={isLoading}
-        isLastPage={isLastPage}
-        loadMoreCallback={loadMoreCallback}
-      /> */}
-      {/* </ContentArea> */}
     </ItemPage>
   );
 }

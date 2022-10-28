@@ -1,4 +1,4 @@
-import { utility } from "../global.types";
+import { utility } from "../../global.types";
 
 const ERROR = "Something went wrong";
 

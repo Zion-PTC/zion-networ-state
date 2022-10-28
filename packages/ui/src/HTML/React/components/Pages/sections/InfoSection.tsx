@@ -3,8 +3,9 @@ import { utility } from "../../../lib";
 
 type InfoSectionStyle = {
   css?: utility.ZionCss<
-    "display" | "width" | "height" | "gridTemplateColumns",
-    true
+    undefined,
+    true,
+    "display" | "width" | "height" | "gridTemplateColumns"
   >;
 };
 
@@ -12,5 +13,6 @@ export const InfoSection = styled.div<InfoSectionStyle>`
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: ${(props) =>
+    props.css?.gridTemplateColumns ? props.css.gridTemplateColumns : "1fr 1fr"};
 `;

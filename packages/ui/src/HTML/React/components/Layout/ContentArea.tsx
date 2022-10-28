@@ -8,4 +8,7 @@ export const ContentArea = styled.div<ContentAreaProps>`
   display: grid;
   place-self: center;
   ${(props) => (props.overflow ? "overflow: auto;" : "")}
+  ${(props) => props.css?.gridArea && `grid-area: ${props.css.gridArea};`}
+  ${(props) =>
+    props.css?.placeContent && `place-content: ${props.css.placeContent};`}
 `;

@@ -1,25 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React, { CSSProperties as CSS } from "react";
 import Layout from "../../components/layout";
 import { Data, NftData } from "../nft/[id]";
 import { BasePropsFromApp } from "../_app";
 import { HTML } from "@zionstate/ui";
-import { Like, More_Normal } from "../../components/Icons";
+import Profile from "../../components/Profile";
 
-const components = HTML.React.components;
-const ContentArea = components.Layout.ContentArea;
-const Area = components.Layout.sections.Area;
-const Cards = components.Items.Cards;
 const getStatic = HTML.Next.staticProps.getStatic;
-
-export type CollectionPropsFromApp = {
-  parentWidth: number;
-  parentHeight: number;
-  width: number;
-  height: number;
-  blockSize: number;
-  columns: number;
-};
 
 export type CollectionProps = Data<NftData> & BasePropsFromApp;
 
@@ -31,69 +17,10 @@ export const { getStaticProps: gsp } = getStatic<NftData>(
 
 export const getStaticProps = gsp;
 
-const ProfileArea = styled.div`
-  display: grid;
-
-  // TODO covertire in numeri relativi
-  grid-template-rows: auto auto;
-  height: 100%;
-  width: 100vw;
-  position: relative;
-`;
-
-const ProfileInfos = styled.div`
-  margin: 0;
-  h1 {
-    margin: 0;
-  }
-`;
-
 export default function Collection(props: CollectionProps) {
-  // THIS COMMENT SHALL BE left as we need it to use the
-  // infinite scroll hook.
-  // const {
-  //   isLoading,
-  //   loadMoreCallback,
-  //   hasDynamicPosts,
-  //   dynamicPosts,
-  //   isLastPage,
-  // } = useInfiniteScroll(props.data);
-  let data = props.data;
-  const LikeIcon = Like({ fill: props.layout.theme.primary.borderColor });
-  const More_NormalIcon = More_Normal({
-    fill: props.layout.theme.primary.borderColor,
-  });
-
   return (
     <Layout {...props.layout}>
-      <ProfileArea id="page">
-        <ProfileInfos>
-          <h1 id="collection-area">Collection</h1>
-        </ProfileInfos>
-        <ContentArea id="content-area">
-          <Area
-            id="area-area"
-            width={props.collection.width}
-            height={props.collection.height}
-            blockSize={props.collection.blockSize}
-            columns={props.collection.columns}
-          >
-            <Cards
-              likeIcon={LikeIcon}
-              menuIcon={More_NormalIcon}
-              type="nft-pfp"
-            >
-              {data}
-            </Cards>
-          </Area>
-          {/*this here under is the infinte scroll loader, we need to create a pagination method and send it a paginated result of the nfts */}
-          {/* <Loader
-            isLoading={isLoading}
-            isLastPage={isLastPage}
-            loadMoreCallback={loadMoreCallback}
-          /> */}
-        </ContentArea>
-      </ProfileArea>
+      <Profile {...props}></Profile>
     </Layout>
   );
 }
