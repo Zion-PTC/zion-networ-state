@@ -1,5 +1,5 @@
 import styled, { StyledComponent } from "styled-components";
-import { BasicShapeDivProps, ShapeProps } from "./Types/Shape";
+import { BasicShapeDivProps, ShapeProps } from "./Shapes/Types/Shape";
 
 export interface Shape {
   (props: ShapeProps): StyledComponent<"div", any, BasicShapeDivProps, never>;

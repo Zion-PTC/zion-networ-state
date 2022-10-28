@@ -1,4 +1,4 @@
-import { Shape } from "./Shape";
+import { Shape } from "../Shape";
 
 // export const Square = styled.div<SquareProps>`
 //   grid-row: span ${(props) => (props.small ? 3 : 6)};

@@ -1,3 +1,4 @@
+export * as Badges from "./Badges";
 export * as Elements from "./Elements/index";
 export * as Items from "./Items/index";
 export * as Layout from "./Layout/index";

@@ -17,8 +17,8 @@ export const Button = styled.button<ButtonStyle<{}>>`
   cursor: pointer;
   display: grid;
   ${(props) => checkCss("gridArea", props)}
+  ${(props) => checkCss("zIndex", props)}
   border: 1px solid ${(props) => props.theme.primary.borderColor};
-  ${(props) => props.zIndex && `z-index: ${props.zIndex};`}
   position: ${(props) => (props.position ? "fixed" : "static")};
   bottom: ${(props) => {
     if (!props.position) return;

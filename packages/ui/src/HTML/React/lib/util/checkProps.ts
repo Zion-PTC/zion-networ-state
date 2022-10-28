@@ -1,29 +1,39 @@
-import { utility } from "../global.types";
-import { checkPropAndSetDefault, checkSize } from "./checkProps/";
+import { css, FlattenSimpleInterpolation } from "styled-components";
+import { BooleanSizes, CSSProps, Size } from "../global.types";
+import {
+  checkSize,
+  CheckSizePossibleProps,
+  CheckSizeOptions,
+} from "./checkProps/";
 
-export default <
-  T extends { css: utility.ZionCss } & {
-    small?: boolean;
-    mid?: boolean;
-    big?: boolean;
-  }
->(
-  type: "propsAndSetDefault" | "checkSize",
-  props: T,
-  property: keyof utility.ZionCss,
-  defaultValue: T["css"][keyof utility.ZionCss]
-) => {
+//// CHECKSIZE BOOLEANSIZE
+function checkProps(type: "checkSize", props: Size): FlattenSimpleInterpolation;
+
+//// CHECKSIZE SIZE
+function checkProps(
+  type: "checkSize",
+  props: BooleanSizes | Size | CSSProps,
+  options: CheckSizeOptions
+): FlattenSimpleInterpolation;
+
+///// ALL POSSIBILITIES
+function checkProps(
+  type: "checkSize",
+  props?: CheckSizePossibleProps,
+  options?: CheckSizeOptions
+): FlattenSimpleInterpolation {
   let result;
   switch (type) {
-    case "propsAndSetDefault":
-      result = checkPropAndSetDefault(props, property, defaultValue);
-      break;
     case "checkSize":
-      result = checkSize(props);
+      if (!options) result = checkSize(props as Size);
+      else
+        result = checkSize(props as BooleanSizes, options as CheckSizeOptions);
       break;
     default:
-      result = "";
+      result = css``;
       break;
   }
-  return props;
-};
+  return result;
+}
+
+export default checkProps;

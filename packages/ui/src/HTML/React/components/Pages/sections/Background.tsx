@@ -8,7 +8,7 @@ import {
 type backgroundAreas = "position" | "backgroundColor" | "zIndex" | Dimensions;
 
 type BackgroundAreaStyle = {
-  css?: utility.ZionCss<
+  css_?: utility.ZionCss<
     "display" | "gridTemplateRows" | "position" | "height" | "backgroundColor",
     true
   > & {

@@ -2,6 +2,7 @@ import { HTML } from "@zionstate/ui";
 import styled from "styled-components";
 import { Data, NftData } from "../pages/nft/[id]";
 import { BasePropsFromApp } from "../pages/_app";
+import Badge from "./Badge";
 import { Like, More_Normal, Share } from "./Icons";
 
 const components = HTML.React.components;
@@ -75,7 +76,13 @@ export default function Profile(props: ProfileProps) {
           >
             <p>{"<account name>"}</p>
             <p>{"@handle"}</p>
-            <InfoSection css={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
+            <InfoSection
+              css_={{
+                gridTemplateColumns: "1fr 1fr 1fr",
+                placeContent: "center",
+              }}
+              size="mid"
+            >
               <TextArea>
                 <p>4</p>
                 <p>Tracks</p>
@@ -98,8 +105,8 @@ export default function Profile(props: ProfileProps) {
               <p>38 years old up coming raver...</p>
               <p>show more</p>
             </TextArea>
-            <Social css={{ gridTemplateColumns: "1fr 1fr" }}>
-              <button></button>
+            <Social css_={{ gridTemplateColumns: "1fr 1fr" }} size="big">
+              <Badge size="small"></Badge>
               <div>twitter</div>
             </Social>
           </TextArea>

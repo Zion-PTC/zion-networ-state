@@ -19,6 +19,15 @@ export type BasicFC<P> = FC<BasicComponentProps<P>>;
 export type BasicFCFactory<P> = FunctionComponentFactory<P>;
 
 export type Dimensions = "width" | "height";
+export type Sizes = "small" | "mid" | "big";
+export type BooleanSizes = {
+  small?: boolean;
+  mid?: boolean;
+  big?: boolean;
+};
+export type Size = { size: Sizes };
+
+export type CSSProps = { css: utility.ZionCss };
 
 // This is just to collect some types that I find useful for
 // the creation of components in the Library.

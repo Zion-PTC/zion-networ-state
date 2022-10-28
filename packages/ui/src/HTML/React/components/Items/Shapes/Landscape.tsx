@@ -1,4 +1,4 @@
-import { Shape } from "./Shape";
+import { Shape } from "../Shape";
 
 // Old way, keeping it here for reference.
 

@@ -1,18 +1,26 @@
-import { css, FlattenSimpleInterpolation } from "styled-components";
+import { FlattenSimpleInterpolation } from "styled-components";
+import { BooleanSizes, CSSProps, Size } from "../../global.types";
+import { checkSizeBoolean } from "./checkSize/checkSizeBoolean";
+import { checkSizeRatio } from "./checkSize/checkSizeRatio";
 
-export const checkSize = (props: {
-  small?: boolean;
-  mid?: boolean;
-  big?: boolean;
-}): FlattenSimpleInterpolation => {
-  let size: { w: number; h: number };
-  const { small, mid, big } = props;
-  if (small) size = { w: 100, h: 100 };
-  if (mid) size = { w: 200, h: 200 };
-  if (big) size = { w: 300, h: 300 };
-  else size = { w: 100, h: 100 };
-  return css`
-    width: ${size.w.toString()}px;
-    height: ${size.h.toString()}px;
-  `;
-};
+export type FS = FlattenSimpleInterpolation;
+export type CheckSizePossibleProps = BooleanSizes | Size | CSSProps;
+export type CheckSizeOptions = {};
+// abbreviations
+type CSO = CheckSizeOptions;
+type CSPP = CheckSizePossibleProps;
+
+export function checkSize(props: Size): FS;
+export function checkSize(props: BooleanSizes, options: CSO): FS;
+export function checkSize(props?: CSPP, options?: CSO): FS {
+  let result: FS;
+  switch (options) {
+    case true:
+      result = checkSizeBoolean(props as BooleanSizes);
+      break;
+    default:
+      result = checkSizeRatio(props as Size);
+      break;
+  }
+  return result;
+}

@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { utility } from "../../../lib";
+import { BooleanSizes, Size, utility } from "../../../lib";
+// import checkCss from "../../../lib/util/checkCss";
+import checkProps from "../../../lib/util/checkProps";
+import { CheckSizeOptions } from "../../../lib/util/checkProps/checkSize";
 
 type InfoSectionStyle = {
   css?: utility.ZionCss<
@@ -7,12 +10,31 @@ type InfoSectionStyle = {
     true,
     "display" | "width" | "height" | "gridTemplateColumns"
   >;
-};
+} & (Size | BooleanSizes) & { options?: CheckSizeOptions } & {
+    css_?: utility.ZionCss<
+      undefined,
+      true,
+      "display" | "width" | "height" | "gridTemplateColumns" | "placeContent"
+    >;
+  };
+
+// export const InfoSection = styled.div<InfoSectionStyle>`
+//   display: grid;
+//   ${(props) => checkProps("checkSize", props as Size)}
+//   ${(props) =>
+//     checkCss("placeContent", props as { css_: { placeContent: string } })}
+//   ${(props) =>
+//     checkCss(
+//       "gridTemplateColumns",
+//       props as { css_: { gridTemplateColumns: string } }
+//     )}
+// `;
 
 export const InfoSection = styled.div<InfoSectionStyle>`
   display: grid;
-  width: 100%;
-  height: 100%;
+  ${(props) => checkProps("checkSize", props as Size)}
   grid-template-columns: ${(props) =>
-    props.css?.gridTemplateColumns ? props.css.gridTemplateColumns : "1fr 1fr"};
+    props.css_?.gridTemplateColumns
+      ? props.css_.gridTemplateColumns
+      : "1fr 1fr"};
 `;

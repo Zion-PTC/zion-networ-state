@@ -1,4 +1,4 @@
-import { Shape } from "./Shape";
+import { Shape } from "../Shape";
 
 // export const Portrait = styled.div<PortraitProps>`
 //   grid-row: span ${(props) => (props.small ? 7 : 14)};
