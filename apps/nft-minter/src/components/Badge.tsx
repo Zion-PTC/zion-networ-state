@@ -31,7 +31,7 @@ const checkSize = (props?: BadgeProps) => {
 
 const BadgeArea = styled.div<BadgeProps>`
   display: grid;
-  ${(props) => checkSize(props)}
+  ${props => checkSize(props)}
   background-color: white;
   grid-template-columns: 10% 20% 60% 10%;
   grid-template-rows: 10% 80% 10%;
@@ -39,10 +39,25 @@ const BadgeArea = styled.div<BadgeProps>`
     ". . . ."
     ". logo infos ."
     ". . . .";
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 4px;
 `;
 
-const LogoArea = styled.div``;
-const InfosArea = styled.div``;
+const LogoArea = styled.div`
+  grid-area: logo;
+`;
+const InfosArea = styled.div`
+  grid-area: infos;
+`;
+const Circolo = styled.div`
+  justify-self: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  background-color: rgba(136, 136, 136, 1);
+  border: 2px solid rgba(196, 196, 196, 1);
+`;
 
 type BadgeProps = {
   size?: "small" | "mid" | "big";
@@ -51,7 +66,9 @@ type BadgeProps = {
 export default function Badge(props: BadgeProps) {
   return (
     <BadgeArea size={props.size}>
-      <LogoArea></LogoArea>
+      <LogoArea>
+        <Circolo />
+      </LogoArea>
       <InfosArea></InfosArea>
     </BadgeArea>
   );
