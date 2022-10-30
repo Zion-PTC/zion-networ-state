@@ -11,7 +11,7 @@ import { CssAttributeValueTypes, Css_ } from "../lib";
  * @param props the props argument of the component
  * Usage:
  *
- * ```js
+ * ```ts
  * // create a defaultValue css
  * const defaultHeight = css`
  *   height: 70%;
@@ -23,6 +23,9 @@ import { CssAttributeValueTypes, Css_ } from "../lib";
  * const styleComponent = styled.div<{css_?:{height?:string}}>`
  *   ${props => new Css("height", defaultHeight, props).value}
  * `
+ *
+ * // TO RETRIEVE THE ACTUAL CSS, GET THE VALUE MEMBER IN THE
+ * // CLASS
  * ```
  */
 export class Css<T extends Css_> {
