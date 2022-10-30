@@ -21,15 +21,7 @@ import { checkGridTemplate } from "./checkCss/checkGridTemplate";
 
 export default function <
   T extends {
-    css_?: {
-      gridArea?: CSSProperties["gridArea"];
-      placeContent?: CSSProperties["placeContent"];
-      backgroundColor?: CSSProperties["backgroundColor"];
-      zIndex?: CSSProperties["zIndex"];
-      gridTemplateColumns?: string;
-      gridTemplateRows?: string;
-      placeItems?: CSSProperties["placeItems"];
-    };
+    css_?: CSSProperties;
     size?:
       | { auto?: boolean; width?: string; height?: string }
       | ("small" | "mid" | "big");

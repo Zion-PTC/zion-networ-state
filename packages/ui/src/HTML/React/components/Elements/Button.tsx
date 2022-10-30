@@ -1,10 +1,18 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { Css } from "../../classes";
 import checkCss from "../../lib/util/checkCss";
 import { ButtonStyle } from "./Types";
 
-export const Button = styled.button<ButtonStyle<{}>>`
+const defaultHeight = css`
   height: 70%;
+`;
+const defaultWidth = css`
   width: 70%;
+`;
+
+export const Button = styled.button<ButtonStyle<{}>>`
+  ${(props) => new Css("height", defaultHeight, props).value}
+  ${(props) => new Css("width", defaultWidth, props).value}
   line-height: 1.2;
   font-size: 70%;
   place-self: center;

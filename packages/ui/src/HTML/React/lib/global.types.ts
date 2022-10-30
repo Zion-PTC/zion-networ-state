@@ -8,26 +8,54 @@ import {
   FunctionComponentFactory,
   PropsWithChildren,
 } from "react";
+import { Interpolation, ThemedStyledProps } from "styled-components";
 
 /**
  * Useful link: https://github.com/frenic/csstype#what-should-i-do-when-i-get-type-errors
  */
-
+/// REACT
 export type BasicComponentProps<P> = PropsWithChildren<P>;
 export type BasicFC<P> = FC<BasicComponentProps<P>>;
-
 export type BasicFCFactory<P> = FunctionComponentFactory<P>;
-
+/// CSS
 export type Dimensions = "width" | "height";
 export type Sizes = "small" | "mid" | "big";
+export type Size = { size: Sizes };
+export type CSSProps = { css_: utility.ZionCss };
+export type Css_ = { css_?: CSS };
+export type Css_v0 = { [prop in keyof CSS]?: CssAttributeValueTypes };
+
 export type BooleanSizes = {
   small?: boolean;
   mid?: boolean;
   big?: boolean;
 };
-export type Size = { size: Sizes };
 
-export type CSSProps = { css: utility.ZionCss };
+export type CssAttributeValueTypes =
+  | string
+  | number
+  | (string & {})
+  | (number & {})
+  | undefined;
+
+export type Position = {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+};
+
+export type CssKeysFromStringArray<T extends (keyof CSS)[]> = {
+  [props in T[number]]: CSS[props];
+};
+
+export type BasicFluidThemedStyledProps = Interpolation<
+  ThemedStyledProps<Css_, any>
+>;
+
+export type FluidThemed<Props> = BasicFluidThemedStyledProps & Props;
+
+export type CssPropertiesKeys = keyof CSS;
 
 // This is just to collect some types that I find useful for
 // the creation of components in the Library.
@@ -84,4 +112,6 @@ export namespace utility {
       ? PickCss<Optional>
       : never
     : CSS;
+  export type CssPropUnion<T extends keyof CSSProperties | undefined> =
+    utility.ZionCss<undefined, true, T>;
 }

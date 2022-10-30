@@ -1,6 +1,6 @@
 import styled from "styled-components";
+import { Position } from "../../../lib";
 import { Button } from "../Button";
-import { Position } from "../Types";
 
 const ScrollToTopButtonArea = styled(Button)`
   width: auto;
