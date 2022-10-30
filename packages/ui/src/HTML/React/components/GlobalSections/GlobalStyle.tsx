@@ -6,9 +6,10 @@ export type Theme = {
   textColor: string;
   backgroundColor: string;
   borderColor: string;
-  headingColor?: string;
-  primary?: BasicProps;
-  secondary?: BasicProps;
+  headingColor: string;
+  primary: BasicProps;
+  secondary: BasicProps;
+  palette: { white: string };
 };
 
 // TODO find where
@@ -20,29 +21,53 @@ export const darkTheme: Theme = {
   body: black,
   textColor: white,
   backgroundColor: black,
-  borderColor: "#fafafa",
+  borderColor: white,
+  headingColor: "",
+  primary: {
+    backgroundColor: black,
+    borderColor: white,
+    color: white,
+  },
+  secondary: {
+    backgroundColor: white,
+    borderColor: black,
+    color: black,
+  },
+  palette: { white: white },
 };
 
 export const lightTheme: Theme = {
-  body: "#fafafa",
-  textColor: "#090909",
-  backgroundColor: "#fafafa",
-  borderColor: "#090909",
+  body: white,
+  textColor: black,
+  backgroundColor: white,
+  borderColor: black,
+  headingColor: "",
+  primary: {
+    backgroundColor: white,
+    borderColor: black,
+    color: black,
+  },
+  secondary: {
+    backgroundColor: black,
+    borderColor: white,
+    color: white,
+  },
+  palette: { white: "#fcfcfc" },
 };
 
 export const GlobalStyles = createGlobalStyle<{
   theme: Theme;
 }>`
   body {
-    background: ${(props) => props.theme.body};
-    color: ${(props) => props.theme.textColor};
+    background: ${props => props.theme.body};
+    color: ${props => props.theme.textColor};
     transition: .3s ease;
     margin:0;
     box-sizing: border-box;
     position:fixed;
   }
   h2{
-    color: ${(props) => props.theme.headingColor};
+    color: ${props => props.theme.headingColor};
   }
   main{
     height:100%;

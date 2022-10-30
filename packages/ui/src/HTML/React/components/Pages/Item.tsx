@@ -93,33 +93,45 @@ export function Item(props: ItemProps) {
   const [src, setSrc] = useState("");
 
   useEffect(() => {
-    !isLoading ? setImageLoaded(true) : setImageLoaded(false);
+    !isLoading
+      ? setImageLoaded(true)
+      : setImageLoaded(false);
     setSrc(props.src);
   }, [isLoading]);
 
   const circleBorderColorCheck = function () {
-    if (!props.background?.bottomSpace?.infoSection?.infosubs?.length)
-      return "black";
-    if (!props.background.bottomSpace.infoSection.infosubs[0]) return "black";
-    if (!props.background.bottomSpace.infoSection.infosubs[0].infoSubDetails)
-      return "black";
     if (
-      !props.background.bottomSpace.infoSection.infosubs[0].infoSubDetails
-        .avatar
+      !props.background?.bottomSpace?.infoSection?.infosubs
+        ?.length
     )
       return "black";
     if (
-      !props.background.bottomSpace.infoSection.infosubs[0].infoSubDetails
-        .avatar.circle
+      !props.background.bottomSpace.infoSection.infosubs[0]
     )
       return "black";
     if (
-      !props.background.bottomSpace.infoSection.infosubs[0].infoSubDetails
-        .avatar.circle.borderColor
+      !props.background.bottomSpace.infoSection.infosubs[0]
+        .infoSubDetails
     )
       return "black";
-    return props.background.bottomSpace.infoSection.infosubs[0].infoSubDetails
-      .avatar.circle.borderColor;
+    if (
+      !props.background.bottomSpace.infoSection.infosubs[0]
+        .infoSubDetails.avatar
+    )
+      return "black";
+    if (
+      !props.background.bottomSpace.infoSection.infosubs[0]
+        .infoSubDetails.avatar.circle
+    )
+      return "black";
+    if (
+      !props.background.bottomSpace.infoSection.infosubs[0]
+        .infoSubDetails.avatar.circle.borderColor
+    )
+      return "black";
+    return props.background.bottomSpace.infoSection
+      .infosubs[0].infoSubDetails.avatar.circle
+      .borderColor;
   };
 
   const circleBorderColor = circleBorderColorCheck();
@@ -128,7 +140,9 @@ export function Item(props: ItemProps) {
     <ItemPage>
       <Background
         item
-        bottomBackgroundColor={props.background?.bottomBackgroundColor}
+        bottomBackgroundColor={
+          props.background?.bottomBackgroundColor
+        }
       >
         <Image
           fullBorder={true}
@@ -138,7 +152,9 @@ export function Item(props: ItemProps) {
           imageLoaded={imageLoaded}
           handleisLoading={setIsLoading}
           gridArea="image"
-          backgroundColor={props.background?.image?.backgroundColor}
+          backgroundColor={
+            props.background?.image?.backgroundColor
+          }
         ></Image>
         <BottomSpace gridArea="infos">
           <Social>
@@ -155,11 +171,15 @@ export function Item(props: ItemProps) {
             <InfoSub>
               <TextArea>
                 <P bold>{INFOSUBCREATORFIELD}</P>
-                <P dimmed>{props.data.infosub.royalties}</P>
+                <P dimmed>
+                  {props.data.infosub.royalties}
+                </P>
               </TextArea>
               <InfoSubDetails>
                 <Avatar>
-                  <Circle borderColor={circleBorderColor} />
+                  <Circle
+                    borderColor={circleBorderColor}
+                  />
                 </Avatar>
                 <ProfileId></ProfileId>
               </InfoSubDetails>
@@ -170,7 +190,9 @@ export function Item(props: ItemProps) {
               </TextArea>
               <InfoSubDetails>
                 <Avatar>
-                  <Circle borderColor={circleBorderColor}></Circle>
+                  <Circle
+                    borderColor={circleBorderColor}
+                  ></Circle>
                 </Avatar>
                 <ProfileId></ProfileId>
               </InfoSubDetails>

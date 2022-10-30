@@ -12,7 +12,11 @@ type InfoSectionStyle = (Size | BooleanSizes) & {
   css_?: utility.ZionCss<
     undefined,
     true,
-    "display" | "width" | "height" | "gridTemplateColumns" | "placeContent"
+    | "display"
+    | "width"
+    | "height"
+    | "gridTemplateColumns"
+    | "placeContent"
   >;
 };
 
@@ -41,8 +45,11 @@ const sizeProp = new Prop(
 
 export const InfoSection = styled.div<InfoSectionStyle>`
   display: grid;
-  ${(props) => sizeProp.checkProps(props as { size: "small" | "mid" | "big" })}
-  grid-template-columns: ${(props) =>
+  ${props =>
+    sizeProp.checkProps(
+      props as { size: "small" | "mid" | "big" }
+    )}
+  grid-template-columns: ${props =>
     props.css_?.gridTemplateColumns
       ? props.css_.gridTemplateColumns
       : "1fr 1fr"};

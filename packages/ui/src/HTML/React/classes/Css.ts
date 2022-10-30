@@ -1,14 +1,39 @@
 import { CSSProperties } from "react";
-import { css, FlattenSimpleInterpolation } from "styled-components";
+import {
+  css,
+  FlattenSimpleInterpolation,
+} from "styled-components";
 import { CssAttributeValueTypes, Css_ } from "../lib";
 
+/**
+ * @param attribute the Css attribute
+ * @param defaultValue the default value for the attribute
+ * @param props the props argument of the component
+ * Usage:
+ *
+ * ```js
+ * // create a defaultValue css
+ * const defaultHeight = css`
+ *   height: 70%;
+ * `;
+ *
+ * // when creating a styled div, inside the body of the css
+ * // style create a code block and return an instance of
+ * // this class.
+ * const styleComponent = styled.div<{css_?:{height?:string}}>`
+ *   ${props => new Css("height", defaultHeight, props).value}
+ * `
+ * ```
+ */
 export class Css<T extends Css_> {
   static #kebabize(str: string) {
     return str
       .split("")
       .map((letter, idx) => {
         return letter.toUpperCase() === letter
-          ? `${idx !== 0 ? "-" : ""}${letter.toLowerCase()}`
+          ? `${
+              idx !== 0 ? "-" : ""
+            }${letter.toLowerCase()}`
           : letter;
       })
       .join("");
@@ -47,7 +72,11 @@ export class Css<T extends Css_> {
     public props?: T
   ) {
     this.kebabCase = Css.#kebabize(attribute);
-    this.value = Css.#checkCssAttribute(attribute, defaultValue, props);
+    this.value = Css.#checkCssAttribute(
+      attribute,
+      defaultValue,
+      props
+    );
   }
 }
 

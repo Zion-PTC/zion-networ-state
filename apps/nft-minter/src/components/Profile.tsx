@@ -47,22 +47,25 @@ const ProfileInfos = styled.div`
 
 export default function Profile(props: ProfileProps) {
   let data = props.data;
-  const LikeIcon = Like({ fill: props.layout.theme.primary.borderColor });
+  const LikeIcon = Like({
+    fill: props.layout.theme.primary.borderColor,
+  });
   const More_NormalIcon = More_Normal({
     fill: props.layout.theme.primary.borderColor,
   });
-  const ShareIcon = Share({ fill: props.layout.theme.primary.borderColor });
+  const ShareIcon = Share({
+    fill: props.layout.theme.primary.borderColor,
+  });
+  const secBGColor =
+    props.layout.theme.secondary.backgroundColor;
   return (
     <ProfileArea id="page">
-      <Background
-        profilePage
-        bottomBackgroundColor={props.background?.bottomBackgroundColor}
-      >
+      <Background profilePage {...props.background}>
         <Avatar
           css_={{
             zIndex: "1",
             gridArea: "image",
-            backgroundColor: props.layout.theme.secondary.backgroundColor,
+            backgroundColor: secBGColor,
           }}
           size={{ width: "100%", height: "100%" }}
         ></Avatar>
@@ -96,16 +99,26 @@ export default function Profile(props: ProfileProps) {
                 <p>Following</p>
               </TextArea>
             </InfoSection>
-            <InfoSection css={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
+            <InfoSection
+              css_={{ gridTemplateColumns: "1fr 1fr 1fr" }}
+            >
               <button></button>
               <SVGButton svg={ShareIcon}></SVGButton>
               <SVGButton svg={More_NormalIcon}></SVGButton>
             </InfoSection>
-            <TextArea css_={{ display: "grid", placeItems: "center" }}>
+            <TextArea
+              css_={{
+                display: "grid",
+                placeItems: "center",
+              }}
+            >
               <p>38 years old up coming raver...</p>
               <p>show more</p>
             </TextArea>
-            <Social css_={{ gridTemplateColumns: "1fr 1fr" }} size="big">
+            <Social
+              css_={{ gridTemplateColumns: "1fr 1fr" }}
+              size="big"
+            >
               <Badge size="small"></Badge>
               <div>twitter</div>
             </Social>
@@ -113,7 +126,10 @@ export default function Profile(props: ProfileProps) {
         </ProfileInfos>
         <ContentArea
           id="content-area"
-          css={{ gridArea: "content", placeContent: "center" }}
+          css={{
+            gridArea: "content",
+            placeContent: "center",
+          }}
         >
           <Area
             id="area-area"

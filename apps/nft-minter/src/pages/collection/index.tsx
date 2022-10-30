@@ -1,13 +1,14 @@
 import React, { CSSProperties as CSS } from "react";
+import Profile from "../../components/Profile";
 import Layout from "../../components/layout";
 import { Data, NftData } from "../nft/[id]";
 import { BasePropsFromApp } from "../_app";
 import { HTML } from "@zionstate/ui";
-import Profile from "../../components/Profile";
 
 const getStatic = HTML.Next.staticProps.getStatic;
 
-export type CollectionProps = Data<NftData> & BasePropsFromApp;
+export type CollectionProps = Data<NftData> &
+  BasePropsFromApp;
 
 export const { getStaticProps: gsp } = getStatic<NftData>(
   "fetch",
@@ -17,7 +18,9 @@ export const { getStaticProps: gsp } = getStatic<NftData>(
 
 export const getStaticProps = gsp;
 
-export default function Collection(props: CollectionProps) {
+export default function Collection(
+  props: CollectionProps
+) {
   return (
     <Layout {...props.layout}>
       <Profile {...props}></Profile>
