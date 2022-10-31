@@ -1,22 +1,28 @@
 import { css } from "styled-components";
 import { Palette } from "./classes/";
 import {
-  cym,
-  rgb,
+  cym as cym_,
+  rgb as rgb_,
   RGB,
+  ryb as ryb_,
   RYB,
 } from "./classes/Palette/ColorWheel/";
 import {
-  FluidColor_type1,
-  FluidColor_type2,
-  FluidColor_type3,
-} from "./classes/FluidColor";
+  fluid_colors1_a as f1a,
+  fluid_colors1_b as f1b,
+  fluid_colors1_c as f1c,
+  fluid_colors1_d as f1d,
+  fluid_colors2_a as f2a,
+  fluid_colors2_b as f2b,
+  fluid_colors3_a as f3a,
+  fluid_colors3_c as f3b,
+} from "./classes/Palette/FluidColor";
 
 export class Google extends Palette {
   blue = "hsl(217, 89%, 61%)";
   yellow = "hsl(45, 97%, 50%)";
   green = "	hsl(136, 53%, 43%)";
-  red = "hsl(4, 81.1658%, 56.2745%)";
+  red = "hsl(4, 81%, 56%)";
 }
 
 export class Twitter extends Palette {
@@ -27,6 +33,8 @@ export class Twitter extends Palette {
   dirtyWHite = "hsl(205, 25%, 91%)";
   white = "hsl(0, 0%, 100%)";
 }
+
+export const twitter = new Palette();
 
 export class Facebook extends Palette {
   blue = "hsl(221, 44%, 41%)";
@@ -88,24 +96,11 @@ export class Android extends Palette {
   green = "	hsl(74, 55%, 50%)";
 }
 
-export let rgb_ = rgb;
+export let rgb = rgb_;
 
-export let cym_ = cym;
+export let cym = cym_;
 
-export let ryb = new RYB(
-  "hsl(5, 99%, 53%)",
-  "hsl(21, 98%, 51%)",
-  "hsl(36, 98%, 50%)",
-  "hsl(47, 97%, 55%)",
-  "hsl(60, 99%, 60%)",
-  "hsl(73, 67%, 52%)",
-  "hsl(95, 56%, 44%)",
-  "hsl(197, 49%, 40%)",
-  "hsl(224, 99%, 50%)",
-  "hsl(251, 71%, 49%)",
-  "hsl(286, 99%, 35%)",
-  "hsl(334, 81%, 42%)"
-);
+export let ryb = ryb_;
 
 // RYB
 export let fluid_1 = new RYB(
@@ -230,37 +225,10 @@ fluid_10.green = "#B1C49D";
 fluid_10.blue_green = "#EDFFF8";
 
 ////////// FLUID COLORS 1
-export let fluid_colors1_a = new FluidColor_type1(
-  "hsl(23, 100%, 50%)",
-  "hsl(203, 100%, 52.94117647058824%)",
-  "hsl(168, 100%, 50%)",
-  "hsl(132, 100%, 50%)",
-  "hsl(312, 100%, 50%)"
-);
-
-export let fluid_colors1_b = new FluidColor_type1(
-  "hsl(23, 45%, 11%)",
-  "hsl(203, 78.3%, 14.5%)",
-  "hsl(168, 32.2%, 37.0%)",
-  "hsl(132, 30.1%, 62.9%)",
-  "hsl(312, 100%, 97%)"
-);
-
-export let fluid_colors1_c = new FluidColor_type1(
-  "hsl(23, 84%, 34.31372549019608%)",
-  "hsl(203, 59.03614457831326%, 51.176470588235304%)",
-  "hsl(168, 59.42028985507245%, 72.94117647058823%)",
-  "hsl(132, 24.50331125827815%, 29.607843137254903%)",
-  "hsl(312, 10.399999999999999%, 24.509803921568626%)"
-);
-
-export let fluid_colors1_d = new FluidColor_type1(
-  "hsl(22, 84%, 19.607843137254903%)",
-  "hsl(203, 88.03418803418803%, 22.941176470588236%)",
-  "hsl(164, 95.74468085106385%, 27.64705882352941%)",
-  "hsl(132, 100%, 80%)",
-  "hsl(313, 100%, 90.98039215686275%)"
-);
+export const fluid_colors1_a = f1a;
+export const fluid_colors1_b = f1b;
+export const fluid_colors1_c = f1c;
+export const fluid_colors1_d = f1d;
 
 export const fluidOrange_darkest = "hsl(22, 3%, 7%)";
 export const fluidOrange_dark = "hsl(22, 54%, 23%)";
@@ -269,123 +237,89 @@ export const fluidOrange_bright = "hsl(22, 37%, 70%)";
 export const fluidOrange_brightest = "hsl(22, 100%, 98%)";
 
 ////////// FLUID COLORS 2
-export let fluid_colors2_a = new FluidColor_type2(
-  "hsl(244, 100%, 50%)",
-  "hsl(273, 100%, 50%)",
-  "hsl(336, 100%, 50%)",
-  "hsl(94, 100%, 50%)",
-  "hsl(156, 100%, 50%)"
-);
-
-export let fluid_colors2_b = new FluidColor_type2(
-  "hsl(243, 71.05263157894736%, 14.901960784313726%)",
-  "hsl(273, 100%, 50%)",
-  "hsl(336, 100%, 50%)",
-  "hsl(94, 100%, 50%)",
-  "hsl(156, 100%, 50%)"
-);
+export const fluid_colors2_a = f2a;
+export const fluid_colors2_b = f2b;
 
 ////////// FLUID COLORS 3
-export let fluid_colors3_a = new FluidColor_type3(
-  "hsl(29, 100%, 50%)",
-  "hsl(209, 100%, 50%)",
-  "hsl(192, 100%, 50%)",
-  "hsl(172, 100%, 50%)",
-  "hsl(352, 100%, 50%)"
-);
+export const fluid_colors3_a = f3a;
+export const fluid_colors3_c = f3b;
 
-export let fluid_colors3_b = new FluidColor_type3(
-  "hsl(31, 92.06349206349206%, 49.41176470588235%)",
-  "hsl(210, 100%, 25.098039215686274%)",
-  "hsl(192, 98.41269841269842%, 24.705882352941174%)",
-  "hsl(172, 98.52941176470588%, 26.666666666666668%)",
-  "hsl(352, 100%, 27.450980392156865%)"
-);
-
-export let fluid_colors3_c = new FluidColor_type3(
-  "hsl(31, 92.06349206349206%, 49.41176470588235%)",
-  "hsl(209, 100%, 25.098039215686274%)",
-  "hsl(184, 66.41221374045803%, 25.68627450980392%)",
-  "hsl(150, 98.52941176470588%, 26.666666666666668%)",
-  "hsl(330, 100%, 27.450980392156865%)"
-);
-
-export const plum = "hsl(300, 33.3333%, 37.647%)";
-export const indigo = "hsl(274, 100%, 25.490%)";
+export const plum = "hsl(300, 47%, 75%)";
+export const indigo = "hsl(275, 100%, 25%)";
 
 export const angles = css`
-  --red: #ff0000ff; // 0                      /// Red             ///// R
-  --candy-apple-red: #ff1500ff;
-  --scarlet: #ff2a00ff;
-  --red-orange-color-wheel: #ff4000ff; // 15  /// Red_orange
-  --orange-pantone: #ff5500ff;
-  --safety-orange-blaze-orange: #ff6a00ff;
-  --orange: #ff8000ff; // 30                  /// Orange
-  --yellow-orange-color-wheel: #ff9500ff;
-  --chrome-yellow: #ffaa00ff;
-  --amber: #ffbf00ff; // 45                   /// yellow_orange
-  --gold-web-golden: #ffd500ff;
-  --middle-yellow: #ffea00ff;
-  --yellow: #ffff00ff; // 60                  /// Yellow                      ///// Y
-  --chartreuse-traditional: #eaff00ff;
-  --arctic-lime: #d4ff00ff;
-  --bitter-lime: #bfff00ff;
-  --spring-bud: #aaff00ff;
-  --french-lime: #95ff00ff;
-  --chartreuse-web: #80ff00ff; // 90
-  --bright-green: #6aff00ff;
-  --harlequin: #55ff00ff;
-  --harlequin-2: #40ff00ff; // 105            /// yellow_green
-  --neon-green: #2aff00ff;
-  --green-1: #15ff00ff;
-  --green: #00ff00ff; // 120                                      ///// G
-  --green-2: #00ff15ff;
-  --green-3: #00ff2aff;
-  --erin: #00ff40ff;
-  --erin-2: #00ff55ff;
-  --spring-green-1: #00ff6aff;
-  --spring-green: #00ff80ff; // 150           /// Green
-  --medium-spring-green: #00ff95ff;
-  --medium-spring-green-2: #00ffaaff;
-  --sea-green-crayola: #00ffbfff;
-  --sea-green-crayola-2: #00ffd4ff;
-  --turquoise-blue: #00ffeaff;
-  --aqua: #00ffffff; // 180                                                   ///// C
-  --electric-blue: #00eaffff;
-  --vivid-sky-blue: #00d4ffff;
-  --capri: #00bfffff; // 195                  /// blue_green
-  --blue-jeans: #00aaffff;
-  --dodger-blue: #0095ffff;
-  --azure: #0080ffff; // 210
-  --bluetiful: #006affff;
-  --blue-ryb: #0055ffff;
-  --blue-ryb-2: #0040ffff;
-  --ultramarine: #002bffff;
-  --blue-1: #0015ffff;
-  --blue: #0000ffff; // 240                   //// Blue            ///// B
-  --blue-2: #1500ffff;
-  --blue-3: #2a00ffff;
-  --ultramarine: #4000ffff;
-  --han-purple: #5500ffff;
-  --electric-indigo: #6a00ffff;
-  --violet-color-wheel: #8000ffff; // 270     /// blue_purple
-  --electric-violet: #9500ffff;
-  --vivid-violet: #aa00ffff;
-  --electric-purple: #c000ffff;
-  --phlox: #d500ffff;
-  --phlox-2: #ea00ffff;
-  --magenta: #ff00ffff; // 300                /// purple                     ///// M
-  --magenta-2: #ff00eaff;
-  --hot-magenta: #ff00d4ff;
-  --shocking-pink: #ff00c0ff;
-  --persian-rose: #ff00aaff;
-  --deep-pink: #ff0095ff;
-  --rose: #ff0080ff; // 330                   /// red_purple
-  --winter-sky: #ff006aff;
-  --radical-red: #ff0055ff;
-  --red-munsell: #ff0040ff;
-  --red-pigment: #ff002bff;
-  --red-2: #ff0015ff;
+  --red: hsl(0, 100%, 50%); /// Red             ///// R
+  --candy-apple-red: hsl(5, 100%, 50%);
+  --scarlet: hsl(10, 100%, 50%);
+  --red-orange-color-wheel: hsl(15, 100%, 50%); // Red_oran
+  --orange-pantone: hsl(20, 100%, 50%);
+  --safety-orange-blaze-orange: hsl(25, 100%, 50%);
+  --orange: hsl(30, 100%, 50%); // Orange
+  --yellow-orange-color-wheel: hsl(35, 100%, 50%);
+  --chrome-yellow: hsl(40, 100%, 50%);
+  --amber: hsl(45, 100%, 50%); // yellow_orange
+  --gold-web-golden: hsl(50, 100%, 50%);
+  --middle-yellow: hsl(55, 100%, 50%);
+  --yellow: hsl(60, 100%, 50%); /// Yellow
+  --chartreuse-traditional: hsl(65, 100%, 50%);
+  --arctic-lime: hsl(70, 100%, 50%);
+  --bitter-lime: hsl(75, 100%, 50%);
+  --spring-bud: hsl(80, 100%, 50%);
+  --french-lime: hsl(85, 100%, 50%);
+  --chartreuse-web: hsl(90, 100%, 50%); // 90
+  --bright-green: hsl(95, 100%, 50%);
+  --harlequin: hsl(100, 100%, 50%);
+  --harlequin-2: hsl(105, 100%, 50%); //yellow_green
+  --neon-green: hsl(110, 100%, 50%);
+  --green-1: hsl(115, 100%, 50%);
+  --green: hsl(120, 100%, 50%); // G
+  --green-2: hsl(125, 100%, 50%);
+  --green-3: hsl(130, 100%, 50%);
+  --erin: hsl(135, 100%, 50%);
+  --erin-2: hsl(140, 100%, 50%);
+  --spring-green-1: hsl(145, 100%, 50%);
+  --spring-green: hsl(150, 100%, 50%); // Green
+  --medium-spring-green: hsl(155, 100%, 50%);
+  --medium-spring-green-2: hsl(160, 100%, 50%);
+  --sea-green-crayola: hsl(165, 100%, 50%);
+  --sea-green-crayola-2: hsl(170, 100%, 50%);
+  --turquoise-blue: hsl(175, 100%, 50%);
+  --aqua: hsl(180, 100%, 50%); // C
+  --electric-blue: hsl(185, 100%, 50%);
+  --vivid-sky-blue: hsl(190, 100%, 50%);
+  --capri: hsl(195, 100%, 50%); // blue_green
+  --blue-jeans: hsl(200, 100%, 50%);
+  --dodger-blue: hsl(205, 100%, 50%);
+  --azure: hsl(210, 100%, 50%); // 210
+  --bluetiful: hsl(215, 100%, 50%);
+  --blue-ryb: hsl(220, 100%, 50%);
+  --blue-ryb-2: hsl(225, 100%, 50%);
+  --ultramarine: hsl(230, 100%, 50%);
+  --blue-1: hsl(235, 100%, 50%);
+  --blue: hsl(240, 100%, 50%); // B
+  --blue-2: hsl(245, 100%, 50%);
+  --blue-3: hsl(250, 100%, 50%);
+  --ultramarine: hsl(255, 100%, 50%);
+  --han-purple: hsl(260, 100%, 50%);
+  --electric-indigo: hsl(265, 100%, 50%);
+  --violet-color-wheel: hsl(270, 100%, 50%); // blue_purple
+  --electric-violet: hsl(275, 100%, 50%);
+  --vivid-violet: hsl(280, 100%, 50%);
+  --electric-purple: hsl(285, 100%, 50%);
+  --phlox: hsl(290, 100%, 50%);
+  --phlox-2: hsl(295, 100%, 50%);
+  --magenta: hsl(300, 100%, 50%); // purple
+  --magenta-2: hsl(305, 100%, 50%);
+  --hot-magenta: hsl(310, 100%, 50%);
+  --shocking-pink: hsl(315, 100%, 50%);
+  --persian-rose: hsl(320, 100%, 50%);
+  --deep-pink: hsl(325, 100%, 50%);
+  --rose: hsl(330, 100%, 50%); // red_purple
+  --winter-sky: hsl(335, 100%, 50%);
+  --radical-red: hsl(340, 100%, 50%);
+  --red-munsell: hsl(345, 100%, 50%);
+  --red-pigment: hsl(345, 100%, 50%);
+  --red-2: hsl(355, 100%, 50%);
 `;
 
 export const exportedPalette = css`

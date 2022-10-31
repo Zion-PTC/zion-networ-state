@@ -68,4 +68,4 @@ export class RGB extends ColorWheel {
   }
 }
 
-export let rgb = new RGB();
+export const rgb = new RGB();
