@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { CssStyled, StyledCss } from "../../../lib";
 
-const Area = styled.div`
+const Area = styled.div<SocialProps>`
   border-bottom: 1px solid;
   border-left: 1px solid;
   border-right: 1px solid;
@@ -28,9 +29,11 @@ const Circle = styled.div`
   justify-self: center;
 `;
 
-export const Social = () => {
+export type SocialProps = CssStyled & StyledCss;
+
+export const Social = (props: SocialProps) => {
   return (
-    <Area>
+    <Area {...props}>
       <Circle />
       <Circle />
       <Circle />

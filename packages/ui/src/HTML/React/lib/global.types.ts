@@ -8,22 +8,40 @@ import {
   FunctionComponentFactory,
   PropsWithChildren,
 } from "react";
-import { Interpolation, ThemedStyledProps } from "styled-components";
+import {
+  Interpolation,
+  ThemedStyledProps,
+} from "styled-components";
 
 /**
  * Useful link: https://github.com/frenic/csstype#what-should-i-do-when-i-get-type-errors
  */
+
+export type width = number;
+export type height = number;
+
+export type BasicLayoutProps = {
+  minHeight?: string;
+};
+
 /// REACT
 export type BasicComponentProps<P> = PropsWithChildren<P>;
 export type BasicFC<P> = FC<BasicComponentProps<P>>;
-export type BasicFCFactory<P> = FunctionComponentFactory<P>;
+export type BasicFCFactory<P> =
+  FunctionComponentFactory<P>;
 /// CSS
 export type Dimensions = "width" | "height";
 export type Sizes = "small" | "mid" | "big";
 export type Size = { size: Sizes };
-export type CSSProps = { css_: utility.ZionCss };
-export type Css_ = { css_?: CSS };
-export type Css_v0 = { [prop in keyof CSS]?: CssAttributeValueTypes };
+export type CSSProps = { css?: CSS };
+export type StyledCss = {
+  css?: string;
+  className?: string;
+};
+export type CssStyled = { css_?: CSS };
+export type Css_v0 = {
+  [prop in keyof CSS]?: CssAttributeValueTypes;
+};
 
 export type BooleanSizes = {
   small?: boolean;
@@ -45,15 +63,18 @@ export type Position = {
   left?: string;
 };
 
-export type CssKeysFromStringArray<T extends (keyof CSS)[]> = {
+export type CssKeysFromStringArray<
+  T extends (keyof CSS)[]
+> = {
   [props in T[number]]: CSS[props];
 };
 
 export type BasicFluidThemedStyledProps = Interpolation<
-  ThemedStyledProps<Css_, any>
+  ThemedStyledProps<CssStyled, any>
 >;
 
-export type FluidThemed<Props> = BasicFluidThemedStyledProps & Props;
+export type FluidThemed<Props> =
+  BasicFluidThemedStyledProps & Props;
 
 export type CssPropertiesKeys = keyof CSS;
 
@@ -67,7 +88,9 @@ export namespace utility {
   export type ClassicElement<P> = CE<P>;
   export type PickCss<P extends keyof CSS> = Pick<CSS, P>;
   export type OmitCss<O extends keyof CSS> = Omit<CSS, O>;
-  export type RequiredCss<R extends keyof CSS> = Required<PickCss<R>>;
+  export type RequiredCss<R extends keyof CSS> = Required<
+    PickCss<R>
+  >;
   /**
    * Utility type to build css property requierements. The
    * CssProperties type is built with all properties being
@@ -112,6 +135,7 @@ export namespace utility {
       ? PickCss<Optional>
       : never
     : CSS;
-  export type CssPropUnion<T extends keyof CSSProperties | undefined> =
-    utility.ZionCss<undefined, true, T>;
+  export type CssPropUnion<
+    T extends keyof CSSProperties | undefined
+  > = utility.ZionCss<undefined, true, T>;
 }

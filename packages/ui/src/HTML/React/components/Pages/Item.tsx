@@ -3,12 +3,6 @@ import { useEffect, useState } from "react";
 import { H1 } from "../Elements/H1";
 import { P } from "../Elements/P";
 import { Image } from "../GlobalSections/Image";
-// import { Like } from "../Icons/Like";
-// import { More } from "../Icons/More";
-// import { Cards } from "../Items";
-// import { BasicCardProps } from "../Items/Types";
-// import { ContentArea } from "../Layout";
-// import { Area } from "../Layout/sections";
 import { InfoSub, TextArea } from "./sections";
 import { Avatar } from "./sections/Avatar";
 import { Background } from "./sections/Background";
@@ -19,6 +13,7 @@ import { InfoSubDetails } from "./sections/InfoSubDetails";
 import { ProfileId } from "./sections/ProfileId";
 import { Social } from "./sections/Social";
 import { SVGButton } from "../Elements/ButtonTypes";
+import { CssStyled, StyledCss } from "../../lib";
 
 export type ItemStyle = {
   src: string;
@@ -83,7 +78,8 @@ type ItemProps = ItemStyle & {
     };
     highestBid: string;
   };
-};
+} & CssStyled &
+  StyledCss;
 
 export function Item(props: ItemProps) {
   const INFOSUB = "Collection";
@@ -156,7 +152,7 @@ export function Item(props: ItemProps) {
             props.background?.image?.backgroundColor
           }
         ></Image>
-        <BottomSpace gridArea="infos">
+        <BottomSpace css_={{ gridArea: "infos" }}>
           <Social>
             {/* TODO like and more svg icon */}
             <SVGButton svg={props.likeIcon}></SVGButton>
@@ -167,7 +163,9 @@ export function Item(props: ItemProps) {
             <P>{props.data.description}</P>
             <P>{props.data.highestBid}</P>
           </TextArea>
-          <InfoSection>
+          <InfoSection
+            css_={{ gridTemplateColumns: "1fr 1fr" }}
+          >
             <InfoSub>
               <TextArea>
                 <P bold>{INFOSUBCREATORFIELD}</P>

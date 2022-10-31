@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { FooterProps } from "./Types";
+import { BasicLayoutProps, StyledCss } from "../../lib";
+
+export type FooterProps = BasicLayoutProps & StyledCss;
 
 export const Footer = styled.footer<FooterProps>`
   display: grid;

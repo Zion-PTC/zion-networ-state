@@ -44,29 +44,22 @@ const BadgeArea = styled.div<BadgeProps>`
   border: 1px solid ${props => props.theme.borderColor};
   background: ${props => props.theme.body};
   border-radius: 4px;
+  place-items: center;
 `;
 
 const LogoArea = styled.div`
   grid-area: logo;
+  width: 100%;
+  height: 100%;
 `;
+
 const InfosArea = styled.div<{ css_: { color: string } }>`
   grid-area: infos;
   text-align: center;
   color: ${props => props.css_.color};
-  h1 {
-    font-size: xx-large;
-  }
   h3 {
     margin: 0;
   }
-`;
-const Circolo = styled.div`
-  height: 100%;
-  width: 100%;
-  border-radius: 100%;
-  background-color: hsl(0, 0%, 53%);
-  border: 2px solid hsl(0, 0%, 76%);
-  box-sizing: border-box;
 `;
 
 type BadgeProps = {
@@ -75,10 +68,19 @@ type BadgeProps = {
 };
 
 export default function Badge(props: BadgeProps) {
+  const darkgrey = props.theme.palette.darkgrey;
+  const border = `2px solid ${props.theme.palette.grey}`;
   return (
     <BadgeArea size={props.size}>
       <LogoArea>
-        <Circolo />
+        <Circle
+          size={{ width: "100%", height: "100%" }}
+          css_={{
+            border,
+            backgroundColor: darkgrey,
+            boxSizing: "border-box",
+          }}
+        />
       </LogoArea>
       <InfosArea
         css_={{ color: props.theme.palette.grey }}

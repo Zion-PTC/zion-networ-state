@@ -3,8 +3,25 @@ import { Head } from "../sections/Head";
 import { Image } from "../../GlobalSections/Image";
 import { Infos } from "../sections/Infos";
 import { Portrait } from "../Shapes/Portrait";
-import { NftPfpProps } from "./Types/NftPfp";
-import { useEffect, useState } from "react";
+import {
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from "react";
+
+export interface NftPfpProps {
+  likeIcon: JSX.IntrinsicElements["svg"];
+  menuIcon: JSX.IntrinsicElements["svg"];
+  id?: number;
+  name?: string;
+  slug?: string;
+  small?: boolean;
+  mid?: boolean;
+  big?: boolean;
+  src?: string;
+  backgroundColor?: string;
+  clickHandler?: MouseEventHandler<HTMLElement>;
+}
 
 const Area = styled(Portrait)`
   height: 100%;
@@ -26,7 +43,9 @@ export function NftPfp(props: NftPfpProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    !isLoading ? setImageLoaded(true) : setImageLoaded(false);
+    !isLoading
+      ? setImageLoaded(true)
+      : setImageLoaded(false);
   }, [isLoading]);
 
   return (

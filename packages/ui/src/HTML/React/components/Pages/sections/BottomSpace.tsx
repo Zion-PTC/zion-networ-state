@@ -1,8 +1,15 @@
-import styled from "styled-components";
-import { utility } from "../../../lib";
+import styled, { css } from "styled-components";
+import { Css } from "../../../classes";
+import {
+  CssStyled,
+  StyledCss,
+  utility,
+} from "../../../lib";
 
 type BottomSpaceStyle = {
   css?: utility.ZionCss<
+    undefined,
+    true,
     | "textAlign"
     | "zIndex"
     | "display"
@@ -11,20 +18,15 @@ type BottomSpaceStyle = {
     | "margin"
     | "gridArea"
   >;
-};
+} & StyledCss &
+  CssStyled;
 
-type BottomSpaceCss = {
-  gridArea: string;
-};
-
-export const BottomSpace = styled.div<BottomSpaceStyle & BottomSpaceCss>`
+export const BottomSpace = styled.div<BottomSpaceStyle>`
   text-align: center;
   z-index: 2;
   display: grid;
   grid-template-rows: 2rem auto 5rem;
   place-items: center;
   margin: 0;
-  ${(props) => {
-    if (props.gridArea) return `grid-area: ${props.gridArea};`;
-  }}
+  ${props => new Css("gridArea", css``, props).value}
 `;

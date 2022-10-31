@@ -1,15 +1,26 @@
-import styled, { css, FlattenSimpleInterpolation } from "styled-components";
+import styled, {
+  css,
+  FlattenSimpleInterpolation,
+} from "styled-components";
 import {
   BasicComponentProps,
   Dimensions,
   utility,
 } from "../../../lib/global.types";
 
-type backgroundAreas = "position" | "backgroundColor" | "zIndex" | Dimensions;
+type backgroundAreas =
+  | "position"
+  | "backgroundColor"
+  | "zIndex"
+  | Dimensions;
 
 type BackgroundAreaStyle = {
   css_?: utility.ZionCss<
-    "display" | "gridTemplateRows" | "position" | "height" | "backgroundColor",
+    | "display"
+    | "gridTemplateRows"
+    | "position"
+    | "height"
+    | "backgroundColor",
     true
   > & {
     upper: utility.ZionCss<backgroundAreas, true>;
@@ -49,7 +60,7 @@ const checkGridSetting = (
 
 export const BackgroundArea = styled.div<BackgroundAreaStyle>`
   display: grid;
-  ${(props) => checkGridSetting(props)}
+  ${props => checkGridSetting(props)}
   #upper {
     position: absolute;
     z-index: 0;
@@ -59,7 +70,8 @@ export const BackgroundArea = styled.div<BackgroundAreaStyle>`
   }
 `;
 
-export type BackgroundProps = BasicComponentProps<BackgroundAreaStyle>;
+export type BackgroundProps =
+  BasicComponentProps<BackgroundAreaStyle>;
 
 export const Background = (props: BackgroundProps) => {
   const { children } = props;

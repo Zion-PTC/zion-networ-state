@@ -7,13 +7,16 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { CollectionPropsFromApp } from "../collection";
 import { HTML } from "@zionstate/ui";
 import Layout from "../../components/layout";
 import { OpenSeaMetadata } from "../api/Types/nfts";
 import { BasePropsFromApp } from "../_app";
 import styled from "styled-components";
-import { FilterAlt, Like, More_Normal } from "../../components/Icons";
+import {
+  FilterAlt,
+  Like,
+  More_Normal,
+} from "../../components/Icons";
 
 const TITLE = "CYBERDOG #010 - THE RIPPER";
 const DESCRIPTION = `WARNING! This cyberdog is out of control! He is very dangerous, he
@@ -55,10 +58,10 @@ export interface NftData {
 
 export type Data<D> = { data: D[] };
 
-export const { getStaticPaths: gspt, getStaticProps: gsp } = getStatic<
-  NftData,
-  { id: string }
->(
+export const {
+  getStaticPaths: gspt,
+  getStaticProps: gsp,
+} = getStatic<NftData, { id: string }>(
   "fetch",
   "http://localhost:3000/api/nfts",
   "data",
@@ -88,12 +91,16 @@ export const Nft: (
   const [imageLoaded, setImageLoaded] = useState(false);
   const [src, setSrc] = useState("");
 
-  const fill = { fill: props.layout.theme.primary.borderColor };
+  const fill = {
+    fill: props.layout.theme.primary.borderColor,
+  };
   const LikeIcon = Like(fill);
   const More = More_Normal(fill);
 
   useEffect(() => {
-    !isLoading ? setImageLoaded(true) : setImageLoaded(false);
+    !isLoading
+      ? setImageLoaded(true)
+      : setImageLoaded(false);
     setSrc(props.data.image);
   }, [isLoading]);
 
@@ -101,7 +108,8 @@ export const Nft: (
 
   const backgroundProps = {
     image: { backgroundColor: "#fafafa" },
-    bottomBackgroundColor: props.layout.theme.secondary.color,
+    bottomBackgroundColor:
+      props.layout.theme.secondary.color,
     bottomSpace: {
       infoSection: {
         infosubs: [
@@ -109,7 +117,8 @@ export const Nft: (
             infoSubDetails: {
               avatar: {
                 circle: {
-                  borderColor: props.layout.theme.primary.borderColor,
+                  borderColor:
+                    props.layout.theme.primary.borderColor,
                 },
               },
             },

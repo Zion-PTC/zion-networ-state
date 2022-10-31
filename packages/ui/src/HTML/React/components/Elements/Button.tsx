@@ -1,7 +1,26 @@
+import { MouseEventHandler } from "react";
 import styled, { css } from "styled-components";
 import { Css } from "../../classes";
+import {
+  Position,
+  Sizes,
+  CssStyled,
+  StyledCss,
+} from "../../lib";
 import checkCss from "../../lib/util/checkCss";
-import { ButtonStyle } from "./Types";
+
+export type ButtonStyle = {
+  primary?: boolean;
+  secondary?: boolean;
+  disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  size?: Sizes;
+  position?: Position;
+  zIndex?: string;
+  gridArea?: string;
+  child?: { justifySelf?: string };
+} & CssStyled &
+  StyledCss;
 
 const defaultHeight = css`
   height: 70%;
@@ -10,7 +29,7 @@ const defaultWidth = css`
   width: 70%;
 `;
 
-export const Button = styled.button<ButtonStyle<{}>>`
+export const Button = styled.button<ButtonStyle>`
   ${props => new Css("height", defaultHeight, props).value}
   ${props => new Css("width", defaultWidth, props).value}
   line-height: 1.2;
@@ -54,10 +73,6 @@ export const Button = styled.button<ButtonStyle<{}>>`
     width: auto;
     height: auto;
   }
-  /* -webkit-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
-  -moz-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
-  -o-box-shadow: 0px 0px 1px 0.1px #8a8a8a;
-  box-shadow: 0px 0px 1px 0.1px #8a8a8a; */
   &:hover {
     cursor: pointer;
   }

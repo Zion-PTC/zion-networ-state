@@ -20,11 +20,16 @@ import Head from "next/head";
 
 const components = HTML.React.components;
 // Components
-const ConnectionButton = components.Elements.ButtonTypes.ConnectionButton;
-const ThemeButton = components.Elements.ButtonTypes.SVGButton;
-const FilterAltButton = components.Elements.ButtonTypes.SVGButton;
-const SearchButton = components.Elements.ButtonTypes.SVGButton;
-const ScrollToTopButton = components.Elements.ButtonTypes.ScrollToTopButton;
+const ConnectionButton =
+  components.Elements.ButtonTypes.ConnectionButton;
+const ThemeButton =
+  components.Elements.ButtonTypes.SVGButton;
+const FilterAltButton =
+  components.Elements.ButtonTypes.SVGButton;
+const SearchButton =
+  components.Elements.ButtonTypes.SVGButton;
+const ScrollToTopButton =
+  components.Elements.ButtonTypes.ScrollToTopButton;
 // const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = components.Layout.NavBar;
 const Footer = components.Layout.Footer;
@@ -64,22 +69,44 @@ class FooterLink {
 }
 
 const HomeFooterLink = new FooterLink(HOME, "/", Home);
-const ArrowLeftFooterLink = new FooterLink(ARROWLEFT, "/", ArrowLeft);
-const ArrowRightFooterLink = new FooterLink(ARROWRIGHT, "/", ArrowRight);
+const ArrowLeftFooterLink = new FooterLink(
+  ARROWLEFT,
+  "/",
+  ArrowLeft
+);
+const ArrowRightFooterLink = new FooterLink(
+  ARROWRIGHT,
+  "/",
+  ArrowRight
+);
 const CuoreFooterLink = new FooterLink(CUORE, "/", Like);
-const AccountFooterLink = new FooterLink(ACCOUNT, "/", Account);
+const AccountFooterLink = new FooterLink(
+  ACCOUNT,
+  "/",
+  Account
+);
 
-const AIconsFooter = (props: { footerLinks: FooterLink[]; fill: string }) => {
+const AIconsFooter = (props: {
+  footerLinks: FooterLink[];
+  fill: string;
+}) => {
   return (
     <>
       {props.footerLinks.map((footerLink, idx) => (
-        <AIconFooter key={idx} footerLink={footerLink} fill={props.fill} />
+        <AIconFooter
+          key={idx}
+          footerLink={footerLink}
+          fill={props.fill}
+        />
       ))}
     </>
   );
 };
 
-const AIconFooter = (props: { footerLink: FooterLink; fill: string }) => {
+const AIconFooter = (props: {
+  footerLink: FooterLink;
+  fill: string;
+}) => {
   const { link, src, svg: SVG } = props.footerLink;
   return (
     <a href={link}>
@@ -228,7 +255,10 @@ const Layout: ILayout = function ({
         ></ScrollToTopButton>
       )}
       <Footer ref={footer}>
-        <AIconsFooter footerLinks={FOOTERLINKS} fill={theme.palette.white} />
+        <AIconsFooter
+          footerLinks={FOOTERLINKS}
+          fill={theme.palette.white}
+        />
       </Footer>
     </>
   );

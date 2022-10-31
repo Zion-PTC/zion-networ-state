@@ -1,5 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import { SVGButtonProps } from "./Types";
+
+const Path = styled.path`
+  stroke: ${props => props.theme.borderColor};
+`;
 
 export function LogoZion(props: SVGButtonProps) {
   return (

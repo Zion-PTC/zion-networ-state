@@ -1,8 +1,11 @@
 import styled, { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme, GlobalStyles } from "../components/theme";
+import { GlobalStyle } from "../components/GlobalStyle";
 import React, { useEffect, useRef, useState } from "react";
 import { LayoutProps } from "../components/Types/";
-import { HTML } from "@zionstate/ui";
+import { HTML, themes } from "@zionstate/ui";
+
+const lightTheme = themes.lightTheme;
+const darkTheme = themes.darkTheme;
 
 const useEthereum = HTML.React.lib.hooks.useEthereum;
 
@@ -26,7 +29,7 @@ export type BasePropsFromApp = {
 type AppStyle = { height: number };
 
 const App = styled.div<AppStyle>`
-  height: ${(props) => props.height}px;
+  height: ${props => props.height}px;
   width: 100vw;
   display: grid;
   grid-template-rows: 1fr 10fr 1fr;
@@ -45,7 +48,8 @@ function Application(props: ApplicationProps) {
 
   const [appHeight, setAppHeight] = useState(0);
   const [theme, setTheme] = useState("light");
-  const [componentAreaHeight, setComponentAreaHeight] = useState(0);
+  const [componentAreaHeight, setComponentAreaHeight] =
+    useState(0);
   const app = useRef<HTMLDivElement>();
   const navbar = useRef<HTMLHeadingElement>();
   const footer = useRef<HTMLHeadingElement>();
@@ -59,7 +63,9 @@ function Application(props: ApplicationProps) {
   const [showButton, setShowButton] = useState(false);
 
   const toggleTheme = () => {
-    theme == "light" ? setTheme("dark") : setTheme("light");
+    theme == "light"
+      ? setTheme("dark")
+      : setTheme("light");
   };
 
   const scrollToTop = () => {
@@ -101,14 +107,17 @@ function Application(props: ApplicationProps) {
   useEffect(() => {
     if (
       window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
+      window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
     ) {
       setTheme("dark");
     }
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        const newColorScheme = event.matches ? "dark" : "light";
+      .addEventListener("change", event => {
+        const newColorScheme = event.matches
+          ? "dark"
+          : "light";
         console.log("changedtheme");
         setTheme(newColorScheme);
       });
@@ -120,7 +129,9 @@ function Application(props: ApplicationProps) {
     );
     // TODO add event listener on resize and on device
     // orientation change
-    window.addEventListener("resize", () => console.log("resized"));
+    window.addEventListener("resize", () =>
+      console.log("resized")
+    );
   }, []);
 
   // set the content area height to be the same as the
@@ -148,7 +159,8 @@ function Application(props: ApplicationProps) {
       let profileAreaY = window.document
         .getElementById("page")
         .getBoundingClientRect().y;
-      let contentAreaY = contentArea.current.getBoundingClientRect().y;
+      let contentAreaY =
+        contentArea.current.getBoundingClientRect().y;
       let scrollPosition = contentAreaY - profileAreaY;
 
       if (scrollPosition > 1000) {
@@ -160,8 +172,10 @@ function Application(props: ApplicationProps) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
-      <GlobalStyles />
+    <ThemeProvider
+      theme={theme == "light" ? lightTheme : darkTheme}
+    >
+      <GlobalStyle />
       <App ref={app} height={appHeight}>
         <Component {...pageProps} />
       </App>

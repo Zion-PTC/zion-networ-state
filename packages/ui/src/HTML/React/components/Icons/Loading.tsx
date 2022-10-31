@@ -1,15 +1,34 @@
+import { CssStyled, StyledCss } from "../../lib";
 import { LoadingWaves } from "./LoadingTypes";
 
-export default function Loading(props: { type: "waves"; display?: string }) {
+export type LoadingProps = {
+  type: "waves";
+  display?: string;
+} & CssStyled &
+  StyledCss;
+
+export default function Loading(props: LoadingProps) {
   let LoadingIcon: () => JSX.Element;
 
   switch (props.type) {
     case "waves":
-      LoadingIcon = () => <LoadingWaves display={props.display} />;
+      LoadingIcon = () => (
+        <LoadingWaves
+          display={props.display}
+          className={props.className}
+          css={props.css}
+        />
+      );
       break;
 
     default:
-      LoadingIcon = () => <LoadingWaves display={props.display} />;
+      LoadingIcon = () => (
+        <LoadingWaves
+          display={props.display}
+          className={props.className}
+          css={props.css}
+        />
+      );
       break;
   }
 

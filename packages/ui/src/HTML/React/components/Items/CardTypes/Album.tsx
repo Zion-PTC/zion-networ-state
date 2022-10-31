@@ -4,7 +4,21 @@ import { Image } from "../../GlobalSections/Image";
 import { Infos } from "../sections/Infos";
 import { Social } from "../sections/Social";
 import { Portrait } from "../Shapes/Portrait";
-import { AlbumProps } from "./Types/Album";
+import { MouseEventHandler } from "react";
+
+export type AlbumProps = {
+  likeIcon: JSX.IntrinsicElements["svg"];
+  menuIcon: JSX.IntrinsicElements["svg"];
+  id?: number;
+  name?: string;
+  slug?: string;
+  small?: boolean;
+  mid?: boolean;
+  big?: boolean;
+  src?: string;
+  backgroundColor?: string;
+  clickHandler?: MouseEventHandler<HTMLElement>;
+};
 
 const Area = styled(Portrait)`
   height: 100%;
@@ -25,7 +39,11 @@ export function Album(props: AlbumProps) {
     <Area backgroundColor={backgroundColor}>
       <CardArea>
         <Head menuIcon={props.menuIcon} />
-        <Image src={props.src ? props.src : ""} width="auto" height="auto" />
+        <Image
+          src={props.src ? props.src : ""}
+          width="auto"
+          height="auto"
+        />
         <Infos
           likeIcon={props.likeIcon}
           collection="CBBBB"

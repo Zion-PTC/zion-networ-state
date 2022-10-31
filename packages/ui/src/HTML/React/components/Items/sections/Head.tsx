@@ -1,8 +1,16 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import {
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { js } from "@zionstate/utils";
-import { HeadProps } from "./Types/Head";
 import { SVGButton } from "../../Elements/ButtonTypes";
+
+export type HeadProps = {
+  menuIcon: JSX.IntrinsicElements["svg"];
+};
 
 const { ZionError: ze } = js;
 const { ZionError } = ze;
@@ -10,7 +18,7 @@ const { ZionError } = ze;
 const Area = styled.div<{ avatarSize: number }>`
   z-index: 1;
   display: grid;
-  grid-template-columns: ${(props) => props.avatarSize}px 4fr 1fr;
+  grid-template-columns: ${props => props.avatarSize}px 4fr 1fr;
   grid-template-rows: 1fr;
   place-items: center;
   border-top: 1px solid;
@@ -30,7 +38,8 @@ const Circle = styled.div`
 const MenuIcon = styled.div``;
 
 export const Head = (props: HeadProps) => {
-  const parent = useRef<HTMLDivElement>() as RefObject<HTMLDivElement>;
+  const parent =
+    useRef<HTMLDivElement>() as RefObject<HTMLDivElement>;
   const [avatarSize, setAvatarSize] = useState(0);
 
   useEffect(() => {

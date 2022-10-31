@@ -1,7 +1,15 @@
 import styled from "styled-components";
+import { CssStyled, StyledCss } from "../../../lib";
 import { SVGButton } from "../../Elements/ButtonTypes";
 import { TextArea } from "./TextArea";
-import { InfosProps } from "./Types";
+
+export type InfosProps = {
+  likeIcon: JSX.IntrinsicElements["svg"];
+  collection?: string;
+  id?: string;
+  creator?: string;
+} & CssStyled &
+  StyledCss;
 
 const NftTitle = TextArea;
 const FloorPrice = TextArea;
@@ -52,7 +60,10 @@ export const Infos = (props: InfosProps) => {
       </InfosArea>
       <SocialArea>
         <LikeIcon>
-          <SVGButton svg={props.likeIcon} justifySelf="end" />
+          <SVGButton
+            svg={props.likeIcon}
+            justifySelf="end"
+          />
         </LikeIcon>
         <Likes gridArea="count"></Likes>
       </SocialArea>

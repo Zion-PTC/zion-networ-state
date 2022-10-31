@@ -1,7 +1,11 @@
+import { Path } from "../Path";
 import { defaultProps } from "../SVGs";
+import { Circle } from "../Circle";
 import { SVGButtonProps } from "./Types";
 
-export function Search(props: SVGButtonProps = defaultProps) {
+export function Search(
+  props: SVGButtonProps = defaultProps
+) {
   return (
     <svg
       width="24"
@@ -10,10 +14,10 @@ export function Search(props: SVGButtonProps = defaultProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="10" cy="10" r="7" stroke={props.stroke} strokeWidth="2" />
-      <path
+      <Circle cx="10" cy="10" r="7" strokeWidth="2" />
+      <Path
+        options={{ stroke: true }}
         d="M15 15L21 21"
-        stroke={props.stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

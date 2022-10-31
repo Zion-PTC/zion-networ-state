@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { Position } from "../../../lib";
+import {
+  CssStyled,
+  Position,
+  StyledCss,
+} from "../../../lib";
 import { Button } from "../Button";
 
 const ScrollToTopButtonArea = styled(Button)`
@@ -7,10 +11,14 @@ const ScrollToTopButtonArea = styled(Button)`
   height: auto;
   z-index: 2;
   background-color: transparent;
-  position: ${(props) => (props.position ? "fixed" : "relative")};
-  bottom: ${(props) =>
-    props.position?.bottom ? props.position?.bottom : "10%"};
-  right: ${(props) => (props.position?.right ? props.position?.right : "7%")};
+  position: ${props =>
+    props.position ? "fixed" : "relative"};
+  bottom: ${props =>
+    props.position?.bottom
+      ? props.position?.bottom
+      : "10%"};
+  right: ${props =>
+    props.position?.right ? props.position?.right : "7%"};
   cursor: pointer;
   border: none;
   padding: 0;
@@ -25,15 +33,22 @@ const ScrollToTopButtonArea = styled(Button)`
   }
 `;
 
-export function ScrollToTopButton(props: {
+export type ScrollToTopButton = {
   svg?: JSX.IntrinsicElements["svg"];
   handleClick?: () => void;
   position?: Position;
-}) {
+} & CssStyled &
+  StyledCss;
+
+export function ScrollToTopButton(
+  props: ScrollToTopButton
+) {
   return (
     <ScrollToTopButtonArea
+      className={props.className}
       onClick={props.handleClick}
       position={props.position}
+      css={props.css}
     >
       <>{props.svg}</>
     </ScrollToTopButtonArea>

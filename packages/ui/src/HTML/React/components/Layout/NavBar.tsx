@@ -1,14 +1,19 @@
 import styled from "styled-components";
-import { NavBarProps } from "./Types";
+import { BasicLayoutProps } from "../../lib";
+
+export type NavBarProps = BasicLayoutProps & {
+  gridTemplateColumns?: string;
+  gridTemplateAreas?: string;
+};
 
 export const NavBar = styled.nav<NavBarProps>`
   top: 0;
   display: grid;
   text-align: center;
-  ${(props) =>
+  ${props =>
     props.gridTemplateColumns &&
     `grid-template-columns: ${props.gridTemplateColumns};`}
-  ${(props) =>
+  ${props =>
     props.gridTemplateAreas &&
     `grid-template-areas: ${props.gridTemplateAreas};`}
 `;

@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { Position } from "../../../lib";
+import {
+  CssStyled,
+  Position,
+  StyledCss,
+} from "../../../lib";
 import { Button } from "../Button";
 
 const SVGButtonArea = styled(Button)`
@@ -10,13 +14,16 @@ const SVGButtonArea = styled(Button)`
   border-radius: 0;
 `;
 
-export function SVGButton(props: {
+export type SvgButtonProps = {
   svg?: JSX.IntrinsicElements["svg"];
   handleClick?: () => void;
   position?: Position;
   gridArea?: string;
   justifySelf?: string;
-}) {
+} & CssStyled &
+  StyledCss;
+
+export function SVGButton(props: SvgButtonProps) {
   return (
     <SVGButtonArea
       onClick={props.handleClick}

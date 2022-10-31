@@ -4,6 +4,7 @@ import { Data, NftData } from "../pages/nft/[id]";
 import { BasePropsFromApp } from "../pages/_app";
 import Badge from "./Badge";
 import { Like, More_Normal, Share } from "./Icons";
+import Twitter from "./Icons/Twitter";
 
 const components = HTML.React.components;
 const { Elements, Items, Layout, Pages } = components;
@@ -45,24 +46,29 @@ const ProfileInfos = styled.div`
     "content";
 `;
 
+const TwitterStyled = styled(Twitter)`
+  place-self: end;
+  background-color: red;
+`;
+
 export default function Profile(props: ProfileProps) {
   let data = props.data;
-  const LikeIcon = Like({
-    fill: props.layout.theme.primary.borderColor,
-  });
-  const More_NormalIcon = More_Normal({
-    fill: props.layout.theme.primary.borderColor,
-  });
-  const ShareIcon = Share({
-    fill: props.layout.theme.primary.borderColor,
-  });
+  // const LikeIcon = Like({
+  //   fill: props.layout.theme.primary.borderColor,
+  // });
+  // const More_NormalIcon = More_Normal({
+  //   fill: props.layout.theme.primary.borderColor,
+  // });
+  // const ShareIcon = Share({
+  //   fill: props.layout.theme.primary.borderColor,
+  // });
   const secBGColor =
     props.layout.theme.secondary.backgroundColor;
   return (
     <ProfileArea id="page">
       <Background profilePage {...props.background}>
         <Avatar
-          css_={{
+          css={{
             zIndex: "1",
             gridArea: "image",
             backgroundColor: secBGColor,
@@ -71,7 +77,7 @@ export default function Profile(props: ProfileProps) {
         ></Avatar>
         <ProfileInfos>
           <TextArea
-            css_={{
+            css={{
               display: "grid",
               placeItems: "center",
               gridArea: "content",
@@ -80,7 +86,7 @@ export default function Profile(props: ProfileProps) {
             <p>{"<account name>"}</p>
             <p>{"@handle"}</p>
             <InfoSection
-              css_={{
+              css={{
                 gridTemplateColumns: "1fr 1fr 1fr",
                 placeContent: "center",
               }}
@@ -100,14 +106,14 @@ export default function Profile(props: ProfileProps) {
               </TextArea>
             </InfoSection>
             <InfoSection
-              css_={{ gridTemplateColumns: "1fr 1fr 1fr" }}
+              css={{ gridTemplateColumns: "1fr 1fr 1fr" }}
             >
               <button></button>
-              <SVGButton svg={ShareIcon}></SVGButton>
-              <SVGButton svg={More_NormalIcon}></SVGButton>
+              <SVGButton svg={<Share />}></SVGButton>
+              <SVGButton svg={<More_Normal />}></SVGButton>
             </InfoSection>
             <TextArea
-              css_={{
+              css={{
                 display: "grid",
                 placeItems: "center",
               }}
@@ -116,14 +122,38 @@ export default function Profile(props: ProfileProps) {
               <p>show more</p>
             </TextArea>
             <Social
-              css_={{ gridTemplateColumns: "1fr 1fr" }}
               size="big"
+              css={`
+                grid-template-columns: 1fr 1fr;
+              `}
             >
               <Badge
                 theme={props.layout.theme}
                 size="small"
               ></Badge>
-              <div>twitter</div>
+              <div
+                css={`
+                  width: 100%;
+                  height: 100%;
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  place-items: center;
+                `}
+              >
+                <div
+                  css={`
+                    display: grid;
+                    width: 100%;
+                  `}
+                >
+                  <Twitter
+                    css={`
+                      place-self: end;
+                    `}
+                  ></Twitter>
+                </div>
+                <p>handle</p>
+              </div>
             </Social>
           </TextArea>
         </ProfileInfos>
@@ -142,8 +172,8 @@ export default function Profile(props: ProfileProps) {
             columns={props.profile.columns}
           >
             <Cards
-              likeIcon={LikeIcon}
-              menuIcon={More_NormalIcon}
+              likeIcon={<Like />}
+              menuIcon={<More_Normal />}
               type="nft-pfp"
             >
               {data}

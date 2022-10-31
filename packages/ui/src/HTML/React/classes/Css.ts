@@ -3,7 +3,7 @@ import {
   css,
   FlattenSimpleInterpolation,
 } from "styled-components";
-import { CssAttributeValueTypes, Css_ } from "../lib";
+import { CssAttributeValueTypes, CssStyled } from "../lib";
 
 /**
  * @param attribute the Css attribute
@@ -28,7 +28,7 @@ import { CssAttributeValueTypes, Css_ } from "../lib";
  * // CLASS
  * ```
  */
-export class Css<T extends Css_> {
+export class Css<T extends CssStyled> {
   static #kebabize(str: string) {
     return str
       .split("")
@@ -41,7 +41,7 @@ export class Css<T extends Css_> {
       })
       .join("");
   }
-  static #checkCssAttribute<T extends Css_>(
+  static #checkCssAttribute<T extends CssStyled>(
     attribute: keyof CSSProperties,
     defaultValue: FlattenSimpleInterpolation,
     props?: T
@@ -49,11 +49,13 @@ export class Css<T extends Css_> {
     let result: FlattenSimpleInterpolation;
     if (props && props.css_ && props.css_[attribute]) {
       const attributeValue = props.css_[attribute];
+      const string = `${Css.#kebabize(
+        attribute
+      )}: ${attributeValue};`;
       result = css`
-        ${Css.#kebabize(attribute)}: ${attributeValue};
+        ${string};
       `;
-    }
-    result = defaultValue;
+    } else result = defaultValue;
     return result;
   }
   value?: FlattenSimpleInterpolation;
@@ -82,13 +84,3 @@ export class Css<T extends Css_> {
     );
   }
 }
-
-// const gooo = styled.div<{ css_?: CSSProperties }>`
-//   display: grid
-//     ${(props) =>
-//       props.css_?.display
-//         ? props.css_.display
-//         : css`
-//             display: grid;
-//           `};
-// `;

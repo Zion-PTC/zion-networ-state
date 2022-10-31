@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { CssStyled, StyledCss } from "../../lib";
 
-const Area = styled.div`
+export type LogoImageProps = CssStyled & StyledCss;
+
+const Area = styled.div<LogoImageProps>`
   place-items: center;
   border-top: 1px solid;
   border-bottom: 1px solid;
@@ -16,9 +19,9 @@ const Circle = styled.div`
   background-color: transparent;
 `;
 
-export const LogoImage = () => {
+export const LogoImage = (props: LogoImageProps) => {
   return (
-    <Area>
+    <Area className={props.className} css={props.css}>
       <Circle />
     </Area>
   );

@@ -1,6 +1,6 @@
-import { ButtonStyle } from "../Types";
+import { ButtonStyle } from "../Button";
 
-export type ThemeButtonProps<T> = ButtonStyle<T> & {};
-export type ConnectionButtonProps<T> = ButtonStyle<T> & {};
-export type ScrollToTopButtonProps<T> = ButtonStyle<T> & {};
-export type HomeButtonProps<T> = ButtonStyle<T> & {};
+export type ThemeButtonProps = ButtonStyle & {};
+export type ConnectionButtonProps = ButtonStyle & {};
+export type ScrollToTopButtonProps = ButtonStyle & {};
+export type HomeButtonProps = ButtonStyle & {};
