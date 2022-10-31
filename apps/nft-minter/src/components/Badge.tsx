@@ -1,3 +1,4 @@
+import { HTML } from "@zionstate/ui";
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -5,6 +6,7 @@ const width = 20;
 const height = 6;
 const ratio = width / height;
 
+const Circle = HTML.React.components.Pages.sections.Circle;
 const defaultSize = css`
   width: 100%;
   height: 100%;
@@ -32,35 +34,44 @@ const checkSize = (props?: BadgeProps) => {
 const BadgeArea = styled.div<BadgeProps>`
   display: grid;
   ${props => checkSize(props)}
-  background-color: white;
-  grid-template-columns: 10% 20% 60% 10%;
+  grid-template-columns: 10% 23% 57% 10%;
   grid-template-rows: 10% 80% 10%;
   grid-template-areas:
     ". . . ."
     ". logo infos ."
     ". . . .";
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid ${props => props.theme.borderColor};
+  background: ${props => props.theme.body};
   border-radius: 4px;
 `;
 
 const LogoArea = styled.div`
   grid-area: logo;
 `;
-const InfosArea = styled.div`
+const InfosArea = styled.div<{ css_: { color: string } }>`
   grid-area: infos;
+  text-align: center;
+  color: ${props => props.css_.color};
+  h1 {
+    font-size: xx-large;
+  }
+  h3 {
+    margin: 0;
+  }
 `;
 const Circolo = styled.div`
-  justify-self: center;
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  background-color: rgba(136, 136, 136, 1);
-  border: 2px solid rgba(196, 196, 196, 1);
+  background-color: hsl(0, 0%, 53%);
+  border: 2px solid hsl(0, 0%, 76%);
+  box-sizing: border-box;
 `;
 
 type BadgeProps = {
   size?: "small" | "mid" | "big";
+  theme: any;
 };
 
 export default function Badge(props: BadgeProps) {
@@ -69,7 +80,12 @@ export default function Badge(props: BadgeProps) {
       <LogoArea>
         <Circolo />
       </LogoArea>
-      <InfosArea></InfosArea>
+      <InfosArea
+        css_={{ color: props.theme.palette.grey }}
+      >
+        <p>ZION 2</p>
+        <h3>SILVER</h3>
+      </InfosArea>
     </BadgeArea>
   );
 }

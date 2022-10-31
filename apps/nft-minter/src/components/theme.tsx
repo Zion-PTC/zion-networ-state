@@ -5,6 +5,8 @@ import { Theme } from "./Types/index";
 
 const black = "#090909";
 const white = "#fafafa";
+const darkgrey = "hsl(0, 0%, 53%)";
+const grey = "hsl(0, 0%, 76%)";
 
 export const darkTheme: Theme = {
   body: black,
@@ -12,9 +14,17 @@ export const darkTheme: Theme = {
   backgroundColor: black,
   borderColor: "#fafafa",
   headingColor: "",
-  primary: { backgroundColor: black, borderColor: "#fafafa", color: white },
-  secondary: { backgroundColor: white, borderColor: black, color: black },
-  palette: { white: "#fcfcfc" },
+  primary: {
+    backgroundColor: black,
+    borderColor: "#fafafa",
+    color: white,
+  },
+  secondary: {
+    backgroundColor: white,
+    borderColor: black,
+    color: black,
+  },
+  palette: { white: "#fcfcfc", grey, darkgrey },
 };
 
 export const lightTheme: Theme = {
@@ -33,7 +43,7 @@ export const lightTheme: Theme = {
     borderColor: "#fafafa",
     color: "#fafafa",
   },
-  palette: { white: "#fcfcfc" },
+  palette: { white: "#fcfcfc", grey, darkgrey },
 };
 
 export const GlobalStyles = createGlobalStyle<{
@@ -41,9 +51,9 @@ export const GlobalStyles = createGlobalStyle<{
 }>`
   body {
     font-family: 'Epilogue', sans-serif;
-    background: ${(props) => props.theme.body};
-    color: ${(props) => props.theme.textColor};
-    border-color: ${(props) => props.theme.borderColor};
+    background: ${props => props.theme.body};
+    color: ${props => props.theme.textColor};
+    border-color: ${props => props.theme.borderColor};
     transition: .3s ease;
     margin:0;
     box-sizing: border-box;
@@ -59,7 +69,7 @@ export const GlobalStyles = createGlobalStyle<{
     font-family: 'Epilogue', sans-serif;
     font-weight: 800;
     font-size: xx-large;
-    color: ${(props) => props.theme.headingColor};
+    color: ${props => props.theme.headingColor};
   }
   h3{
     font-family: 'Epilogue', sans-serif;
@@ -80,11 +90,11 @@ export const GlobalStyles = createGlobalStyle<{
     font-weight: 300;
   } */
   Button{
-    background: ${(props) => props.theme.body};
-    border-color: ${(props) => props.theme.borderColor};
-    color: ${(props) => props.theme.textColor};
+    background: ${props => props.theme.body};
+    border-color: ${props => props.theme.borderColor};
+    color: ${props => props.theme.textColor};
   }
   img{
-    border-color: ${(props) => props.theme.borderColor};
+    border-color: ${props => props.theme.borderColor};
   }
 `;

@@ -8,5 +8,9 @@ export type Theme = {
   headingColor: string;
   primary: BasicProps;
   secondary: BasicProps;
-  palette: { white: string };
+  palette: {
+    white: string;
+    grey: string;
+    darkgrey: string;
+  };
 };

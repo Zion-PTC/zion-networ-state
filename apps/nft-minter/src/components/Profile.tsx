@@ -119,7 +119,10 @@ export default function Profile(props: ProfileProps) {
               css_={{ gridTemplateColumns: "1fr 1fr" }}
               size="big"
             >
-              <Badge size="small"></Badge>
+              <Badge
+                theme={props.layout.theme}
+                size="small"
+              ></Badge>
               <div>twitter</div>
             </Social>
           </TextArea>
