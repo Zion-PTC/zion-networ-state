@@ -8,6 +8,13 @@ export enum Colors {
   blue,
   indigo,
   violet,
+  cyan,
+}
+
+export enum ColorWheels {
+  rgb,
+  cmy,
+  ryb,
 }
 
 export type dark = "dark";
