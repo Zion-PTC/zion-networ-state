@@ -73,14 +73,75 @@ export default function Profile(props: ProfileProps) {
           size={{ width: "100%", height: "100%" }}
         ></Avatar>
         <ProfileInfos {...props} />
-        <div
+        <ul
           css={`
             width: 100vw;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-areas: tracks album playlist repost;
+            list-style-type: none;
+            place-content: end;
             height: 5rem;
-            background-color: red;
+            border-bottom: 2px solid
+              ${props.layout.theme.primary.borderColor};
             grid-area: navbar;
           `}
-        ></div>
+        >
+          <li
+            css={`
+            display:grid
+              grid-area: tracks;
+              height: 100%;
+              width: 100%;
+              &:hover {
+  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+}
+
+            `}
+          >
+            TRACKS
+          </li>
+          <li
+            css={`
+             display:grid
+              grid-area: album;
+              height: 100%;
+              width: 100%;
+              &:hover {
+  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+}
+            `}
+          >
+            ALBUM
+          </li>
+          <li
+            css={`
+             display:grid
+              grid-area: playlist;
+              height: 100%;
+              width: 100%;
+              &:hover {
+  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+}
+            `}
+          >
+            PLAYLISTS
+          </li>
+          <li
+            css={`
+             display:grid
+              grid-area: repost;
+              
+              height: 100%;
+              width: 100%;
+              &:hover {
+  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+}
+            `}
+          >
+            REPOST
+          </li>
+        </ul>
         <ContentArea
           id="content-area"
           css_={{
