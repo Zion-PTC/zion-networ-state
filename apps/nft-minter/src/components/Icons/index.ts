@@ -14,3 +14,4 @@ export * from "./Search";
 export * from "./Share";
 export * from "./Sun";
 export * from "./Trending";
+export * from "./Twitter";

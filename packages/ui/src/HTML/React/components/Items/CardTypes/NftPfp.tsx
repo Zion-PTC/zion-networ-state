@@ -2,16 +2,17 @@ import styled from "styled-components";
 import { Head } from "../sections/Head";
 import { Image } from "../../GlobalSections/Image";
 import { Infos } from "../sections/Infos";
-import { Portrait } from "../Shapes/Portrait";
 import {
   MouseEventHandler,
   useEffect,
   useState,
 } from "react";
+import { CardArea } from "../../../style/Areas/CardArea";
+import { Portrait } from "../../../style/Areas/Shape/";
 
 export interface NftPfpProps {
-  likeIcon: JSX.IntrinsicElements["svg"];
-  menuIcon: JSX.IntrinsicElements["svg"];
+  likeIcon: JSX.Element;
+  menuIcon: JSX.Element;
   id?: number;
   name?: string;
   slug?: string;
@@ -23,18 +24,14 @@ export interface NftPfpProps {
   clickHandler?: MouseEventHandler<HTMLElement>;
 }
 
-const Area = styled(Portrait)`
+export const AreaOld = styled(Portrait)`
   height: 100%;
   display: grid;
 `;
 
-const CardArea = styled.div`
-  background-color: transparent;
-  height: 90%;
-  width: 90%;
+const Area = styled(Portrait)`
+  height: 100%;
   display: grid;
-  place-self: center;
-  grid-template-rows: 1.4fr 9fr 2.8fr;
 `;
 
 export function NftPfp(props: NftPfpProps) {
@@ -50,13 +47,15 @@ export function NftPfp(props: NftPfpProps) {
 
   return (
     <Area
+      portrait
+      mid
       backgroundColor={backgroundColor}
       onClick={() =>
         (window.location.href = `http://localhost:3000/nft/${props.id}`)
       }
       // onClick={() => console.log("clicked" + props.id)}
     >
-      <CardArea>
+      <CardArea nft>
         <Head menuIcon={props.menuIcon} />
         <Image
           handleisLoading={setIsLoading}

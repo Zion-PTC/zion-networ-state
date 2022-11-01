@@ -1,12 +1,13 @@
 import { HTML } from "@zionstate/ui";
 import React from "react";
 import styled, { css } from "styled-components";
+import { LogoZion } from "./Icons/LogoZion";
 
 const width = 20;
 const height = 6;
 const ratio = width / height;
 
-const Circle = HTML.React.components.Pages.sections.Circle;
+const Circle = HTML.React.styled.areas.Circle;
 const defaultSize = css`
   width: 100%;
   height: 100%;
@@ -42,7 +43,7 @@ const BadgeArea = styled.div<BadgeProps>`
     ". . . .";
   box-sizing: border-box;
   border: 1px solid ${props => props.theme.borderColor};
-  background: ${props => props.theme.body};
+  background-color: #e5e5e5;
   border-radius: 4px;
   place-items: center;
 `;
@@ -75,12 +76,18 @@ export default function Badge(props: BadgeProps) {
       <LogoArea>
         <Circle
           size={{ width: "100%", height: "100%" }}
+          css={`
+            display: grid;
+            place-items: center;
+          `}
           css_={{
             border,
             backgroundColor: darkgrey,
             boxSizing: "border-box",
           }}
-        />
+        >
+          <LogoZion></LogoZion>
+        </Circle>
       </LogoArea>
       <InfosArea
         css_={{ color: props.theme.palette.grey }}

@@ -12,6 +12,10 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     position:fixed;
   }
+  * {
+    margin: 0;
+    padding: 0;
+  }
   Button{
     background: ${props => props.theme.body};
     border-color: ${props => props.theme.borderColor};

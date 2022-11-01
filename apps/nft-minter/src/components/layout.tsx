@@ -1,5 +1,4 @@
 // import Link from "next/link";
-import React from "react";
 import { HTML } from "@zionstate/ui";
 import { ILayout } from "./Types/index";
 import styled from "styled-components";
@@ -18,21 +17,23 @@ import { Home } from "./Icons";
 import { SVGButtonProps } from "./Icons/Types";
 import Head from "next/head";
 
-const components = HTML.React.components;
+const React = HTML.React;
+const components = React.components;
 // Components
 const ConnectionButton =
   components.Elements.ButtonTypes.ConnectionButton;
-const ThemeButton =
+const SVGButton =
   components.Elements.ButtonTypes.SVGButton;
-const FilterAltButton =
-  components.Elements.ButtonTypes.SVGButton;
-const SearchButton =
-  components.Elements.ButtonTypes.SVGButton;
+const ThemeButton = SVGButton;
+const FilterAltButton = SVGButton;
+const SearchButton = SVGButton;
 const ScrollToTopButton =
   components.Elements.ButtonTypes.ScrollToTopButton;
+const ScrollToTopButton_old =
+  components.Elements.ButtonTypes.ScrollToTopButton_old;
 // const HomeButton = components.Elements.ButtonTypes.HomeButton;
-const NavBar = components.Layout.NavBar;
-const Footer = components.Layout.Footer;
+const NavBar = React.styled.layout.NavBar;
+const Footer = React.styled.layout.Footer;
 // const TestButton = components.Elements.Button;
 
 const Welcome = <p>Welcome</p>;
@@ -204,6 +205,9 @@ const Layout: ILayout = function ({
         <title>Bombotaitol</title>
       </Head>
       <NavBar
+        css={`
+          border-bottom: 2px solid hsl(210, 20%, 8%);
+        `}
         ref={navbar}
         gridTemplateAreas="'. home search logo web3 theme menu'"
         gridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr 1fr"
@@ -213,31 +217,30 @@ const Layout: ILayout = function ({
           {!landing && !nft && Home}
           {!connect && landing && ConnectWallet}
         </HomeButton> */}
-        <SearchButton
-          svg={Search({
+        <SearchButton gridArea="search">
+          {Search({
             stroke: theme.primary.borderColor,
             width: "20",
             height: "20",
           })}
-          gridArea="search"
-        />
+        </SearchButton>
         <LogoNav />
         <ConnectionButton onClick={metamask.handleClick}>
           <text>{metamask.buttonMess}</text>
         </ConnectionButton>
         <ThemeButton
-          svg={ThemeSvg}
-          handleClick={handleClick}
+          onClick={handleClick}
           gridArea="theme"
-        />
-        <FilterAltButton
-          svg={FilterAlt({
+        >
+          {ThemeSvg}
+        </ThemeButton>
+        <FilterAltButton gridArea="menu">
+          {FilterAlt({
             fill: theme.primary.borderColor,
             width: "24",
             height: "24",
           })}
-          gridArea="menu"
-        />
+        </FilterAltButton>
       </NavBar>
       <Main ref={contentArea}>
         {landing && Welcome}
@@ -245,16 +248,22 @@ const Layout: ILayout = function ({
       </Main>
       {showButton && (
         <ScrollToTopButton
-          handleClick={backToTopHandleClick}
-          svg={ScrollToTop({
+          onClick={backToTopHandleClick}
+          position={{ bottom: "10%", right: "4%" }}
+        >
+          {ScrollToTop({
             stroke: theme.primary.borderColor,
             width: "51",
             height: "51",
           })}
-          position={{ bottom: "10%", right: "4%" }}
-        ></ScrollToTopButton>
+        </ScrollToTopButton>
       )}
-      <Footer ref={footer}>
+      <Footer
+        css={`
+          border-top: 2px solid hsl(210, 20%, 8%);
+        `}
+        ref={footer}
+      >
         <AIconsFooter
           footerLinks={FOOTERLINKS}
           fill={theme.palette.white}

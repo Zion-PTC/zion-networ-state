@@ -1,4 +1,4 @@
-import { ButtonStyle } from "../Button";
+import { ButtonStyle } from "../../../style";
 
 export type ThemeButtonProps = ButtonStyle & {};
 export type ConnectionButtonProps = ButtonStyle & {};

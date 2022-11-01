@@ -3,12 +3,13 @@ import { Head } from "../sections/Head";
 import { Image } from "../../GlobalSections/Image";
 import { Infos } from "../sections/Infos";
 import { Social } from "../sections/Social";
-import { Portrait } from "../Shapes/Portrait";
 import { MouseEventHandler } from "react";
+import { CardArea } from "../../../style/Areas/CardArea";
+import { Portrait } from "../../../style/Areas/Shape/";
 
 export type AlbumProps = {
-  likeIcon: JSX.IntrinsicElements["svg"];
-  menuIcon: JSX.IntrinsicElements["svg"];
+  likeIcon: JSX.Element;
+  menuIcon: JSX.Element;
   id?: number;
   name?: string;
   slug?: string;
@@ -25,19 +26,11 @@ const Area = styled(Portrait)`
   display: grid;
 `;
 
-const CardArea = styled.div`
-  background-color: #eeeeee;
-  height: 90%;
-  width: 90%;
-  display: grid;
-  place-self: center;
-  grid-template-rows: 1.4fr 6fr 1fr 1.8fr;
-`;
 export function Album(props: AlbumProps) {
   let { backgroundColor } = props;
   return (
-    <Area backgroundColor={backgroundColor}>
-      <CardArea>
+    <Area portrait mid backgroundColor={backgroundColor}>
+      <CardArea album>
         <Head menuIcon={props.menuIcon} />
         <Image
           src={props.src ? props.src : ""}

@@ -39,6 +39,9 @@ export type StyledCss = {
   className?: string;
 };
 export type CssStyled = { css_?: CSS };
+export type GCssStyled<A extends keyof CSS> = {
+  css_?: utility.ZionCss<undefined, true, A>;
+};
 export type Css_v0 = {
   [prop in keyof CSS]?: CssAttributeValueTypes;
 };
@@ -139,3 +142,6 @@ export namespace utility {
     T extends keyof CSSProperties | undefined
   > = utility.ZionCss<undefined, true, T>;
 }
+
+////// UTILITY
+export type EnumToUnion<T> = keyof T;

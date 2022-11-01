@@ -1,5 +1,5 @@
-export * from "./Button";
-export * from "./H1";
-export * from "./Input";
-export * from "./P";
+export * from "../../style/Button";
+export * from "../../style/H1";
+export * from "../../style/Input";
+export * from "../../style/P";
 export * as ButtonTypes from "./ButtonTypes/index";

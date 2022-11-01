@@ -5,6 +5,7 @@ import styled, {
 import {
   BasicComponentProps,
   Dimensions,
+  StyledCss,
   utility,
 } from "../../../lib/global.types";
 
@@ -29,7 +30,7 @@ type BackgroundAreaStyle = {
   bottomBackgroundColor?: string;
   item?: boolean;
   profilePage?: boolean;
-};
+} & StyledCss;
 
 const ItemGridSetting = css`
   grid-template-rows: 1.5rem 90vw auto;
@@ -45,7 +46,7 @@ const ProfileGridSetting = css`
     ". image ."
     ". infos ."
     ". social ."
-    ". navbar ."
+    "navbar navbar navbar"
     ". content .";
 `;
 
@@ -77,6 +78,8 @@ export const Background = (props: BackgroundProps) => {
   const { children } = props;
   return (
     <BackgroundArea
+      css={props.css}
+      className={props.className}
       bottomBackgroundColor={props.bottomBackgroundColor}
       profilePage={props.profilePage}
       item={props.item}

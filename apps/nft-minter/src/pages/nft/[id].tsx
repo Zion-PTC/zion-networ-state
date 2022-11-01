@@ -39,7 +39,7 @@ const propsObj = {
 };
 
 const components = HTML.React.components;
-const ContentArea = components.Layout.ContentArea;
+const ContentArea = HTML.React.styled.layout.ContentArea;
 const Image = components.GlobalSections.Image;
 const Item = components.Pages.Item;
 const getStatic = HTML.Next.staticProps.getStatic;

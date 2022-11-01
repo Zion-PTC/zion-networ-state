@@ -1,19 +1,22 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { H1 } from "../Elements/H1";
-import { P } from "../Elements/P";
-import { Image } from "../GlobalSections/Image";
-import { InfoSub, TextArea } from "./sections";
-import { Avatar } from "./sections/Avatar";
-import { Background } from "./sections/Background";
-import { BottomSpace } from "./sections/BottomSpace";
-import { Circle } from "./sections/Circle";
-import { InfoSection } from "./sections/InfoSection";
-import { InfoSubDetails } from "./sections/InfoSubDetails";
-import { ProfileId } from "./sections/ProfileId";
-import { Social } from "./sections/Social";
-import { SVGButton } from "../Elements/ButtonTypes";
 import { CssStyled, StyledCss } from "../../lib";
+import { Background } from "./sections";
+import { Image } from "../GlobalSections";
+import {
+  Avatar,
+  BottomSpace,
+  Circle,
+  H1,
+  InfoSection,
+  InfoSub,
+  InfoSubDetails,
+  P,
+  ProfileId,
+  Social,
+  TextArea,
+} from "../../style";
+import { SVGButton } from "../Elements/ButtonTypes";
 
 export type ItemStyle = {
   src: string;
@@ -58,7 +61,7 @@ export type ItemStyle = {
   };
 };
 
-export const ItemPage = styled.div`
+export const ItemPage = styled.div<StyledCss>`
   display: grid;
   /* grid-template-rows: auto auto; */
   height: 100%;
@@ -66,8 +69,8 @@ export const ItemPage = styled.div`
 `;
 
 type ItemProps = ItemStyle & {
-  likeIcon: JSX.IntrinsicElements["svg"];
-  menuIcon: JSX.IntrinsicElements["svg"];
+  likeIcon: JSX.Element;
+  menuIcon: JSX.Element;
   data: {
     title: string;
     description: string;
@@ -133,7 +136,7 @@ export function Item(props: ItemProps) {
   const circleBorderColor = circleBorderColorCheck();
 
   return (
-    <ItemPage>
+    <ItemPage css={props.css} className={props.className}>
       <Background
         item
         bottomBackgroundColor={
@@ -155,8 +158,8 @@ export function Item(props: ItemProps) {
         <BottomSpace css_={{ gridArea: "infos" }}>
           <Social>
             {/* TODO like and more svg icon */}
-            <SVGButton svg={props.likeIcon}></SVGButton>
-            <SVGButton svg={props.menuIcon}></SVGButton>
+            <SVGButton>{props.likeIcon}</SVGButton>
+            <SVGButton>{props.menuIcon}</SVGButton>
           </Social>
           <TextArea css_={{ display: "block" }}>
             <H1>{props.data.title}</H1>

@@ -1,6 +1,6 @@
 import { Path } from "../Path";
 
-export default function Twitter(props: {
+export function Twitter(props: {
   css: any;
   className?: string;
 }) {
