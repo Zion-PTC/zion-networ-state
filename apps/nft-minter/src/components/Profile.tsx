@@ -75,6 +75,7 @@ export default function Profile(props: ProfileProps) {
         <ProfileInfos {...props} />
         <ul
           css={`
+            cursor: pointer;
             width: 100vw;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -94,8 +95,9 @@ export default function Profile(props: ProfileProps) {
               height: 100%;
               width: 100%;
               &:hover {
-  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+  border-bottom: 5px solid ${props.layout.theme.primary.borderColor};
 }
+
 
             `}
           >
@@ -108,7 +110,7 @@ export default function Profile(props: ProfileProps) {
               height: 100%;
               width: 100%;
               &:hover {
-  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+  border-bottom: 5px solid ${props.layout.theme.primary.borderColor};
 }
             `}
           >
@@ -121,7 +123,7 @@ export default function Profile(props: ProfileProps) {
               height: 100%;
               width: 100%;
               &:hover {
-  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+  border-bottom: 5px solid ${props.layout.theme.primary.borderColor};
 }
             `}
           >
@@ -135,7 +137,7 @@ export default function Profile(props: ProfileProps) {
               height: 100%;
               width: 100%;
               &:hover {
-  border-bottom: 3px solid ${props.layout.theme.primary.borderColor};
+  border-bottom: 5px solid ${props.layout.theme.primary.borderColor};
 }
             `}
           >
