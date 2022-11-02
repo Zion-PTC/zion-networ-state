@@ -1,17 +1,19 @@
 import styled from "styled-components";
+import Layout from "./layout";
 
 const LdsHourglass = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
   place-content: center;
+  z-index: 10;
 
   &:after {
     content: " ";
     display: block;
     border-radius: 50%;
-    width: 0;
-    height: 0;
+    width: 100vw;
+    height: 100vh;
     margin: 8px;
     box-sizing: border-box;
     border: 32px solid #fff;
@@ -43,6 +45,8 @@ const LdsHourglass = styled.div`
   }
 `;
 
-export default function LoadingPage() {
+export function LoadingPage_v1(props) {
   return <LdsHourglass></LdsHourglass>;
 }
+
+export default LdsHourglass;

@@ -16,6 +16,7 @@ import {
 import { Home } from "./Icons";
 import { SVGButtonProps } from "./Icons/Types";
 import Head from "next/head";
+import LoadingPage from "./LoadingPage";
 
 const React = HTML.React;
 const components = React.components;
@@ -173,6 +174,7 @@ const Layout: ILayout = function ({
   landing,
   connect,
   nft,
+  loading,
   navbar,
   contentArea,
   footer,
@@ -196,7 +198,67 @@ const Layout: ILayout = function ({
   });
 
   const ThemeSvg = isLightTheme ? MoonSvg : SunSvg;
-  return (
+
+  const Nav = (
+    <NavBar
+      css={`
+        border-bottom: 2px solid hsl(210, 20%, 8%);
+      `}
+      ref={navbar}
+      gridTemplateAreas="'. home search logo web3 theme menu'"
+      gridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr 1fr"
+    >
+      {/* <HomeButton>
+{nft && Collection}
+{!landing && !nft && Home}
+{!connect && landing && ConnectWallet}
+</HomeButton> */}
+      <SearchButton gridArea="search">
+        {Search({
+          stroke: theme.primary.borderColor,
+          width: "20",
+          height: "20",
+        })}
+      </SearchButton>
+      <LogoNav />
+      <ConnectionButton onClick={metamask.handleClick}>
+        <p>{metamask.buttonMess}</p>
+      </ConnectionButton>
+      <ThemeButton onClick={handleClick} gridArea="theme">
+        {ThemeSvg}
+      </ThemeButton>
+      <FilterAltButton gridArea="menu">
+        {FilterAlt({
+          fill: theme.primary.borderColor,
+          width: "24",
+          height: "24",
+        })}
+      </FilterAltButton>
+    </NavBar>
+  );
+
+  const Foot = (
+    <Footer
+      css={`
+        border-top: 2px solid hsl(210, 20%, 8%);
+      `}
+      ref={footer}
+    >
+      <AIconsFooter
+        footerLinks={FOOTERLINKS}
+        fill={theme.palette.white}
+      />
+    </Footer>
+  );
+
+  const Maintodos = (
+    <Main ref={contentArea}>
+      {landing && Welcome}
+      {children}
+    </Main>
+  );
+
+  const v1 = (
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
@@ -211,10 +273,10 @@ const Layout: ILayout = function ({
         gridTemplateColumns="1fr 1fr 1fr 1fr 1fr 1fr 1fr"
       >
         {/* <HomeButton>
-          {nft && Collection}
-          {!landing && !nft && Home}
-          {!connect && landing && ConnectWallet}
-        </HomeButton> */}
+      {nft && Collection}
+      {!landing && !nft && Home}
+      {!connect && landing && ConnectWallet}
+    </HomeButton> */}
         <SearchButton gridArea="search">
           {Search({
             stroke: theme.primary.borderColor,
@@ -224,7 +286,7 @@ const Layout: ILayout = function ({
         </SearchButton>
         <LogoNav />
         <ConnectionButton onClick={metamask.handleClick}>
-          <text>{metamask.buttonMess}</text>
+          <p>{metamask.buttonMess}</p>
         </ConnectionButton>
         <ThemeButton
           onClick={handleClick}
@@ -269,6 +331,73 @@ const Layout: ILayout = function ({
       </Footer>
     </>
   );
+
+  const Hidden = styled(props => v1)`
+    display: ${props =>
+      props.layout.loading ? "none" : "grid"};
+  `;
+
+  console.log(loading);
+  // works with v3 in collection
+  const v2 = (
+    <>
+      {loading ? (
+        <LoadingPage>
+          <NavBar ref={navbar}></NavBar>
+          <Main ref={contentArea}>
+            {landing && Welcome}
+            {loading ? children : ""}
+          </Main>
+          <Footer ref={footer}></Footer>
+        </LoadingPage>
+      ) : (
+        v1
+      )}
+    </>
+  );
+
+  const v3 = (
+    <>
+      {loading ? (
+        <LoadingPage>
+          <NavBar ref={navbar}></NavBar>
+          <Main ref={contentArea}>
+            {landing && Welcome}
+            {loading ? "" : children}
+          </Main>
+          <Footer ref={footer}></Footer>
+        </LoadingPage>
+      ) : (
+        v1
+      )}
+    </>
+  );
+
+  const v4 = (
+    <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <title>Bombotaitol</title>
+      </Head>
+      {loading ? <div ref={navbar}></div> : Nav}
+      {loading ? <div ref={contentArea}></div> : Maintodos}
+      {loading ? <div ref={footer}></div> : Foot}
+      {showButton && (
+        <ScrollToTopButton
+          onClick={backToTopHandleClick}
+          position={{ bottom: "10%", right: "4%" }}
+        >
+          {ScrollToTop({
+            stroke: theme.primary.borderColor,
+            width: "51",
+            height: "51",
+          })}
+        </ScrollToTopButton>
+      )}
+    </>
+  );
+
+  return <>{v4}</>;
 };
 
 export default Layout;

@@ -4,6 +4,7 @@ import Layout from "../../components/layout";
 import { Data, NftData } from "../nft/[id]";
 import { BasePropsFromApp } from "../_app";
 import { HTML } from "@zionstate/ui";
+import styled from "styled-components";
 
 const getStatic = HTML.Next.staticProps.getStatic;
 
@@ -18,12 +19,34 @@ export const { getStaticProps: gsp } = getStatic<NftData>(
 
 export const getStaticProps = gsp;
 
+const HiddenProfile = styled(Profile)`
+  display: ${props =>
+    props.layout.loading ? "none" : "grid"};
+`;
+
 export default function Collection(
   props: CollectionProps
 ) {
-  return (
+  const v1 = (
     <Layout {...props.layout}>
       <Profile {...props}></Profile>
     </Layout>
   );
+
+  const v2 = (
+    <Layout {...props.layout}>
+      {!props.layout.loading ? (
+        <Profile {...props}></Profile>
+      ) : (
+        <></>
+      )}
+    </Layout>
+  );
+
+  const v3 = (
+    <Layout {...props.layout}>
+      <HiddenProfile {...props}></HiddenProfile>
+    </Layout>
+  );
+  return <>{v1}</>;
 }

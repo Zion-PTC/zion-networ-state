@@ -3,7 +3,6 @@ import { GlobalStyle } from "../components/GlobalStyle";
 import React, { useEffect, useRef, useState } from "react";
 import { LayoutProps } from "../components/Types/";
 import { HTML, themes } from "@zionstate/ui";
-import LoadingPage from "../components/LoadingPage";
 
 const lightTheme = themes.lightTheme;
 const darkTheme = themes.darkTheme;
@@ -42,6 +41,7 @@ const columns = 8;
 type ApplicationProps = {
   Component: any;
   pageProps: BasePropsFromApp;
+  loading: boolean;
 };
 
 function Application(props: ApplicationProps) {
@@ -62,6 +62,7 @@ function Application(props: ApplicationProps) {
   const [blockSize, setBlockSize] = useState(0);
   const contentArea = useRef<HTMLDivElement>();
   const [showButton, setShowButton] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const toggleTheme = () => {
     theme == "light"
@@ -90,6 +91,7 @@ function Application(props: ApplicationProps) {
     contentArea,
     navbar,
     footer,
+    loading,
     handleClick: toggleTheme,
     children: "not set",
     connect: undefined,
@@ -172,24 +174,28 @@ function Application(props: ApplicationProps) {
     });
   }, []);
 
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLoading(false);
+    }
+    // setTimeout(() => setLoading(false), 2000);
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => setLoading(true), 1000);
-  });
+    if (!loading) {
+      const loader = document.getElementById("cazzo");
+      if (loader) loader.style.display = "none";
+    }
+  }, [loading]);
 
   return (
     <ThemeProvider
       theme={theme == "light" ? lightTheme : darkTheme}
     >
       <GlobalStyle />
-      {!loading ? (
-        <App ref={app} height={appHeight}>
-          <Component {...pageProps} />
-        </App>
-      ) : (
-        <LoadingPage />
-      )}
+      <App ref={app} height={appHeight}>
+        <Component {...pageProps} />
+      </App>
     </ThemeProvider>
   );
 }

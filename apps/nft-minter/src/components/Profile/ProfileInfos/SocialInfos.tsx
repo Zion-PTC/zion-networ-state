@@ -1,6 +1,12 @@
 import { HTML } from "@zionstate/ui";
 import { More_Normal, Share } from "../../Icons";
 import styled, { css } from "styled-components";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
+
+type comè = DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>;
 
 const React = HTML.React;
 const components = React.components;
@@ -31,7 +37,7 @@ export function SocialInfosData(props: SocialInfosCss) {
     <div className={props.className}>
       <div>
         <button id="follow-btn">
-          <text>Follow</text>
+          <p>Follow</p>
         </button>
       </div>
       <SVGButton>
