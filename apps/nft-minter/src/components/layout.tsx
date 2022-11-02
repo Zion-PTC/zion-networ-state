@@ -29,8 +29,6 @@ const FilterAltButton = SVGButton;
 const SearchButton = SVGButton;
 const ScrollToTopButton =
   components.Elements.ButtonTypes.ScrollToTopButton;
-const ScrollToTopButton_old =
-  components.Elements.ButtonTypes.ScrollToTopButton_old;
 // const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = React.styled.layout.NavBar;
 const Footer = React.styled.layout.Footer;

@@ -1,4 +1,7 @@
-import styled, { css } from "styled-components";
+import styled, {
+  css,
+  DefaultTheme,
+} from "styled-components";
 import { Css } from "../../classes";
 import { CssStyled, StyledCss, utility } from "../../lib";
 import checkCss from "../../lib/util/checkCss";
@@ -6,6 +9,8 @@ import checkCss from "../../lib/util/checkCss";
 type CircleStyle = {
   borderColor?: string;
   cardHead?: boolean;
+  small?: boolean;
+  badge?: boolean;
   size?: {
     auto?: boolean;
     width?: string;
@@ -54,10 +59,30 @@ const cardHeadCircle = css`
   background-color: #e5e5e5;
 `;
 
-export const Circle = styled.div<CircleStyle>`
+const Badge = css`
+  background-color: ${props =>
+    props.theme.palette.darkgrey};
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+`;
+
+const small = css`
+  width: 10px;
+  height: 10px;
+  border: 0.05rem solid;
+  background-color: #e5e5e5;
+  justify-self: center;
+`;
+
+export const Circle = styled.div<
+  CircleStyle & DefaultTheme
+>`
   border-radius: 100%;
   ${props =>
     props.cardHead ? cardHeadCircle : defaultCircle}
+  ${props => (props.small ? small : defaultCircle)}
+  ${props => props.badge && Badge}
 `;
 
 export const Circle2 = styled.div`

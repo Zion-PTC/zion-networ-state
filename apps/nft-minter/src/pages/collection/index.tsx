@@ -1,5 +1,5 @@
 import React, { CSSProperties as CSS } from "react";
-import Profile from "../../components/Profile";
+import { Profile } from "../../components/Profile";
 import Layout from "../../components/layout";
 import { Data, NftData } from "../nft/[id]";
 import { BasePropsFromApp } from "../_app";

@@ -1,7 +1,7 @@
 import { Path } from "../Path";
 
 export function Twitter(props: {
-  css: any;
+  css?: any;
   className?: string;
 }) {
   return (

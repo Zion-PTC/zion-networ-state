@@ -1,50 +1,43 @@
-import { HTML } from "@zionstate/ui";
-const React = HTML.React;
-const { styled: FluidStyled } = React;
-const { areas, TextArea } = FluidStyled;
-const { InfoSection } = areas;
-const ProfileDetailsArea = InfoSection;
+// import { HTML } from "@zionstate/ui";
+import styled from "styled-components";
 
-export function ProfileDetails() {
+type ProfileDetailsProps = {
+  tracks: number;
+  followers: number;
+  following: number;
+  className?: string;
+};
+
+function ProfileDetails_v2(props: ProfileDetailsProps) {
   return (
-    <ProfileDetailsArea
-      css={`
-        height: 100%;
-      `}
-      css_={{
-        gridTemplateColumns: "1fr 1fr 1fr",
-        placeContent: "center",
-      }}
-      size="mid"
-      id="profile-details"
-    >
-      <TextArea
-        filled
-        css={`
-          place-items: center;
-        `}
-      >
-        <p>4</p>
+    <div className={props.className}>
+      <div id="text-area">
+        <p>{props.tracks}</p>
         <p>Tracks</p>
-      </TextArea>
-      <TextArea
-        filled
-        css={`
-          place-items: center;
-        `}
-      >
-        <p>1,4k</p>
+      </div>
+      <div id="text-area">
+        <p>{props.followers}</p>
         <p>Followers</p>
-      </TextArea>
-      <TextArea
-        filled
-        css={`
-          place-items: center;
-        `}
-      >
-        <p>48</p>
+      </div>
+      <div id="text-area">
+        <p>{props.following}</p>
         <p>Following</p>
-      </TextArea>
-    </ProfileDetailsArea>
+      </div>
+    </div>
   );
 }
+
+export const ProfDetStyled = styled(ProfileDetails_v2)`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    p {
+      &:first-child {
+        place-self: end;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+`;

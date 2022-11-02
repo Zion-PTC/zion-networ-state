@@ -8,6 +8,39 @@ const height = 6;
 const ratio = width / height;
 
 const Circle = HTML.React.styled.areas.Circle;
+
+type BadgeProps = {
+  size?: "small" | "mid" | "big";
+  theme?: any;
+  className?: string;
+};
+
+const BadgeCircle = styled(Circle)`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border: 2px solid ${props => props.theme.palette.grey};
+  background-color: darkgrey;
+  box-sizing: border-box;
+`;
+
+export function BadgeData(props: BadgeProps) {
+  return (
+    <div className={props.className}>
+      <div id="logo">
+        <BadgeCircle>
+          <LogoZion></LogoZion>
+        </BadgeCircle>
+      </div>
+      <div id="infos">
+        <p>ZION 2</p>
+        <h3>SILVER</h3>
+      </div>
+    </div>
+  );
+}
+
 const defaultSize = css`
   width: 100%;
   height: 100%;
@@ -32,7 +65,7 @@ const checkSize = (props?: BadgeProps) => {
   if (props.size === "big") return bigSize;
 };
 
-const BadgeArea = styled.div<BadgeProps>`
+export const Badge_v2 = styled(BadgeData)`
   display: grid;
   ${props => checkSize(props)}
   grid-template-columns: 10% 23% 57% 10%;
@@ -46,55 +79,19 @@ const BadgeArea = styled.div<BadgeProps>`
   background-color: #e5e5e5;
   border-radius: 4px;
   place-items: center;
-`;
-
-const LogoArea = styled.div`
-  grid-area: logo;
-  width: 100%;
-  height: 100%;
-`;
-
-const InfosArea = styled.div<{ css_: { color: string } }>`
-  grid-area: infos;
-  text-align: center;
-  color: ${props => props.css_.color};
-  h3 {
-    margin: 0;
+  #logo {
+    grid-area: logo;
+    width: 100%;
+    height: 100%;
+  }
+  #infos {
+    grid-area: infos;
+    text-align: center;
+    color: ${props => props.theme.palette.grey};
+    h3 {
+      margin: 0;
+    }
   }
 `;
 
-type BadgeProps = {
-  size?: "small" | "mid" | "big";
-  theme: any;
-};
-
-export default function Badge(props: BadgeProps) {
-  const darkgrey = props.theme.palette.darkgrey;
-  const border = `2px solid ${props.theme.palette.grey}`;
-  return (
-    <BadgeArea size={props.size}>
-      <LogoArea>
-        <Circle
-          size={{ width: "100%", height: "100%" }}
-          css={`
-            display: grid;
-            place-items: center;
-          `}
-          css_={{
-            border,
-            backgroundColor: darkgrey,
-            boxSizing: "border-box",
-          }}
-        >
-          <LogoZion></LogoZion>
-        </Circle>
-      </LogoArea>
-      <InfosArea
-        css_={{ color: props.theme.palette.grey }}
-      >
-        <p>ZION 2</p>
-        <h3>SILVER</h3>
-      </InfosArea>
-    </BadgeArea>
-  );
-}
+export const Badge = Badge_v2;

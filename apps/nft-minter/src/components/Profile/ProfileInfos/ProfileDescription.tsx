@@ -1,29 +1,23 @@
-import { HTML } from "@zionstate/ui";
+import styled from "styled-components";
 
-const React = HTML.React;
-const components = React.components;
-const { Elements, Items, Pages } = components;
-const { styled: FluidStyled } = React;
-const { areas, layout } = FluidStyled;
-const {
-  Circle: Avatar,
-  TextArea,
-  InfoSection,
-  Social: S,
-  Area,
-} = areas;
-const ProfileDescriptionArea = TextArea;
+type ProfileDescriptionProps = {
+  text: string;
+};
 
-export function ProfileDescription() {
+export function ProfileDescription_(
+  props: ProfileDescriptionProps & StyledProps
+) {
   return (
-    <ProfileDescriptionArea
-      filled
-      css_={{
-        display: "grid",
-        placeItems: "center",
-      }}
-    >
-      <p>38 years old up coming raver...</p>
-    </ProfileDescriptionArea>
+    <div className={props.className}>
+      <p>{props.text}</p>
+    </div>
   );
 }
+
+export const ProfDesc = styled(ProfileDescription_)`
+  height: 100%;
+  display: grid;
+  place-items: center;
+`;
+
+export const ProfileDescription = ProfDesc;

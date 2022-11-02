@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { InfosProps } from "../../components/Items/sections";
 import { CssStyled, StyledCss } from "../../lib";
+import { border1PxSolid_wo_top } from "../common/border";
 
 type AreaStyle = {
   width?: number;
@@ -39,12 +40,6 @@ const defaultArea = css<AreaStyle>`
     ${props => props.blockSize + "px"}
   );
   overflow: auto;
-`;
-
-const border1PxSolid_wo_top = css`
-  border-left: 1px solid;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
 `;
 
 const cardHeadArea = css<{ avatarSize?: number }>`

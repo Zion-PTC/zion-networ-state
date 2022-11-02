@@ -1,4 +1,4 @@
-// import { StaticImageData } from "next/image";
+import styled from "styled-components";
 import { CssStyled, StyledCss } from "../../lib";
 import { NftPfpCardProps } from "./Cards";
 import { Album } from "./CardTypes/Album";
@@ -35,7 +35,7 @@ export type CardProps<Data> = {
 
 export type NftCardProps = CardProps<NftPfpCardProps>;
 
-export function Card<T>(props: CardProps<T>) {
+export function Card_v1<T>(props: CardProps<T>) {
   let { type } = props;
   let Element: () => JSX.Element;
   switch (type) {
@@ -51,3 +51,18 @@ export function Card<T>(props: CardProps<T>) {
   }
   return <Element></Element>;
 }
+
+const nft = styled.div``;
+const album = styled.div``;
+
+type CardPropsCss = {
+  nft?: boolean;
+  album?: boolean;
+};
+
+export const Card_v2 = styled.div<CardPropsCss>`
+  ${props => props.nft && nft}
+  ${props => props.album && album}
+`;
+
+export const Card = Card_v1;
