@@ -3,6 +3,7 @@ import { GlobalStyle } from "../components/GlobalStyle";
 import React, { useEffect, useRef, useState } from "react";
 import { LayoutProps } from "../components/Types/";
 import { HTML, themes } from "@zionstate/ui";
+import LoadingPage from "../components/LoadingPage";
 
 const lightTheme = themes.lightTheme;
 const darkTheme = themes.darkTheme;
@@ -171,14 +172,24 @@ function Application(props: ApplicationProps) {
     });
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(true), 1000);
+  });
+
   return (
     <ThemeProvider
       theme={theme == "light" ? lightTheme : darkTheme}
     >
       <GlobalStyle />
-      <App ref={app} height={appHeight}>
-        <Component {...pageProps} />
-      </App>
+      {!loading ? (
+        <App ref={app} height={appHeight}>
+          <Component {...pageProps} />
+        </App>
+      ) : (
+        <LoadingPage />
+      )}
     </ThemeProvider>
   );
 }
