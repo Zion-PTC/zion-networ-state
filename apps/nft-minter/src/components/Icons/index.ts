@@ -1,4 +1,5 @@
 export * from "./Account";
+export * from "./Album";
 export * from "./ArrowBack";
 export * from "./ArrowLeft";
 export * from "./ArrowRight";
@@ -14,4 +15,5 @@ export * from "./Search";
 export * from "./Share";
 export * from "./Sun";
 export * from "./Trending";
+export * from "./Tracks";
 export * from "./Twitter";

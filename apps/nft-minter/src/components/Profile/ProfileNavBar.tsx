@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import { LogoZion } from "../Icons/LogoZion";
+import { Album, Tracks, Queue, Share } from "../Icons";
 import {
   InputData,
   ProfileNavBarInput,
@@ -25,10 +25,10 @@ export function NavBarData(
 
   return (
     <nav className={props.className}>
-      <Input Icona={LogoZion} input={tracks} checked />
-      <Input Icona={LogoZion} input={album} />
-      <Input Icona={LogoZion} input={playlist} />
-      <Input Icona={LogoZion} input={repost} />
+      <Input Icona={Tracks} input={tracks} checked />
+      <Input Icona={Album} input={album} />
+      <Input Icona={Queue} input={playlist} />
+      <Input Icona={Share} input={repost} />
     </nav>
   );
 }
