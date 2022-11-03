@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { CssStyled, StyledCss } from "../../lib";
+import { CssStyled } from "../../lib";
 import { Background } from "./sections";
 import { Image } from "../GlobalSections";
 import {
@@ -16,7 +16,7 @@ import {
   Social,
   TextArea,
 } from "../../style";
-import { SVGButton } from "../Elements/ButtonTypes";
+import { SVGButton } from "../../style/Buttons";
 
 export type ItemStyle = {
   src: string;
@@ -61,7 +61,7 @@ export type ItemStyle = {
   };
 };
 
-export const ItemPage = styled.div<StyledCss>`
+export const ItemPage = styled.div<StyledDefault>`
   display: grid;
   /* grid-template-rows: auto auto; */
   height: 100%;
@@ -82,7 +82,7 @@ type ItemProps = ItemStyle & {
     highestBid: string;
   };
 } & CssStyled &
-  StyledCss;
+  StyledDefault;
 
 export function Item(props: ItemProps) {
   const INFOSUB = "Collection";

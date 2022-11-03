@@ -1,3 +1,7 @@
+import {
+  DefaultTheme as DefThem,
+  css,
+} from "styled-components";
 import { CardFormats } from "../style/Areas/Shape";
 import {
   BooleanSizes as BoolS,
@@ -6,6 +10,11 @@ import {
   Sizes as Siz,
   CssStyled as CssSt,
   StyledCss as StCss,
+  utility,
+  StyledDefault as StDef,
+  FluidStyled as FlSt,
+  BasicProps as BasPr,
+  FluidTheme as FluTh,
 } from "./global.types";
 
 export {};
@@ -22,4 +31,10 @@ declare global {
   type CssStyled = CssSt;
   type StyledCss = StCss;
   type EnumToUnion<T> = En2Un<T>;
+  // type DefaultTheme = DefThem;
+  type CssPropUnion<T> = utility.CssPropUnion<T>;
+  type StyledDefault = StDef;
+  type FluidStyled = FlSt;
+  type BasicFluidProps = BasPr;
+  type FluidTheme = FluTh;
 }

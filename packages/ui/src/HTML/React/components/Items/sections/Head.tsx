@@ -5,21 +5,32 @@ import {
   useState,
 } from "react";
 import { js } from "@zionstate/utils";
-import { SVGButton } from "../../Elements/ButtonTypes";
-import { Area, Circle } from "../../../style/Areas";
+import {
+  Area,
+  Circle,
+  CircleStyle,
+} from "../../../style/Areas";
 import { Div } from "../../../style/Div";
+import { SVGButton } from "../../../style/Buttons";
 
-export type HeadProps = {
-  menuIcon: JSX.Element;
-};
+export type HeadProps_v1 = {
+  menuIcon?: JSX.Element;
+  circle?: CircleStyle;
+} & StyledDefault &
+  CssStyled;
+
+export type HeadProps_v2 = CircleStyle & CssStyled;
+
+type HeadProps = HeadProps_v1;
 
 const { ZionError: ze } = js;
 const { ZionError } = ze;
 
-export const Head = (props: HeadProps) => {
+export function CardHead(props: HeadProps) {
   const parent =
     useRef<HTMLDivElement>() as RefObject<HTMLDivElement>;
   const [avatarSize, setAvatarSize] = useState(0);
+  console.log(props);
 
   useEffect(() => {
     if (!parent.current) throw new ZionError();
@@ -28,11 +39,13 @@ export const Head = (props: HeadProps) => {
 
   return (
     <Area cardHead ref={parent} avatarSize={avatarSize}>
-      <Circle cardHead />
+      <Circle cardHead {...props.circle} />
       <Div empty></Div>
       <Div empty>
-        <SVGButton>{props.menuIcon}</SVGButton>
+        <SVGButton {...props}>{props.menuIcon}</SVGButton>
       </Div>
     </Area>
   );
-};
+}
+
+export const Head = CardHead;

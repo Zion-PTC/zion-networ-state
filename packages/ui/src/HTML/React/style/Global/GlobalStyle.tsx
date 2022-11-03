@@ -2,17 +2,27 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   body {
+    width: 100vw;
+    height: 100vh;
     background: ${props => props.theme.body};
     color: ${props => props.theme.textColor};
     transition: .3s ease;
-    margin:0;
     box-sizing: border-box;
     position:fixed;
+    #__next {
+    width: 100%;
+    height: 100%;
+    }
+  }
+  * {
+    margin: 0;
+    padding: 0;
   }
   h2{
     color: ${props => props.theme.headingColor};
   }
   main{
+    width: 100%;
     height:100%;
   }
 `;

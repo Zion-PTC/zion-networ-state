@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 import styled, { css } from "styled-components";
-import { Css } from "../classes";
+import { Css } from "../classes/Css";
 import checkCss from "../lib/util/checkCss";
 
 export type ButtonStyle = {
@@ -14,7 +14,7 @@ export type ButtonStyle = {
   gridArea?: string;
   child?: { justifySelf?: string };
 } & CssStyled &
-  StyledCss;
+  StyledDefault;
 
 const defaultHeight = css`
   height: 70%;

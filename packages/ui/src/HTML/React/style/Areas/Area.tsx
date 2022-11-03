@@ -1,37 +1,40 @@
 import styled, { css } from "styled-components";
-import { InfosProps } from "../../components/Items/sections";
-import { CssStyled, StyledCss } from "../../lib";
+import {
+  AlbumProps,
+  NftPfpProps,
+} from "../../components/Items/CardTypes";
+import {
+  ImageProps,
+  InfosProps,
+} from "../../components/Items/sections";
 import { border1PxSolid_wo_top } from "../common/border";
+
+type AreaTypes = {
+  cardHead?: boolean;
+  cardInfos?: boolean;
+  image?: boolean;
+  infos?: boolean;
+};
 
 type AreaStyle = {
   width?: number;
   height?: number;
   blockSize?: number;
   columns?: number;
-  cardHead?: boolean;
-  cardInfos?: boolean;
-  infos?: boolean;
   avatarSize?: number;
-} & StyledCss &
-  CssStyled &
+};
+
+type UsedBy = NftPfpProps &
+  AlbumProps &
+  ImageProps &
   InfosProps;
 
-export type ImageAreaCss = {
-  width?: string;
-  height?: string;
-  maxWidth?: string;
-  backgroundColor?: string;
-  borderTop?: string;
-  gridArea?: string;
-  image?: {
-    width?: string;
-    height?: string;
-    maxWidth?: string;
-  };
-} & CssStyled &
-  StyledCss;
+type AreaStyled = AreaStyle &
+  UsedBy &
+  FluidStyled &
+  AreaTypes;
 
-const defaultArea = css<AreaStyle>`
+const defaultArea = css<ImageProps & AreaStyle>`
   width: ${props => props.width}px;
   height: 100%;
   grid-auto-rows: ${props => props.blockSize + "px"};
@@ -42,7 +45,7 @@ const defaultArea = css<AreaStyle>`
   overflow: auto;
 `;
 
-const cardHeadArea = css<{ avatarSize?: number }>`
+const cardHeadArea = css<AreaStyle>`
   z-index: 1;
   grid-template-columns: ${props => props.avatarSize}px 4fr 1fr;
   grid-template-rows: 1fr;
@@ -50,26 +53,18 @@ const cardHeadArea = css<{ avatarSize?: number }>`
   ${border1PxSolid_wo_top}
 `;
 
-const cardInfos = styled.div<InfosProps>`
+const cardInfos = styled.div<AreaStyled>`
   ${border1PxSolid_wo_top}
   grid-template-columns: 1fr 1fr;
 `;
 
-const infos = styled.div`
+const infos = styled.div<AreaStyled>`
   width: 100%;
   height: 100%;
   grid-template-rows: 2fr 1fr 1fr;
 `;
 
-export const Area = styled.div<AreaStyle>`
-  display: grid;
-  place-items: center;
-  ${props => (props.cardHead ? cardHeadArea : defaultArea)}
-  ${props => (props.cardInfos ? cardInfos : defaultArea)}
-  ${props => (props.infos ? infos : defaultArea)}
-`;
-
-export const Area2 = styled.div<ImageAreaCss>`
+const image = css<ImageProps>`
   z-index: 1;
   background-color: ${props =>
     props.backgroundColor
@@ -94,8 +89,41 @@ export const Area2 = styled.div<ImageAreaCss>`
   }}
 `;
 
-export type LogoImageProps = CssStyled & StyledCss;
-export const Area3 = styled.div<LogoImageProps>`
+export const Area = styled.div<any>`
+  display: grid;
+  place-items: center;
+  ${props => (props.cardHead ? cardHeadArea : defaultArea)}
+  ${props => (props.cardInfos ? cardInfos : defaultArea)}
+  ${props => (props.infos ? infos : defaultArea)}
+  ${props => props.image && image}
+`;
+
+export const Area2 = styled.div<any>`
+  z-index: 1;
+  background-color: ${props =>
+    props.backgroundColor
+      ? props.backgroundColor
+      : "transparent"};
+  //
+  ${props => {
+    if (props.borderTop)
+      return `border-top: ${props.borderTop} solid;`;
+  }}
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  overflow: hidden;
+  ${props => {
+    if (props.gridArea)
+      return `grid-area: ${props.gridArea};`;
+  }}
+`;
+
+export const Area3 = styled.div<any>`
   place-items: center;
   border-top: 1px solid;
   border-bottom: 1px solid;

@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { CssStyled, StyledCss } from "../lib";
+import { CssStyled } from "../lib";
 
 export type PStyle = {
   bold?: boolean;
   dimmed?: boolean;
 } & CssStyled &
-  StyledCss;
+  StyledDefault;
 
 export const P = styled.p<PStyle>`
   ${props => (props.bold ? "font-weight: bold;" : "")}

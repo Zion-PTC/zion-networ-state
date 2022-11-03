@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { CssStyled, StyledCss } from "../../lib";
+import { CssStyled } from "../../lib";
 
 const LoadingAnimation = keyframes`
 0% {height:5px;transform:translateY(0px);background:#9b59b6;}
@@ -9,7 +9,7 @@ const LoadingAnimation = keyframes`
 `;
 
 export type LoadingIconWaveStyle = {} & CssStyled &
-  StyledCss;
+  StyledDefault;
 
 export const LoadingWavesArea = styled.div<LoadingIconWaveStyle>`
   display: ${props =>

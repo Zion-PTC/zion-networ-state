@@ -3,8 +3,7 @@ import { HTML } from "@zionstate/ui";
 import "styled-components";
 import {} from "styled-components/cssprop";
 
-type Theme =
-  HTML.React.components.GlobalSections.Types.Theme;
+type Theme = HTML.React.lib.FluidTheme;
 
 export type BasicProps = {
   color: string;

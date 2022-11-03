@@ -32,7 +32,7 @@ export const Shape = styled.div<ShapeCss>`
 
 // export interface Shape {
 //   (
-//     props: ShapePropsOld & StyledCss & CssStyled
+//     props: ShapePropsOld & StyledDefault & CssStyled
 //   ): StyledComponent<
 //     "div",
 //     any,

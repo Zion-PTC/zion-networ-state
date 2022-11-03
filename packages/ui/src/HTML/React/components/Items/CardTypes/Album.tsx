@@ -8,8 +8,8 @@ import { CardArea } from "../../../style/Areas/CardArea";
 import { Portrait } from "../../../style/Areas/Shape/";
 
 export type AlbumProps = {
-  likeIcon: JSX.Element;
-  menuIcon: JSX.Element;
+  likeIcon?: JSX.Element;
+  menuIcon?: JSX.Element;
   id?: number;
   name?: string;
   slug?: string;
@@ -26,7 +26,7 @@ const Area = styled(Portrait)`
   display: grid;
 `;
 
-export function Album(props: AlbumProps) {
+export function Album_v1(props: AlbumProps) {
   let { backgroundColor } = props;
   return (
     <Area portrait mid backgroundColor={backgroundColor}>
@@ -48,3 +48,5 @@ export function Album(props: AlbumProps) {
     </Area>
   );
 }
+
+export const Album = Album_v1;

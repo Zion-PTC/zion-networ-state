@@ -10,9 +10,9 @@ type comè = DetailedHTMLProps<
 
 const React = HTML.React;
 const components = React.components;
-const { Elements } = components;
-const { ButtonTypes } = Elements;
-const { SVGButton } = ButtonTypes;
+const { styled: st } = React;
+const { buttons } = st;
+const { SVGButton } = buttons;
 
 type SocialInfosCss = {
   size?: { small?: boolean; mid?: boolean; big?: boolean };

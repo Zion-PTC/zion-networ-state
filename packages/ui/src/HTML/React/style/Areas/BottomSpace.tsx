@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { Css } from "../../classes";
-import { CssStyled, StyledCss, utility } from "../../lib";
+import { Css } from "../../classes/Css";
+import { CssStyled, utility } from "../../lib";
 
 type BottomSpaceStyle = {
   css?: utility.ZionCss<
@@ -14,7 +14,7 @@ type BottomSpaceStyle = {
     | "margin"
     | "gridArea"
   >;
-} & StyledCss &
+} & StyledDefault &
   CssStyled;
 
 export const BottomSpace = styled.div<BottomSpaceStyle>`

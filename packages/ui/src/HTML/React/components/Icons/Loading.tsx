@@ -1,11 +1,11 @@
-import { CssStyled, StyledCss } from "../../lib";
+import { CssStyled } from "../../lib";
 import { LoadingWaves } from "./LoadingTypes";
 
 export type LoadingProps = {
   type: "waves";
   display?: string;
 } & CssStyled &
-  StyledCss;
+  StyledDefault;
 
 export default function Loading(props: LoadingProps) {
   let LoadingIcon: () => JSX.Element;

@@ -1,2 +1,3 @@
-export * from "./Css";
-export * from "./Prop";
+export * from "./Hsl";
+export * from "./Palette";
+export * as palettes from "./Palette";

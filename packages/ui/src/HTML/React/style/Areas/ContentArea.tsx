@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { GCssStyled, StyledCss } from "../../lib";
+import { GCssStyled } from "../../lib";
 
 export type ContentAreaProps = {
   overflow?: string;
-} & StyledCss &
+} & StyledDefault &
   GCssStyled<
     | "border"
     | "width"

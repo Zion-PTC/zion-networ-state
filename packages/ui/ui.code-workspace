@@ -8,6 +8,15 @@
     },
     {
       "path": "src/HTML/Next"
+    },
+    {
+      "path": "src/pages"
+    },
+    {
+      "path": "src/HTML/React/components"
+    },
+    {
+      "path": "src/HTML/React/style"
     }
   ],
   "settings": {}

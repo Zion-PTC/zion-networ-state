@@ -1,8 +1,21 @@
 import styled from "styled-components";
-import { CssStyled, StyledCss } from "../../../lib";
-import { SVGButton } from "../../Elements/ButtonTypes";
 import { TextArea } from "../../../style/Areas/TextArea";
-import { Area, Social } from "../../../style/Areas/";
+import { SVGButton } from "../../../style/Buttons";
+
+export type InfosData = {
+  likeIcon?: JSX.Element;
+  collection?: string;
+  id?: string;
+  creator?: string;
+};
+
+export type InfosCss = {};
+
+export type InfosHandles = {};
+
+export type InfosProps = InfosData &
+  InfosCss &
+  FluidStyled;
 
 const NftTitle = TextArea;
 const FloorPrice = TextArea;
@@ -43,14 +56,6 @@ const LikeIcon = styled.div`
   place-items: end;
 `;
 
-export type InfosProps = {
-  likeIcon?: JSX.Element;
-  collection?: string;
-  id?: string;
-  creator?: string;
-} & CssStyled &
-  StyledCss;
-
 const JustifiedButton = styled(SVGButton)`
   justify-self: center;
 `;
@@ -72,26 +77,6 @@ export const Infos_v1 = (props: InfosProps) => {
         <Likes gridArea="count"></Likes>
       </SocialArea>
     </Area_old>
-  );
-};
-
-export const Infos_v2 = (props: InfosProps) => {
-  return (
-    <Area cardInfos {...props}>
-      <Area infos>
-        <NftTitle></NftTitle>
-        <FloorPrice></FloorPrice>
-        <PlaceBid></PlaceBid>
-      </Area>
-      <Social cardInfos>
-        <LikeIcon>
-          <JustifiedButton>
-            {props.likeIcon}
-          </JustifiedButton>
-        </LikeIcon>
-        <Likes gridArea="count"></Likes>
-      </Social>
-    </Area>
   );
 };
 

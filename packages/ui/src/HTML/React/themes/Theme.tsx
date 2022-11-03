@@ -1,5 +1,3 @@
-import { Theme } from "../components/GlobalSections/Types";
-
 const black = "#090909";
 const white = "#fafafa";
 const darkgrey = "hsl(0, 0%, 53%)";
@@ -12,7 +10,7 @@ const palette = {
   black: "hsl(192, 100%, 1%)",
 };
 
-export const darkTheme: Theme = {
+export const darkTheme: FluidTheme = {
   body: black,
   textColor: white,
   backgroundColor: black,
@@ -31,7 +29,7 @@ export const darkTheme: Theme = {
   palette,
 };
 
-export const lightTheme: Theme = {
+export const lightTheme: FluidTheme = {
   body: white,
   textColor: black,
   backgroundColor: white,

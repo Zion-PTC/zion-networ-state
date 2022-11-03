@@ -5,7 +5,6 @@ import styled, {
 import {
   BasicComponentProps,
   Dimensions,
-  StyledCss,
   utility,
 } from "../../../lib/global.types";
 
@@ -30,7 +29,7 @@ type BackgroundAreaStyle = {
   bottomBackgroundColor?: string;
   item?: boolean;
   profilePage?: boolean;
-} & StyledCss;
+} & StyledDefault;
 
 const ItemGridSetting = css`
   grid-template-rows: 1.5rem 90vw auto;

@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import { GCssStyled, StyledCss } from "../../lib";
+import { GCssStyled } from "../../lib";
 import checkCss from "../../lib/util/checkCss";
 
-export type TextAreaStyle = StyledCss &
+export type TextAreaStyle = StyledDefault &
   GCssStyled<
     | "display"
     | "margin"
@@ -48,13 +48,13 @@ export const TextArea_v1 = styled.div<TextAreaStyle>`
 export const TextArea = styled.div<TextAreaStyle>`
   width: 100%;
   height: 60%;
-  background-color: ${props => props.theme.palette.grey};
   display: ${props =>
     props.css_
       ? props.css_.display
         ? props.css_.display
         : "inline-flex"
       : "inline-flex"};
+  background-color: ${props => props.theme.palette.grey};
   ${props => props.smaller && smallerTextArea}
   ${props => props.filled && filledTextArea}
   ${props => checkCss("placeContent", props)}

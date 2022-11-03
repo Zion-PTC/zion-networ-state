@@ -1,12 +1,20 @@
 import styled from "styled-components";
-import { CssStyled, StyledCss } from "../../../lib";
 import { Circle, Social as Area } from "../../../style";
 
 const Menu = styled(Circle)``;
 
-export type SocialProps = CssStyled & StyledCss;
+export type SocialDatas = {};
 
-export const Social = (props: SocialProps) => {
+export type SocialCss = {};
+
+export type SocialHandles = {};
+
+export type SocialProps = SocialDatas &
+  SocialCss &
+  SocialHandles &
+  FluidStyled;
+
+export const Social_v1 = (props: SocialProps) => {
   return (
     <Area cardSocial {...props}>
       <Circle small />
@@ -16,3 +24,5 @@ export const Social = (props: SocialProps) => {
     </Area>
   );
 };
+
+export const Social = Social_v1;

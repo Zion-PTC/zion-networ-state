@@ -20,16 +20,14 @@ import LoadingPage from "./LoadingPage";
 
 const React = HTML.React;
 const components = React.components;
+const buttons = React.styled.buttons;
 // Components
-const ConnectionButton =
-  components.Elements.ButtonTypes.ConnectionButton;
-const SVGButton =
-  components.Elements.ButtonTypes.SVGButton;
+const ConnectionButton = buttons.ConnectionButton;
+const SVGButton = buttons.SVGButton;
 const ThemeButton = SVGButton;
 const FilterAltButton = SVGButton;
 const SearchButton = SVGButton;
-const ScrollToTopButton =
-  components.Elements.ButtonTypes.ScrollToTopButton;
+const ScrollToTopButton = buttons.ScrollToTopButton_v1;
 // const HomeButton = components.Elements.ButtonTypes.HomeButton;
 const NavBar = React.styled.layout.NavBar;
 const Footer = React.styled.layout.Footer;

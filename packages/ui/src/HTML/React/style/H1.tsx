@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import { Css } from "../classes";
-import { CssStyled, StyledCss } from "../lib";
+import { Css } from "../classes/Css";
+import { CssStyled } from "../lib";
 
-export type H1Style = StyledCss & CssStyled;
+export type H1Style = StyledDefault & CssStyled;
 
 const margin = css`
   margin: 0;

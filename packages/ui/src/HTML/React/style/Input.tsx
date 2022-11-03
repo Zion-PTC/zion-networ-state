@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { CssStyled, StyledCss } from "../lib";
+import { CssStyled } from "../lib";
 
-export type InputStyle = CssStyled & StyledCss;
+export type InputStyle = CssStyled & StyledDefault;
 
 export const Input = styled.input<InputStyle>`
   width: 100%;

@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { CssStyled, StyledCss } from "../../lib";
+import { CssStyled } from "../../lib";
 import { Card } from "./Card";
 
 export type BasicCardProps = {
@@ -22,7 +22,7 @@ export type NftPfpCardProps = CardsProps<NftPfpCardProps>;
 
 export interface ICards {
   <T extends BasicCardProps>(
-    props: CardsProps<T> & StyledCss & CssStyled
+    props: CardsProps<T> & StyledDefault & CssStyled
   ): JSX.Element;
 }
 

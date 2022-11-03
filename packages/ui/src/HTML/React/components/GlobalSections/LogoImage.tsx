@@ -1,10 +1,14 @@
-import { Circle2, areas } from "../../style";
+import { Circle, areas } from "../../style";
 const { Area3 } = areas;
 
-export const LogoImage = (props: areas.LogoImageProps) => {
+export type LogoImageProps = CssStyled & StyledDefault;
+
+export const LogoImage_v1 = (props: LogoImageProps) => {
   return (
     <Area3 className={props.className} css={props.css}>
-      <Circle2 />
+      <Circle logoImage />
     </Area3>
   );
 };
+
+export const LogoImage = LogoImage_v1;

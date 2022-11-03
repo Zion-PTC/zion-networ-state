@@ -1,12 +1,7 @@
 import styled, { css } from "styled-components";
-import { Prop } from "../../classes";
+import { Prop } from "../../classes/Prop";
 // import { Prop } from "../../../classes";
-import {
-  BooleanSizes,
-  Size,
-  StyledCss,
-  utility,
-} from "../../lib";
+import { BooleanSizes, Size, utility } from "../../lib";
 // import checkCss from "../../../lib/util/checkCss";
 // import checkProps from "../../../lib/util/checkProps";
 import { CheckSizeOptions } from "../../lib/util/checkProps/checkSize";
@@ -23,7 +18,7 @@ type InfoSectionStyle = (Size | BooleanSizes) & {
     | "gridTemplateColumns"
     | "placeContent"
   >;
-} & StyledCss;
+} & StyledDefault;
 
 const SIZE = "size";
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CssStyled, StyledCss } from "../../lib";
+import { CssStyled } from "../../lib";
 import { NftPfpCardProps } from "./Cards";
 import { Album } from "./CardTypes/Album";
 import { NftPfp } from "./CardTypes/NftPfp";
@@ -30,7 +30,7 @@ export type CardProps<Data> = {
   type: "nft-pfp" | "album";
   backgroundColor?: string;
   src?: string;
-} & StyledCss &
+} & StyledDefault &
   CssStyled;
 
 export type NftCardProps = CardProps<NftPfpCardProps>;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Head } from "../sections/Head";
 import { Image } from "../../GlobalSections/Image";
-import { Infos, Infos_v2 } from "../sections/Infos";
+import { Infos } from "../sections/Infos";
 import {
   MouseEventHandler,
   useEffect,
@@ -29,7 +29,7 @@ export const AreaOld = styled(Portrait)`
   display: grid;
 `;
 
-export function NftPfp(props: NftPfpProps) {
+export function NftPfp_v1(props: NftPfpProps) {
   let { backgroundColor } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -65,44 +65,5 @@ export function NftPfp(props: NftPfpProps) {
     </AreaOld>
   );
 }
-const Area = styled(Portrait)`
-  height: 100%;
-  display: grid;
-`;
 
-export function NftPfp_v2(props: NftPfpProps) {
-  let { backgroundColor } = props;
-  const [isLoading, setIsLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  useEffect(() => {
-    !isLoading
-      ? setImageLoaded(true)
-      : setImageLoaded(false);
-  }, [isLoading]);
-
-  return (
-    <Area
-      portrait
-      mid
-      backgroundColor={backgroundColor}
-      onClick={() =>
-        (window.location.href = `http://localhost:3000/nft/${props.id}`)
-      }
-      // onClick={() => console.log("clicked" + props.id)}
-    >
-      <CardArea nft>
-        <Head menuIcon={props.menuIcon} />
-        <Image
-          handleisLoading={setIsLoading}
-          src={props.src ? props.src : ""}
-          width="100%"
-          height="100%"
-          display={imageLoaded ? "block" : "none"}
-          imageLoaded={imageLoaded}
-        />
-        <Infos_v2 likeIcon={props.likeIcon} />
-      </CardArea>
-    </Area>
-  );
-}
+export const NftPfp = NftPfp_v1;

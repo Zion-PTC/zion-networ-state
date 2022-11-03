@@ -12,10 +12,16 @@ import {
   Interpolation,
   ThemedStyledProps,
 } from "styled-components";
+import { FluidTheme as FluTh } from "./types/theme";
 
 /**
  * Useful link: https://github.com/frenic/csstype#what-should-i-do-when-i-get-type-errors
  */
+export type BasicProps = {
+  color: string;
+  backgroundColor: string;
+  borderColor: string;
+};
 
 export type width = number;
 export type height = number;
@@ -34,14 +40,23 @@ export type Dimensions = "width" | "height";
 export type Sizes = "small" | "mid" | "big";
 export type Size = { size: Sizes };
 export type CSSProps = { css?: CSS };
-export type StyledCss = {
+// export type StyledCss = {
+//   css?: string;
+//   className?: string;
+// };
+export type StyledDefault = {
   css?: string;
   className?: string;
 };
 export type CssStyled = { css_?: CSS };
+export type GFluidStyled<A extends keyof CSS> =
+  StyledDefault & GCssStyled<A>;
+
+export type FluidStyled = StyledDefault & CssStyled;
 export type GCssStyled<A extends keyof CSS> = {
   css_?: utility.ZionCss<undefined, true, A>;
 };
+
 export type Css_v0 = {
   [prop in keyof CSS]?: CssAttributeValueTypes;
 };
@@ -145,3 +160,6 @@ export namespace utility {
 
 ////// UTILITY
 export type EnumToUnion<T> = keyof T;
+
+//////// STYLED COMPONENTS
+export type FluidTheme = FluTh;
