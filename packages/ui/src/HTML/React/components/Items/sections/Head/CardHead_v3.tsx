@@ -34,7 +34,10 @@ export function CardHeadData(props: HeadProps) {
 
 export const CardHead_v3 = styled(CardHeadData)`
   background-color: red;
-  /* border: 1px solid black; */
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  border-top: none;
   display: grid;
   place-items: center;
   grid-template-columns:

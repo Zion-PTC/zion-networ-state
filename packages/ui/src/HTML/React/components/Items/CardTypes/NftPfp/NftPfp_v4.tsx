@@ -174,6 +174,8 @@ export const NftPfp_v4 = styled(NftPfpData)`
   #card {
     height: 90%;
     width: 90%;
+
+    border: 1px solid rgba(0, 0, 0, 0.8);
     display: grid;
     place-self: center;
     background-color: transparent;
@@ -184,9 +186,8 @@ export const NftPfp_v4 = styled(NftPfpData)`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 5fr 1fr;
     align-items: center;
-    /* border-left: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid; */
+    border: none;
+
     button {
       display: grid;
       width: 100%;

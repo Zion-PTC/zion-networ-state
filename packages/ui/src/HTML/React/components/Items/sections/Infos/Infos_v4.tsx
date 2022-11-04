@@ -62,9 +62,10 @@ const grid = css`
 export const Infos_v4 = styled(InfosData)`
   display: grid;
   place-items: center;
-  /* border-left: 1px solid;
-  border-right: 1px solid;
-  border-bottom: 1px solid; */
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.8);
   grid-template-columns: 0.1fr 2fr 0.1fr;
   grid-template-rows: 0.2fr 3fr 0.2fr 1.5fr 0.2fr;
   background-color: #1e8000;
@@ -79,6 +80,7 @@ export const Infos_v4 = styled(InfosData)`
   #line1 {
     ${filled1}
     ${grid}
+    
     grid-template-columns: 0.02fr 1fr 0.02fr;
     grid-template-rows: 0.02fr 1fr 0.02fr;
     grid-template-areas:
@@ -91,6 +93,8 @@ export const Infos_v4 = styled(InfosData)`
       background-color: yellow;
       ${grid}
       align-content: center;
+
+      border: none;
     }
   }
   #line2 {
@@ -104,16 +108,22 @@ export const Infos_v4 = styled(InfosData)`
       ". floor . bid ."
       ". . . . .";
     grid-area: line2;
+
+    border: none;
     #floor-price {
       grid-area: floor;
       background-color: #001eff;
       ${grid}
       align-content: center;
+
+      border: none;
     }
     #place-bid {
       grid-area: bid;
       background-color: #ff00e6;
       ${grid}
+
+      border: none;
       align-content: center;
       a {
         place-self: end;
@@ -131,6 +141,7 @@ export const Infos_v4 = styled(InfosData)`
       ". bid . likes ."
       ". . . . .";
     grid-area: line3;
+
     #likes {
       ${grid}
       align-content: center;
