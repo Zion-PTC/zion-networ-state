@@ -7,6 +7,7 @@ import {
   Dimensions,
   utility,
 } from "../../../lib/global.types";
+import { checkGridSetting } from "../../../lib/util/checkGridSettings";
 
 type backgroundAreas =
   | "position"
@@ -31,36 +32,10 @@ type BackgroundAreaStyle = {
   profilePage?: boolean;
 } & StyledDefault;
 
-const ItemGridSetting = css`
-  grid-template-rows: 1.5rem 90vw auto;
-  grid-template-columns: 1fr 90vw 1fr;
-  grid-template-areas: ". . ." ". image ." ". infos .";
-`;
-
-const ProfileGridSetting = css`
-  grid-template-rows: 40vw 40vw auto auto auto auto;
-  grid-template-columns: 1fr 40vw 1fr;
-  grid-template-areas:
-    ". . ."
-    ". image ."
-    ". infos ."
-    ". social ."
-    "navbar navbar navbar"
-    ". content .";
-`;
-
-const checkGridSetting = (
-  props: BackgroundAreaStyle
-): FlattenSimpleInterpolation => {
-  let settings: FlattenSimpleInterpolation;
-  if (props.profilePage) settings = ProfileGridSetting;
-  else settings = ItemGridSetting;
-  return settings;
-};
-
 export const BackgroundArea = styled.div<BackgroundAreaStyle>`
   display: grid;
-  ${props => checkGridSetting(props)}
+  ${props =>
+    checkGridSetting(props as { profilePage: boolean })}
   #upper {
     position: absolute;
     z-index: 0;

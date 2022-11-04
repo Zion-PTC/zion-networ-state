@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { CssStyled } from "../../lib";
-import { Background } from "./sections";
-import { Image } from "../GlobalSections";
+import { Background } from "../sections";
+import { Image } from "../../GlobalSections";
 import {
   Avatar,
   BottomSpace,
@@ -15,10 +14,10 @@ import {
   ProfileId,
   Social,
   TextArea,
-} from "../../style";
-import { SVGButton } from "../../style/Buttons";
+} from "../../../style";
+import { SVGButton } from "../../../style/Buttons";
 
-export type ItemStyle = {
+type ItemStyle = {
   src: string;
   background?: {
     bottomBackgroundColor?: string;
@@ -61,6 +60,35 @@ export type ItemStyle = {
   };
 };
 
+type ItemDatas_v1 = {
+  likeIcon: JSX.Element;
+  menuIcon: JSX.Element;
+  data: {
+    title: string;
+    description: string;
+    highestBid: string;
+    infosub: {
+      info: string;
+      creatorField: string;
+      royalties: string;
+    };
+  };
+};
+
+type ItemCss_v1 = {
+  small?: boolean;
+  mid?: boolean;
+  big?: boolean;
+};
+
+type ToEdit = ItemDatas_v1 & ItemCss_v1;
+type Theme = { theme: FluidTheme };
+type FromLibrary = FluidStyled & Theme;
+
+export type ItemProps_v1 = ToEdit &
+  FromLibrary &
+  ItemStyle;
+
 export const ItemPage = styled.div<StyledDefault>`
   display: grid;
   /* grid-template-rows: auto auto; */
@@ -68,23 +96,7 @@ export const ItemPage = styled.div<StyledDefault>`
   position: relative;
 `;
 
-type ItemProps = ItemStyle & {
-  likeIcon: JSX.Element;
-  menuIcon: JSX.Element;
-  data: {
-    title: string;
-    description: string;
-    infosub: {
-      info: string;
-      creatorField: string;
-      royalties: string;
-    };
-    highestBid: string;
-  };
-} & CssStyled &
-  StyledDefault;
-
-export function Item(props: ItemProps) {
+export function Item_v1(props: ItemProps_v1) {
   const INFOSUB = "Collection";
   const INFOSUBCREATORFIELD = "Creator";
   const [isLoading, setIsLoading] = useState(true);
@@ -134,6 +146,7 @@ export function Item(props: ItemProps) {
   };
 
   const circleBorderColor = circleBorderColorCheck();
+  console.log(props.theme.textColor);
 
   return (
     <ItemPage css={props.css} className={props.className}>
@@ -157,20 +170,24 @@ export function Item(props: ItemProps) {
         ></Image>
         <BottomSpace css_={{ gridArea: "infos" }}>
           <Social>
-            {/* TODO like and more svg icon */}
-            <SVGButton>{props.likeIcon}</SVGButton>
-            <SVGButton>{props.menuIcon}</SVGButton>
+            <SVGButton {...props}>
+              {props.likeIcon}
+            </SVGButton>
+            <SVGButton {...props}>
+              {props.menuIcon}
+            </SVGButton>
           </Social>
-          <TextArea css_={{ display: "block" }}>
+          <TextArea css_={{ display: "block" }} {...props}>
             <H1>{props.data.title}</H1>
             <P>{props.data.description}</P>
             <P>{props.data.highestBid}</P>
           </TextArea>
           <InfoSection
             css_={{ gridTemplateColumns: "1fr 1fr" }}
+            {...props}
           >
             <InfoSub>
-              <TextArea>
+              <TextArea {...props}>
                 <P bold>{INFOSUBCREATORFIELD}</P>
                 <P dimmed>
                   {props.data.infosub.royalties}
@@ -186,7 +203,7 @@ export function Item(props: ItemProps) {
               </InfoSubDetails>
             </InfoSub>
             <InfoSub>
-              <TextArea>
+              <TextArea {...props}>
                 <P bold>{INFOSUB}</P>
               </TextArea>
               <InfoSubDetails>
