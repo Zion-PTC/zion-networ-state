@@ -21,6 +21,7 @@ const itemProps: ItemProps = {
     info: "info",
     creatorField: "creator",
     royalties: "10%",
+    currency: "ETH",
   },
   likeIcon: <LogoZion></LogoZion>,
   // menuIcon: <LogoZion></LogoZion>,

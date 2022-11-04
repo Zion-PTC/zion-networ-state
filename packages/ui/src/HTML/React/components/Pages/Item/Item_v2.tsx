@@ -16,6 +16,7 @@ type Item_v2Datas = {
     info: string;
     creatorField: string;
     royalties: string;
+    currency: string;
   };
 };
 
@@ -37,6 +38,7 @@ export const Item_v2Data = (
   const COLLECTION = "Collection";
   const CREATOR = "Creator";
   const ROYALTIES = "Royalties";
+  const HIGHEST_BID = "highest bid:";
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [src, setSrc] = useState("");
@@ -64,7 +66,9 @@ export const Item_v2Data = (
       <div id="infos">
         <h1>{props.data.title}</h1>
         <p>{props.data.description}</p>
-        <p>highest bid: {props.data.highestBid} ETH</p>
+        <p>${HIGHEST_BID}</p>
+        <p>{props.data.highestBid}</p>
+        <p>{props.data.currency}</p>
       </div>
       <div id="links">
         <div id="sublink">
