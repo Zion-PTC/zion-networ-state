@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Image_v1 } from "./Image/v1";
+import { Image_v3 } from "./Image/v3";
 
 export type ImageCss = {
   width?: string;
@@ -31,4 +32,4 @@ export type ImageProps = ImageDatas &
   ImageHandles &
   FluidStyled;
 
-export const Image = Image_v1;
+export const Image = Image_v3;

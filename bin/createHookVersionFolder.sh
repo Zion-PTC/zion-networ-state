@@ -2,7 +2,7 @@
 
 directory=${1}
 indexpath=${directory}/index.ts
-filepath=${directory}/v1.tsx
+filepath=${directory}/v1.ts
 
 mkdir ${directory} &&
 touch ${indexpath} &&

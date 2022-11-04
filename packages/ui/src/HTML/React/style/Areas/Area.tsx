@@ -1,12 +1,9 @@
+import { RefObject } from "react";
 import styled, { css } from "styled-components";
-import {
-  AlbumProps,
-  NftPfpProps,
-} from "../../components/Items/CardTypes";
-import {
-  ImageProps,
-  InfosProps,
-} from "../../components/Items/sections";
+import { AlbumProps } from "../../components/Items/CardTypes";
+import { NftPfpProps } from "../../components/Items/CardTypes/NftPfp/";
+import { ImageProps } from "../../components/Items/sections";
+import { InfosProps } from "../../components/Items/sections/Infos/";
 import { border1PxSolid_wo_top } from "../common/border";
 
 type AreaTypes = {
@@ -14,14 +11,16 @@ type AreaTypes = {
   cardInfos?: boolean;
   image?: boolean;
   infos?: boolean;
+  itemArea?: boolean;
 };
 
-type AreaStyle = {
+export type AreaStyle = {
   width?: number;
   height?: number;
   blockSize?: number;
   columns?: number;
   avatarSize?: number;
+  ref?: RefObject<HTMLDivElement>;
 };
 
 type UsedBy = NftPfpProps &
@@ -35,14 +34,14 @@ type AreaStyled = AreaStyle &
   AreaTypes;
 
 const defaultArea = css<ImageProps & AreaStyle>`
-  width: ${props => props.width}px;
   height: 100%;
+  overflow: auto;
+  width: ${props => props.width}px;
   grid-auto-rows: ${props => props.blockSize + "px"};
   grid-template-columns: repeat(
     ${props => props.columns},
     ${props => props.blockSize + "px"}
   );
-  overflow: auto;
 `;
 
 const cardHeadArea = css<AreaStyle>`
@@ -89,13 +88,23 @@ const image = css<ImageProps>`
   }}
 `;
 
+// const itemArea = styled.div`
+//   display: grid;
+//   place-items: none;
+// `;
+
 export const Area = styled.div<any>`
   display: grid;
-  place-items: center;
-  ${props => (props.cardHead ? cardHeadArea : defaultArea)}
-  ${props => (props.cardInfos ? cardInfos : defaultArea)}
-  ${props => (props.infos ? infos : defaultArea)}
-  ${props => props.image && image}
+  /* place-items: center; */
+  ${props => {
+    if (props.cardHead) return cardHeadArea;
+    if (props.cardInfos) return cardInfos;
+    if (props.infos) return infos;
+    else {
+      if (props.image) return image;
+      else return defaultArea;
+    }
+  }}
 `;
 
 export const Area2 = styled.div<any>`

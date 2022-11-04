@@ -36,8 +36,6 @@ export const Image_v3 = styled(ImageData)`
   z-index: 1;
   overflow: hidden;
   grid-area: ${props => props.gridArea};
-  width: ${props => props.width};
-  height: ${props => props.height};
   background-color: ${props =>
     props.backgroundColor
       ? props.backgroundColor
@@ -49,9 +47,9 @@ export const Image_v3 = styled(ImageData)`
   }}
   border-top: ${props =>
     props.fullBorder ? "1px" : undefined};
-  border-bottom: 1px solid;
+  /* border-bottom: 1px solid;
   border-left: 1px solid;
-  border-right: 1px solid;
+  border-right: 1px solid; */
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;

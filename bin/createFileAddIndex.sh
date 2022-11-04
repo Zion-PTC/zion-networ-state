@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
 filename=${1}
-fileextension=.tsx
+fileextension=.ts
 completename=${filename}${fileextension}
 indexfile=index.ts
 
