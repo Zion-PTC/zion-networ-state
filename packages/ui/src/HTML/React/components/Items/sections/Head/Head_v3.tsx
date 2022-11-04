@@ -1,21 +1,29 @@
 import styled from "styled-components";
+import { DebugColor } from "../../../../lib/util/classes";
 import { ButtonStyle } from "../../../../style";
 import { CircleStyle } from "../../../../style/Areas";
 import { LogoZion } from "../../../Icons/LogoZion";
 
-export type HeadProps_v1 = {
+type Head_v3Datas = {
   menuIcon?: JSX.Element;
   circle?: CircleStyle;
   clientHeight: number;
   menuIconProps?: ButtonStyle;
-} & StyledDefault &
-  CssStyled;
+};
 
-export type HeadProps_v2 = CircleStyle & CssStyled;
+type Head_v3Css = {
+  small?: boolean;
+  mid?: boolean;
+  big?: boolean;
+};
 
-type HeadProps = HeadProps_v1;
+type ToEdit = Head_v3Datas & Head_v3Css;
+type Theme = { theme: FluidTheme };
+type FromLibrary = FluidStyled & Theme;
 
-export function CardHeadData(props: HeadProps) {
+export type Head_v3Props = ToEdit & FromLibrary;
+
+export function CardHeadData_v3(props: Head_v3Props) {
   return (
     <div
       className={props.className}
@@ -32,8 +40,12 @@ export function CardHeadData(props: HeadProps) {
   );
 }
 
-export const CardHead_v3 = styled(CardHeadData)`
-  background-color: red;
+const debug = false;
+
+const CardHeadDebug = new DebugColor("red", debug);
+
+export const CardHead_v3 = styled(CardHeadData_v3)`
+  ${CardHeadDebug.value};
   border-left: none;
   border-right: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.8);

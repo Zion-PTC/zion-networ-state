@@ -64,4 +64,8 @@ export class Palette implements colors_ {
   magenta_blue?: string;
   cyan_green?: string;
   cyan_blue?: string;
+  grey?: string;
+  darkgrey?: string;
+  smoke?: string;
+  constructor() {}
 }

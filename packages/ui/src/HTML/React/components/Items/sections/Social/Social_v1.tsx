@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Circle, Social as Area } from "../../../style";
-import { Social_v2 } from "./Social/v2";
+import { Circle, Social as Area } from "../../../../style";
 
 const Menu = styled(Circle)``;
 
@@ -25,5 +24,3 @@ export const Social_v1 = (props: SocialProps) => {
     </Area>
   );
 };
-
-export const Social = Social_v2;

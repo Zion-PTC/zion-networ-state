@@ -1,1 +1,2 @@
-export * from './PercentageFromParts';
+export * from "./PercentageFromParts";
+export * from "./DebugColor";

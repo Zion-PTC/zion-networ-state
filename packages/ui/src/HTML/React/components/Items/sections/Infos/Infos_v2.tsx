@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Area, Social, TextArea } from "../../../../style";
 import { SVGButton } from "../../../../style/Buttons";
-import { InfosProps } from "../Infos";
+import { InfosProps } from ".";
 
 const NftTitle = TextArea;
 const FloorPrice = TextArea;

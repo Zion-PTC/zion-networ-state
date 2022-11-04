@@ -1,3 +1,5 @@
+import { Palette1 } from "./Palettes";
+
 export type FluidTheme = {
   body: string;
   textColor: string;
@@ -6,16 +8,5 @@ export type FluidTheme = {
   headingColor: string;
   primary: BasicFluidProps;
   secondary: BasicFluidProps;
-  palette: {
-    white: string;
-    grey: string;
-    darkgrey: string;
-    black: string;
-    red?: string;
-    orange?: string;
-    yellow?: string;
-    green?: string;
-    blue?: string;
-    purple?: string;
-  };
+  palette: Palette1;
 };

@@ -66,7 +66,7 @@ export const Item_v2Data = (
       <div id="infos">
         <h1>{props.data.title}</h1>
         <p>{props.data.description}</p>
-        <p>${HIGHEST_BID}</p>
+        <p>{HIGHEST_BID}</p>
         <p>{props.data.highestBid}</p>
         <p>{props.data.currency}</p>
       </div>

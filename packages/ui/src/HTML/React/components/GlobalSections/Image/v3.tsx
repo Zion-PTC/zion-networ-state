@@ -59,6 +59,7 @@ export const Image_v3 = styled(ImageData)`
       return `grid-area: ${props.gridArea};`;
   }}
   img {
+    border-image: none;
     display: ${props =>
       props.imageLoaded ? "block" : "none"};
     max-width: ${props => props.image?.maxWidth};

@@ -1,12 +1,12 @@
 import { css } from "styled-components";
-import { Palette } from "../../classes";
+import { Palette } from "../../../classes";
 import {
   cym as cym_,
   rgb as rgb_,
   RGB,
   ryb as ryb_,
   RYB,
-} from "../../classes/Palette/ColorWheel/";
+} from "../../../classes/Palette/ColorWheel/";
 import {
   fluid_colors1_a as f1a,
   fluid_colors1_b as f1b,
@@ -16,7 +16,7 @@ import {
   fluid_colors2_b as f2b,
   fluid_colors3_a as f3a,
   fluid_colors3_c as f3b,
-} from "../../classes/Palette/FluidColor";
+} from "../../../classes/Palette/FluidColor";
 
 export class Google extends Palette {
   blue = "hsl(217, 89%, 61%)";
@@ -189,16 +189,6 @@ fluid_6.blue = "#234154";
 fluid_6.purple = "#42404D";
 fluid_6.black = "#11171F";
 fluid_6.white = "#FFFEF7";
-
-export let fluid_7 = new Palette();
-fluid_7.red = "#C10732";
-fluid_7.orange = "#DE7D55";
-fluid_7.yellow = "#FAF377";
-fluid_7.green = "#87A47B";
-fluid_7.blue = "#13557F";
-fluid_7.purple = "#6A2E59";
-fluid_7.black = "#061904";
-fluid_7.white = "#FFFCFF";
 
 export let fluid_8 = new Palette();
 fluid_8.red = "#590418";

@@ -14,13 +14,11 @@ import { Div } from "../../../../style/Div";
 import { SVGButton } from "../../../../style/Buttons";
 import styled from "styled-components";
 
-export type HeadProps_v1 = {
+type HeadProps_v1 = {
   menuIcon?: JSX.Element;
   circle?: CircleStyle;
 } & StyledDefault &
   CssStyled;
-
-export type HeadProps_v2 = CircleStyle & CssStyled;
 
 type HeadProps = HeadProps_v1;
 

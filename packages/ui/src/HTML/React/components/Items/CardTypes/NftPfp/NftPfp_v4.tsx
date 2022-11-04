@@ -8,11 +8,10 @@ import {
 } from "react";
 import styled from "styled-components";
 import { roundDecimals } from "../../../../lib/util/calculate/";
-import { CardArea } from "../../../../style";
-import { Portrait } from "../../../../style/Areas/Shape/";
+import { RemainingPercentage } from "../../../../lib/util/classes/RemainingPercentage";
 import { LogoZion } from "../../../Icons/LogoZion";
 import { Head, Image, Infos } from "../../sections";
-import { HeadProps_v1 } from "../../sections/Head/";
+import { HeadProps } from "../../sections/Head/";
 import { InfosProps } from "../../sections/Infos";
 
 const widthinblocks = 8;
@@ -26,44 +25,19 @@ const heightInPercentage = roundDecimals(
   1000
 );
 
-class RemainingPercentage {
-  fixed: string;
-  variable: string;
-  rest: string;
-  restB: string;
-  constructor(num: number) {
-    const fixed = 0.1;
-    this.fixed = (fixed * 100).toString() + "%";
-    this.variable = (num * 100).toString() + "%";
-    const rest = RemainingPercentage.#remainingPercentage(
-      fixed,
-      num
-    );
-    const ratio = 0.7;
-    const sectionA = ratio * rest;
-    const sectionB = rest - sectionA;
-    this.rest = (sectionA * 100).toString() + "%";
-    this.restB = (sectionB * 100).toString() + "%";
-  }
-  static #remainingPercentage = (a: number, b: number) => {
-    const result = 1 - a - b;
-    if (result < 0) throw new Error("100% exceeded");
-    return result;
-  };
-}
-
 const percentage = new RemainingPercentage(
   heightInPercentage
 );
+
 export type NftPfpDatas = {
   id?: number;
   name?: string;
   slug?: string;
-  src?: string;
+  src: string;
   backgroundColor?: string;
   clickHandler?: MouseEventHandler<HTMLElement>;
   infos: InfosProps;
-  headProps: HeadProps_v1;
+  headProps: HeadProps;
 };
 
 export type NftPfpCss = {
@@ -76,10 +50,10 @@ export type ToEdit = NftPfpDatas & NftPfpCss;
 export type Theme = { theme: FluidTheme };
 export type FromLibrary = FluidStyled & Theme;
 
-export type NftPfpProps = ToEdit & FromLibrary;
+export type NftPfpProps_v4 = ToEdit & FromLibrary;
 
 export function NftPfpData(
-  props: PropsWithRef<NftPfpProps>
+  props: PropsWithRef<NftPfpProps_v4>
 ) {
   const [isLoading, setIsLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -117,19 +91,12 @@ export function NftPfpData(
   );
 
   return (
-    // @ts-ignore
     <div
       className={props.className}
       css={props.css}
       ref={self as RefObject<HTMLDivElement>}
     >
       <div id="card">
-        {/* <div id="a"></div>
-        <div id="b">
-          <img src={src}></img>
-        </div>
-        <div id="c"></div>
-        <div id="d"></div> */}
         <Head
           {...props.headProps}
           clientHeight={headHeight}
@@ -171,6 +138,11 @@ export const NftPfp_v4 = styled(NftPfpData)`
   display: grid;
   grid-column: span 8;
   grid-row: span 14;
+  ${Head} {
+    button {
+      cursor: pointer;
+    }
+  }
   #card {
     height: 90%;
     width: 90%;
@@ -193,6 +165,7 @@ export const NftPfp_v4 = styled(NftPfpData)`
       width: 100%;
       border: none;
       background-color: transparent;
+      cursor: pointer;
       #svg {
         place-self: end;
         display: grid;

@@ -9,7 +9,7 @@ import { Portrait } from "../../../../style/Areas/Shape/";
 import { Head, Image } from "../../sections";
 import { Infos_v1 } from "../../sections/Infos/";
 
-export interface NftPfpProps {
+interface NftPfpProps {
   likeIcon: JSX.Element;
   menuIcon: JSX.Element;
   id?: number;
@@ -20,6 +20,7 @@ export interface NftPfpProps {
   big?: boolean;
   src?: string;
   backgroundColor?: string;
+  clientHeight: number;
   clickHandler?: MouseEventHandler<HTMLElement>;
 }
 
@@ -50,7 +51,10 @@ export function NftPfp_v1(props: NftPfpProps) {
       // onClick={() => console.log("clicked" + props.id)}
     >
       <CardArea nft>
-        <Head menuIcon={props.menuIcon} />
+        <Head
+          menuIcon={props.menuIcon}
+          clientHeight={props.clientHeight}
+        />
         <Image
           handleisLoading={setIsLoading}
           src={props.src ? props.src : ""}

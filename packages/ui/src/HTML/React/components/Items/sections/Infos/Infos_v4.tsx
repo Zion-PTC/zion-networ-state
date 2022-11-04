@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { DebugColor } from "../../../../lib/util/classes";
 
-type V4Datas = {
+type Infos_v4Datas = {
   likeIcon: JSX.Element;
   likeCounts: string;
   title: string;
@@ -9,15 +10,15 @@ type V4Datas = {
   bid_link: string;
 };
 
-type V4Css = {};
+type Infos_v4Css = {};
 
-type ToEdit = V4Datas & V4Css;
+type ToEdit = Infos_v4Datas & Infos_v4Css;
 type Theme = { theme?: FluidTheme };
 type FromLibrary = FluidStyled & Theme;
 
-export type V4Props = ToEdit & FromLibrary;
+export type Infos_v4Props = ToEdit & FromLibrary;
 
-const InfosData = (props: V4Props) => {
+const InfosData = (props: Infos_v4Props) => {
   return (
     <div className={props.className} css={props.css}>
       <div id="line1">
@@ -37,15 +38,6 @@ const InfosData = (props: V4Props) => {
           </a>
         </div>
       </div>
-      {/* <div id="line3">
-        
-        <div id="likes">
-          <div id="content">
-            {props.likeIcon}
-            <p id="counts">127</p>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
@@ -59,6 +51,17 @@ const grid = css`
   display: grid;
 `;
 
+const debug = false;
+
+const Infos_v4Debug = new DebugColor(
+  "hsl(105, 100%, 25%)",
+  debug
+);
+const titleDebug = new DebugColor("yellow", debug);
+const floorPriceDebug = new DebugColor("#001eff", debug);
+const placeBidDebug = new DebugColor("#ff00e6", debug);
+const likesDebug = new DebugColor("#0066ff", debug);
+
 export const Infos_v4 = styled(InfosData)`
   display: grid;
   place-items: center;
@@ -68,7 +71,7 @@ export const Infos_v4 = styled(InfosData)`
   border-top: 1px solid rgba(0, 0, 0, 0.8);
   grid-template-columns: 0.1fr 2fr 0.1fr;
   grid-template-rows: 0.2fr 3fr 0.2fr 1.5fr 0.2fr;
-  background-color: #1e8000;
+  ${Infos_v4Debug.value}
   grid-template-areas:
     ". . ."
     ". line1 ."
@@ -90,7 +93,7 @@ export const Infos_v4 = styled(InfosData)`
     grid-area: line1;
     #title {
       grid-area: title;
-      background-color: yellow;
+      ${titleDebug.value}
       ${grid}
       align-content: center;
 
@@ -112,7 +115,7 @@ export const Infos_v4 = styled(InfosData)`
     border: none;
     #floor-price {
       grid-area: floor;
-      background-color: #001eff;
+      ${floorPriceDebug.value};
       ${grid}
       align-content: center;
 
@@ -120,7 +123,7 @@ export const Infos_v4 = styled(InfosData)`
     }
     #place-bid {
       grid-area: bid;
-      background-color: #ff00e6;
+      ${placeBidDebug.value};
       ${grid}
 
       border: none;
@@ -146,7 +149,7 @@ export const Infos_v4 = styled(InfosData)`
       ${grid}
       align-content: center;
       grid-area: likes;
-      background-color: #0066ff;
+      ${likesDebug.value};
       #content {
         display: inline-flex;
         place-content: end;
