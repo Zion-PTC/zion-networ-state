@@ -9,3 +9,4 @@ export * from "./Img";
 export * from "./Input";
 export * from "./P";
 export * from "./Areas/";
+export * from "./Loaders";
