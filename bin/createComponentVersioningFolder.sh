@@ -2,11 +2,13 @@
 
 directory=${1}
 indexpath=${directory}/index.ts
-filepath=${directory}/v1.tsx
+filepath=${directory}/${directory}_v1.tsx
 
 mkdir ${directory} &&
 touch ${indexpath} &&
-echo "export * from './v1'" >> ${indexpath} &&
+echo "import { ${directory}_v1 } from './${directory}_v1';" >> ${indexpath}
+echo "" >> ${indexpath}
+echo "export const ${directory} = ${directory}_v1;" >> ${indexpath} &&
 touch ${filepath} &&
-echo "export {}" >> ${filepath} &&
+echo "export const ${directory}_v1 = '${directory}_v1';" >> ${filepath} &&
 echo finished
