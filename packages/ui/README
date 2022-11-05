@@ -1,0 +1,23 @@
+# UI
+
+This package containes utilities to build Fluid
+applications.
+
+## File syntax formatting.
+
+We found that we prefer having the types as closes as
+possible to the components. This means that, broadly
+speaking, a component should look always somehow like this:
+
+```ts
+// IMPORTS
+import { something } from "./somewhere";
+
+type ComponentProps = {
+  name: string;
+};
+
+export function Component() {
+  return <div></div>;
+}
+```
