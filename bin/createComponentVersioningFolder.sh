@@ -6,6 +6,7 @@ filepath=${directory}/${directory}_v1.tsx
 
 mkdir ${directory} &&
 touch ${indexpath} &&
+echo "export * from './${directory}';" >> index.ts
 echo "import { ${directory}_v1 } from './${directory}_v1';" >> ${indexpath}
 echo "" >> ${indexpath}
 echo "export const ${directory} = ${directory}_v1;" >> ${indexpath} &&
