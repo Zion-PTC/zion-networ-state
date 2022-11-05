@@ -22,13 +22,12 @@ const BadgeCircle = styled(Circle)`
   background-color: darkgrey;
   box-sizing: border-box;
 `;
-
+// TODO risolvere il problema che non coincidono i
+// types di size
 export function BadgeData(props: BadgeProps) {
   return (
     <div className={props.className}>
       <div id="logo">
-        // TODO risolvere il problema che non coincidono i
-        // types di size
         <BadgeCircle {...(props as any)}>
           <LogoZion {...(props as any)}></LogoZion>
         </BadgeCircle>
