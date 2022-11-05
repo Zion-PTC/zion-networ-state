@@ -40,8 +40,6 @@ export const Button = styled.button<ButtonStyle>`
   ${props => checkCss("gridArea", props)}
   ${props => checkCss("zIndex", props)}
   border: 1px solid ${props => {
-    console.log(props);
-
     return props.theme.primary.borderColor;
   }};
   position: ${props =>

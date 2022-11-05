@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { CssStyled } from "../../lib";
-import { NftPfpCardProps } from "./Cards";
 import { Album } from "./CardTypes/Album";
-import { NftPfp } from "./CardTypes/NftPfp";
+import { NftPfp, NftPfpProps } from "./CardTypes/NftPfp";
 
 export enum CardFormats {
   landscape = "landscape",
@@ -31,9 +30,8 @@ export type CardProps<Data> = {
   backgroundColor?: string;
   src?: string;
 } & StyledDefault &
-  CssStyled;
-
-export type NftCardProps = CardProps<NftPfpCardProps>;
+  CssStyled &
+  NftPfpProps;
 
 export function Card_v1<T>(props: CardProps<T>) {
   let { type } = props;

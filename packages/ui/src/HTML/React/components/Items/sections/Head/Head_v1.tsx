@@ -29,7 +29,6 @@ export function CardHead_v1(props: HeadProps) {
   const parent =
     useRef<HTMLDivElement>() as RefObject<HTMLDivElement>;
   const [avatarSize, setAvatarSize] = useState(0);
-  console.log(props);
 
   useEffect(() => {
     if (!parent.current) throw new ZionError();

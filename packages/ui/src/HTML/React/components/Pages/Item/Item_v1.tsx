@@ -146,7 +146,6 @@ export function Item_v1(props: ItemProps_v1) {
   };
 
   const circleBorderColor = circleBorderColorCheck();
-  console.log(props.theme.textColor);
 
   return (
     <ItemPage css={props.css} className={props.className}>

@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import { Palette } from "../HTML/React/classes";
 import { LogoZion } from "../HTML/React/components/Icons/LogoZion";
 import { NftPfpProps } from "../HTML/React/components/Items/CardTypes/NftPfp/";
-import { ItemProps } from "../HTML/React/components/Pages";
+import {
+  ItemProps,
+  ProfilePageProps,
+} from "../HTML/React/components/Pages";
 import { fluid_7 } from "../HTML/React/lib/colors/Palettes/fluid_7";
 import { GlobalStyles } from "../HTML/React/style/Global";
 
@@ -68,6 +71,20 @@ const nftPfpProps: NftPfpProps = {
   theme,
 };
 
+const profilePageProps: ProfilePageProps = {
+  data: [{ id: 0, name: "name", slug: "slug", src }],
+  profile: {
+    blockSize: 0,
+    columns: 0,
+    height: 0,
+    parentHeight: 0,
+    parentWidth: 0,
+    width: 0,
+    theme,
+  },
+  theme,
+};
+
 export default function _app(props: any) {
   const { Component } = props;
   props = {
@@ -75,6 +92,7 @@ export default function _app(props: any) {
     itemProps: itemProps,
     ...itemProps,
     ...nftPfpProps,
+    ...profilePageProps,
   };
   useEffect(() => {
     setTimeout(

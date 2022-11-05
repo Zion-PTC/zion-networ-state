@@ -29,7 +29,6 @@ export function CardHeadData_v3(props: Head_v3Props) {
       className={props.className}
       css={props.css}
       id="card-head"
-      onLoad={() => console.log("loaded")}
     >
       <div id="circle" />
       <div></div>

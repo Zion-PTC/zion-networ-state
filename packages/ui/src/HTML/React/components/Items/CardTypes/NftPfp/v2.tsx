@@ -29,7 +29,6 @@ export function NftPfp_v2(props: NftPfpProps) {
       onClick={() =>
         (window.location.href = `http://localhost:3000/nft/${props.id}`)
       }
-      // onClick={() => console.log("clicked" + props.id)}
     >
       <CardArea nft>
         <Head {...props} />

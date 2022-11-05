@@ -1,5 +1,5 @@
 import {
-  MouseEventHandler,
+  // MouseEventHandler,
   PropsWithRef,
   RefObject,
   useEffect,
@@ -9,8 +9,12 @@ import {
 import styled from "styled-components";
 import { roundDecimals } from "../../../../lib/util/calculate/";
 import { RemainingPercentage } from "../../../../lib/util/classes/RemainingPercentage";
-import { LogoZion } from "../../../Icons/LogoZion";
-import { Head, Image, Infos } from "../../sections";
+import {
+  Head,
+  Image,
+  Infos,
+  Social,
+} from "../../sections";
 import { HeadProps } from "../../sections/Head/";
 import { InfosProps } from "../../sections/Infos";
 
@@ -30,12 +34,12 @@ const percentage = new RemainingPercentage(
 );
 
 export type NftPfpDatas = {
-  id?: number;
-  name?: string;
-  slug?: string;
+  // id?: number;
+  // name?: string;
+  // slug?: string;
   src: string;
-  backgroundColor?: string;
-  clickHandler?: MouseEventHandler<HTMLElement>;
+  // backgroundColor?: string;
+  // clickHandler?: MouseEventHandler<HTMLElement>;
   infos: InfosProps;
   headProps: HeadProps;
 };
@@ -110,31 +114,13 @@ export function NftPfpData(
           imageLoaded={imageLoaded}
         />
         <Infos {...props.infos} />
-        <div id="social">
-          <button>
-            <LogoZion />
-          </button>
-          <button>
-            <LogoZion />
-          </button>
-          <button>
-            <LogoZion />
-          </button>
-          <div></div>
-          <button id="last">
-            <div id="svg">
-              <LogoZion />
-            </div>
-          </button>
-        </div>
+        <Social />
       </div>
     </div>
   );
 }
 
 export const NftPfp_v4 = styled(NftPfpData)`
-  /* height: 100%;
-  width: 100%; */
   display: grid;
   grid-column: span 8;
   grid-row: span 14;

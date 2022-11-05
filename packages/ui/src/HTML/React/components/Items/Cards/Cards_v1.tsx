@@ -1,14 +1,16 @@
 import { MouseEventHandler } from "react";
-import { CssStyled } from "../../lib";
-import { Card } from "./Card";
+import { Card } from "../Card";
+import { NftPfpProps } from "../CardTypes";
 
-export type BasicCardProps = {
+export type BasicCardProps_v1 = {
   slug?: string;
   src?: string;
   clickHandler?: MouseEventHandler<HTMLElement>;
 };
 
-export interface CardsProps<T extends BasicCardProps> {
+export interface CardsProps_v1<
+  T extends BasicCardProps_v1
+> {
   likeIcon: JSX.Element;
   menuIcon: JSX.Element;
   children: T[];
@@ -18,15 +20,16 @@ export interface CardsProps<T extends BasicCardProps> {
   big?: boolean;
   clickHandler?: MouseEventHandler<HTMLElement>;
 }
-export type NftPfpCardProps = CardsProps<NftPfpCardProps>;
 
-export interface ICards {
-  <T extends BasicCardProps>(
-    props: CardsProps<T> & StyledDefault & CssStyled
-  ): JSX.Element;
+export type NftPfpCardProps_v1 =
+  CardsProps_v1<NftPfpProps>;
+
+export interface ICards_v1 {
+  (props: NftPfpCardProps_v1): JSX.Element;
 }
 
-export const Cards: ICards = props => {
+export const Cards_v1: ICards_v1 = props => {
+  console.log("Cards_v1: ", props);
   const { children } = props;
   return (
     <>
