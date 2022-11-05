@@ -62,6 +62,7 @@ const ProfileArea = styled.div`
   height: 100%;
   width: 100vw;
   position: relative;
+  overflow: auto;
 `;
 
 const Avatar = styled(Circle)`
