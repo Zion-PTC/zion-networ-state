@@ -1,4 +1,11 @@
 import { createGlobalStyle } from "styled-components";
+import { GoogleFonts } from "../../../class";
+
+const roboto = new GoogleFonts({
+  fontFamily: "Noto Sans Limbu",
+});
+export const robotoGoogleQuery = roboto.googleQuery;
+const robotoCssValue = roboto.cssValue;
 
 export const GlobalStyles = createGlobalStyle`
   body {
@@ -17,6 +24,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   * {
+    font-family: ${robotoCssValue};
     margin: 0;
     padding: 0;
   }
