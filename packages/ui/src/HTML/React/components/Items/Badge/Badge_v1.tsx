@@ -24,6 +24,7 @@ const BadgeCircle = styled(Circle)`
 `;
 // TODO risolvere il problema che non coincidono i
 // types di size
+// TODO #7 (questo issue è diverso da quello appena qui sopra).
 export function BadgeData(props: BadgeProps) {
   return (
     <div className={props.className}>
