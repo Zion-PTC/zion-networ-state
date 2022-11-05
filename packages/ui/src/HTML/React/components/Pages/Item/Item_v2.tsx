@@ -66,9 +66,11 @@ export const Item_v2Data = (
       <div id="infos">
         <h1>{props.data.title}</h1>
         <p>{props.data.description}</p>
-        <p>{HIGHEST_BID}</p>
-        <p>{props.data.highestBid}</p>
-        <p>{props.data.currency}</p>
+        <div id="infos-text">
+          <p>{HIGHEST_BID}</p>
+          <p id="bold">{props.data.highestBid}</p>
+          <p id="bold">{props.data.currency}</p>
+        </div>
       </div>
       <div id="links">
         <div id="sublink">
@@ -151,10 +153,22 @@ export const Item_v2 = styled(Item_v2Data)`
   }
   #infos {
     grid-area: infos;
-    display: block;
+    display: inline;
     width: 100%;
     height: 100%;
     text-align: center;
+    #infos-text {
+      display: inline;
+      p {
+        display: inline;
+        margin-right: 0.2rem;
+        color: ${props => props.theme.palette.grey};
+      }
+      #bold {
+        font-weight: bold;
+        color: ${props => props.theme.palette.black};
+      }
+    }
   }
   #links {
     grid-area: links;
