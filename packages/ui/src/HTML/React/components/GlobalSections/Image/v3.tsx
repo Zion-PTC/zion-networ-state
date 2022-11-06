@@ -1,7 +1,7 @@
+import { Dispatch, SetStateAction } from "react";
 import styled, { keyframes } from "styled-components";
-import { ImageProps } from "../Image";
 
-type function_componentsDatas = {
+type Image_v3Datas = {
   width?: string;
   height?: string;
   maxWidth?: string;
@@ -16,19 +16,18 @@ type function_componentsDatas = {
     height?: string;
     maxWidth?: string;
   };
+  handleisLoading: Dispatch<SetStateAction<boolean>>;
+  src: string;
 };
 
-type function_componentsCss = {};
+type Image_v3Css = {};
 
-type ToEdit = function_componentsDatas &
-  function_componentsCss;
-type Theme = { theme: FluidTheme };
-type FromLibrary = FluidStyled & Theme;
+type ToEdit = Image_v3Datas & Image_v3Css;
+type FromLibrary = StyledDefault;
 
-export type function_componentsProps = ToEdit &
-  FromLibrary;
+export type Image_v3Props = ToEdit & FromLibrary;
 
-export const ImageData = (props: ImageProps) => {
+export const ImageData = (props: Image_v3Props) => {
   const handleOnLoad = () => {
     if (props.handleisLoading)
       props.handleisLoading(false);
@@ -109,10 +108,6 @@ export const Image_v3 = styled(ImageData)`
     position: absolute;
     #loading-waves {
       place-self: center;
-      display: ${props =>
-        props.css_?.display
-          ? props.css_?.display
-          : undefined};
       display: ${props => {
         console.log(props);
 

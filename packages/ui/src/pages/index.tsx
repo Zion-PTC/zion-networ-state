@@ -1,17 +1,14 @@
-import {
-  NftPfp,
-  NftPfpProps,
-} from "../HTML/React/components/Items/CardTypes/";
-import { ItemsAreaProps } from "../HTML/React/components/Items/ItemsArea/";
 import { ItemsArea } from "../HTML/React/components/Items/ItemsArea";
+import {
+  Card,
+  CardProps,
+} from "../HTML/React/components/Items";
 
-export default function index(
-  props: NftPfpProps & ItemsAreaProps
-) {
+export default function index(props: CardProps) {
   return (
     <>
       <ItemsArea {...props}>
-        <NftPfp {...props}></NftPfp>
+        <Card {...props}></Card>
       </ItemsArea>
     </>
   );

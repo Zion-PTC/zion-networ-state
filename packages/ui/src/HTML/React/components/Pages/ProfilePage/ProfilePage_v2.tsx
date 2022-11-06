@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { PropsWithChildren } from "react";
 import { NftPfpProps } from "../../Items/CardTypes";
-import { Infos, InfosProps } from "./sections/Infos";
+import { Infos, InfosProps } from "./Infos";
 
 type toDelete = {
   background?: { bottomBackgroundColor?: string };

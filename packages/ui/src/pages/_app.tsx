@@ -9,10 +9,10 @@ import {
   ItemProps,
   ProfilePageProps,
 } from "../HTML/React/components/Pages";
-import { InfosProps } from "../HTML/React/components/Pages/ProfilePage/sections/Infos";
-import { DetailsProps } from "../HTML/React/components/Pages/ProfilePage/sections/Infos/Details";
-import { LinksProps } from "../HTML/React/components/Pages/ProfilePage/sections/Infos/Links";
-import { TwitterProps } from "../HTML/React/components/Pages/ProfilePage/sections/Infos/Links/Links_v2";
+import { InfosProps } from "../HTML/React/components/Pages/ProfilePage/Infos";
+import { DetailsProps } from "../HTML/React/components/Pages/ProfilePage/Infos/Details";
+import { LinksProps } from "../HTML/React/components/Pages/ProfilePage/Infos/Links";
+import { TwitterProps } from "../HTML/React/components/Pages/ProfilePage/Infos/Links/Links_v2";
 import { ColorGenerator } from "../HTML/React/lib/colors";
 import { fluid_7 } from "../HTML/React/lib/colors/Palettes/fluid_7";
 import { GlobalStyles } from "../HTML/React/style/Global";
