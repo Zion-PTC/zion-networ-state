@@ -1,5 +1,5 @@
 export declare global {
-  type StyledProps = {
+  type StyledDefault = {
     className?: string;
   };
 }

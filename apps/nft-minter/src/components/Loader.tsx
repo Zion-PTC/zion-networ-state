@@ -5,10 +5,18 @@ type LoaderProps<T> = Pick<
   "isLoading" | "loadMoreCallback" | "isLastPage"
 >;
 
-export const Loader: <T>(props: LoaderProps<T>) => JSX.Element = (props) => {
+export const Loader: <T>(
+  props: LoaderProps<T>
+) => JSX.Element = props => {
   if (props.isLoading) return <p>Loading...</p>;
 
   if (props.isLastPage) return <p>End of content</p>;
 
-  return <div ref={props.loadMoreCallback}>load more callback</div>;
+  return (
+    <div ref={props.loadMoreCallback}>
+      load more callback
+    </div>
+  );
 };
+
+//PORTATO

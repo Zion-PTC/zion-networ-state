@@ -16,7 +16,8 @@ export const LoadingIconWave = styled.div`
     height: 5px;
     background: #9b59b6;
     position: absolute;
-    animation: ${LoadingAnimation} 1.5s infinite ease-in-out;
+    animation: ${LoadingAnimation} 1.5s infinite
+      ease-in-out;
   }
   span:nth-child(2) {
     left: 11px;
@@ -47,3 +48,5 @@ export default function LoadingWaves() {
     </LoadingIconWave>
   );
 }
+
+//PORTATO

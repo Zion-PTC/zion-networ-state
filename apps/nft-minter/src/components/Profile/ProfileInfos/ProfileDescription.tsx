@@ -5,7 +5,7 @@ type ProfileDescriptionProps = {
 };
 
 export function ProfileDescription_(
-  props: ProfileDescriptionProps & StyledProps
+  props: ProfileDescriptionProps & StyledDefault
 ) {
   return (
     <div className={props.className}>

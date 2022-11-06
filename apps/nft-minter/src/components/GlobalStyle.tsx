@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  // TODO #5 toglierlo dal cazzo?? ti ricordi cos'era?
   #cazzo {
   width: 100%;
   height: 100%;
@@ -67,3 +68,5 @@ export const GlobalStyle = createGlobalStyle`
     border-color: ${props => props.theme.borderColor};
   }
 `;
+
+//PORTATO

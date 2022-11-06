@@ -7,7 +7,9 @@ const MDContentArea = styled.div`
   }
 `;
 
-export default function MDContent(props: { contentHtml: string }) {
+export default function MDContent(props: {
+  contentHtml: string;
+}) {
   const { contentHtml } = props;
   return (
     <MDContentArea
@@ -22,3 +24,5 @@ export default function MDContent(props: { contentHtml: string }) {
     />
   );
 }
+
+//PORTATO

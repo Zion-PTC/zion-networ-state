@@ -16,7 +16,7 @@ type NavBarProps = {
 const Input = styled(ProfileNavBarInput)``;
 
 export function NavBarData(
-  props: NavBarProps & StyledProps
+  props: NavBarProps & StyledDefault
 ) {
   const tracks = new InputData("tracks");
   const album = new InputData("album");

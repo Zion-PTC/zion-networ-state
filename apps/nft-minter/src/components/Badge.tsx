@@ -95,3 +95,5 @@ export const Badge_v2 = styled(BadgeData)`
 `;
 
 export const Badge = Badge_v2;
+
+//PORTATO
