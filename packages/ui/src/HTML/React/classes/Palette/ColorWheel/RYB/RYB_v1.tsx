@@ -1,11 +1,11 @@
 import {
+  ColorWheel,
   PrimaryColors,
   SecondaryColors,
   TertiaryColors,
-  ColorWheel,
 } from "..";
 
-export class RYBPrimary extends PrimaryColors {
+export class RYBPrimary_v1 extends PrimaryColors {
   constructor(
     public red: string,
     public yellow: string,
@@ -15,7 +15,7 @@ export class RYBPrimary extends PrimaryColors {
   }
 }
 
-export class RYBSecondary extends SecondaryColors {
+export class RYBSecondary_v1 extends SecondaryColors {
   constructor(
     public orange: string,
     public green: string,
@@ -24,7 +24,7 @@ export class RYBSecondary extends SecondaryColors {
     super();
   }
 }
-export class RYBTertiary extends TertiaryColors {
+export class RYBTertiary_v1 extends TertiaryColors {
   constructor(
     public red_orange: string,
     public yellow_orange: string,
@@ -37,7 +37,7 @@ export class RYBTertiary extends TertiaryColors {
   }
 }
 
-export class RYB extends ColorWheel {
+export class RYB_v1 extends ColorWheel {
   constructor(
     public red: string = "hsl(5, 99%, 53%)",
     public red_orange: string = "hsl(21, 98%, 51%)",
@@ -53,9 +53,9 @@ export class RYB extends ColorWheel {
     public red_purple: string = "hsl(334, 81%, 42%)"
   ) {
     super(
-      new RYBPrimary(red, yellow, blue),
-      new RYBSecondary(orange, green, purple),
-      new RYBTertiary(
+      new RYBPrimary_v1(red, yellow, blue),
+      new RYBSecondary_v1(orange, green, purple),
+      new RYBTertiary_v1(
         red_orange,
         yellow_orange,
         yellow_green,
@@ -66,5 +66,3 @@ export class RYB extends ColorWheel {
     );
   }
 }
-
-export const ryb = new RYB();

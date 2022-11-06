@@ -1,22 +1,13 @@
-import { CssStyled } from "../../../lib";
 import { LoadingWavesArea } from "../../../style/Areas/LoadingWavesArea";
+import { LoadingWaves_v2 } from "./LoadingWaves/v2";
 
 export type LoadingWavesProps = {
-  display?: string;
-} & CssStyled &
-  StyledDefault;
+  display: boolean;
+};
 
 export function LoadingWaves_v1(props: LoadingWavesProps) {
   return (
-    <LoadingWavesArea
-      css={props.css}
-      className={props.className}
-      css_={{
-        display: props.css_?.display
-          ? props.css_?.display
-          : undefined,
-      }}
-    >
+    <LoadingWavesArea display={props.display}>
       <span></span>
       <span></span>
       <span></span>
@@ -26,4 +17,4 @@ export function LoadingWaves_v1(props: LoadingWavesProps) {
   );
 }
 
-export const LoadingWaves = LoadingWaves_v1;
+export const LoadingWaves = LoadingWaves_v2;

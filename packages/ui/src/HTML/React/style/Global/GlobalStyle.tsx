@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { GoogleFonts } from "../../../class";
 
 const roboto = new GoogleFonts({
-  fontFamily: "Noto Sans Limbu",
+  fontFamily: "Roboto",
 });
 export const robotoGoogleQuery = roboto.googleQuery;
 const robotoCssValue = roboto.cssValue;
@@ -13,12 +13,13 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     background: ${props => props.theme.body};
     color: ${props => props.theme.textColor};
-    transition: .3s ease;
+    /* transition: .3s ease; */
     box-sizing: border-box;
     position:fixed;
     #__next {
     display: grid;
-    place-items: center;
+    /* place-items: center; */
+    overflow: auto;
     width: 100%;
     height: 100%;
     }

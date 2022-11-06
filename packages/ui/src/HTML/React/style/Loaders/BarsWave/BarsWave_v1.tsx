@@ -1,4 +1,19 @@
 import styled, { keyframes } from "styled-components";
+import { LoadingWavesProps } from "../../../components/Icons/LoadingTypes";
+
+export function BarWavesData(
+  props: LoadingWavesProps & StyledDefault
+) {
+  return (
+    <div className={props.className}>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  );
+}
 
 const LoadingAnimation = keyframes`
 0% {height:5px;transform:translateY(0px);background:#9b59b6;}
@@ -7,8 +22,11 @@ const LoadingAnimation = keyframes`
 100% {height:5px;transform:translateY(0px);background:#9b59b6;}
 `;
 
-export const LoadingIconWave = styled.div`
+export const BarWaves = styled(BarWavesData)`
+  display: ${props => (props.display ? "block" : "none")};
   position: relative;
+  right: 4.5px;
+  place-self: center;
   span {
     display: block;
     bottom: 0px;
@@ -16,23 +34,25 @@ export const LoadingIconWave = styled.div`
     height: 5px;
     background: #9b59b6;
     position: absolute;
+    place-self: center;
     animation: ${LoadingAnimation} 1.5s infinite
       ease-in-out;
+    animation-delay: 0.2s;
   }
   span:nth-child(2) {
     left: 11px;
-    animation-delay: 0.1s;
+    animation-delay: 0.3s;
   }
   span:nth-child(3) {
     left: 22px;
-    animation-delay: 0.2s;
+    animation-delay: 0.4s;
   }
   span:nth-child(4) {
-    left: 33px;
-    animation-delay: 0.3s;
+    left: -11px;
+    animation-delay: 0.1s;
   }
   span:nth-child(5) {
-    left: 44px;
-    animation-delay: 0.4s;
+    left: -22px;
+    animation-delay: 0s;
   }
 `;

@@ -34,7 +34,6 @@ export function Infos_v1(props: ProfilePageProps) {
         css={`
           grid-template-columns: 1fr 1fr 1fr;
         `}
-        className={props.className}
         {...details}
       />
       <SocialInfos size={{ small: true }} {...props} />

@@ -1,10 +1,38 @@
 import styled, { keyframes } from "styled-components";
 import { ImageProps } from "../Image";
 
+type function_componentsDatas = {
+  width?: string;
+  height?: string;
+  maxWidth?: string;
+  backgroundColor?: string;
+  borderTop?: string;
+  gridArea?: string;
+  display?: string;
+  fullBorder?: boolean;
+  imageLoaded: boolean;
+  image?: {
+    width?: string;
+    height?: string;
+    maxWidth?: string;
+  };
+};
+
+type function_componentsCss = {};
+
+type ToEdit = function_componentsDatas &
+  function_componentsCss;
+type Theme = { theme: FluidTheme };
+type FromLibrary = FluidStyled & Theme;
+
+export type function_componentsProps = ToEdit &
+  FromLibrary;
+
 export const ImageData = (props: ImageProps) => {
   const handleOnLoad = () => {
     if (props.handleisLoading)
       props.handleisLoading(false);
+    console.log("loaded");
   };
   return (
     <div className={props.className} css={props.css}>
@@ -14,12 +42,15 @@ export const ImageData = (props: ImageProps) => {
         alt="nft"
         id="image"
       ></img>
-      <div id="loading-waves">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div id="test"></div>
+      <div id="loading-waves-container">
+        <div id="loading-waves">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   );
@@ -47,18 +78,17 @@ export const Image_v3 = styled(ImageData)`
   }}
   border-top: ${props =>
     props.fullBorder ? "1px" : undefined};
-  /* border-bottom: 1px solid;
-  border-left: 1px solid;
-  border-right: 1px solid; */
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
-  place-items: center;
-  ${props => {
-    if (props.gridArea)
-      return `grid-area: ${props.gridArea};`;
-  }}
-  img {
+  /* #test {
+    background-color: yellow;
+    width: 100%;
+    height: 100%;
+    place-self: center;
+    position:absolute
+  } */
+  #image {
     border-image: none;
     display: ${props =>
       props.imageLoaded ? "block" : "none"};
@@ -73,40 +103,49 @@ export const Image_v3 = styled(ImageData)`
       props.height ? props.height : "auto"};
     ${props => props.width && `width: ${props.width};`};
   }
-  div {
-    display: ${props =>
-      props.css_?.display
-        ? props.css_?.display
-        : undefined};
-    display: ${props =>
-      props.imageLoaded ? "none" : "block"};
-    position: relative;
-    span {
-      display: block;
-      bottom: 0px;
-      width: 9px;
-      height: 5px;
-      background: #9b59b6;
-      position: absolute;
-      animation: ${LoadingAnimation} 1.5s infinite
-        ease-in-out;
-      animation-delay: 0.2s;
-    }
-    span:nth-child(2) {
-      left: 11px;
-      animation-delay: 0.3s;
-    }
-    span:nth-child(3) {
-      left: 22px;
-      animation-delay: 0.4s;
-    }
-    span:nth-child(4) {
-      left: -11px;
-      animation-delay: 0.1s;
-    }
-    span:nth-child(5) {
-      left: -22px;
-      animation-delay: 0s;
+  #loading-waves-container {
+    place-self: center;
+    grid-area: content;
+    position: absolute;
+    #loading-waves {
+      place-self: center;
+      display: ${props =>
+        props.css_?.display
+          ? props.css_?.display
+          : undefined};
+      display: ${props => {
+        console.log(props);
+
+        return props.imageLoaded ? "none" : "block";
+      }};
+      position: relative;
+      span {
+        display: block;
+        bottom: 0px;
+        width: 9px;
+        height: 5px;
+        background: #9b59b6;
+        position: absolute;
+        animation: ${LoadingAnimation} 1.5s infinite
+          ease-in-out;
+        animation-delay: 0.2s;
+      }
+      span:nth-child(2) {
+        left: 11px;
+        animation-delay: 0.3s;
+      }
+      span:nth-child(3) {
+        left: 22px;
+        animation-delay: 0.4s;
+      }
+      span:nth-child(4) {
+        left: -11px;
+        animation-delay: 0.1s;
+      }
+      span:nth-child(5) {
+        left: -22px;
+        animation-delay: 0s;
+      }
     }
   }
 `;

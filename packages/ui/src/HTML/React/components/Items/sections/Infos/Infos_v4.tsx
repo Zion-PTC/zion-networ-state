@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 import { DebugColor } from "../../../../lib/util/classes";
+import { DetailsProps } from "../../../Pages/ProfilePage/sections/Infos/Details";
+import { LinksProps } from "../../../Pages/ProfilePage/sections/Infos/Links";
+import { SocialProps } from "../Social";
 
 type Infos_v4Datas = {
   likeIcon: JSX.Element;
@@ -8,17 +11,19 @@ type Infos_v4Datas = {
   id: string;
   price: string;
   bid_link: string;
+  links: LinksProps;
+  details: DetailsProps;
+  social: SocialProps;
 };
 
 type Infos_v4Css = {};
 
 type ToEdit = Infos_v4Datas & Infos_v4Css;
-type Theme = { theme?: FluidTheme };
-type FromLibrary = FluidStyled & Theme;
+type FromLibrary = FluidStyled;
 
 export type Infos_v4Props = ToEdit & FromLibrary;
 
-const InfosData = (props: Infos_v4Props) => {
+const InfosData_v4 = (props: Infos_v4Props) => {
   return (
     <div className={props.className} css={props.css}>
       <div id="line1">
@@ -62,7 +67,7 @@ const floorPriceDebug = new DebugColor("#001eff", debug);
 const placeBidDebug = new DebugColor("#ff00e6", debug);
 const likesDebug = new DebugColor("#0066ff", debug);
 
-export const Infos_v4 = styled(InfosData)`
+export const Infos_v4 = styled(InfosData_v4)`
   display: grid;
   place-items: center;
   border-left: none;

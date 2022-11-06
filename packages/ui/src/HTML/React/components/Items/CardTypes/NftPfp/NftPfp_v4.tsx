@@ -16,7 +16,7 @@ import {
   Social,
 } from "../../sections";
 import { HeadProps } from "../../sections/Head/";
-import { InfosProps } from "../../sections/Infos";
+import { CardInfosProps } from "../../sections/Infos";
 
 const widthinblocks = 8;
 const totalHeightInBlocks = 14;
@@ -34,13 +34,13 @@ const percentage = new RemainingPercentage(
 );
 
 export type NftPfpDatas = {
-  // id?: number;
-  // name?: string;
-  // slug?: string;
+  id: number;
+  name: string;
+  slug: string;
   src: string;
-  // backgroundColor?: string;
+  backgroundColor: string;
   // clickHandler?: MouseEventHandler<HTMLElement>;
-  infos: InfosProps;
+  infos: CardInfosProps;
   headProps: HeadProps;
 };
 

@@ -6,7 +6,7 @@ export type SVGButtonProps = {
   width?: string;
   height?: string;
   fill?: string;
-  theme: FluidTheme;
+  theme?: FluidTheme;
 };
 
 const SVGButtonArea = styled(Button)`

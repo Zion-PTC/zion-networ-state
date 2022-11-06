@@ -2,10 +2,10 @@ import styled, { keyframes } from "styled-components";
 import { LoadingWavesProps } from "../LoadingWaves";
 
 export function LoadingWavesData(
-  props: LoadingWavesProps
+  props: LoadingWavesProps & StyledDefault
 ) {
   return (
-    <div css={props.css} className={props.className}>
+    <div className={props.className}>
       <span></span>
       <span></span>
       <span></span>
@@ -23,9 +23,10 @@ const LoadingAnimation = keyframes`
 `;
 
 export const LoadingWaves_v2 = styled(LoadingWavesData)`
-  display: ${props =>
-    props.css_?.display ? props.css_?.display : undefined};
+  display: ${props => (props.display ? "block" : "none")};
   position: relative;
+  right: 4.5px;
+  place-self: center;
   span {
     display: block;
     bottom: 0px;
@@ -33,6 +34,7 @@ export const LoadingWaves_v2 = styled(LoadingWavesData)`
     height: 5px;
     background: #9b59b6;
     position: absolute;
+    place-self: center;
     animation: ${LoadingAnimation} 1.5s infinite
       ease-in-out;
     animation-delay: 0.2s;

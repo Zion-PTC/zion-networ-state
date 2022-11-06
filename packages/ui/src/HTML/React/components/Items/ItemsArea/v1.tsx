@@ -1,22 +1,38 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, RefObject } from "react";
+import styled from "styled-components";
 import { useCalculateFluidGrid } from "../../../lib/hooks/useCalculateFluidGrid";
-import { Area } from "../../../style";
 
-export type ItemsAreaDatas = {
-  name: string;
+type ItemsAreaDatas = {
+  height: number;
+  avatarSize: number;
+  ref?: RefObject<HTMLDivElement>;
 };
 
-export type ItemsAreaCss = {
+type ItemsAreaCss = {
   small?: boolean;
   mid?: boolean;
   big?: boolean;
 };
 
-export type ToEdit = ItemsAreaDatas & ItemsAreaCss;
-export type Theme = { theme: FluidTheme };
-export type FromLibrary = FluidStyled & Theme;
+type ToEdit = ItemsAreaDatas & ItemsAreaCss;
+
+type FromLibrary = StyledCss;
 
 export type ItemsAreaProps = ToEdit & FromLibrary;
+
+const Area = styled.div<any>`
+  display: grid;
+  grid-area: content;
+  height: 100%;
+  overflow: auto;
+  width: ${props => props.width}px;
+  grid-auto-rows: ${props => props.blockSize + "px"};
+  grid-template-columns: repeat(
+    ${props => props.columns},
+    ${props => props.blockSize + "px"}
+  );
+  place-self: center;
+`;
 
 export function ItemsArea_v1(
   props: PropsWithChildren<ItemsAreaProps>

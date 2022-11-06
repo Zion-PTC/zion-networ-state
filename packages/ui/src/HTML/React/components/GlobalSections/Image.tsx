@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { Image_v1 } from "./Image/v1";
 import { Image_v3 } from "./Image/v3";
 
 export type ImageCss = {
@@ -11,7 +10,7 @@ export type ImageCss = {
   gridArea?: string;
   display?: string;
   fullBorder?: boolean;
-  imageLoaded?: boolean;
+  imageLoaded: boolean;
   image?: {
     width?: string;
     height?: string;
@@ -20,7 +19,7 @@ export type ImageCss = {
 } & FluidStyled;
 
 export type ImageHandles = {
-  handleisLoading?: Dispatch<SetStateAction<boolean>>;
+  handleisLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 export type ImageDatas = {

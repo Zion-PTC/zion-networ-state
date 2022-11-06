@@ -8,3 +8,4 @@ indexfile=index.ts
 touch ${completename} &&
 echo "export * from './${filename}';" >> ${indexfile} &&
 echo "export {}" >> ${completename}
+echo "done!!🏁🚀"

@@ -13,7 +13,7 @@ type InfosCss = {};
 
 // type InfosHandles = {};
 
-export type InfosProps = InfosData &
+export type InfosProps_v1 = InfosData &
   InfosCss &
   FluidStyled;
 
@@ -60,7 +60,7 @@ const JustifiedButton = styled(SVGButton)`
   justify-self: center;
 `;
 
-export const Infos_v1 = (props: InfosProps) => {
+export const Infos_v1 = (props: InfosProps_v1) => {
   return (
     <Area_old {...props}>
       <InfosArea>

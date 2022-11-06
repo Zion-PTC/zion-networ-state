@@ -1,24 +1,17 @@
 import styled from "styled-components";
+import { BooleanDisplay } from "../../../lib";
 
-export const LdsHourglass_v1 = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-content: center;
-  z-index: 10;
+export const LdsHourglass_v1 = styled.div<BooleanDisplay>`
+  display: ${props => (props.display ? "block" : "none")};
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid currentColor;
+  border-color: currentColor #ffee00 currentColor #ffee00;
+  animation: lds-hourglass 1.2s infinite;
 
-  &:after {
-    content: " ";
-    display: block;
-    border-radius: 50%;
-    width: 100vw;
-    height: 100vh;
-    margin: 8px;
-    box-sizing: border-box;
-    border: 32px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-hourglass 1.2s infinite;
-  }
   @keyframes lds-hourglass {
     0% {
       transform: rotate(0);
@@ -30,7 +23,7 @@ export const LdsHourglass_v1 = styled.div`
       );
     }
     50% {
-      transform: rotate(900deg);
+      transform: rotate(360deg);
       animation-timing-function: cubic-bezier(
         0.215,
         0.61,
@@ -39,7 +32,7 @@ export const LdsHourglass_v1 = styled.div`
       );
     }
     100% {
-      transform: rotate(1800deg);
+      transform: rotate(540deg);
     }
   }
 `;

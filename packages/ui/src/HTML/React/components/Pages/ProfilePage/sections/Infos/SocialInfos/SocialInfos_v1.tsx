@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { More_Normal } from "../../../../../Icons/More_Normal";
 import { Share } from "../../../../../Icons/Share";
 import { SVGButton } from "../../../../../../style/Buttons";
@@ -9,18 +9,6 @@ type SocialInfosCss = {
   layout?: any;
   theme: FluidTheme;
 };
-
-const small = css`
-  width: 50vw;
-`;
-
-const mid = css`
-  width: 60vw;
-`;
-
-const big = css`
-  width: 70vw;
-`;
 
 export function SocialInfosData(props: SocialInfosCss) {
   return (
@@ -41,14 +29,11 @@ export function SocialInfosData(props: SocialInfosCss) {
 }
 
 export const SocialInfos_v1 = styled(SocialInfosData)`
-  width: 100%;
+  width: 140%;
   height: 100%;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   grid-template-areas: "follow . .";
   display: grid;
-  ${props => props.size?.big && big}
-  ${props => props.size?.mid && mid}
-  ${props => props.size?.small && small}
   #follow-btn {
     background-color: red;
     grid-area: follow;
@@ -62,5 +47,3 @@ export const SocialInfos_v1 = styled(SocialInfosData)`
       ${props => props.theme.primary.borderColor};
   }
 `;
-
-export const SocialInfos = SocialInfos_v1;

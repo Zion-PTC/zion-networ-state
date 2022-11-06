@@ -45,7 +45,6 @@ const ProfileNavBar_v1 = styled(NavBarData)`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   list-style-type: none;
-  place-content: end;
   grid-area: navbar;
   input {
     display: none;

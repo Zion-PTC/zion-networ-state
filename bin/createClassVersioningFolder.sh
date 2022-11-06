@@ -12,4 +12,4 @@ echo "" >> ${indexpath}
 echo "export const ${directory} = ${directory}_v1;" >> ${indexpath} &&
 touch ${filepath} &&
 echo "export const ${directory}_v1 = '${directory}_v1';" >> ${filepath} &&
-echo finished
+echo "done!!🏁🚀"

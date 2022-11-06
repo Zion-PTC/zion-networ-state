@@ -10,7 +10,7 @@ const ratio = width / height;
 type BadgeProps = {
   size?: "small" | "mid" | "big";
   className?: string;
-  theme: FluidTheme;
+  theme?: FluidTheme;
 };
 
 const BadgeCircle = styled(Circle)`
@@ -29,9 +29,9 @@ export function BadgeData(props: BadgeProps) {
   return (
     <div className={props.className}>
       <div id="logo">
-        <BadgeCircle {...(props as any)}>
+        <div id="badge-circle">
           <LogoZion {...(props as any)}></LogoZion>
-        </BadgeCircle>
+        </div>
       </div>
       <div id="infos">
         <p>ZION 2</p>
@@ -84,6 +84,18 @@ export const Badge_v2 = styled(BadgeData)`
     grid-area: logo;
     width: 100%;
     height: 100%;
+    #badge-circle {
+      border-radius: 100%;
+
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      border: 2px solid
+        ${props => props.theme.palette.grey};
+      background-color: darkgrey;
+      box-sizing: border-box;
+    }
   }
   #infos {
     grid-area: infos;

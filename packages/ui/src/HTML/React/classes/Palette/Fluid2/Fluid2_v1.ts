@@ -1,13 +1,13 @@
 import { colors_, Palette } from "../../Palette";
 
-export type Fluid2 = Pick<
+export type Fluid2Type_v1 = Pick<
   colors_,
   "blue" | "purple" | "red_purple" | "green" | "blue_green"
 >;
 
-export class FluidColor_type2
+export class Fluid2_v1
   extends Palette
-  implements Fluid2
+  implements Fluid2Type_v1
 {
   constructor(
     public blue: string,

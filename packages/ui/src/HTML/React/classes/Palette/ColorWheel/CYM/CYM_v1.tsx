@@ -1,11 +1,11 @@
 import {
+  ColorWheel,
   PrimaryColors,
   SecondaryColors,
   TertiaryColors,
-  ColorWheel,
-} from "..";
+} from "../";
 
-export class CYMPrimary extends PrimaryColors {
+export class CYMPrimary_v1 extends PrimaryColors {
   constructor(
     public cyan: string,
     public yellow: string,
@@ -15,7 +15,7 @@ export class CYMPrimary extends PrimaryColors {
   }
 }
 
-export class CYMSecondary extends SecondaryColors {
+export class CYMSecondary_v1 extends SecondaryColors {
   constructor(
     public green: string,
     public blue: string,
@@ -25,7 +25,7 @@ export class CYMSecondary extends SecondaryColors {
   }
 }
 
-export class CYMTertiary extends TertiaryColors {
+export class CYMTertiary_v1 extends TertiaryColors {
   constructor(
     public yellow_green: string,
     public cyan_green: string,
@@ -38,7 +38,7 @@ export class CYMTertiary extends TertiaryColors {
   }
 }
 
-export class CYM extends ColorWheel {
+export class CYM_v1 extends ColorWheel {
   constructor(
     public yellow: string = "hsl(60, 100%, 50%)",
     public yellow_green: string = "hsl(90, 100%, 50%)",
@@ -54,9 +54,9 @@ export class CYM extends ColorWheel {
     public yellow_red: string = "hsl(30, 100%, 50%)"
   ) {
     super(
-      new CYMPrimary(cyan, yellow, magenta),
-      new CYMSecondary(green, blue, red),
-      new CYMTertiary(
+      new CYMPrimary_v1(cyan, yellow, magenta),
+      new CYMSecondary_v1(green, blue, red),
+      new CYMTertiary_v1(
         yellow_green,
         cyan_green,
         cyan_blue,
@@ -67,5 +67,3 @@ export class CYM extends ColorWheel {
     );
   }
 }
-
-export const cym = new CYM();

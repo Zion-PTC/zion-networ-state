@@ -45,4 +45,12 @@ css related properties and ways to access them.
      }
      ```
 
-- fil
+- ## CSS Attributes order
+
+```tsx
+const Div = styled.div`
+  grid-area: name;
+  diplay: grid;
+  overflow: auto;
+`;
+```

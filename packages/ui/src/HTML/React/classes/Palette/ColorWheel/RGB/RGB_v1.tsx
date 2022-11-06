@@ -5,7 +5,7 @@ import {
   ColorWheel,
 } from "..";
 
-export class RGBPrimary extends PrimaryColors {
+export class RGBPrimary_v1 extends PrimaryColors {
   constructor(
     public red: string,
     public green: string,
@@ -15,7 +15,7 @@ export class RGBPrimary extends PrimaryColors {
   }
 }
 
-export class RGBSecondary extends SecondaryColors {
+export class RGBSecondary_v1 extends SecondaryColors {
   constructor(
     public yellow: string,
     public cyan: string,
@@ -25,7 +25,7 @@ export class RGBSecondary extends SecondaryColors {
   }
 }
 
-export class RGBTertiary extends TertiaryColors {
+export class RGBTertiary_v1 extends TertiaryColors {
   constructor(
     public red_yellow: string,
     public green_yellow: string,
@@ -38,7 +38,7 @@ export class RGBTertiary extends TertiaryColors {
   }
 }
 
-export class RGB extends ColorWheel {
+export class RGB_v1 extends ColorWheel {
   constructor(
     public red: string = "hsl(0, 100%, 50%)",
     public red_yellow: string = "hsl(30, 100%, 50%)",
@@ -54,9 +54,9 @@ export class RGB extends ColorWheel {
     public red_magenta: string = "hsl(330, 100%, 50%)"
   ) {
     super(
-      new RGBPrimary(red, green, blue),
-      new RGBSecondary(yellow, cyan, magenta),
-      new RGBTertiary(
+      new RGBPrimary_v1(red, green, blue),
+      new RGBSecondary_v1(yellow, cyan, magenta),
+      new RGBTertiary_v1(
         red_yellow,
         green_yellow,
         green_cyan,
@@ -67,5 +67,3 @@ export class RGB extends ColorWheel {
     );
   }
 }
-
-export const rgb = new RGB();

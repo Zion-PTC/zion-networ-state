@@ -4,7 +4,7 @@ import {
 } from "./Infos_v4";
 import {
   Infos_v1 as v1,
-  InfosProps as v1Props,
+  InfosProps_v1 as v1Props,
 } from "./Infos_v1";
 import { Infos_v2 as v2 } from "./Infos_v2";
 import { Infos_v3 as v3 } from "./Infos_v3";
@@ -16,6 +16,6 @@ export const Infos_v2 = v2;
 export const Infos_v3 = v3;
 export const Infos_v4 = v4;
 
-export type InfosProps = v4Props;
+export type CardInfosProps = v4Props;
 
 export const Infos = v4;

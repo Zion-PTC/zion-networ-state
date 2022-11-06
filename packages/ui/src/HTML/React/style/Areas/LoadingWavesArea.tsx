@@ -1,20 +1,21 @@
 import styled, { keyframes } from "styled-components";
-import { CssStyled } from "../../lib";
+
+export type LoadingWavesAreaProps = {
+  display: boolean;
+};
 
 const LoadingAnimation = keyframes`
-0% {height:5px;transform:translateY(0px);background:#9b59b6;}
-25% {height:30px;transform:translateY(15px);background:#3498db;}
-50% {height:5px;transform:translateY(0px);background:#9b59b6;}
-100% {height:5px;transform:translateY(0px);background:#9b59b6;}
+  0% {height:5px;transform:translateY(0px);background:#9b59b6;}
+  25% {height:30px;transform:translateY(15px);background:#3498db;}
+  50% {height:5px;transform:translateY(0px);background:#9b59b6;}
+  100% {height:5px;transform:translateY(0px);background:#9b59b6;}
 `;
 
-export type LoadingIconWaveStyle = {} & CssStyled &
-  StyledDefault;
-
-export const LoadingWavesArea = styled.div<LoadingIconWaveStyle>`
-  display: ${props =>
-    props.css_?.display ? props.css_?.display : "none"};
+export const LoadingWavesArea = styled.div<LoadingWavesAreaProps>`
+  display: ${props => (props.display ? "block" : "none")};
   position: relative;
+  right: 4.5px;
+  place-self: center;
   span {
     display: block;
     bottom: 0px;
@@ -22,6 +23,7 @@ export const LoadingWavesArea = styled.div<LoadingIconWaveStyle>`
     height: 5px;
     background: #9b59b6;
     position: absolute;
+    place-self: center;
     animation: ${LoadingAnimation} 1.5s infinite
       ease-in-out;
     animation-delay: 0.2s;

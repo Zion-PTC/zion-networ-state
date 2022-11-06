@@ -6,7 +6,7 @@ import { Content } from "./sections/Content";
 import { Infos } from "./sections/Infos";
 import { NavBar } from "./sections/NavBar";
 
-export type ProfilePropsFromApp = {
+export type ProfilePropsFromApp_v1 = {
   parentWidth: number;
   parentHeight: number;
   width: number;
@@ -17,7 +17,7 @@ export type ProfilePropsFromApp = {
 };
 
 export type BasePropsFromApp = {
-  profile: ProfilePropsFromApp;
+  profile: ProfilePropsFromApp_v1;
 };
 
 export type Data<D> = { data: D[] };
@@ -90,6 +90,7 @@ export function ProfilePage_v1(
           size={{ width: "100%", height: "100%" }}
           theme={props.theme}
         ></Avatar>
+        {/* @ts-ignore */}
         <Infos {...props} />
         <NavBar {...props} />
         <Content {...props} />
@@ -97,5 +98,3 @@ export function ProfilePage_v1(
     </ProfileArea>
   );
 }
-
-export const Profile = ProfilePage_v1;
