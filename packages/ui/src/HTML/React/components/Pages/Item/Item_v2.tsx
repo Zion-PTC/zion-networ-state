@@ -27,8 +27,7 @@ type Item_v2Css = {
 };
 
 type ToEdit = Item_v2Datas & Item_v2Css;
-type Theme = { theme: FluidTheme };
-type FromLibrary = FluidStyled & Theme;
+type FromLibrary = StyledDefault;
 
 export type Item_v2Props = ToEdit & FromLibrary;
 

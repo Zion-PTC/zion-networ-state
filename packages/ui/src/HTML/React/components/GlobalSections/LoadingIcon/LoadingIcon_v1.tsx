@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { PropsWithChildren } from "react";
-import { LoadingIconType } from "../../../lib";
+import { LoadingIconType } from "../../../lib/types/styledComponents/LoadingIconType";
 
 type LoadingIcon_v1Datas = {
   display: boolean;

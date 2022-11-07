@@ -2,34 +2,11 @@ import {
   ProfilePage_v4 as v4,
   ProfilePage_v4Props as v4Props,
 } from "./ProfilePage_v4";
-import {
-  ProfilePage_v3 as v3,
-  ProfilePage_v3Props as v3Props,
-} from "./ProfilePage_v3";
-import {
-  ProfilePage_v2 as v2,
-  ProfilePage_v2Props as v2Props,
-} from "./ProfilePage_v2";
-import {
-  ProfilePage_v1 as v1,
-  ProfilePage_v1Props as v1Props,
-  ProfilePropsFromApp_v1,
-} from "./ProfilePage_v1";
 
 /// EXPORT
-export type ProfilePropsFromApp = ProfilePropsFromApp_v1;
-export type ProfilePageProps = ProfilePage_v3Props;
+export type ProfilePageProps = ProfilePage_v4Props;
 export const ProfilePage = v4;
 //////////
-
-export type ProfilePage_v1Props = v1Props;
-export const ProfilePage_v1 = v1;
-
-export type ProfilePage_v2Props = v2Props;
-export const ProfilePage_v2 = v2;
-
-export const ProfilePage_v3 = v3;
-export type ProfilePage_v3Props = v3Props;
 
 export const ProfilePage_v4 = v4;
 export type ProfilePage_v4Props = v4Props;

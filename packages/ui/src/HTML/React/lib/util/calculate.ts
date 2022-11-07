@@ -1,6 +1,10 @@
 import { calculateSize } from "./calculate/calculateSize";
 
-export function calculate(type: "size", ratio: number, base: number) {
+export function calculate(
+  type: "size",
+  ratio: number,
+  base: number
+) {
   let result;
   switch (type) {
     case "size":

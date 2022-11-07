@@ -5,7 +5,6 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import { InfosProps } from "./Infos";
 import { SVGButton } from "../../../style/Buttons";
 import { Share } from "../../Icons/Share";
 import { More_Normal } from "../../Icons/More_Normal";
@@ -31,12 +30,15 @@ type ProfilePage_v4Datas = {
   columns: number;
   theme: FluidTheme;
   data: CardProps[];
-  infos: InfosProps;
   isShowMore: boolean;
   setIsShowMore: Dispatch<SetStateAction<boolean>>;
   navbar: NavBarProps & StyledDefault;
   itemsarea: ItemsAreaProps;
   nftpfp: CardProps;
+  tracks: number;
+  followers: number;
+  following: number;
+  description: string;
 } & toDelete;
 
 type ProfilePage_v4Css = {
@@ -46,7 +48,7 @@ type ProfilePage_v4Css = {
 };
 
 type ToEdit = ProfilePage_v4Datas & ProfilePage_v4Css;
-type FromLibrary = FluidStyled;
+type FromLibrary = StyledDefault;
 
 export type ProfilePage_v4Props = ToEdit & FromLibrary;
 
@@ -79,19 +81,15 @@ export const ProfilePageData_v3 = (
         <p id="handle">{"@handle"}</p>
         <div id="details">
           <div id="text-area">
-            <p id="bold">{props.infos.details.tracks}</p>
+            <p id="bold">{props.tracks}</p>
             <p>Tracks</p>
           </div>
           <div id="text-area">
-            <p id="bold">
-              {props.infos.details.followers}
-            </p>
+            <p id="bold">{props.followers}</p>
             <p>Followers</p>
           </div>
           <div id="text-area">
-            <p id="bold">
-              {props.infos.details.following}
-            </p>
+            <p id="bold">{props.following}</p>
             <p>Following</p>
           </div>
         </div>
@@ -109,16 +107,14 @@ export const ProfilePageData_v3 = (
           </SVGButton>
         </div>
         <div id="description">
-          <p>{props.infos.description}</p>
+          <p>{props.description}</p>
         </div>
         <button onClick={handleClick}>Show More</button>
         <div id="links-area">
           <Badge size="small"></Badge>
           <div id="links">
             <div id="twitter">
-              <StyledTwitter
-                {...props.infos.links.twitter}
-              />
+              <StyledTwitter />
             </div>
             <div id="handle">
               <p>handle</p>
@@ -186,7 +182,7 @@ export const ProfilePage_v4 = styled(ProfilePageData_v3)`
     /* place-items: center; */
     grid-template-rows: 1.5rem 1.5rem 2rem 2rem 2rem 1.5rem 3.5rem;
     ${props => {
-      if (props.infos.isShowMore)
+      if (props.isShowMore)
         return css`
           grid-template-rows: 1.5rem 1.5rem 2rem 2rem auto 1.5rem 3.5rem;
         `;

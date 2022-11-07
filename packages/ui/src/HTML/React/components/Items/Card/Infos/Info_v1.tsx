@@ -1,8 +1,5 @@
 import styled, { css } from "styled-components";
 import { DebugColor } from "../../../../lib/util/classes";
-import { DetailsProps } from "../../../Pages/ProfilePage/Infos/Details";
-import { LinksProps } from "../../../Pages/ProfilePage/Infos/Links";
-import { SocialProps } from "../../sections";
 
 type Infos_v1Datas = {
   likeIcon: JSX.Element;
@@ -11,15 +8,12 @@ type Infos_v1Datas = {
   id: string;
   price: string;
   bid_link: string;
-  links: LinksProps;
-  details: DetailsProps;
-  social: SocialProps;
 };
 
 type Infos_v1Css = {};
 
 type ToEdit = Infos_v1Datas & Infos_v1Css;
-type FromLibrary = FluidStyled;
+type FromLibrary = StyledDefault;
 
 export type Infos_v1Props = ToEdit & FromLibrary;
 

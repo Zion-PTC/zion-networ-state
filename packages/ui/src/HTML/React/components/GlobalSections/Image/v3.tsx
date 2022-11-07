@@ -31,7 +31,6 @@ export const ImageData = (props: Image_v3Props) => {
   const handleOnLoad = () => {
     if (props.handleisLoading)
       props.handleisLoading(false);
-    console.log("loaded");
   };
   return (
     <div className={props.className} css={props.css}>
@@ -109,8 +108,6 @@ export const Image_v3 = styled(ImageData)`
     #loading-waves {
       place-self: center;
       display: ${props => {
-        console.log(props);
-
         return props.imageLoaded ? "none" : "block";
       }};
       position: relative;

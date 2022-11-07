@@ -1,4 +1,4 @@
-import { roundDecimals } from "../../util/calculate/";
+import { roundDecimals } from "../../lib/util/calculate/";
 import { validation } from "./validation";
 
 export type ColorGeneratorOptions_v1 = {

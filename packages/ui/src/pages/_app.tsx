@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { Palette } from "../HTML/React/classes";
+import { ColorGenerator } from "../HTML/React/classes/ColorGenerator";
 import { LogoZion } from "../HTML/React/components/Icons/LogoZion";
-import { NftPfpProps } from "../HTML/React/components/Items/CardTypes/NftPfp/";
+import { CardProps } from "../HTML/React/components/Items";
+import { InfosProps } from "../HTML/React/components/Items/Card/Infos/";
 import { ItemsAreaProps } from "../HTML/React/components/Items/ItemsArea";
-import { CardInfosProps } from "../HTML/React/components/Items/sections";
 import {
   ItemProps,
   ProfilePageProps,
 } from "../HTML/React/components/Pages";
-import { InfosProps } from "../HTML/React/components/Pages/ProfilePage/Infos";
-import { DetailsProps } from "../HTML/React/components/Pages/ProfilePage/Infos/Details";
-import { LinksProps } from "../HTML/React/components/Pages/ProfilePage/Infos/Links";
-import { TwitterProps } from "../HTML/React/components/Pages/ProfilePage/Infos/Links/Links_v2";
-import { ColorGenerator } from "../HTML/React/lib/colors";
 import { fluid_7 } from "../HTML/React/lib/colors/Palettes/fluid_7";
 import { GlobalStyles } from "../HTML/React/style/Global";
 import { NavBarProps } from "../HTML/React/style/Layout";
@@ -46,28 +42,25 @@ const theme = {
   textColor: black,
 };
 
-const twitterProps: TwitterProps = {};
+// const twitterProps: TwitterProps = {};
 
-const linksProps: LinksProps = {
-  name: "some name",
-  twitter: twitterProps,
-};
+// const linksProps: LinksProps = {
+//   name: "some name",
+//   twitter: twitterProps,
+// };
 
-const detailsProps: DetailsProps = {
-  followers: 100,
-  following: 100,
-  tracks: 100,
-};
+// const detailsProps: DetailsProps = {
+//   followers: 100,
+//   following: 100,
+//   tracks: 100,
+// };
 
-const infosProps: InfosProps = {
-  details: detailsProps,
-  links: linksProps,
-  social: {},
-  description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  isShowMore: false,
-  setIsShowMore: () => {},
-};
+// const infosProps: InfosProps = {
+//   description:
+//     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+//   isShowMore: false,
+//   setIsShowMore: () => {},
+// };
 
 const itemProps: ItemProps = {
   data: {
@@ -82,30 +75,24 @@ const itemProps: ItemProps = {
   likeIcon: <LogoZion></LogoZion>,
   // menuIcon: <LogoZion></LogoZion>,
   src,
-  theme,
 };
 
-const cardInfosProps: CardInfosProps = {
+const cardInfosProps: InfosProps = {
   bid_link: "",
   id: "1/20",
   likeCounts: "127",
   likeIcon: <p>like icon</p>,
   price: "0.32",
   title: "<Title here>",
-  links: linksProps,
-  details: detailsProps,
-  social: {},
 };
 
-const nftPfpProps: NftPfpProps = {
+const nftPfpProps: CardProps = {
   headProps: {
     menuIcon: <LogoZion></LogoZion>,
     clientHeight: 0,
-    theme,
   },
   infos: cardInfosProps,
   src: "",
-  theme,
   id: 0,
   name: "name",
   slug: "slug",
@@ -130,9 +117,8 @@ const profilePageProps: ProfilePageProps = {
       slug: "slug",
       src,
       backgroundColor: theme.backgroundColor,
-      headProps: { clientHeight: 0, theme },
+      headProps: { clientHeight: 0 },
       infos: cardInfosProps,
-      theme,
     },
   ],
   theme,
@@ -143,11 +129,15 @@ const profilePageProps: ProfilePageProps = {
   parentHeight: 0,
   parentWidth: 0,
   width: 0,
-  infos: infosProps,
   itemsarea: itemsAreaProps,
   isShowMore: false,
   navbar: navBarProps,
   nftpfp: nftPfpProps,
+  description:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+  followers: 100,
+  following: 100,
+  tracks: 100,
   setIsShowMore: () => {},
 };
 

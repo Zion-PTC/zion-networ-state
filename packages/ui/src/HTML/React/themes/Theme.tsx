@@ -9,7 +9,7 @@ const palette = {
   darkgrey,
   black: "hsl(192, 100%, 1%)",
 };
-
+// TODO #9 arianna mission
 export const darkTheme: FluidTheme = {
   body: black,
   textColor: white,

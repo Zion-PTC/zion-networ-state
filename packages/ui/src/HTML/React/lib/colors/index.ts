@@ -1,1 +1,1 @@
-export * from './ColorGenerator';
+export * from "./Palettes";
