@@ -4,10 +4,17 @@ const darkgrey = "hsl(0, 0%, 53%)";
 const grey = "hsl(0, 0%, 76%)";
 
 const palette = {
-  white: "#fcfcfc",
   grey,
   darkgrey,
-  black: "hsl(192, 100%, 1%)",
+  red: "hsl(346, 93%, 39%)",
+  orange: "#hsl(18, 67%, 60%)",
+  yellow: "hsl(57, 93%, 72%)",
+  green: "hsl(102, 18%, 56%)",
+  blue: "hsl(203, 74%, 29%)",
+  purple: "hsl(317, 39%, 30%)",
+  black: "hsl(114, 72%, 6%)",
+  white: "hsl(300, 100%, 99%)",
+  smoke: "hsl(317,1%,29%)",
 };
 // TODO #9 arianna mission
 export const darkTheme: FluidTheme = {
