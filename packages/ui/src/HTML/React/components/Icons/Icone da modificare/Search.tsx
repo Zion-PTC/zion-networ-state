@@ -1,10 +1,10 @@
-import { Path } from "../Path";
-import { defaultProps } from "../SVGs";
-import { Circle } from "../Circle";
-import { SVGButtonProps } from "./Types";
+import { defaultIconProps } from "../../../lib/constants/defaultIconProps";
+import { SVGButtonProps } from "../../../style/Buttons";
+import { Circle } from "../../../style/Circle";
+import { Path } from "../../../style/Path";
 
 export function Search(
-  props: SVGButtonProps = defaultProps
+  props: SVGButtonProps = defaultIconProps
 ) {
   return (
     <svg
@@ -16,6 +16,7 @@ export function Search(
     >
       <Circle cx="10" cy="10" r="7" strokeWidth="2" />
       <Path
+        {...props}
         options={{ stroke: true }}
         d="M15 15L21 21"
         strokeWidth="2"
