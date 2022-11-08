@@ -27,6 +27,36 @@ export {};
 
 type _AllHTMLAttributes<T> = allHTML<T>;
 
+type _InputValue =
+  | string
+  | number
+  | readonly string[]
+  | undefined;
+
+type _InputType =
+  | "button"
+  | "checkbox"
+  | "color"
+  | "date"
+  | "datetime-local"
+  | "email"
+  | "file"
+  | "hidden"
+  | "image"
+  | "month"
+  | "number"
+  | "password"
+  | "radio"
+  | "range"
+  | "reset"
+  | "search"
+  | "submit"
+  | "tel"
+  | "text"
+  | "time"
+  | "url"
+  | "week";
+
 /////////////////////////////
 /////////////////////////////
 /////////////////////////////
@@ -116,6 +146,8 @@ declare global {
   };
   ///// HTML
   type AllHTMLAttributes<T> = _AllHTMLAttributes<T>;
+  type InputValue = _InputValue;
+  type InputType = _InputType;
 
   ///// React
 
