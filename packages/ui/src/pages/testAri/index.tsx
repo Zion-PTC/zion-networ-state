@@ -1,51 +1,81 @@
 import React from "react";
 import styled from "styled-components";
+import { InputData } from "../../HTML/React/components/Pages/ProfilePage/NavBar/Input/Input_v1";
+import { Input as I } from "../../HTML/React/components/Pages/ProfilePage/NavBar/Input";
+import { Tracks } from "../../HTML/React/components/Icons/Tracks";
+import { Album } from "../../HTML/React/components/Icons/Album";
+import { Queue } from "../../HTML/React/components/Icons/Queue";
 
-function testariData(props: any) {
+type NavBarProps = {
+  icon1?: JSX.Element;
+  icon2?: JSX.Element;
+  icon3?: JSX.Element;
+};
+const Input = styled(I)``;
+
+function NewNavbarData(
+  props: NavBarProps & StyledDefault
+) {
+  const tracks = new InputData("tracks");
+  const album = new InputData("album");
+  const playlist = new InputData("playlist");
   return (
-    <div className={props.className} css={props.css}>
-      <div id="row">
-        <div id="cell">HEADER</div>
-        <div id="cell">lol</div>
-      </div>
-      <div id="row">
-        <img src={props.src}></img>
-        <div id="cell">HEADER</div>
-        <div id="cell">lol</div>
-      </div>
-      <div id="row">
-        <div id="cell">HEADER</div>
-        <div id="cell">lol</div>
-      </div>
-    </div>
+    <nav className={props.className}>
+      <Input
+        Icona={Tracks}
+        input={tracks}
+        checked
+        {...props}
+      ></Input>
+      <Input
+        Icona={Album}
+        input={album}
+        {...props}
+      ></Input>
+      <Input
+        Icona={Queue}
+        input={playlist}
+        {...props}
+      ></Input>
+    </nav>
   );
 }
 
-const testari2 = styled(testariData)`
+const NewNavbar = styled(NewNavbarData)`
   display: grid;
-  overflow: auto;
-  grid-template-rows: 1fr 1fr 1fr;
-  height: 90%;
-  width: 90%;
-  #row  {
-    overflow: auto;
-    border-top: 1px solid red;
-    border-left: 1px solid red;
-    border-right: 1px solid red;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  list-style-type: none;
+  input {
+    display: none;
+  }
+  label {
+    cursor: pointer;
+    background-color: #7c808316;
+    border-top: 0.05rem solid
+      ${props => props.theme.primary.borderColor};
+    font-size: 70%;
     display: grid;
-    img {
-      border-image: none;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    place-content: center;
+    &:hover {
+      background-color: #b0b3b520;
     }
-    #cell {
+    div {
       display: grid;
+      place-items: center;
     }
   }
-  #row:last-child {
-    border-top: 1px solid red;
-    border-left: 1px solid red;
-    border-right: 1px solid red;
-    border-bottom: 1px solid red;
+  input:checked + label {
+    border-top: 0.1rem solid
+      ${props => props.theme.primary.borderColor};
+    border-bottom: 2px solid
+      ${props => props.theme.secondary.borderColor};
+    background-color: ${props =>
+      props.theme.primary.backgroundColor};
   }
 `;
 
-export default testari2;
+export default NewNavbar;
