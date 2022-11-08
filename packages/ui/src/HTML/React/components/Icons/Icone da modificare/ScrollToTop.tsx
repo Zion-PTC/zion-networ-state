@@ -1,9 +1,10 @@
+import { defaultIconProps } from "../../../lib/constants/defaultIconProps";
 import { SVGButtonProps } from "../../../style/Buttons";
 import { Circle } from "../../../style/Circle";
 import { Path } from "../../../style/Path";
 
 export function ScrollToTop(
-  props: SVGButtonProps = { width: "51", height: "51" }
+  props: SVGButtonProps = defaultIconProps
 ) {
   return (
     <svg
