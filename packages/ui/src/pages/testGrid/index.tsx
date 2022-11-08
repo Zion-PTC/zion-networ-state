@@ -17,9 +17,7 @@ function indexData() {
   return (
     <div>
       <Account />
-      <ArrowBack />
-      <ArrowLeft />
-      <ArrowRight />
+
       <FilterAlt />
       <Home />
       <Moon />
