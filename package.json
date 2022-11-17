@@ -23,7 +23,8 @@
     "social": "bolt w @zionapps/social dev",
     "build": "sh bin/build.working.sh",
     "prod": "bolt w @zionpps/nft-minter prod",
-    "typecheck": "bolt ws typecheck"
+    "typecheck": "bolt ws typecheck",
+    "noiz": "bolt w @zionapps/scripts "
   },
   "dependencies": {
     "@babel/cli": "^7.18.6",
