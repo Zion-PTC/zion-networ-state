@@ -3,6 +3,7 @@
 noiz="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 newFileClass=$noiz/newFileClass.sh
 newFileComponent=$noiz/newFileComponent.sh
+newFileFunction=$noiz/newFileFunction.sh
 newFileHook=$noiz/newFileHook.sh
 newFileStyled=$noiz/newFileStyled.sh
 config=.noiz
@@ -53,11 +54,14 @@ if [ $type3 = ${TYPESARRAY[1]} ]; then
 fi
 
 if [ $type3 = ${TYPESARRAY[2]} ]; then
-  $newFileHook $newVersion
-  echo "is a hook folder"
+  $newFileFunction $newVersion
 fi
 
 if [ $type3 = ${TYPESARRAY[3]} ]; then
+  $newFileHook $newVersion
+fi
+
+if [ $type3 = ${TYPESARRAY[4]} ]; then
   $newFileStyled $newVersion
 fi
 
