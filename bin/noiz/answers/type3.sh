@@ -21,4 +21,8 @@ if [ $answer = ${TYPESARRAY[3]} ]; then
   result="${TYPESARRAY[3]}"
 fi
 
+if [ $answer = ${TYPESARRAY[4]} ]; then
+  result="${TYPESARRAY[4]}"
+fi
+
 echo $result

@@ -21,6 +21,10 @@ select yn in $TYPES; do
     answer=${TYPESARRAY[3]} &&
       break
     ;;
+  ${TYPESARRAY[4]})
+    answer=${TYPESARRAY[4]} &&
+      break
+    ;;
   esac
 done
 

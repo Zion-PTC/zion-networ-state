@@ -12,21 +12,21 @@ _version=$5
 _creation_date=$6
 _update_date=$7
 
-folder=${1}
 indexpath=${folder}/index.ts
 filepath=${folder}/${folder}_v1.ts
 noizconfigpath=${folder}/.noiz
+indexfile=index.ts
 
 # root dir index
-echo "" >>index.ts &&
-  echo "//// ${folder}" >>index.ts &&
-  echo "export * from './${folder}';" >>index.ts
+echo "" >>${indexfile} &&
+  echo "//// ${folder}" >>${indexfile} &&
+  echo "export * from './${folder}';" >>${indexfile}
 
 mkdir ${folder} &&
   touch ${indexpath} &&
   echo "///// EXPORT" >>${indexpath} &&
-  echo "export { ${folder}_v1 as ${folder} } from \"./${folder}_v1\";" >>${indexpath} &&
-  echo "////////////" >>${indexpath}
+  echo "export { ${folder}_v1 as ${folder} } from './${folder}_v1';" >>${indexpath} &&
+  echo "//////" >>${indexpath}
 
 # noiz config
 touch ${noizconfigpath} &&
@@ -40,4 +40,4 @@ touch ${noizconfigpath} &&
 touch ${filepath} &&
   echo "export const ${folder}_v1 = '${folder}_v1';" >>${filepath}
 
-echo "created a new Class Folder!!🏁🚀"
+echo "created a new Function Folder!!🏁🚀"

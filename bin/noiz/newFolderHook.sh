@@ -24,10 +24,8 @@ echo "" >>${indexfile} &&
 
 mkdir ${folder} &&
   touch ${indexpath} &&
-  echo "import { ${folder}_v1 } from './${folder}_v1';" >>${indexpath} &&
   echo "///// EXPORT" >>${indexpath} &&
-  echo "" >>${indexpath} &&
-  echo "export const ${folder} = ${folder}_v1;" >>${indexpath} &&
+  echo "export { ${folder}_v1 as ${folder} } from './${folder}_v1';" >>${indexpath} &&
   echo "//////" >>${indexpath}
 
 # noiz config
@@ -40,5 +38,6 @@ touch ${noizconfigpath} &&
   echo $_update_date >>${noizconfigpath}
 
 touch ${filepath} &&
-  echo "export const ${folder}_v1 = '${folder}_v1';" >>${filepath} &&
-  echo "done!!🏁🚀"
+  echo "export const ${folder}_v1 = '${folder}_v1';" >>${filepath}
+
+echo "created a new Hook Folder!!🏁🚀"

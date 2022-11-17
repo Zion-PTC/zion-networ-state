@@ -4,6 +4,7 @@ cond=$(checkIfFileExists.sh .noiz)
 noiz="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 newFolderClass=$noiz/newFolderClass.sh
 newFolderComponent=$noiz/newFolderComponent.sh
+newFolderFunction=$noiz/newFolderFunction.sh
 newFolderHook=$noiz/newFolderHook.sh
 newFolderStyled=$noiz/newFolderStyled.sh
 config=.noiz
@@ -64,10 +65,14 @@ if [ $type = ${TYPESARRAY[1]} ]; then
 fi
 
 if [ $type = ${TYPESARRAY[2]} ]; then
-  sh $newFolderHook $folder $_type1 $_type2 $_type3 $_version "${_creation_date}" "${_update_date}"
+  sh $newFolderFunction $folder $_type1 $_type2 $_type3 $_version "${_creation_date}" "${_update_date}"
 fi
 
 if [ $type = ${TYPESARRAY[3]} ]; then
+  sh $newFolderHook $folder $_type1 $_type2 $_type3 $_version "${_creation_date}" "${_update_date}"
+fi
+
+if [ $type = ${TYPESARRAY[4]} ]; then
   sh $newFolderStyled $folder
 fi
 

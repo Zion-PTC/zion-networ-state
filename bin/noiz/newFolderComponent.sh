@@ -76,5 +76,6 @@ touch ${filepath} &&
   echo "export type ${propsFilename} = '${propsFilename}';" >>${filepath} &&
   echo "export type ${classPropsFilename} = '${classPropsFilename}';" >>${filepath} &&
   echo "export type ${asChildFilename} = '${asChildFilename}';" >>${filepath} &&
-  echo "export const ${builtFilename} = '${builtFilename}';" >>${filepath} &&
-  echo "done!!🏁🚀"
+  echo "export const ${builtFilename} = '${builtFilename}';" >>${filepath}
+
+echo "created a new Component Folder!!🏁🚀"
