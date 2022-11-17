@@ -22,7 +22,7 @@ export abstract class RegExpDescr implements RegExp {
 
 export interface IZionRegExp extends RegExp {}
 
-export class ZionRegExp extends RegExp implements IZionRegExp {
+export class ZionRegExp_v1 extends RegExp implements IZionRegExp {
   static [key: string]: RegExp | unknown;
   static folderNameFromFolderPath = /\w+$/g;
   static valueBetweenSymbols = /((?<=[/]))(.*?)(?=\.)/;
@@ -51,9 +51,9 @@ export class ZionRegExp extends RegExp implements IZionRegExp {
     let regexp = `${symbolA}(.*?)${symbolB}`;
     return new RegExp(regexp, "g");
   };
-  constructor(pattern: string | ZionRegExp, flags?: string) {
+  constructor(pattern: string | ZionRegExp_v1, flags?: string) {
     super(pattern, flags);
   }
 }
 
-export default ZionRegExp;
+export default ZionRegExp_v1;

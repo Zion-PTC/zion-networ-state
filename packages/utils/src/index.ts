@@ -1,4 +1,4 @@
-export * as js from "./js/index";
-export * as node from "./node/index";
+export * from "./js";
+export * as node from "./node";
 
 // TODO add graph traversing algos

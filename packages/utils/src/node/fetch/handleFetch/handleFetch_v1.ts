@@ -1,4 +1,4 @@
-export const handleFetch = async <
+export const handleFetch_v1 = async <
   T extends { [key: string | number | symbol]: any } = { id: string }
 >(
   input: RequestInfo | URL,

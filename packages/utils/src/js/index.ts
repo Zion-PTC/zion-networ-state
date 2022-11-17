@@ -1,2 +1,5 @@
-export * as ZionError from "./Error/ZionError";
-export * as ZionRegexp from "./Regexp/ZionRegexp";
+//// ZionError
+export * from "./ZionError";
+
+//// ZionRegExp
+export * from "./ZionRegExp";

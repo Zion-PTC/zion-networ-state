@@ -1,5 +1,7 @@
 import util from "util";
-import { Condizioni, emptyString } from "./Condizioni.js";
+import { Condizioni } from "../Condizioni";
+import { emptyString } from "../Condizioni/Condizioni_v1";
+import { zionUtil } from "../";
 
 interface IInspectArguments {
   object: any;
@@ -9,7 +11,7 @@ interface IInspectArguments {
 }
 export type DebugLogger = util.DebugLogger;
 
-export interface IUtils {
+export interface IZionUtils_v1 {
   ////// util
   inspect(obj: IInspectArguments): string;
   debuglog(
@@ -49,12 +51,12 @@ export interface IUtils {
   convertDecimalToFracionString(decimale: number): string; //////////FATTO
 }
 
-class Utils implements IUtils {
+export class ZionUtils_v1 implements IZionUtils_v1 {
   condizioni: Condizioni;
   constructor() {
     this.condizioni = new Condizioni();
   }
-  ////// utils
+  ////// Zionutils_v1
   inspect = util.inspect;
   debuglog = util.debuglog;
   promisify = util.promisify;
@@ -84,7 +86,6 @@ class Utils implements IUtils {
   convertDecimalToFracionString = convertDecimalToFracionString;
 }
 
-export let zionUtil: IUtils = new Utils();
 /**
  * Il contenuto degli array deve essere identico anche nell'ordine
  * @param {*} array
@@ -135,7 +136,7 @@ function checkArrayElementsConstructor<T>(
     //@ts-ignore
     let condizione = elemento.constructor === constructor;
     risultatoControllo.push(condizione);
-    return risultatoControllo.some((el) => el === false);
+    return risultatoControllo.some(el => el === false);
   };
   const controlloFinale = function (element: boolean) {
     return element === false;
@@ -163,14 +164,14 @@ function checkObjectConstructor(
  * @returns
  */
 function hasArrayObjectElements(
-  this: IUtils,
+  this: IZionUtils_v1,
   array: object[]
 ): boolean | string {
   if (this.isArrayEmpty(array)) {
     return "Array is Empty";
   }
   let result: boolean[] = [];
-  array.forEach((element) => {
+  array.forEach(element => {
     if (typeof element === "object") result.push(true);
     if (typeof element !== "object") result.push(false);
   });
@@ -245,7 +246,7 @@ function extractSameElementsFromArray<T extends string | boolean | number>(
       );
     }
     for (let element2 of array2) {
-      let match = array1.find((element1) => element1 === element2);
+      let match = array1.find(element1 => element1 === element2);
       match ? sameValues.push(match) : "no match found";
     }
     return sameValues;
@@ -321,7 +322,7 @@ function sliceArray<T>(size: number, array: T): T[][] | string {
 function subtractArrays(arr1: string[], arr2: string[]) {
   return arr1
     .concat(arr2)
-    .filter((item) => !arr1.includes(item) || !arr2.includes(item));
+    .filter(item => !arr1.includes(item) || !arr2.includes(item));
 }
 /**
  *
@@ -407,7 +408,10 @@ function modulo(a: number, b: number): number {
  * essere creata la string.
  * @returns una string con formato frazione (0,2 => '1/5')
  */
-function convertDecimalToFracionString(this: IUtils, decimale: number): string {
+function convertDecimalToFracionString(
+  this: IZionUtils_v1,
+  decimale: number
+): string {
   let frazioneInString: string;
   if (decimale === 1) return "1";
   if (decimale >= 1) return "il valore passato deve essere un numero decimale!";

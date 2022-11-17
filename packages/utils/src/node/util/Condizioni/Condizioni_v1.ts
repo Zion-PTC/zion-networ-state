@@ -4,7 +4,7 @@ export function emptyString(el: string) {
   return el !== "";
 }
 
-export class Condizioni {
+export class Condizioni_v1 {
   constructor() {}
   // TODO creare strategie di riconoscimento classe
   oggettoUgualeCostruttore(object: object, constructor: Function) {

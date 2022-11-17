@@ -1,2 +1,8 @@
-export * as zionUtil from "./zionUtil";
-export * as Condizioni from "./Condizioni";
+//// Condizioni
+export * from "./Condizioni";
+
+//// ZionUtils
+export * from "./ZionUtils";
+
+//// zionUtil
+export * from "./zionUtil";

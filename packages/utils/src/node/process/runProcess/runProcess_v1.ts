@@ -4,12 +4,12 @@ export type Options = {
   args?: any[];
 };
 
-export type runProcess = <T>(
+export type runProcess_v1 = <T>(
   process: () => Promise<T>,
   options?: Options
 ) => void;
 
-export const runProcess: runProcess = function <T>(
+export const runProcess_v1: runProcess_v1 = function <T>(
   process: () => Promise<T>,
   options: Options = { successMess: "Success" }
 ) {
@@ -21,8 +21,8 @@ export const runProcess: runProcess = function <T>(
   };
 
   main(options?.successMess)
-    .then((process) => {
+    .then(process => {
       if (process.end === 0) console.log("\n\n" + process.successMess + "\n\n");
     })
-    .catch((e) => console.log(options?.showTrace ? e : e.message));
+    .catch(e => console.log(options?.showTrace ? e : e.message));
 };

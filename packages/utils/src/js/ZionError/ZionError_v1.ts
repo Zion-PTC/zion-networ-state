@@ -1,7 +1,7 @@
 // import mongoose from "mongoose";
 // TODO create a mixin which makes a class mongoosable
 
-export interface ZionError {
+export interface ZionError_v1 extends Error {
   name: string;
   message: string;
   stack?: string;
@@ -18,10 +18,10 @@ export interface ZionErrorConstructor {
  * @param name It's the name which appear in the console log
  * @param args Object containing the called parameters
  */
-export class ZionError extends Error {
+export class ZionError_v1 extends Error {
   constructor(
-    message?: string,
     name?: string,
+    message?: string,
     public args?: string[] | IArguments
   ) {
     super(message);
@@ -42,4 +42,4 @@ export class ZionError extends Error {
 // zionErrorSchema.loadClass(ZionError);
 // export let ZionErrorDoc = mongoose.model("Error", zionErrorSchema);
 
-export default ZionError;
+export default ZionError_v1;
