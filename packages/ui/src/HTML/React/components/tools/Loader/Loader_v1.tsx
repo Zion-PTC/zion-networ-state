@@ -1,7 +1,7 @@
-import { UseInfiniteScroll } from "../../../lib/hooks";
+import { useInfiniteScroll } from "../../../lib/hooks";
 
 type LoaderProps<T> = Pick<
-  UseInfiniteScroll<T>,
+  useInfiniteScroll<T>,
   "isLoading" | "loadMoreCallback" | "isLastPage"
 >;
 

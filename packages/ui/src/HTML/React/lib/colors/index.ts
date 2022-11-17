@@ -1,1 +1,1 @@
-export * from "./Palettes";
+export * as Palettes from "./Palettes";

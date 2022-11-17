@@ -18,11 +18,3 @@ export function handleChange_v2(
     callBacks.forEach(callback => callback(e));
   };
 }
-
-interface boooo {
-  (a: number): number;
-}
-
-function boooo(a) {
-  return a;
-}

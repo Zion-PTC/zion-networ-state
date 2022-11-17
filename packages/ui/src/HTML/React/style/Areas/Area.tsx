@@ -1,9 +1,10 @@
+import { ImageProps } from "next/image";
 import { RefObject } from "react";
 import styled, { css } from "styled-components";
-import { AlbumProps } from "../../components/Items/CardTypes";
-import { NftPfpProps } from "../../components/Items/CardTypes/NftPfp/";
-import { ImageProps } from "../../components/Items/sections";
-import { InfosProps } from "../../components/Items/sections/Infos/";
+import {
+  CardProps,
+  InfosProps,
+} from "../../components/Items";
 import { border1PxSolid_wo_top } from "../common/border";
 
 type AreaTypes = {
@@ -23,14 +24,11 @@ export type AreaStyle = {
   ref?: RefObject<HTMLDivElement>;
 };
 
-type UsedBy = NftPfpProps &
-  AlbumProps &
-  ImageProps &
-  InfosProps;
+type UsedBy = CardProps & ImageProps & InfosProps;
 
 type AreaStyled = AreaStyle &
   UsedBy &
-  FluidStyled &
+  utility.FluidStyled &
   AreaTypes;
 
 const defaultArea = css<ImageProps & AreaStyle>`
@@ -63,7 +61,8 @@ const infos = styled.div<AreaStyled>`
   grid-template-rows: 2fr 1fr 1fr;
 `;
 
-const image = css<ImageProps>`
+// TODO sistemare any
+const image = css<any>`
   z-index: 1;
   background-color: ${props =>
     props.backgroundColor

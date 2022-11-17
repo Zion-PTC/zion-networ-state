@@ -17,6 +17,12 @@
     },
     {
       "path": "src/HTML/React/style"
+    },
+    {
+      "path": "src/HTML/React/classes"
+    },
+    {
+      "path": "src/Colors"
     }
   ],
   "settings": {}

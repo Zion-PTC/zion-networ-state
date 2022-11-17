@@ -12,7 +12,7 @@ import { Infos, InfosProps } from "./Infos";
 import { Social } from "./Social";
 import { Image } from "../../GlobalSections";
 import { RemainingPercentage } from "../../../lib/util/classes/RemainingPercentage";
-import { roundDecimals } from "../../../lib/util/calculate/";
+import { roundDecimals } from "../../../lib/util/calculate/roundDecimals";
 
 const widthinblocks = 8;
 const totalHeightInBlocks = 14;

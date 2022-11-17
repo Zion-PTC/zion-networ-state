@@ -1,5 +1,5 @@
 import { css, CSSProperties } from "styled-components";
-import { checkPropAndSetDefault } from "../checkPropsAndSetDefault";
+import { checkPropsAndSetDefault } from "../checkPropsAndSetDefault";
 
 export const checkPlaceItems_v2 = <
   T extends {
@@ -12,7 +12,7 @@ export const checkPlaceItems_v2 = <
   if (!props.css_.placeItems) return;
   let result;
   if (props)
-    result = checkPropAndSetDefault(
+    result = checkPropsAndSetDefault(
       props,
       "placeItems",
       css`

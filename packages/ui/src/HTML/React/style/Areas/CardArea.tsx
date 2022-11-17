@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { roundDecimals } from "../../lib/util/calculate/";
+import { roundDecimals } from "../../lib/util/calculate/roundDecimals";
 
 const widthinblocks = 8;
 const totalHeightInBlocks = 14;

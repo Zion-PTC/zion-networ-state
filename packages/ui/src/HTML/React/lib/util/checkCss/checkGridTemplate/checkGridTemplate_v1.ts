@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { checkPropAndSetDefault } from "../checkPropsAndSetDefault";
+import { checkPropsAndSetDefault } from "../checkPropsAndSetDefault";
 
 // function checkGridTemplateColumns<
 //   T extends {
@@ -23,7 +23,7 @@ export function checkGridTemplate_v1<
   let result;
   switch (type) {
     case "columns":
-      result = checkPropAndSetDefault(
+      result = checkPropsAndSetDefault(
         props,
         "gridTemplateColumns",
         css`
@@ -34,7 +34,7 @@ export function checkGridTemplate_v1<
       break;
 
     case "rows":
-      result = checkPropAndSetDefault(
+      result = checkPropsAndSetDefault(
         props,
         "gridTemplateRows",
         css``

@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { css } from "styled-components";
 
-export const checkGridAreaWithCss_ = <
+export const checkGridAreaWithCss__v1 = <
   T extends {
     css_: { gridArea?: CSSProperties["gridArea"] };
   }

@@ -1,3 +1,9 @@
-export * from "./Hsl";
-export * from "./Palette";
-export * as palettes from "./Palette";
+//// NavBar
+export * from "./NavBar";
+
+//// Icon
+export * from "./Icon";
+
+//// Form
+export * from './Form';
+export * as Basic from './Basic'

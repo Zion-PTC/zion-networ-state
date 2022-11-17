@@ -22,7 +22,7 @@ const LoadingAnimation = keyframes`
 100% {height:5px;transform:translateY(0px);background:#9b59b6;}
 `;
 
-export const BarWaves = styled(BarWavesData)`
+export const BarsWave_v1 = styled(BarWavesData)`
   display: ${props => (props.display ? "block" : "none")};
   position: relative;
   right: 4.5px;

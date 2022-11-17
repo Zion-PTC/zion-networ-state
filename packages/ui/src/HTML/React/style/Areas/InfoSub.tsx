@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { utility } from "../../lib";
 
 type InfoSubStyle = {
   css?: utility.ZionCss<

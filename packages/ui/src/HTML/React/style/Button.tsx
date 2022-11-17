@@ -1,31 +1,35 @@
 import { MouseEventHandler } from "react";
-import styled, { css } from "styled-components";
-import { Css } from "../classes/Css";
-import checkCss from "../lib/util/checkCss";
+import styled from "styled-components";
+import { checkCss } from "../lib/util/checkCss";
 
-export type ButtonStyle = {
-  primary?: boolean;
-  secondary?: boolean;
-  disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  size?: Sizes;
-  position?: Position;
-  zIndex?: string;
-  gridArea?: string;
-  child?: { justifySelf?: string };
-} & CssStyled &
-  StyledDefault;
+export type ButtonStyle = NoizProps<
+  {
+    primary?: boolean;
+    secondary?: boolean;
+    disabled?: boolean;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    size?: Sizes;
+    position?: Position;
+    zIndex?: string;
+    gridArea?: string;
+    child?: { justifySelf?: string };
+  },
+  true
+>;
 
-const defaultHeight = css`
-  height: 70%;
-`;
-const defaultWidth = css`
-  width: 70%;
-`;
+// const defaultHeight = css`
+//   height: 70%;
+// `;
+// const defaultWidth = css`
+//   width: 70%;
+// `;
+
+/**
+ * ${props => new Css("height", defaultHeight, props).value}
+ * ${props => new Css("width", defaultWidth, props).value}
+ */
 
 export const Button = styled.button<ButtonStyle>`
-  ${props => new Css("height", defaultHeight, props).value}
-  ${props => new Css("width", defaultWidth, props).value}
   line-height: 1.2;
   font-size: 70%;
   place-self: center;

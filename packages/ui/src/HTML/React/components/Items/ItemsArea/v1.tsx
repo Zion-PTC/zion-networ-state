@@ -16,7 +16,7 @@ type ItemsAreaCss = {
 
 type ToEdit = ItemsAreaDatas & ItemsAreaCss;
 
-type FromLibrary = StyledCss;
+type FromLibrary = StyledDefault;
 
 export type ItemsAreaProps = ToEdit & FromLibrary;
 

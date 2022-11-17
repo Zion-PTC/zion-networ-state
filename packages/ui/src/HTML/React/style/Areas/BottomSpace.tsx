@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import { Css } from "../../classes/Css";
-import { CssStyled, utility } from "../../lib";
+import { Css } from "../../lib/global/BaseNoiz/Css";
 
 type BottomSpaceStyle = {
   css?: utility.ZionCss<
@@ -15,7 +14,7 @@ type BottomSpaceStyle = {
     | "gridArea"
   >;
 } & StyledDefault &
-  CssStyled;
+  utility.CssStyled;
 
 export const BottomSpace = styled.div<BottomSpaceStyle>`
   text-align: center;

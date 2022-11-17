@@ -7,7 +7,7 @@ export enum CardShapesEnum {
   slim,
   resource,
 }
-export type CardShapesTypes = EnumToUnion<
+export type CardShapesTypes = utility.EnumToUnion<
   typeof CardShapesEnum
 >;
 

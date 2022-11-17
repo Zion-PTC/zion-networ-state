@@ -13,7 +13,7 @@ type BadgeProps = {
   theme?: FluidTheme;
 };
 
-const BadgeCircle = styled(Circle)`
+export const BadgeCircle = styled(Circle)`
   width: 100%;
   height: 100%;
   display: grid;

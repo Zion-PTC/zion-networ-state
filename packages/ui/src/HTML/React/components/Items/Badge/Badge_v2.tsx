@@ -11,8 +11,7 @@ type Badge_v2Css = {
 };
 
 type ToEdit = Badge_v2Datas & Badge_v2Css;
-type Theme = { theme: FluidTheme };
-type FromLibrary = FluidStyled & Theme;
+type FromLibrary = StyledDefault;
 
 export type Badge_v2Props = ToEdit & FromLibrary;
 

@@ -6,7 +6,7 @@ import { Tracks } from "../../../Icons/Tracks";
 import { Input as I } from "./Input";
 import { InputData } from "./Input/Input_v1";
 
-type NavBarProps = {
+export type NavBarProps_v1 = {
   icon1?: JSX.Element;
   icon2?: JSX.Element;
   icon3?: JSX.Element;
@@ -16,7 +16,7 @@ type NavBarProps = {
 const Input = styled(I)``;
 
 export function NavBarData(
-  props: NavBarProps & StyledDefault
+  props: NavBarProps_v1 & StyledDefault
 ) {
   const tracks = new InputData("tracks");
   const album = new InputData("album");

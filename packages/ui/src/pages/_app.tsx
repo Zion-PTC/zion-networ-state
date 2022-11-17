@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Palette } from "../HTML/React/classes";
-import { ColorGenerator } from "../HTML/React/classes/ColorGenerator";
-import { LogoZion } from "../HTML/React/components/Icons/LogoZion";
-import { CardProps } from "../HTML/React/components/Items";
-import { InfosProps } from "../HTML/React/components/Items/Card/Infos/";
-import { ItemsAreaProps } from "../HTML/React/components/Items/ItemsArea";
+import HTML from "../HTML";
+// TYPES
 import {
+  CardProps,
+  InfosProps,
+  ItemsAreaProps,
   ItemProps,
   ProfilePageProps,
-} from "../HTML/React/components/Pages";
-import { fluid_7 } from "../HTML/React/lib/colors/Palettes/fluid_7";
-import { GlobalStyles } from "../HTML/React/style/Global";
-import { NavBarProps } from "../HTML/React/style/Layout";
+  NavBarProps,
+} from "../HTML/types";
+import { ColorGenerator } from "../Colors/classes";
+import { Palette } from "../Colors/classes/Palette";
+
+const LogoZion = HTML.React.components.Icons.LogoZion;
+const fluid_7 = HTML.React.lib.colors.Palettes.fluid_7;
+const GlobalStyles = HTML.React.styled.global.GlobalStyles;
 
 const src =
   "https://ipfs.io/ipfs/QmQbeC3h3eAZej3mQCGoQAcuVj7v3RiNJqQ3huzjzDywb9?filename=QmQbeC3h3eAZej3mQCGoQAcuVj7v3RiNJqQ3huzjzDywb9";
@@ -100,17 +103,17 @@ const nftPfpProps: CardProps = {
 };
 
 const itemsAreaProps: ItemsAreaProps = {
-  blockSize: 0,
-  columns: 0,
+  // blockSize: 0,
+  // columns: 0,
   height: 0,
-  width: 0,
+  // width: 0,
   avatarSize: 0,
 };
 
 const navBarProps: NavBarProps = {};
 
 const profilePageProps: ProfilePageProps = {
-  data: [
+  datas: [
     {
       id: 0,
       name: "name",

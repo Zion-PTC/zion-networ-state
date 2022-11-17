@@ -1,7 +1,8 @@
 import { Circle, areas } from "../../style";
 const { Area3 } = areas;
 
-export type LogoImageProps = CssStyled & StyledDefault;
+export type LogoImageProps = utility.CssStyled &
+  StyledDefault;
 
 export const LogoImage_v1 = (props: LogoImageProps) => {
   return (

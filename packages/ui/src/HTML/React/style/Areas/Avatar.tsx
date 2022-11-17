@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { utility } from "../../lib";
 
 type AvatarStyle = {
   css?: utility.ZionCss<"display", true>;

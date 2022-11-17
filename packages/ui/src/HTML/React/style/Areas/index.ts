@@ -2,7 +2,7 @@ export * from "./Area";
 export * from "./Avatar";
 export * from "./BottomSpace";
 export * from "./CardArea";
-export * from "./Circle";
+export * from "./CircleArea";
 export * from "./ContentArea";
 export * from "./InfoSection";
 export * from "./InfoSub";

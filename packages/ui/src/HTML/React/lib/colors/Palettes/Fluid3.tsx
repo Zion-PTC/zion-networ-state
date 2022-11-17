@@ -1,4 +1,4 @@
-import { Fluid3 } from "../../../classes/Palette/Fluid3";
+import { Fluid3 } from "../../../../../Colors/classes/Palette";
 
 export let fluid_colors3_a = new Fluid3(
   "hsl(29, 100%, 50%)",

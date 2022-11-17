@@ -1,5 +1,4 @@
 import { FlattenSimpleInterpolation } from "styled-components";
-import { utility } from "../../../utility";
 
 export function preCheckProp<
   T extends { css_?: utility.ZionCss } = {

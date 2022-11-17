@@ -1,1 +1,2 @@
-export * from "./checkSize";
+//// checkSize
+export * as checkSize_props from "./checkSize";
