@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { exec } from "child_process";
+
 export const noiz_v1 = "noiz_v1";
 
 const PLATFORM = process.platform;
@@ -13,3 +15,4 @@ const MESSAGE =
     : "fuck you";
 
 console.log(MESSAGE);
+exec('"sh hello.sh"');
