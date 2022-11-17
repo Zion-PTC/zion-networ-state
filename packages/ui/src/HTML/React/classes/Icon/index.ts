@@ -14,3 +14,6 @@ export * from "./Like";
 
 //// LogoZion
 export * from "./LogoZion";
+
+//// Album
+export * from './Album';

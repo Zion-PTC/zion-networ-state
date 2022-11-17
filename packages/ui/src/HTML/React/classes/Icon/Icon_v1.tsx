@@ -3,6 +3,7 @@ import { LogoZion } from "../../components/Icons";
 ("../../lib/types");
 import { Like as LikeIcon } from "./Like";
 import { Moon as MoonIcon } from "./Moon";
+import { LogoZion as ZionIcon } from "./";
 
 ///// TYPES
 export type Icon_v1Datas = {};
@@ -28,11 +29,12 @@ export type StyledSvgProps = {
 
 export const Icon_v1 = class extends BaseNoiz<
   Icon_v1Datas,
-  Icon_v1ClassBooleans
+  Icon_v1ClassProps
 > {
   constructor(props: Icon_v1ClassProps) {
     super(props);
   }
+
   static StyledSvg = styled.svg<StyledSvgProps>`
     path {
       fill: ${props =>
@@ -45,6 +47,7 @@ export const Icon_v1 = class extends BaseNoiz<
           : ""};
     }
   `;
+
   static Svg24 = (
     props: NoizProps<StyledSvgProps, true>
   ) => (
@@ -59,12 +62,17 @@ export const Icon_v1 = class extends BaseNoiz<
       {props.children}
     </Icon_v1.StyledSvg>
   );
-  Like = LikeIcon;
-  Moon = MoonIcon;
+
+  static LogoZion = ZionIcon;
+
+  static Like = LikeIcon;
+
+  static Moon = MoonIcon;
+
   render() {
     let Icon: () => JSX.Element = LogoZion;
-    if (this.props.like) Icon = this.Like;
-    if (this.props.moon) Icon = this.Moon;
+    if (this.props.like) Icon = Icon_v1.Like;
+    if (this.props.moon) Icon = Icon_v1.Moon;
     return <Icon {...this.props.datas[0]}></Icon>;
   }
 };

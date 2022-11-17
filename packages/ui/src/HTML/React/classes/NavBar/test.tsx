@@ -20,14 +20,18 @@ class Smalle extends BaseNoiz<SmalleData, SmalleBooleans> {
   constructor(props: SmalleClassProps) {
     super(props);
   }
+
   Html = (props: SmalleProps) => (
     <div className={props.className}>
       <p>{props.age}</p>
       <p>{props.age}</p>
     </div>
   );
+
   Style = styled(this.Html)``;
+
   Mapper = Smalle.mapperFactory(this.Style);
+
   render() {
     return <this.Mapper {...this.props}></this.Mapper>;
   }

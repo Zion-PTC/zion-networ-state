@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+export const noiz_v1 = "noiz_v1";
+
+const PLATFORM = process.platform;
+const DARWIN = "darwin";
+const WIN32 = "win32";
+
+const MESSAGE =
+  PLATFORM === DARWIN
+    ? "you are a good user"
+    : PLATFORM === WIN32
+    ? "you are a bad user"
+    : "fuck you";
+
+console.log(MESSAGE);

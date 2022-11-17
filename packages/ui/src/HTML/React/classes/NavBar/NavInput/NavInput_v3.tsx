@@ -7,16 +7,13 @@ export type NavInput_v3Data = utility.Flatten<
   {
     inputId: string;
     inputName: string;
-    checked?: boolean;
     value?: string;
     IconComponent: (props: IconClassProps) => JSX.Element;
   } & IconAsChild
 >;
-
 export type NavInput_v3Booleans = {
   checked?: boolean;
 };
-
 export type NavInput_v3Props = NoizProps<
   NavInput_v3Data & NavInput_v3Booleans
 >;
@@ -26,10 +23,9 @@ export type NavInput_v3ClassBooleans = {
   keyValueInput?: boolean;
   textInput?: boolean;
 };
-
-export type NavInput_v3ClassProps =
-  NoizDatas<NavInput_v3Props> & NavInput_v3ClassBooleans;
-
+export type NavInput_v3ClassProps = utility.Flatten<
+  NoizDatas<NavInput_v3Props> & NavInput_v3ClassBooleans
+>;
 export type NavInput_v3AsChild = MakeAsChild<
   "NavInput",
   NavInput_v3ClassProps
@@ -135,8 +131,6 @@ export const NavInput_v3 = class extends BaseNoiz<
   Mapper = BaseNoiz.mapperFactory(this.Style);
 
   render() {
-    return (
-      <this.Mapper datas={this.props.datas}></this.Mapper>
-    );
+    return <this.Mapper {...this.props}></this.Mapper>;
   }
 };
