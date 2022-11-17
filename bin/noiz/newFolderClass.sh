@@ -24,11 +24,9 @@ echo "" >>index.ts &&
 
 mkdir ${folder} &&
   touch ${indexpath} &&
-  echo "import { ${folder}_v1 } from './${folder}_v1';" >>${indexpath} &&
   echo "///// EXPORT" >>${indexpath} &&
-  echo "" >>${indexpath} &&
-  echo "export const ${folder} = ${folder}_v1;" >>${indexpath} &&
-  echo "//////" >>${indexpath}
+  echo "export { ${folder}_v1 as ${folder} } from \"./${folder}_v1\";" >>${indexpath} &&
+  echo "////////////" >>${indexpath}
 
 # noiz config
 touch ${noizconfigpath} &&
