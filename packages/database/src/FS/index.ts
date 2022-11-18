@@ -8,8 +8,6 @@ export * from "./classes/ZionCsv.js";
 export * from "./classes/ZionYaml.js";
 export * from "./System";
 // lib
-export * as classes from "./classes/index.js";
-export * as lib from "./lib/index.js";
 // export * from "./lib/CRUD.js";
 // export * from "./lib/read.js";
 // export * from "./lib/readJSON.js";
@@ -18,3 +16,6 @@ export * as lib from "./lib/index.js";
 // export * from "./lib/types/index.js";
 // lib/chokidar
 // export * from "./lib/chokidar/stop.js";
+export * as classes from "./classes";
+export * as lib from "./lib";
+export * as scripts from "./scripts";
