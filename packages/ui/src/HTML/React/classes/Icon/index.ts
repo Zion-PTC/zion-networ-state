@@ -65,3 +65,9 @@ export * from './Tracks';
 
 //// Twitter
 export * from './Twitter';
+
+//// ScrollToTop
+export * from './ScrollToTop';
+
+//// Loading
+export * from './Loading';

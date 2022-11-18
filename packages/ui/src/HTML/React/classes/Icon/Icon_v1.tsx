@@ -20,6 +20,7 @@ import {
   Share as ShareIcon,
   Tracks as TracksIcon,
   Twitter as TwitterIcon,
+  ScrollToTop as ScrollToTopIcon,
 } from "./";
 
 ///// TYPES
@@ -47,6 +48,7 @@ export type Icon_v1ClassBooleans = {
   share?: boolean;
   tracks?: boolean;
   twitter?: boolean;
+  scrollToTop?: boolean;
 };
 export type Icon_v1ClassProps = NoizDatas<Icon_v1Props> &
   Icon_v1ClassBooleans;
@@ -152,9 +154,12 @@ export const Icon_v1 = class extends BaseNoiz<
 
   Twitter = TwitterIcon;
 
+  ScrollToTop = ScrollToTopIcon;
+
   render() {
     const LogoZion = this.LogoZion;
     let Icon: () => JSX.Element = LogoZion;
+    if (this.props.scrollToTop) Icon = this.ScrollToTop;
     if (this.props.more_Normal) Icon = this.More_Normal;
     if (this.props.queue) Icon = this.Queue;
     if (this.props.share) Icon = this.Share;
