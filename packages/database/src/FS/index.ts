@@ -4,8 +4,9 @@
 // export * from "./classes/Reader.js";
 // export * from "./classes/Watcher.js";
 // export * from "./classes/Writer.js";
-export * from "./classes/ZionCsv.js";
-export * from "./classes/ZionYaml.js";
+export { ZionCsv } from "./classes/";
+export type { IZionCsv } from "./classes/";
+export { ZionYaml, ZionYamlToFile } from "./classes";
 export * from "./System";
 // lib
 // export * from "./lib/CRUD.js";
