@@ -14,7 +14,8 @@ _update_date=$7
 
 folder=${1}
 indexpath=${folder}/index.ts
-filepath=${folder}/${folder}_v1.ts
+filename=${folder}_v1
+filepath=${folder}/${filename}.ts
 noizconfigpath=${folder}/.noiz
 
 # root dir index
@@ -25,7 +26,8 @@ echo "" >>index.ts &&
 mkdir ${folder} &&
   touch ${indexpath} &&
   echo "///// EXPORT" >>${indexpath} &&
-  echo "export { ${folder}_v1 as ${folder} } from \"./${folder}_v1\";" >>${indexpath} &&
+  echo "export { ${filename} as ${folder} } from \"./${filename}\";" >>${indexpath} &&
+  echo "export { ${filename}Ctor as ${folder}Ctor } from \"./${filename}\";" >>${indexpath} &&
   echo "////////////" >>${indexpath}
 
 # noiz config
@@ -38,6 +40,24 @@ touch ${noizconfigpath} &&
   echo $_update_date >>${noizconfigpath}
 
 touch ${filepath} &&
-  echo "export const ${folder}_v1 = '${folder}_v1';" >>${filepath}
+  echo "export interface I${filename} {" >>${filepath} &&
+  echo "  name: string;" >>${filepath} &&
+  echo "}" >>${filepath} &&
+  echo "" >>${filepath} &&
+  echo "export interface ${filename} {" >>${filepath} &&
+  echo "  name: string;" >>${filepath} &&
+  echo "}" >>${filepath} &&
+  echo "" >>${filepath} &&
+  echo "export class ${filename} implements I${filename} {" >>${filepath} &&
+  echo "  constructor(name: string) {" >>${filepath} &&
+  echo "    this.name = name;" >>${filepath} &&
+  echo "  }" >>${filepath} &&
+  echo "}" >>${filepath} &&
+  echo "" >>${filepath} &&
+  echo "export type ${folder}_v1Ctor = {" >>${filepath} &&
+  echo "  new (name: string): ${filename};" >>${filepath} &&
+  echo "};" >>${filepath} &&
+  echo "" >>${filepath} &&
+  echo "export const ${folder}_v1Ctor: ${folder}_v1Ctor = ${filename};" >>${filepath}
 
 echo "created a new Class Folder!!🏁🚀"

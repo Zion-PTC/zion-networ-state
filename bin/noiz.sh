@@ -86,6 +86,8 @@ else
   fi
 fi
 
+# echo "What would you like to do?"
+
 echo "Do you want to create a file or a folder?"
 answer1=$(sh $step1)
 if [ $answer1 = "index" ]; then
