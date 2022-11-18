@@ -1,5 +1,4 @@
-import { Account } from "../../../../HTML/React/components/Icons/Icone da modificare/Account";
-import { ArrowBack } from "../../../../HTML/React/components/Icons/Icone da modificare/ArrowBack";
+import { Icon } from "../../../../HTML/React/classes";
 
 export default function index() {
   return (
@@ -11,9 +10,7 @@ export default function index() {
         height: 100%;
       `}
     >
-      <ArrowBack></ArrowBack>
-      <Account></Account>
-      <ArrowBack></ArrowBack>
+      <Icon account datas={[]}></Icon>
     </div>
   );
 }

@@ -1,6 +1,4 @@
-export {
-  Moon_v1 as Moon,
-} from './Moon_v1';
+export { Moon_v1 as Moon } from "./Moon_v1";
 
 export type {
   Moon_v1Data as MoonData,
@@ -8,5 +6,4 @@ export type {
   Moon_v1Props as MoonProps,
   Moon_v1ClassProps as MoonClassProps,
   Moon_v1AsChild as MoonAsChild,
-} from './Moon_v1';
-
+} from "./Moon_v1";

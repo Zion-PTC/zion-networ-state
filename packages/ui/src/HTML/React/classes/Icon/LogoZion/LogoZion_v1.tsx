@@ -2,7 +2,7 @@ import { Icon } from "..";
 
 export type LogoZion_v1Props = "LogoZion_v1Props";
 export const LogoZion_v1 = () => (
-  <Icon.Svg24>
+  <Icon.Svg24 stroked>
     <path
       d="M14.5575 9.776L11.052 7.75206L16.6705 8.55681L19.9996 6.62253L11.9931 2L9.47386 3.48159L13.8907 6.03158L9.47386 5.50021L6.57087 5.15128L4.03906 6.62253L12.0452 11.2451L14.5575 9.776Z"
       strokeWidth="0.5"
