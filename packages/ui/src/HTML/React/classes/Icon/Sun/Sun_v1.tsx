@@ -7,7 +7,7 @@ export type Sun_v1ClassProps = "Sun_v1ClassProps";
 export type Sun_v1AsChild = "Sun_v1AsChild";
 
 export const Sun_v1 = () => (
-  <Icon.Svg24>
+  <Icon.Svg24 stroked>
     <circle cx="12" cy="12" r="5.25" strokeWidth="2" />
     <path
       d="M12 4V2"

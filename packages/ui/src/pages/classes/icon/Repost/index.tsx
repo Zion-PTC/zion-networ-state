@@ -1,5 +1,5 @@
+import { Icon } from "../../../../HTML/React/classes";
+
 export default function index() {
-  return (
-    <div>index</div>
-  )
+  return <Icon repost datas={[]}></Icon>;
 }

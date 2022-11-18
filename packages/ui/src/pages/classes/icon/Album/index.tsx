@@ -1,5 +1,5 @@
-import { Album_v1 } from "../../../../HTML/React/classes/Icon/Album/Album_v1";
+import { Icon } from "../../../../HTML/React/classes";
 
 export default function index() {
-  return <Album_v1 />;
+  return <Icon album datas={[]}></Icon>;
 }
