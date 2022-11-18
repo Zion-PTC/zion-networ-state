@@ -1,3 +1,5 @@
-export default function index(props: any) {
-  return <div {...props}>index</div>;
+import { Album_v1 } from "../../../../HTML/React/classes/Icon/Album/Album_v1";
+
+export default function index() {
+  return <Album_v1 />;
 }
