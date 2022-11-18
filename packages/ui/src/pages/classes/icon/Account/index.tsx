@@ -1,5 +1,5 @@
-import { Account_v1 } from "../../../../HTML/React/classes/Icon/Account/Account_v1";
+import { Account } from "../../../../HTML/React/classes/Icon/Account";
 
-export default function index() {
-  return <Account_v1 />;
+export default function index(props: any) {
+  return <Account {...props}></Account>;
 }
