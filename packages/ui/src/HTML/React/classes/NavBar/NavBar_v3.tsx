@@ -38,7 +38,7 @@ export const NavBar_v3 = class extends BaseNoiz<
     return (
       <nav className={props.className}>
         <NavInput
-          datas={...props.NavInput}
+          datas={props.NavInput}
           textInput
         ></NavInput>
       </nav>
@@ -49,7 +49,7 @@ export const NavBar_v3 = class extends BaseNoiz<
     return (
       <nav className={props.className}>
         <NavInput
-          datas={...props.NavInput}
+          datas={props.NavInput}
           keyValueInput
         ></NavInput>
       </nav>
@@ -60,7 +60,7 @@ export const NavBar_v3 = class extends BaseNoiz<
     return (
       <nav className={props.className}>
         <NavInput
-          datas={...props.NavInput}
+          datas={props.NavInput}
           iconInput
         ></NavInput>
       </nav>

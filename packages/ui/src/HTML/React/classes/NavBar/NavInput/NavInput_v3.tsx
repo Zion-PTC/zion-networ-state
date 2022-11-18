@@ -106,7 +106,7 @@ export const NavInput_v3 = class extends BaseNoiz<
         />
         <label htmlFor={inputId}>
           <div>
-            <IconComponent datas={...Icon} />
+            <IconComponent datas={Icon} />
           </div>
           <p>{inputId.toLocaleUpperCase()}</p>
         </label>

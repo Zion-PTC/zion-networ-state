@@ -70,7 +70,7 @@ export class Form_v1 extends BaseNoiz<
       >
         <label>
           <p>prova</p>
-          <Input datas={...inputProps} />
+          <Input datas={inputProps} />
         </label>
       </form>
     );

@@ -30,7 +30,7 @@ export class Label_v1 extends BaseNoiz<
     return (
       <label className={props.className}>
         <p>{props.name}</p>
-        <Input datas={...props.Input} />
+        <Input datas={props.Input} />
       </label>
     );
   };
