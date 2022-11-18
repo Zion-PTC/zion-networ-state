@@ -49,7 +49,36 @@ export class Image_v1 extends BaseNoiz<
 > {
   constructor(props: Image_v1ClassProps) {
     super(props);
+    this.state = { isLoading: false, src: "" };
   }
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+  }
+
+  LogoImage = (props: Image_v1Props) => {
+    return (
+      <div className={props.className} css={props.css}>
+        <circle />
+      </div>
+    );
+  };
+
+  LogoImageStyled = styled(this.LogoImage)`
+    place-items: center;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    div {
+      ${BaseNoiz.styles.getCommonStyle("sixty")}
+      border-radius: 100%;
+      border: 0.05rem solid;
+      background-color: transparent;
+      border-radius: 100%;
+    }
+  `;
+
   Html = (props: Image_v1Props) => {
     const handleOnLoad = () => {
       if (props.handleisLoading)

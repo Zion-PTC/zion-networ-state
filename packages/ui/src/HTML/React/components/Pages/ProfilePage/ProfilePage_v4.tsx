@@ -14,8 +14,8 @@ import { NavBar } from "./NavBar";
 import { NavBarProps } from "../../../style/Layout";
 import { ItemsArea } from "../../Items/ItemsArea";
 import { ItemsAreaProps } from "../../Items/ItemsArea";
-import { Image } from "../../GlobalSections";
 import { Card, CardProps } from "../../Items";
+import { Image } from "../../../classes";
 
 type toDelete = {
   background?: { bottomBackgroundColor?: string };
@@ -32,7 +32,7 @@ type ProfilePage_v4Datas = {
   data: CardProps[];
   isShowMore: boolean;
   setIsShowMore: Dispatch<SetStateAction<boolean>>;
-  navbar: NavBarProps & StyledDefault;
+  navbar: StyledDefault<NavBarProps>;
   itemsarea: ItemsAreaProps;
   nftpfp: CardProps;
   tracks: number;
@@ -48,9 +48,8 @@ type ProfilePage_v4Css = {
 };
 
 type ToEdit = ProfilePage_v4Datas & ProfilePage_v4Css;
-type FromLibrary = StyledDefault;
 
-export type ProfilePage_v4Props = ToEdit & FromLibrary;
+export type ProfilePage_v4Props = StyledDefault<ToEdit>;
 
 const StyledTwitter = styled(Twitter)`
   place-self: end;
@@ -71,9 +70,14 @@ export const ProfilePageData_v3 = (
       <div id="bg-upper"></div>
       <div id="profile-avatar">
         <Image
-          src="https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc"
+          datas={[
+            {
+              src: "https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc",
+              imageLoaded: !isAvatarImageLoaded,
+              handleisLoading: setIsAvatarImageLoaded,
+            },
+          ]}
           imageLoaded={!isAvatarImageLoaded}
-          handleisLoading={setIsAvatarImageLoaded}
         ></Image>
       </div>
       <div id="infos">

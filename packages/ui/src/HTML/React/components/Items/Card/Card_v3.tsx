@@ -10,9 +10,9 @@ import styled from "styled-components";
 import { Head, HeadProps } from "./Head";
 import { Infos, InfosProps } from "./Infos";
 import { Social } from "./Social";
-import { Image } from "../../GlobalSections";
 import { RemainingPercentage } from "../../../lib/util/classes/RemainingPercentage";
 import { roundDecimals } from "../../../lib/util/calculate/roundDecimals";
+import { Image } from "../../../classes";
 
 const widthinblocks = 8;
 const totalHeightInBlocks = 14;
@@ -47,9 +47,8 @@ export type Card_v3Css = {
 };
 
 export type ToEdit = Card_v3Datas & Card_v3Css;
-export type FromLibrary = StyledDefault;
 
-export type Card_v3Props = ToEdit & FromLibrary;
+export type Card_v3Props = StyledDefault<ToEdit>;
 
 export function Card_v3Data(
   props: PropsWithRef<Card_v3Props>
@@ -101,11 +100,16 @@ export function Card_v3Data(
           clientHeight={headHeight}
         />
         <Image
-          handleisLoading={setIsLoading}
-          src={src}
-          width="100%"
-          height="100%"
-          display={imageLoaded ? "block" : "none"}
+          datas={[
+            {
+              handleisLoading: setIsLoading,
+              src,
+              width: "100%",
+              height: "",
+              display: imageLoaded ? "block" : "none",
+              imageLoaded,
+            },
+          ]}
           imageLoaded={imageLoaded}
         />
         <Infos {...props.infos} />

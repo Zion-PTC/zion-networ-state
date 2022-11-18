@@ -9,6 +9,7 @@ import {
   filled_height as fh,
   filled_width as fw,
 } from "../fillable";
+import { sixty as sx } from "../position";
 
 class StyleTuple<S extends string = string> {
   constructor(
@@ -39,6 +40,9 @@ const filled_width = new StyleTuple(FILLED_WIDTH, fh);
 const FILLED_HEIGHT = "filled_height";
 const filled_height = new StyleTuple(FILLED_HEIGHT, fw);
 
+const SIXTY = "sixty";
+const sixty = new StyleTuple(SIXTY, sx);
+
 const path = new ElementTuple("path", Path);
 
 type getFromStyleTuple<T> = T extends StyleTuple<infer X>[]
@@ -56,7 +60,12 @@ interface ICommon {
 }
 
 export class CommonStyles_v1 implements ICommon {
-  commonStyles = [filled, filled_width, filled_height];
+  commonStyles = [
+    filled,
+    filled_width,
+    filled_height,
+    sixty,
+  ];
   elements = [path];
   constructor() {}
   getCommonStyle<

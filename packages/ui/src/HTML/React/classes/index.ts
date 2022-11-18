@@ -5,8 +5,11 @@ export * from "./NavBar";
 export * from "./Icon";
 
 //// Form
-export * from './Form';
-export * as Basic from './Basic'
+export * from "./Form";
+export * as Basic from "./Basic";
 
 //// Image
-export * from './Image';
+export * from "./Image";
+
+//// Styles
+export * from "./Styles";

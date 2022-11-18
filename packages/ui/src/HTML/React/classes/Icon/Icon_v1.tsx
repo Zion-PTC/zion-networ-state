@@ -89,6 +89,21 @@ export const Icon_v1 = class extends BaseNoiz<
     </Icon_v1.StyledSvg>
   );
 
+  static Svg51 = (
+    props: NoizProps<StyledSvgProps, true>
+  ) => (
+    <Icon_v1.StyledSvg
+      filled={props.filled}
+      stroked={props.stroked}
+      width="51"
+      height="51"
+      viewBox="0 0 51 51"
+      fill="none"
+    >
+      {props.children}
+    </Icon_v1.StyledSvg>
+  );
+
   LogoZion = ZionIcon;
 
   Like = LikeIcon;

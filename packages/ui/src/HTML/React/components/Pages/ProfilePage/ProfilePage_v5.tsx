@@ -13,9 +13,8 @@ import { Twitter } from "../../Icons/Twitter";
 import { NavBarProps } from "../../../style/Layout";
 import { ItemsArea } from "../../Items/ItemsArea";
 import { ItemsAreaProps } from "../../Items/ItemsArea";
-import { Image } from "../../GlobalSections";
 import { Card, CardProps } from "../../Items";
-import { NavBar } from "../../../classes";
+import { Image, NavBar } from "../../../classes";
 
 type toDelete = {
   background?: { bottomBackgroundColor?: string };
@@ -72,9 +71,14 @@ export const ProfilePage_v5Data = (
       <div id="bg-upper"></div>
       <div id="profile-avatar">
         <Image
-          src="https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc"
+          datas={[
+            {
+              src: "https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc",
+              imageLoaded: !isAvatarImageLoaded,
+              handleisLoading: setIsAvatarImageLoaded,
+            },
+          ]}
           imageLoaded={!isAvatarImageLoaded}
-          handleisLoading={setIsAvatarImageLoaded}
         ></Image>
       </div>
       <div id="infos">

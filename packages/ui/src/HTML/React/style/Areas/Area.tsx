@@ -1,19 +1,18 @@
-import { ImageProps } from "next/image";
+// import { ImageProps } from "next/image";
 import { RefObject } from "react";
 import styled, { css } from "styled-components";
-import {
-  CardProps,
-  InfosProps,
-} from "../../components/Items";
+// import {
+//   InfosProps,
+// } from "../../components/Items";
 import { border1PxSolid_wo_top } from "../common/border";
 
-type AreaTypes = {
-  cardHead?: boolean;
-  cardInfos?: boolean;
-  image?: boolean;
-  infos?: boolean;
-  itemArea?: boolean;
-};
+// type AreaTypes = {
+//   cardHead?: boolean;
+//   cardInfos?: boolean;
+//   image?: boolean;
+//   infos?: boolean;
+//   itemArea?: boolean;
+// };
 
 export type AreaStyle = {
   width?: number;
@@ -24,14 +23,7 @@ export type AreaStyle = {
   ref?: RefObject<HTMLDivElement>;
 };
 
-type UsedBy = CardProps & ImageProps & InfosProps;
-
-type AreaStyled = AreaStyle &
-  UsedBy &
-  utility.FluidStyled &
-  AreaTypes;
-
-const defaultArea = css<ImageProps & AreaStyle>`
+const defaultArea = css<AreaStyle>`
   height: 100%;
   overflow: auto;
   width: ${props => props.width}px;
@@ -42,7 +34,9 @@ const defaultArea = css<ImageProps & AreaStyle>`
   );
 `;
 
-const cardHeadArea = css<AreaStyle>`
+type CardAreaProps = AreaStyle;
+
+const cardHeadArea = css<CardAreaProps>`
   z-index: 1;
   grid-template-columns: ${props => props.avatarSize}px 4fr 1fr;
   grid-template-rows: 1fr;
@@ -50,19 +44,27 @@ const cardHeadArea = css<AreaStyle>`
   ${border1PxSolid_wo_top}
 `;
 
-const cardInfos = styled.div<AreaStyled>`
+type CardInfosProps = AreaStyle;
+const cardInfos = styled.div<CardInfosProps>`
   ${border1PxSolid_wo_top}
   grid-template-columns: 1fr 1fr;
 `;
 
-const infos = styled.div<AreaStyled>`
+type InfosProps_ = AreaStyle;
+const infos = styled.div<InfosProps_>`
   width: 100%;
   height: 100%;
   grid-template-rows: 2fr 1fr 1fr;
 `;
 
 // TODO sistemare any
-const image = css<any>`
+type ImageProps = {
+  backgroundColor: string;
+  borderTop: string;
+  gridArea: string;
+};
+
+const image = css<ImageProps>`
   z-index: 1;
   background-color: ${props =>
     props.backgroundColor
@@ -92,7 +94,14 @@ const image = css<any>`
 //   place-items: none;
 // `;
 
-export const Area = styled.div<any>`
+type AreaProps = {
+  cardHead: boolean;
+  cardInfos: boolean;
+  infos: boolean;
+  image: boolean;
+} & ImageProps &
+  AreaStyle;
+export const Area = styled.div<AreaProps>`
   display: grid;
   /* place-items: center; */
   ${props => {

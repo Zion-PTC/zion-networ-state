@@ -4,7 +4,7 @@ import {
   useState,
 } from "react";
 import styled from "styled-components";
-import { Image } from "../../GlobalSections";
+import { Image } from "../../../classes";
 
 type Item_v2Datas = {
   src: string;
@@ -27,9 +27,8 @@ type Item_v2Css = {
 };
 
 type ToEdit = Item_v2Datas & Item_v2Css;
-type FromLibrary = StyledDefault;
 
-export type Item_v2Props = ToEdit & FromLibrary;
+export type Item_v2Props = StyledDefault<ToEdit>;
 
 export const Item_v2Data = (
   props: PropsWithChildren<Item_v2Props>
@@ -53,10 +52,19 @@ export const Item_v2Data = (
     <div className={props.className} css={props.css}>
       <div id="bg-upper"></div>
       <Image
-        src={src}
+        datas={[
+          {
+            src,
+            imageLoaded,
+            handleisLoading: setIsLoading,
+            gridArea: "image",
+          },
+        ]}
         imageLoaded={imageLoaded}
-        handleisLoading={setIsLoading}
-        gridArea="image"
+        // src={src}
+        // imageLoaded={imageLoaded}
+        // handleisLoading={setIsLoading}
+        // gridArea="image"
       ></Image>
       <div id="social">
         <button>{props.likeIcon}</button>
@@ -132,9 +140,6 @@ export const Item_v2 = styled(Item_v2Data)`
     height: 60vw;
     max-height: 15rem;
     background-color: #c4c4c4;
-  }
-  ${Image} {
-    overflow: hidden;
   }
   #social {
     grid-area: social;
