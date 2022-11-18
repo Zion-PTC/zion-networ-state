@@ -16,7 +16,37 @@ export * from "./Like";
 export * from "./LogoZion";
 
 //// Album
-export * from './Album';
+export * from "./Album";
 
 //// Account
-export * from './Account';
+export * from "./Account";
+
+//// ArrowBack
+export * from "./ArrowBack";
+
+//// ArrowLeft
+export * from "./ArrowLeft";
+
+//// ArrowRight
+export * from "./ArrowRight";
+
+//// FilterAlt
+export * from "./FilterAlt";
+
+//// Home
+export * from "./Home";
+
+//// Moon
+export * from "./Moon";
+
+//// Repost
+export * from "./Repost";
+
+//// Search
+export * from './Search';
+
+//// Sun
+export * from './Sun';
+
+//// Trending
+export * from './Trending';
