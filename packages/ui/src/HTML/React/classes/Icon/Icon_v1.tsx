@@ -15,6 +15,11 @@ import {
   Search as SearchIcon,
   Sun as SunIcon,
   Trending as TrendingIcon,
+  More_Normal as More_NormalIcon,
+  Queue as QueueIcon,
+  Share as ShareIcon,
+  Tracks as TracksIcon,
+  Twitter as TwitterIcon,
 } from "./";
 
 ///// TYPES
@@ -37,6 +42,11 @@ export type Icon_v1ClassBooleans = {
   search?: boolean;
   sun?: boolean;
   trending?: boolean;
+  more_Normal?: boolean;
+  queue?: boolean;
+  share?: boolean;
+  tracks?: boolean;
+  twitter?: boolean;
 };
 export type Icon_v1ClassProps = NoizDatas<Icon_v1Props> &
   Icon_v1ClassBooleans;
@@ -132,9 +142,24 @@ export const Icon_v1 = class extends BaseNoiz<
 
   Trending = TrendingIcon;
 
+  More_Normal = More_NormalIcon;
+
+  Queue = QueueIcon;
+
+  Share = ShareIcon;
+
+  Tracks = TracksIcon;
+
+  Twitter = TwitterIcon;
+
   render() {
     const LogoZion = this.LogoZion;
     let Icon: () => JSX.Element = LogoZion;
+    if (this.props.more_Normal) Icon = this.More_Normal;
+    if (this.props.queue) Icon = this.Queue;
+    if (this.props.share) Icon = this.Share;
+    if (this.props.tracks) Icon = this.Tracks;
+    if (this.props.twitter) Icon = this.Twitter;
     if (this.props.arrowBack) Icon = this.ArrowBack;
     if (this.props.arrowRight) Icon = this.ArrowRight;
     if (this.props.arrowLeft) Icon = this.ArrowLeft;
