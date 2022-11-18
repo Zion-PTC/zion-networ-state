@@ -17,3 +17,6 @@ export * from "./LogoZion";
 
 //// Album
 export * from './Album';
+
+//// Account
+export * from './Account';
