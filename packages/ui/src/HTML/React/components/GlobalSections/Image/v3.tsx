@@ -20,12 +20,12 @@ type Image_v3Datas = {
   src: string;
 };
 
-type Image_v3Css = {};
+export type Image_v3Css = {};
 
-type ToEdit = Image_v3Datas & Image_v3Css;
-type FromLibrary = StyledDefault;
+export type ToEdit = Image_v3Datas & Image_v3Css;
+// type FromLibrary = StyledDefault;
 
-export type Image_v3Props = ToEdit & FromLibrary;
+export type Image_v3Props = StyledDefault<ToEdit>;
 
 export const ImageData = (props: Image_v3Props) => {
   const handleOnLoad = () => {
