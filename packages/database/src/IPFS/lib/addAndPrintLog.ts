@@ -3,7 +3,7 @@ import { AddResult } from "ipfs-core-types/src/root";
 import fs from "fs";
 import { basename } from "path";
 import { js } from "@zionstate/utils";
-const ZionRegExp = js.ZionRegexp.ZionRegExp;
+const ZionRegExp = js.ZionRegExp;
 // const check1 = /(\..*)/g;
 const check1 = ZionRegExp.fileExtensionWithPoint;
 // const check2 = /[\w-_]+(?=\.)/g;

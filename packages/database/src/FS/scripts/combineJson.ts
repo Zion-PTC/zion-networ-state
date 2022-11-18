@@ -4,8 +4,8 @@ import { js, node } from "@zionstate/utils";
 
 const runProcess = node.process.runProcess;
 
-const { ZionRegexp } = js;
-const { ZionRegExp } = ZionRegexp;
+const { ZionRegExp } = js;
+
 const check = ZionRegExp.fileExtensionWithPoint;
 // TODO integrare il check da ZionRegeExp
 check;

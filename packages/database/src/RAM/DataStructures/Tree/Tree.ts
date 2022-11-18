@@ -6,8 +6,7 @@ import { node } from "@zionstate/utils";
 
 // TODO aggiunto per zittare ts
 const { util } = node;
-const { zionUtil: zu } = util;
-const zionUtil = zu.zionUtil;
+const { zionUtil } = util;
 export type TTTT = ITreeNode;
 
 export interface ITree {

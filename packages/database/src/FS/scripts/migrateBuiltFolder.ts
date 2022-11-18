@@ -10,8 +10,7 @@ import { changePackJson, changeTsConfig } from "../lib/edit.js";
 
 const runProcess = node.process.runProcess;
 
-const { ZionRegexp } = js;
-const { ZionRegExp } = ZionRegexp;
+const { ZionRegExp } = js;
 // TODO da cancellare ZionRegExp
 ZionRegExp;
 

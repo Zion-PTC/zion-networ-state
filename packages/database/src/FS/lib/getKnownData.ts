@@ -1,7 +1,6 @@
 import fs from "fs";
 import { js } from "@zionstate/utils";
-const { ZionRegexp } = js;
-const { ZionRegExp } = ZionRegexp;
+const { ZionRegExp } = js;
 
 const check1 = ZionRegExp.tsComment;
 const check2 = ZionRegExp.tsComment2;

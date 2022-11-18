@@ -2,8 +2,7 @@ import { readFileSync } from "fs";
 import { extname } from "path";
 import { js } from "@zionstate/utils";
 
-const { ZionRegexp } = js;
-const { ZionRegExp } = ZionRegexp;
+const { ZionRegExp } = js;
 const regexp = ZionRegExp.allTsComments;
 // TODO integrare la regexp qui sopra
 regexp;

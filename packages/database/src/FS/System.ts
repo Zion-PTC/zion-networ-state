@@ -12,11 +12,9 @@ import { Folder, IFolder } from "../RAM/DataStructures/Tree/Folder.js";
 import { File, IFile } from "../RAM/DataStructures/Tree/File.js";
 import { js, node } from "@zionstate/utils";
 
-const { ZionError: ze } = js;
-const { ZionError } = ze;
+const { ZionError } = js;
 const { util } = node;
-const { zionUtil: zu } = util;
-const zionUtil = zu.zionUtil;
+const { zionUtil } = util;
 
 export const JOINPATHSERROR = "arguments must be of type string[]";
 
