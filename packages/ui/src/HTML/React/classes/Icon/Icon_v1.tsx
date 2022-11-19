@@ -84,6 +84,18 @@ export const Icon_v1 = class extends BaseNoiz<
           ? props.theme.primary.borderColor
           : ""};
     }
+    circle {
+      fill: ${props =>
+        props.filled
+          ? props.secondary
+            ? props.theme.secondary.borderColor
+            : props.theme.primary.borderColor
+          : ""};
+      stroke: ${props =>
+        props.stroked
+          ? props.theme.primary.borderColor
+          : ""};
+    }
   `;
 
   static Svg24 = (
