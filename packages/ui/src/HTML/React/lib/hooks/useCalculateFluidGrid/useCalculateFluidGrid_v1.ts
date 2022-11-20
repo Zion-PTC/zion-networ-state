@@ -15,7 +15,12 @@ type ParentSize = {
   height?: number;
 };
 
-export function useCalculateFluidGrid_v1() {
+export function useCalculateFluidGrid_v1(): [
+  number,
+  number,
+  RefObject<HTMLDivElement>,
+  number
+] {
   const [blockSize, setBlockSize] = useState(0);
   const [width, setWidth] = useState(0);
   const itemsArea =

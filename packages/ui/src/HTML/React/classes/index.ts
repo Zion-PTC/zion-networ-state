@@ -13,3 +13,12 @@ export * from "./Image";
 
 //// Styles
 export * from "./Styles";
+
+//// Badge
+export * from './Badge';
+
+//// ItemsArea
+export * from './ItemsArea';
+
+//// Card
+export * from './Card';

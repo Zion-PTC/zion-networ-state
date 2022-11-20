@@ -7,6 +7,10 @@ const PLATFORM = process.platform;
 const DARWIN = "darwin";
 const WIN32 = "win32";
 
+const STEP1 = "./steps/";
+const STEP2 = "./steps/";
+const STEP3 = "./steps/";
+
 const MESSAGE =
   PLATFORM === DARWIN
     ? "you are a good user"

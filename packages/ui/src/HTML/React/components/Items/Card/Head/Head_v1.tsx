@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { Icon } from "../../../../classes";
 import { DebugColor } from "../../../../lib/util/classes";
 import { ButtonStyle } from "../../../../style";
 import { CircleStyle } from "../../../../style/Areas";
-import { LogoZion } from "../../../Icons/LogoZion";
 
 type Head_v1Datas = {
   menuIcon?: JSX.Element;
@@ -18,9 +18,8 @@ type Head_v1Css = {
 };
 
 type ToEdit = Head_v1Datas & Head_v1Css;
-type FromLibrary = StyledDefault;
 
-export type Head_v1Props = ToEdit & FromLibrary;
+export type Head_v1Props = StyledDefault<ToEdit>;
 
 export function CardHeadData_v3(props: Head_v1Props) {
   return (
@@ -32,7 +31,7 @@ export function CardHeadData_v3(props: Head_v1Props) {
       <div id="circle" />
       <div></div>
       <button id="menu">
-        <LogoZion />
+        <Icon datas={[]} />
       </button>
     </div>
   );

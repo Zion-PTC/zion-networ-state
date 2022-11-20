@@ -7,6 +7,7 @@ import { mapper as mp, mapperReturn } from "../../util";
 export var BaseNoiz_v2 = class<
   Data extends {},
   ClassBooleans extends {},
+  State extends {} = {},
   Props extends {
     className?: string;
     children?: any;
@@ -14,7 +15,7 @@ export var BaseNoiz_v2 = class<
   ClassProps extends NoizDatas<Props> &
     ClassBooleans = NoizDatas<Props> & ClassBooleans,
   MapperBuilderReturn extends mapperReturn<Props> = mapperReturn<Props>
-> extends Component<ClassProps> {
+> extends Component<ClassProps, State> {
   static styles = styles;
 
   static mapperFactory = mp;
