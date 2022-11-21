@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Html,
   Head,
@@ -5,6 +6,10 @@ import {
   NextScript,
 } from "next/document";
 import { robotoGoogleQuery } from "../HTML/React/style/Global";
+/**
+ *
+ * @returns
+ */
 
 function Document_v2() {
   return (
