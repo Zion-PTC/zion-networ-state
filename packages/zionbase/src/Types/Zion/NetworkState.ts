@@ -9,7 +9,7 @@ declare global {
         | "build"
         | "communication"
         | "trade";
-      export type Tokens = "ERC721" | "ERC1155" | "ERC20" | "zNTFT";
+      export type Tokens = "ERC721" | "ERC1155" | "ERC20" | "zNFT";
       export type Unique721 = "copyright" | "intellectual-properties";
       export type Licences = "commercial" | "private";
       export type ArtDomain = "music" | "visual" | "cooking";

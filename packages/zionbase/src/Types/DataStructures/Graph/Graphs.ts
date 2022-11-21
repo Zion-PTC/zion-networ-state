@@ -13,4 +13,5 @@ export type Trees =
   | "n-ary"
   | "heap"
   | "merkle";
+
 export type BinaryTrees = "full" | "perfect" | "complete";

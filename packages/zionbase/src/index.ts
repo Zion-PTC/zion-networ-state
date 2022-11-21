@@ -3,3 +3,4 @@ export * as DataStructure from "./DataStructures";
 export * as Types from "./Types";
 export * as Mixin from "./Mixin";
 export * as Zion from "./Zion/index";
+export * as DataStructures from './DataStructures'
