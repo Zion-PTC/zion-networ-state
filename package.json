@@ -79,6 +79,9 @@
     "gun": "^0.2020.1237",
     "hardhat": "^2.11.1",
     "hardhat-gas-reporter": "^1.0.9",
+    "ink": "^3.2.0",
+    "ink-use-stdout-dimensions": "^1.0.5",
+    "inquirer": "^9.1.4",
     "ipfs-http-client": "^57.0.3",
     "mocha": "^10.0.0",
     "mongoose": "^6.5.2",
@@ -114,8 +117,5 @@
     "webfontloader": "^1.6.28",
     "yaml": "^2.1.1",
     "zksync": "^0.12.3"
-  },
-  "peerDependencies": {
-    "chokidar": "^3.5.3"
   }
 }

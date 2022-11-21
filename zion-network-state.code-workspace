@@ -11,6 +11,9 @@
     {
       "name": "packages",
       "path": "packages"
+    },
+    {
+      "path": "bin"
     }
   ],
   "settings": {}
