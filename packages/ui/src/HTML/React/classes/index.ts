@@ -22,3 +22,4 @@ export * from './ItemsArea';
 
 //// Card
 export * from './Card';
+export * as Pages from './Pages'

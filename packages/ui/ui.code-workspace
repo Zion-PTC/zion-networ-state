@@ -21,10 +21,6 @@
       "path": "src/pages"
     },
     {
-      "name": "components",
-      "path": "src/HTML/React/components"
-    },
-    {
       "name": "style",
       "path": "src/HTML/React/style"
     },

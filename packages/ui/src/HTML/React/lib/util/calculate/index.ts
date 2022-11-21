@@ -4,9 +4,9 @@
 // export const calculate = v1;
 // //////
 
-// //// calculateSize
-// // export * as calculateSize from "./calculateSize";
+// calculateSize
+export * from "./calculateSize";
 
-// //// roundDecimals
-// export * from "./roundDecimals";
+//// roundDecimals
+export * from "./roundDecimals";
 export {};

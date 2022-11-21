@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export type FooterProps = BasicLayoutProps & StyledDefault;
+export type FooterProps = StyledDefault<BasicLayoutProps>;
 
 export const Footer = styled.footer<FooterProps>`
   display: grid;

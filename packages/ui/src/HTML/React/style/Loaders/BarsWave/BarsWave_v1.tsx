@@ -1,8 +1,8 @@
 import styled, { keyframes } from "styled-components";
-import { LoadingWavesProps } from "../../../components/Icons/LoadingTypes";
+import { LoadingWavesAreaProps } from "../../Areas";
 
 export function BarWavesData(
-  props: LoadingWavesProps & StyledDefault
+  props: StyledDefault<LoadingWavesAreaProps>
 ) {
   return (
     <div className={props.className}>

@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import styled, {
+  DefaultTheme,
+  StyledComponent,
+} from "styled-components";
 ("../../lib/types");
 import {
   Like as LikeIcon,
@@ -49,6 +52,7 @@ export type Icon_v1ClassBooleans = {
   tracks?: boolean;
   twitter?: boolean;
   scrollToTop?: boolean;
+  buttoned?: boolean;
 };
 export type Icon_v1ClassProps = NoizDatas<Icon_v1Props> &
   Icon_v1ClassBooleans;
@@ -113,6 +117,21 @@ export const Icon_v1 = class extends BaseNoiz<
     </Icon_v1.StyledSvg>
   );
 
+  ButtonedHtml(props: {
+    Component: (props: Icon_v1Props) => JSX.Element;
+  }) {
+    const { Component } = props;
+    return () => (
+      <button>
+        <Component></Component>
+      </button>
+    );
+  }
+
+  Buttoned = (props: {
+    Component: (props: Icon_v1Props) => JSX.Element;
+  }) => styled(this.ButtonedHtml(props))``;
+
   static Svg51 = (
     props: NoizProps<StyledSvgProps, true>
   ) => (
@@ -170,7 +189,14 @@ export const Icon_v1 = class extends BaseNoiz<
 
   render() {
     const LogoZion = this.LogoZion;
-    let Icon: () => JSX.Element = LogoZion;
+    let Icon:
+      | (() => JSX.Element)
+      | StyledComponent<
+          () => JSX.Element,
+          DefaultTheme,
+          {},
+          never
+        > = LogoZion;
     if (this.props.scrollToTop) Icon = this.ScrollToTop;
     if (this.props.more_Normal) Icon = this.More_Normal;
     if (this.props.queue) Icon = this.Queue;
@@ -190,6 +216,8 @@ export const Icon_v1 = class extends BaseNoiz<
     if (this.props.account) Icon = this.Account;
     if (this.props.like) Icon = this.Like;
     if (this.props.moon) Icon = this.Moon;
+    if (this.props.buttoned)
+      Icon = this.Buttoned({ Component: Icon });
     return <Icon {...this.props.datas[0]}></Icon>;
   }
 };

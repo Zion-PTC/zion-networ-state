@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { checkCss } from "../../lib/util/checkCss";
 
-export type TextAreaStyle = StyledDefault &
+export type TextAreaStyle = StyledDefault<
   utility.GCssStyled<
     | "display"
     | "margin"
@@ -12,7 +12,8 @@ export type TextAreaStyle = StyledDefault &
     gridArea?: string;
     filled?: boolean;
     smaller?: boolean;
-  };
+  }
+>;
 
 // export const TextArea = styled.div<TextAreaStyle>`
 //   background-color: grey;

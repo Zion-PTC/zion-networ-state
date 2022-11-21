@@ -1,20 +1,21 @@
-import styled, { css } from "styled-components";
-import { Css } from "../../lib/global/BaseNoiz/Css";
+import styled from "styled-components";
 
 type BottomSpaceStyle = {
-  css?: utility.ZionCss<
-    undefined,
-    true,
-    | "textAlign"
-    | "zIndex"
-    | "display"
-    | "gridTemplateRows"
-    | "placeItems"
-    | "margin"
-    | "gridArea"
+  css?: StyledDefault<
+    utility.ZionCss<
+      undefined,
+      true,
+      | "textAlign"
+      | "zIndex"
+      | "display"
+      | "gridTemplateRows"
+      | "placeItems"
+      | "margin"
+      | "gridArea"
+    > &
+      utility.CssStyled
   >;
-} & StyledDefault &
-  utility.CssStyled;
+};
 
 export const BottomSpace = styled.div<BottomSpaceStyle>`
   text-align: center;
@@ -23,5 +24,4 @@ export const BottomSpace = styled.div<BottomSpaceStyle>`
   grid-template-rows: 2rem auto 5rem;
   place-items: center;
   margin: 0;
-  ${props => new Css("gridArea", css``, props).value}
 `;

@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { PropsWithChildren, RefObject } from "react";
 import styled from "styled-components";
 import { useCalculateFluidGrid } from "../../lib/hooks";
 
@@ -18,10 +18,12 @@ export type ItemsArea_v1Booleans = {
 export type ItemsArea_v1Props = NoizProps<
   ItemsArea_v1Data &
     ItemsArea_v1Booleans &
-    ItemsArea_v1ClassState
+    ItemsArea_v1ClassState,
+  true
 >;
 
-export type ItemsArea_v1ClassBooleans = {};
+export type ItemsArea_v1ClassBooleans =
+  PropsWithChildren<{}>;
 
 export type ItemsArea_v1ClassState = {
   blockSize?: number;

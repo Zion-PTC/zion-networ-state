@@ -26,4 +26,4 @@ export * from "./checkProps";
 export * from "./defaultTheme";
 
 //// mapper
-export * from './mapper';
+export * from "./mapper";

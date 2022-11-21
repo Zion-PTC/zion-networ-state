@@ -11,7 +11,7 @@ export class RGBPrimary_v1 extends PrimaryColors {
     public green: string,
     public blue: string
   ) {
-    super("white");
+    super();
   }
 }
 
@@ -21,7 +21,7 @@ export class RGBSecondary_v1 extends SecondaryColors {
     public cyan: string,
     public magenta: string
   ) {
-    super("white");
+    super();
   }
 }
 
@@ -34,7 +34,7 @@ export class RGBTertiary_v1 extends TertiaryColors {
     public blue_magenta: string,
     public red_magenta: string
   ) {
-    super("white");
+    super();
   }
 }
 

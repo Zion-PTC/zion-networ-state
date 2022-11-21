@@ -11,7 +11,7 @@ export class RYBPrimary_v1 extends PrimaryColors {
     public yellow: string,
     public blue: string
   ) {
-    super("white");
+    super();
   }
 }
 
@@ -21,7 +21,7 @@ export class RYBSecondary_v1 extends SecondaryColors {
     public green: string,
     public purple: string
   ) {
-    super("white");
+    super();
   }
 }
 export class RYBTertiary_v1 extends TertiaryColors {
@@ -33,7 +33,7 @@ export class RYBTertiary_v1 extends TertiaryColors {
     public blue_purple: string,
     public red_purple: string
   ) {
-    super("white");
+    super();
   }
 }
 

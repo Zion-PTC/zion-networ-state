@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Css } from "../lib/global/BaseNoiz/Css";
 
-export type H1Style = StyledDefault & utility.CssStyled;
+export type H1Style = StyledDefault<utility.CssStyled>;
 
 const margin = css`
   margin: 0;

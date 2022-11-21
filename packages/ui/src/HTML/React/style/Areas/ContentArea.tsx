@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export type ContentAreaProps = {
-  overflow?: string;
-} & StyledDefault &
-  utility.GCssStyled<
+export type ContentAreaProps = StyledDefault<
+  {
+    overflow?: string;
+  } & utility.GCssStyled<
     | "border"
     | "width"
     | "height"
@@ -12,7 +12,8 @@ export type ContentAreaProps = {
     | "overflow"
     | "gridArea"
     | "placeContent"
-  >;
+  >
+>;
 
 // this div shall be placed in a container which provides its dimension.
 export const ContentArea = styled.div<ContentAreaProps>`
