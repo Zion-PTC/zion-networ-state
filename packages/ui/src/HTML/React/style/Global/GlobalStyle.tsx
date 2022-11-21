@@ -7,7 +7,7 @@ const roboto = new GoogleFonts({
 export const robotoGoogleQuery = roboto.googleQuery;
 const robotoCssValue = roboto.cssValue;
 
-export const GlobalStyles = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   body {
     width: 100vw;
     height: 100vh;

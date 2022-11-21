@@ -1,17 +1,9 @@
-import {
-  Card,
-  CardProps,
-} from "../HTML/React/components/Items";
-import { ItemsArea } from "../HTML/React/components/Items/ItemsArea";
+import React from "react";
 
-export default function index(props: CardProps) {
+export default function index() {
   return (
-    <>
-      {/* TODO sistemare */}
-      {/* @ts-ignore */}
-      <ItemsArea {...props}>
-        <Card {...props}></Card>
-      </ItemsArea>
-    </>
+    <div>
+      arianna aggiungi qui i link alle varie cartelle!!
+    </div>
   );
 }
