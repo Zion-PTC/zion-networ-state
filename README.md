@@ -582,3 +582,13 @@ market offer us at the moment:
   - IPFS based:
     - [Radible]('https://radicle.xyz/')
     - [Pando]('https://github.com/pandonetwork/pando')
+
+# Packages interdependencies
+
+Here under a picture of the interdependencies between Noiz
+internal packages.
+
+The `test` package is the upper most package. All the other
+packages have a dependency on this one.
+
+</br><image src="assets/pkg-graph.png" height=300px>
