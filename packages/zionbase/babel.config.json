@@ -8,5 +8,11 @@
     ],
     "@babel/preset-typescript"
   ],
-  "babelrcRoots": ["*"]
+  "babelrcRoots": ["*"],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      { "decoratorsBeforeExport": true }
+    ]
+  ]
 }
