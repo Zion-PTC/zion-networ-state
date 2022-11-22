@@ -20,5 +20,13 @@
     "build": "yarn preconstruct build && run-p build:*",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
     "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.20.2",
+    "@zionstate/test": "0.0.1"
+  },
+  "peerDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.20.2",
+    "@zionstate/test": "0.0.1"
   }
 }
