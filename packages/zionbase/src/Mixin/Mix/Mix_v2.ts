@@ -44,8 +44,18 @@ export class Mix_v2 implements IMix_v2 {
   }
 }
 
+/**
+ * Describes the class itself, use this to validate an input
+ * with require this class as argument.
+ */
 export type Mix_v2Ctor = {
   new (superclass: Mix_v2Constructor): Mix_v2;
 };
 
+/**
+ *  This is the same class as the main one exported in the
+ *  file. It is mainly used to double check the class
+ *  constructor arguements. It can be used to define an
+ *  input or even to create an instance.
+ */
 export const Mix_v2Ctor: Mix_v2Ctor = Mix_v2;
