@@ -9,7 +9,7 @@ import React from "react";
 import {
   StepConfiguration,
   Step,
-  StepOption,
+  Option,
 } from "../../../class/index.js";
 
 export const Folder = () => (
@@ -20,13 +20,23 @@ export const File = () => (
   <Text color={"red"}>Notter ok</Text>
 );
 
-const folder = new StepOption("folder", Folder);
-const file = new StepOption("file", File);
+const question =
+  "Do you want to create a file or a folder?";
 
-const question = "What do you want to do?? =)";
+const folder = new Option({
+  option: "folder",
+  component: Folder,
+});
+
+const file = new Option({
+  option: "file",
+  component: File,
+});
+
 export const question1 = new StepConfiguration(
   question,
   [folder, file],
   "radio"
 );
+
 export const Step1_v1 = Step(question1);
