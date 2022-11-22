@@ -1,7 +1,7 @@
 export {
   Step_v1 as Step,
   StepConfiguration_v1 as StepConfiguration,
-  StepOption_v1 as StepOption,
+  // StepOption_v1 as StepOption,
 } from "./Step_v1";
 
 export type {

@@ -1,8 +1,9 @@
 import { Box, Key, Text } from "ink";
 import React, { Component, useEffect } from "react";
+// import { NoizState } from "../../app/app_v2";
 import { checkOptions } from "../../hooks";
 import { Prompt, PromptTypes } from "../index";
-
+import { Option } from "../";
 export type Step_v1Data = "Step_v1Data";
 export type Step_v1Booleans = "Step_v1Booleans";
 export type Step_v1Props = "Step_v1Props";
@@ -11,26 +12,11 @@ export type Step_v1AsChild = "Step_v1AsChild";
 
 export type StepTypes_v1 = "open" | "radio" | "multiple";
 
-export interface StepOption_v1 {
-  value: [string, () => JSX.Element];
-}
-
-export class StepOption_v1 {
-  constructor(
-    option: string,
-    component: () => JSX.Element
-  ) {
-    const arr: [string, () => JSX.Element] = [
-      option,
-      component,
-    ];
-    this.value = arr;
-  }
+export interface StepConfiguration_v1 {
+  value: [string, Option[]];
 }
 
 export class StepConfiguration_v1 {
-  value: [string, StepOption_v1[]];
-
   get question() {
     return this.value[0];
   }
@@ -61,27 +47,45 @@ export class StepConfiguration_v1 {
 
   constructor(
     question: string,
-    options: StepOption_v1[],
+    options: Option[],
     public type: StepTypes_v1
   ) {
-    const arr: [string, StepOption_v1[]] = [
-      question,
-      options,
-    ];
+    const arr: [string, Option[]] = [question, options];
     this.value = arr;
   }
 }
 
-type StepClassProps = {
+interface StepClassProps {
   input: string | string[];
+  handleSteps(props: {
+    isCompleted: boolean;
+    RenderedSteps: () => JSX.Element;
+  }): void;
   usrKey?: Key;
-};
+}
+
+class StepClassProps {
+  constructor(
+    input: string | string[],
+    handleSteps: (props: {
+      isCompleted: boolean;
+      RenderedSteps: () => JSX.Element;
+    }) => void,
+    usrKey: Key
+  ) {
+    this.input = input;
+    this.handleSteps = handleSteps;
+    this.usrKey = usrKey;
+  }
+}
+
 export type StepClassState = {
   active: number;
   order: number[];
   selected?: number;
   completed?: boolean;
 };
+
 export const Step_v1 = (config: StepConfiguration_v1) =>
   class StepClass extends Component<
     StepClassProps,
@@ -119,6 +123,13 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
 
     Question = Prompt(config.value[0], config.promptType);
 
+    handleSteps(props: {
+      isCompleted: boolean;
+      RenderedSteps: () => JSX.Element;
+    }) {
+      this.props.handleSteps(props);
+    }
+
     optionField =
       (icon: string) =>
       (props: {
@@ -129,6 +140,10 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
         const cursor = props.active
           ? this.cursorSelect
           : "  ";
+        // TODO #21 @ariannatnl aggiungere frammento vuoto
+        // (`<></>`) e inserire 3 Text (provare), il primo
+        // deve essere `dimmed` (grigio), il secondo
+        // colorato acceso, e il terzo bianco.
         return (
           <Text>
             {cursor}
@@ -174,8 +189,12 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
             selected: currentActive,
           });
         }
-        if (this.props.usrKey?.return)
-          this.setState({ completed: true });
+        if (this.props.usrKey?.return === true) {
+          this.props.handleSteps({
+            isCompleted: true,
+            RenderedSteps: this.Step as () => JSX.Element,
+          });
+        }
       }, [this.props.usrKey]);
 
       return (
@@ -196,14 +215,43 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
       );
     };
 
-    override render(): React.ReactNode {
+    Step = (
+      props: {
+        input: string | string[];
+        handleSteps(props: {
+          isCompleted: boolean;
+          RenderedSteps: () => JSX.Element;
+        }): void;
+      },
+      x: number
+    ) => {
       return (
         <Box flexDirection="column">
           <this.Question
-            input={this.props.input}
+            input={props.input}
           ></this.Question>
           <this.Multiple></this.Multiple>
         </Box>
+      );
+    };
+
+    override render(): React.ReactNode {
+      const { Step } = this;
+      const isntance = Step(
+        {
+          input: this.props.input,
+          handleSteps: this.handleSteps,
+        },
+        10
+      );
+      return (
+        <>
+          <Step
+            input={this.props.input}
+            handleSteps={this.handleSteps}
+          />
+          {isntance}
+        </>
       );
     }
   };
