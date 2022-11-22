@@ -1,7 +1,10 @@
 import { useApp, useInput, Key } from "ink";
 import { useState } from "react";
 
-export const useBasicInput_v1 = () => {
+export const useBasicInput_v1 = (
+  type?: "open" | "selection"
+) => {
+  type;
   const [answers, setAnswers] = useState<string[]>([]);
   const [inputUpdate, setInputUpdate] = useState<string[]>(
     []
