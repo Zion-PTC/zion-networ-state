@@ -1,23 +1,65 @@
-import { Box } from "ink";
-import React, { Component, useEffect } from "react";
-import { useBasicInput } from "../hooks/index";
+import { Box, Text, useInput } from "ink";
+import React, { Component } from "react";
 
-export class Noiz_v3 extends Component {
-  constructor(props: {}) {
+class Other extends Component<{
+  conto: number;
+  handleConto: (conto: number) => void;
+}> {
+  constructor(props: {
+    conto: number;
+    handleConto: (conto: number) => void;
+  }) {
     super(props);
+    this.handle = this.handle.bind(this);
   }
 
-  Html = () => {
-    const { usrKey } = useBasicInput();
-    useEffect(() => {
-      console.log(usrKey?.downArrow);
-    }, [usrKey]);
-    usrKey;
+  handle(conto: number) {
+    this.props.handleConto(conto);
+  }
 
-    return <Box flexDirection="column"></Box>;
+  Hook = (props: { currentConto: number }) => {
+    useInput((input, key) => {
+      console.log(input, key.return);
+      let newCont = props.currentConto + 1;
+      this.handle(newCont);
+    });
+    return <Text>ccccc</Text>;
   };
 
+  override componentDidMount(): void {}
+
   override render() {
-    return <this.Html></this.Html>;
+    return (
+      <this.Hook
+        currentConto={this.props.conto}
+      ></this.Hook>
+    );
+  }
+}
+
+export class Noiz_v3 extends Component<
+  {},
+  { conto: number }
+> {
+  constructor(props: {}) {
+    super(props);
+    this.state = { conto: 0 };
+    this.handleConto = this.handleConto.bind(this);
+  }
+
+  handleConto(conto: number) {
+    this.setState({ conto });
+  }
+
+  override render() {
+    return (
+      <Box flexDirection="column">
+        <Other
+          conto={this.state.conto}
+          handleConto={this.handleConto}
+        ></Other>
+        <Text>{this.state.conto}</Text>
+      </Box>
+    );
   }
 }

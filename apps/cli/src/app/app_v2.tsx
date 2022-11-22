@@ -1,4 +1,4 @@
-import { Box, Text } from "ink";
+import { Box } from "ink";
 import React, { Component } from "react";
 import { StepConfiguration } from "../class/index";
 import {
@@ -36,27 +36,65 @@ const checkYesNo = checkOptions([
   ["no", File],
 ]);
 
-export type NoizState = { isStep1Completed?: boolean };
+export type NoizState = {
+  completedSteps: number[];
+  currentStep: number;
+  RenderedSteps: () => JSX.Element;
+};
 export class Noiz_v2 extends Component<{}, NoizState> {
   constructor(props: {}) {
     super(props);
+    this.state = {
+      currentStep: 0,
+      completedSteps: [],
+      RenderedSteps: () => <></>,
+    };
   }
 
-  Html = () => {
+  handleSteps = (props: {
+    isCompleted: boolean;
+    RenderedSteps: () => JSX.Element;
+  }) => {
+    const nextStep =
+      new Number(this.state.currentStep).valueOf() + 1;
+    if (props.isCompleted) {
+      this.setState({ currentStep: nextStep });
+      this.setState({
+        RenderedSteps: props.RenderedSteps,
+      });
+    }
+  };
+
+  Html = (props: {
+    RenderedSteps: () => JSX.Element;
+    handleSteps: (props: {
+      isCompleted: boolean;
+      RenderedSteps: () => JSX.Element;
+    }) => void;
+  }) => {
     let { inputUpdate, answers, usrKey } = useBasicInput();
     const { botCheck } = useCheck(answers, checkYesNo);
+    const { RenderedSteps, handleSteps } = props;
     return (
       <Box flexDirection="column">
-        {answers.map((res, id) => (
-          <Text key={id}>{res}</Text>
-        ))}
-        <Step1 input={inputUpdate} usrKey={usrKey}></Step1>
+        <RenderedSteps />
+        <Step1
+          input={inputUpdate}
+          usrKey={usrKey}
+          handleSteps={handleSteps}
+        ></Step1>
         {botCheck}
       </Box>
     );
   };
 
   override render() {
-    return <this.Html></this.Html>;
+    const { RenderedSteps } = this.state;
+    return (
+      <this.Html
+        RenderedSteps={RenderedSteps}
+        handleSteps={this.handleSteps}
+      ></this.Html>
+    );
   }
 }
