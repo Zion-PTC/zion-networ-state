@@ -27,7 +27,7 @@ mkdir ${folder} &&
   touch ${indexpath} &&
   echo "///// EXPORT" >>${indexpath} &&
   echo "export { ${filename} as ${folder} } from \"./${filename}\";" >>${indexpath} &&
-  echo "export { ${filename}Ctor as ${folder}Ctor } from \"./${filename}\";" >>${indexpath} &&
+  echo "export type { ${filename}Ctor as ${folder}Ctor } from \"./${filename}\";" >>${indexpath} &&
   echo "////////////" >>${indexpath}
 
 # noiz config
