@@ -23,7 +23,17 @@ export declare class StepConfiguration_v1 {
 }
 declare type StepClassProps = {
     input: string | string[];
+    handleSteps(props: {
+        isCompleted: boolean;
+        RenderedSteps: () => JSX.Element;
+    }): void;
     usrKey?: Key;
+};
+export declare type StepClassState = {
+    active: number;
+    order: number[];
+    selected?: number;
+    completed?: boolean;
 };
 export declare const Step_v1: (config: StepConfiguration_v1) => {
     new (props: StepClassProps): {
@@ -86,6 +96,10 @@ export declare const Step_v1: (config: StepConfiguration_v1) => {
             };
             contextType?: React.Context<any> | undefined;
         };
+        handleSteps(props: {
+            isCompleted: boolean;
+            RenderedSteps: () => JSX.Element;
+        }): void;
         optionField: (icon: string) => (props: {
             active?: boolean;
             cursor?: boolean;
@@ -113,82 +127,34 @@ export declare const Step_v1: (config: StepConfiguration_v1) => {
             children?: string;
         }) => JSX.Element;
         Multiple: () => JSX.Element;
+        Step: (props: {
+            input: string | string[];
+            handleSteps(props: {
+                isCompleted: boolean;
+                RenderedSteps: () => JSX.Element;
+            }): void;
+        }) => JSX.Element;
+        componentDidUpdate(): void;
+        componentDidMount(): void;
         render(): React.ReactNode;
         context: unknown;
-        setState<K_1 extends "active" | "order" | "selected" | "completed">(state: {
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        } | ((prevState: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>, props: Readonly<StepClassProps>) => {
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        } | Pick<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }, K_1> | null) | Pick<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }, K_1> | null, callback?: (() => void) | undefined): void;
+        setState<K_1 extends keyof StepClassState>(state: StepClassState | ((prevState: Readonly<StepClassState>, props: Readonly<StepClassProps>) => StepClassState | Pick<StepClassState, K_1> | null) | Pick<StepClassState, K_1> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
         readonly props: Readonly<StepClassProps>;
-        state: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>;
+        state: Readonly<StepClassState>;
         refs: {
             [key: string]: React.ReactInstance;
         };
-        componentDidMount?(): void;
-        shouldComponentUpdate?(nextProps: Readonly<StepClassProps>, nextState: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>, nextContext: any): boolean;
+        shouldComponentUpdate?(nextProps: Readonly<StepClassProps>, nextState: Readonly<StepClassState>, nextContext: any): boolean;
         componentWillUnmount?(): void;
         componentDidCatch?(error: Error, errorInfo: React.ErrorInfo): void;
-        getSnapshotBeforeUpdate?(prevProps: Readonly<StepClassProps>, prevState: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>): any;
-        componentDidUpdate?(prevProps: Readonly<StepClassProps>, prevState: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>, snapshot?: any): void;
+        getSnapshotBeforeUpdate?(prevProps: Readonly<StepClassProps>, prevState: Readonly<StepClassState>): any;
         componentWillMount?(): void;
         UNSAFE_componentWillMount?(): void;
         componentWillReceiveProps?(nextProps: Readonly<StepClassProps>, nextContext: any): void;
         UNSAFE_componentWillReceiveProps?(nextProps: Readonly<StepClassProps>, nextContext: any): void;
-        componentWillUpdate?(nextProps: Readonly<StepClassProps>, nextState: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>, nextContext: any): void;
-        UNSAFE_componentWillUpdate?(nextProps: Readonly<StepClassProps>, nextState: Readonly<{
-            active: number;
-            order: number[];
-            selected?: number | undefined;
-            completed?: boolean | undefined;
-        }>, nextContext: any): void;
+        componentWillUpdate?(nextProps: Readonly<StepClassProps>, nextState: Readonly<StepClassState>, nextContext: any): void;
+        UNSAFE_componentWillUpdate?(nextProps: Readonly<StepClassProps>, nextState: Readonly<StepClassState>, nextContext: any): void;
     };
     shiftFirst(array: number[]): number[];
     shiftLast(array: number[]): number[];

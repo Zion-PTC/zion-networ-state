@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Step_v1 = exports.StepConfiguration_v1 = exports.StepOption_v1 = void 0;
 const ink_1 = require("ink");
 const react_1 = __importStar(require("react"));
+// import { NoizState } from "../../app/app_v2";
 const hooks_1 = require("../../hooks");
 const index_1 = require("../index");
 class StepOption_v1 {
@@ -137,6 +138,10 @@ const Step_v1 = (config) => class StepClass extends react_1.Component {
                 const cursor = props.active
                     ? this.cursorSelect
                     : "  ";
+                // TODO #21 @ariannatnl aggiungere frammento vuoto
+                // (`<></>`) e inserire 3 Text (provare), il primo
+                // deve essere `dimmed` (grigio), il secondo
+                // colorato acceso, e il terzo bianco.
                 return (react_1.default.createElement(ink_1.Text, null,
                     cursor,
                     icon,
@@ -204,8 +209,12 @@ const Step_v1 = (config) => class StepClass extends react_1.Component {
                             selected: currentActive,
                         });
                     }
-                    if (this.props.usrKey?.return)
-                        this.setState({ completed: true });
+                    if (this.props.usrKey?.return === true) {
+                        this.props.handleSteps({
+                            isCompleted: true,
+                            RenderedSteps: this.Step,
+                        });
+                    }
                 }, [this.props.usrKey]);
                 return (react_1.default.createElement(react_1.default.Fragment, null, options.map((option, id) => {
                     let Element = this.UnselectedField;
@@ -216,6 +225,16 @@ const Step_v1 = (config) => class StepClass extends react_1.Component {
                         Element = this.SelectedField;
                     return (react_1.default.createElement(Element, { key: id, active: isActive }, optiontext));
                 })));
+            }
+        });
+        Object.defineProperty(this, "Step", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: (props) => {
+                return (react_1.default.createElement(ink_1.Box, { flexDirection: "column" },
+                    react_1.default.createElement(this.Question, { input: props.input }),
+                    react_1.default.createElement(this.Multiple, null)));
             }
         });
         let counter = 0;
@@ -241,10 +260,14 @@ const Step_v1 = (config) => class StepClass extends react_1.Component {
         array.reverse();
         return array;
     }
+    handleSteps(props) {
+        this.props.handleSteps(props);
+    }
+    componentDidUpdate() { }
+    componentDidMount() { }
     render() {
-        return (react_1.default.createElement(ink_1.Box, { flexDirection: "column" },
-            react_1.default.createElement(this.Question, { input: this.props.input }),
-            react_1.default.createElement(this.Multiple, null)));
+        const { Step } = this;
+        return (react_1.default.createElement(Step, { input: this.props.input, handleSteps: this.handleSteps }));
     }
 };
 exports.Step_v1 = Step_v1;
