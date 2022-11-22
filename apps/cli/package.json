@@ -12,7 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zionstate/blockchain": "0.0.1",
     "@zionstate/database": "0.0.1",
+    "@zionstate/git": "0.0.1",
+    "@zionstate/test": "0.0.1",
+    "@zionstate/ui": "0.0.1",
     "@zionstate/utils": "0.0.1",
     "@zionstate/zionbase": "0.0.1",
     "ink": "^3.2.0",
