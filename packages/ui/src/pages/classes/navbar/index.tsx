@@ -1,9 +1,9 @@
+import React from "react";
 import {
   NavBar,
   NavInputProps,
+  Tracks,
 } from "../../../HTML/React/classes";
-import { Queue } from "../../../HTML/React/components/Icons/Queue";
-import { Tracks } from "../../../HTML/React/components/Icons/Tracks";
 
 export default function index() {
   const data: NavInputProps[] = [
