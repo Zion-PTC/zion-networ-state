@@ -1,6 +1,10 @@
 import React from "react";
 import { Icon } from "../../../../HTML/React/classes";
 
+const IconMap = Icon.map(function(element){
+  return `${element.firstName} ${element.lastName}`};
+
 export default function index() {
-  return <Icon account datas={[]}></Icon>;
+  return <IconMap ></IconMap>;
 }
+
