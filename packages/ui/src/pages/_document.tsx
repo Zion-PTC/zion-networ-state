@@ -10,7 +10,6 @@ import { robotoGoogleQuery } from "../HTML/React/style/Global";
  * TODO
  * @returns
  */
-
 function Document_v2() {
   return (
     <Html>

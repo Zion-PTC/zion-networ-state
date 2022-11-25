@@ -1,4 +1,7 @@
-export { Icon_v1 as Icon } from "./Icon_v1";
+export { Icon_v2 as Icon } from "./Icon_v2";
+
+export type { Icon_v2Props } from "./Icon_v2";
+export { Icon_v1 } from "./Icon_v1";
 
 export type {
   Icon_v1Props as IconProps,

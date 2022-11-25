@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
-type Flatten<T> = utility.Flatten<T>;
+import { Flatten } from "../../../utility";
+import { StyledDefault } from "../../utility/StyledDefault/StyledDefault_v1";
 
 /**
  * Adds StyledDefault {css:.., className:...}
@@ -11,7 +12,7 @@ export type NoizProps<
   C extends boolean = false
 > = C extends false
   ? StyledDefault<T>
-  : utility.Flatten<PropsWithChildren<StyledDefault<T>>>;
+  : Flatten<PropsWithChildren<StyledDefault<T>>>;
 
 /**
  * Standard React Component (class or function) props.

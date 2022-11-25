@@ -24,5 +24,3 @@ export type {
   Mix_v1Constructor as MixConstructor,
   Mix_v1Mixin as MixMixin,
 } from "./Mix_v1";
-
-////////////

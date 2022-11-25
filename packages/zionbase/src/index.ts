@@ -1,6 +1,7 @@
 export * as Class from "./Class";
 export * as DataStructure from "./DataStructures";
 export * as Types from "./Types";
+
 // Mixin
 export * as Mixin from "./Mixin";
 export { Pattern1Able, pattern2 } from "./Mixin";
@@ -31,3 +32,10 @@ export {
   AppNodeCtor,
 } from "./DataStructures";
 export type { GraphProps, IGraph } from "./DataStructures";
+
+export type {
+  AnyCtor_v1 as AnyCtor,
+  Constructor,
+  GConstructor,
+  NCtor,
+} from "./Types";

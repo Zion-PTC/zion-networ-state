@@ -3,38 +3,6 @@
     {
       "name": "ui",
       "path": "."
-    },
-    {
-      "name": "CLI",
-      "path": "src/CLI"
-    },
-    {
-      "name": "React",
-      "path": "src/HTML/React"
-    },
-    {
-      "name": "Next",
-      "path": "src/HTML/Next"
-    },
-    {
-      "name": "pages",
-      "path": "src/pages"
-    },
-    {
-      "name": "style",
-      "path": "src/HTML/React/style"
-    },
-    {
-      "name": "classes",
-      "path": "src/HTML/React/classes"
-    },
-    {
-      "name": "Colors",
-      "path": "src/Colors"
-    },
-    {
-      "name": "FS",
-      "path": "../database/src/FS"
     }
   ],
   "settings": {}

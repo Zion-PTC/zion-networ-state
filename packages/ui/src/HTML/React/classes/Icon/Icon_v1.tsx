@@ -1,8 +1,10 @@
+import { ReactNode } from "react";
 import styled, {
   DefaultTheme,
   StyledComponent,
 } from "styled-components";
-("../../lib/types");
+import { NoizProps, MakeAsChild } from "../../lib/types";
+
 import {
   Like as LikeIcon,
   Moon as MoonIcon,
@@ -28,10 +30,13 @@ import {
 
 ///// TYPES
 export type Icon_v1Datas = {};
+
 export type Icon_v1Booleans = {};
+
 export type Icon_v1Props = NoizProps<
   Icon_v1Datas & Icon_v1Booleans
 >;
+
 export type Icon_v1ClassBooleans = {
   like?: boolean;
   moon?: boolean;
@@ -53,28 +58,59 @@ export type Icon_v1ClassBooleans = {
   twitter?: boolean;
   scrollToTop?: boolean;
   buttoned?: boolean;
+  svg?: {
+    filled?: boolean | undefined;
+    stroked?: boolean | undefined;
+    secondary?: boolean | undefined;
+  };
 };
-export type Icon_v1ClassProps = NoizDatas<Icon_v1Props> &
-  Icon_v1ClassBooleans;
+
+export type Icon_v1ClassProps = {
+  datas: {
+    css?: string | undefined;
+    className?: string | undefined;
+  }[];
+  like?: boolean;
+  moon?: boolean;
+  account?: boolean;
+  album?: boolean;
+  arrowBack?: boolean;
+  arrowLeft?: boolean;
+  arrowRight?: boolean;
+  filterAlt?: boolean;
+  home?: boolean;
+  repost?: boolean;
+  search?: boolean;
+  sun?: boolean;
+  trending?: boolean;
+  more_Normal?: boolean;
+  queue?: boolean;
+  share?: boolean;
+  tracks?: boolean;
+  twitter?: boolean;
+  scrollToTop?: boolean;
+  buttoned?: boolean;
+  children?: ReactNode | undefined;
+};
+
 export type Icon_v1AsChild = MakeAsChild<
   "Icon",
   Icon_v1ClassProps
 >;
+
 export type StyledSvgProps = {
   filled?: boolean;
   stroked?: boolean;
   secondary?: boolean;
 };
+
 ////////////
+export interface Icon_v1 {}
 
 export const Icon_v1 = class extends BaseNoiz<
   Icon_v1Datas,
   Icon_v1ClassProps
 > {
-  constructor(props: Icon_v1ClassProps) {
-    super(props);
-  }
-
   static StyledSvg = styled.svg<StyledSvgProps>`
     path {
       fill: ${props =>
@@ -117,21 +153,6 @@ export const Icon_v1 = class extends BaseNoiz<
     </Icon_v1.StyledSvg>
   );
 
-  ButtonedHtml(props: {
-    Component: (props: Icon_v1Props) => JSX.Element;
-  }) {
-    const { Component } = props;
-    return () => (
-      <button>
-        <Component></Component>
-      </button>
-    );
-  }
-
-  Buttoned = (props: {
-    Component: (props: Icon_v1Props) => JSX.Element;
-  }) => styled(this.ButtonedHtml(props))``;
-
   static Svg51 = (
     props: NoizProps<StyledSvgProps, true>
   ) => (
@@ -146,6 +167,25 @@ export const Icon_v1 = class extends BaseNoiz<
       {props.children}
     </Icon_v1.StyledSvg>
   );
+
+  constructor(props: Icon_v1ClassProps) {
+    super(props);
+  }
+
+  ButtonedHtml(props: {
+    Component: (props: Icon_v1Props) => JSX.Element;
+  }) {
+    const { Component } = props;
+    return () => (
+      <button>
+        <Component></Component>
+      </button>
+    );
+  }
+
+  Buttoned = (props: {
+    Component: (props: Icon_v1Props) => JSX.Element;
+  }) => styled(this.ButtonedHtml(props))``;
 
   LogoZion = ZionIcon;
 
