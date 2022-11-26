@@ -12,16 +12,27 @@ fileextension=.ts
 completename=${builtFilename}${fileextension}
 indexfile=index.ts
 
+templateIndex="
+///// EXPORT
+export { ${completename}v1 as joinPaths } from \"./${completename}v1\";
+export type { ${completename}v1 as joinPathsType } from \"./${completename}v1\";
+//////
+"
+
+templateFunction="
+export interface I${completename} {
+  (a: any): any;
+}
+
+export const ${completename}: I${completename} = function () {};
+"
+
 # script
 
-# // ComponentFile
+# // functionname
 touch ${completename} &&
-  echo "export const ${builtFilename} = '${builtFilename}'" >>${completename} &&
-  echo "export type ${propsFilename} = '${propsFilename}'" >>${completename} &&
+  echo ${templateFunction} >>${completename}
 
-  # // index file
-  echo "import { ${builtFilename} as v${version}, ${propsFilename} as v${version}Props } from './${builtFilename}';" | cat - ${indexfile} >temp && mv temp ${indexfile} &&
-  echo "" >>${indexfile} &&
-  echo "export const ${builtFilename} = v${version};" >>${indexfile} &&
-  echo "export type ${propsFilename} = v${version}Props;" >>${indexfile} &&
+# // index file
+echo ${completename} &&
   echo "done!!🏁🚀"
