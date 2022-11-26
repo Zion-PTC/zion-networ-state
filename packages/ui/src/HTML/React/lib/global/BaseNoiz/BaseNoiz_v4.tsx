@@ -11,7 +11,7 @@ type LoaderProps<T> = Pick<
   "isLoading" | "loadMoreCallback" | "isLastPage"
 >;
 
-export var BaseNoiz_v3 = class<
+export var BaseNoiz_v4 = class<
   Data extends {},
   ClassBooleans extends {},
   State extends {} = {},
@@ -46,24 +46,8 @@ export var BaseNoiz_v3 = class<
       );
     };
 
-  MdContentHtml(props: { contentHtml: string }) {
-    const { contentHtml } = props;
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: contentHtml }}
-        id="page"
-      />
-    );
-  }
-
-  MdContent = styled(this.MdContentHtml)`
-    img {
-      width: 100vw;
-    }
-  `;
-
   mapperBuilder(): MapperBuilderReturn {
-    let mapper = BaseNoiz_v3.mapperFactory(
+    let mapper = BaseNoiz_v4.mapperFactory(
       this.Style
     ) as MapperBuilderReturn;
     // this.types.forEach(type => {});
@@ -79,10 +63,10 @@ export var BaseNoiz_v3 = class<
   };
 
   Style = styled(this.Html)`
-    ${BaseNoiz_v3.styles.getCommonStyle("filled")}
+    ${BaseNoiz_v4.styles.getCommonStyle("filled")}
   `;
 
-  Mapper = BaseNoiz_v3.mapperFactory(this.Style);
+  Mapper = BaseNoiz_v4.mapperFactory(this.Style);
 
   render() {
     return <this.Mapper {...this.props}></this.Mapper>;

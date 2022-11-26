@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Component } from "react";
 import { styles } from "../../../style/common/CommonStyles";
 import { mapper as mp, mapperReturn } from "../../util";
+import { NoizDatas, NoizProps } from "../../types";
 // import { NoizDatas } from "../../types";
 
 export var BaseNoiz_v2 = class<
@@ -47,6 +48,7 @@ export var BaseNoiz_v2 = class<
   `;
 
   Mapper = BaseNoiz_v2.mapperFactory(this.Style);
+
   render() {
     return <this.Mapper {...this.props}></this.Mapper>;
   }

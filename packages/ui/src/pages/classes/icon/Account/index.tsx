@@ -4,6 +4,5 @@ import "../../../../HTML/React";
 
 export default function index() {
   console.log(Icon.svgslist());
-
   return <Icon account datas={[]}></Icon>;
 }

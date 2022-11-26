@@ -134,6 +134,7 @@ export const Icon_v2 = class extends BaseNoiz<
   Icon_v2ClassProps
 > {
   static StyledSvg = styled.svg<StyledSvgProps>`
+    // #10 aggiungere qui
     path {
       fill: ${props =>
         props.filled

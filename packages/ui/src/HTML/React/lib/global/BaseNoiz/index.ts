@@ -1,3 +1,10 @@
+export {
+BaseNoiz_v4
+} from './BaseNoiz_v4';
+
+export type {
+BaseNoiz_v4Props
+} from './BaseNoiz_v4';
 export { BaseNoiz_v3 } from "./BaseNoiz_v3";
 
 export { BaseNoiz_v2 as BaseNoiz } from "./BaseNoiz_v2";
@@ -7,3 +14,4 @@ export * from "./Css";
 
 //// Props
 export * from "./Props";
+
