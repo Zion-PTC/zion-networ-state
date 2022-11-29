@@ -1,17 +1,15 @@
 import { types, Factories } from "@zionstate/blockchain";
-import {
-  ERC1155TokenShop__factory,
-  Membership__factory,
-  ProvaMaster__factory,
-  USDC__factory,
-} from "@zionstate/blockchain/dist/types/contracts";
+import { ERC1155TokenShop__factory } from "@zionstate/blockchain/dist/types/contracts";
+import { Membership__factory } from "@zionstate/blockchain/dist/types/contracts";
+import { ProvaMaster__factory } from "@zionstate/blockchain/dist/types/contracts";
+import { USDC__factory } from "@zionstate/blockchain/dist/types/contracts";
 import { ethers, Signer } from "ethers";
-
-export type ERC1155IndividualURI =
-  types.ZionContractsTypeScript.ERC1155IndividualURI;
 
 export type ERC1155IndividualURI_Factory =
   types.ZionContractsTypeScript.ERC1155IndividualURI__factory;
+
+export type ERC1155IndividualURI =
+  types.ZionContractsTypeScript.ERC1155IndividualURI;
 
 export type ContractFactory = ethers.ContractFactory;
 
