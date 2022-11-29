@@ -35,6 +35,10 @@ export var BaseNoiz_v2 = class<
     return mapper;
   }
 
+  404 = "create a fallback 404 page";
+
+  FallbackHtml = () => <p>There was some kind of error</p>;
+
   Html = (props: Props) => {
     return (
       <div className={props.className}>
