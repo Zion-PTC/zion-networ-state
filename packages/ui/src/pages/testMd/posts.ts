@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
-import { readAndParseFiles } from "./readAndParseFiles";
 import { mdParser } from "../../HTML/React/lib/hooks";
+import {
+  readAndParse,
+  processMatter,
+} from "../../library";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 const simplepost = path.join(
@@ -56,18 +58,18 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id) {
-  var { contentHtml, matterResult } = await getAllPosts(
+export async function getPostData(id: string) {
+  var { matterResult } = await getAllPosts(
     id,
     postsDirectory
   );
-  // Combine the data with the id and contentHtml
+  // Combine the data with the id and matterResult
   return {
     id,
-    contentHtml,
-    // sending the page configuration datas in a data object
-    // down to the component which will consume it.
-    ...matterResult.data,
+    matterResult: {
+      data: matterResult.data,
+      content: matterResult.content,
+    },
   };
 }
 
@@ -75,18 +77,7 @@ async function getAllPosts(
   id: string,
   _postsDirectory: string
 ) {
-  const fileContents = readAndParseFiles(
-    _postsDirectory,
-    id
-  );
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-
-  // Use remark to convert markdown into HTML string
-  const processedContent = await mdParser(matterResult);
-  console.log(processedContent.result);
-
-  let contentHtml = processedContent.toString();
-  return { contentHtml, matterResult };
+  const fileContents = readAndParse(_postsDirectory, id);
+  const matterResult = processMatter(fileContents);
+  return { matterResult };
 }
