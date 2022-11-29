@@ -24,6 +24,14 @@ export interface IEVMweb {
   detect(): Promise<MetaMaskEthereumProvider | null>;
 }
 
+export interface EVMweb {
+  window: RequireOnlyOne<Window, "ethereum">;
+  provider: ethers.providers.Web3Provider;
+  signer: ethers.providers.JsonRpcSigner;
+  contractFactories: typeof ZionContractFactories["prototype"]["contractFactories"];
+  detect(): Promise<MetaMaskEthereumProvider | null>;
+}
+
 export class EVMweb implements IEVMweb {
   window: RequireOnlyOne<Window, "ethereum">;
   provider: ethers.providers.Web3Provider;
