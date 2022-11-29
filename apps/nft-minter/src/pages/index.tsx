@@ -9,7 +9,9 @@ const SRC =
   "https://raw.githubusercontent.com/newsbubbles/elsewhere/main/README.md";
 
 interface NewLanding {
-  (props: BasePropsFromApp & { data: string }): JSX.Element;
+  (
+    props: BasePropsFromApp & { data: string }
+  ): JSX.Element;
 }
 
 export async function getStaticProps(): Promise<{
@@ -21,7 +23,10 @@ export async function getStaticProps(): Promise<{
 
 const Feed = styled.div``;
 
-const NewLanding: NewLanding = function Landing({ data, layout }) {
+const NewLanding: NewLanding = function Landing({
+  data,
+  layout,
+}) {
   return (
     <Layout landing {...layout}>
       <MDContent contentHtml={data}></MDContent>

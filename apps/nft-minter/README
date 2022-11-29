@@ -70,13 +70,17 @@ each time we make a change and we wish to have it reflecting
 in the browser we need to perform the following (in the
 project's root folder, NOT in the monorepo root folder):
 
-- `yarn preconstruct build`
-- `yarn build`
+- `yarn run build`
 
-I created a convinient script which can be found at:
-`./bin/build.sh`, so by running `sh bin/build.sh` at the
-project's root level folder, you can run both commands
-easily.
+This commands runs a script that I put in `./bin/build.sh`.
+This folders shall be put global in your system in order for
+it to work.
+
+> Windows users shall install `git` utilities which has a
+> replica of `bash` in order to run this scripts.
+> I am working on the translation of those scripts in node
+> scripts so that they can be easily run with no stress. Thats
+> why I created the `CLI` application.
 
 # Contents
 
@@ -97,11 +101,17 @@ use to distribute the Elsewhere© and Underlords© projects.
 
 ### Disclaimer
 
-why it doesnt work
+at the moment we are working on consolidating the `ui`
+package.
+We succesfully created classes for this pages:
 
-> At the moment the applications is on a early stage, we are
-> working on displaying the data realitive to the Elsewhere
-> and Gotek's Discography contracts. At it's completion the
-> application will work by receiving withing the URL the
-> address of the contract which it will display, like
-> `...ourdns.com/api/<token_address>`.
+- profile
+- item
+
+We are currently working on the integration of `.md` files.
+
+We have some issues with exporting modules which use `fs`
+from the packages and import them in client applications.
+
+We created a next application inside the `ui` package to be
+able to visualize every class that we create.
