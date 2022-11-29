@@ -9,13 +9,13 @@ export async function getStaticProps() {
 }
 
 export default function index(props) {
-  console.log(props);
+  // console.log(props);
 
   const text = `<h2>Hello, world!</h2>
   <p>Welcome to my page 👀</p>`;
-  const Content = new Md({
-    datas: [{ contentString: text }],
-  }).Content;
+  // const Content = new Md({
+  //   datas: [{ contentString: text }],
+  // }).Content;
 
-  return <Content></Content>;
+  return <Md datas={[{ contentString: text }]}></Md>;
 }
