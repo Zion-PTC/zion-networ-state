@@ -7,6 +7,7 @@ import "../../../zion/lib/ZionLib.sol";
 import "../../../access/Ownable.sol";
 import "../../ERC721/ERC721.sol";
 import "../../ERC20/ERC20.sol";
+import "../ZNFT.sol";
 
 contract Profile is Ownable {
     using ZionLib for ZionLib.DefinedId;
@@ -37,3 +38,9 @@ contract Profile is Ownable {
         return _profileToken.totalSupply();
     }
 }
+
+abstract contract ProfileNew is P, PPro {}
+
+abstract contract User is ProfileNew {}
+
+abstract contract Creator is ProfileNew {}
