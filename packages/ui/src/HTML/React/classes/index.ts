@@ -28,4 +28,10 @@ export * as Basic from "./Basic";
 export * from "./Icon";
 
 //// Md
-export * from './Md';
+export * from "./Md";
+
+//// Chart
+export * from "./Chart";
+
+///////// Contract
+export * from "./Contract";
