@@ -215,16 +215,13 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
       );
     };
 
-    Step = (
-      props: {
-        input: string | string[];
-        handleSteps(props: {
-          isCompleted: boolean;
-          RenderedSteps: () => JSX.Element;
-        }): void;
-      },
-      x: number
-    ) => {
+    Step = (props: {
+      input: string | string[];
+      handleSteps(props: {
+        isCompleted: boolean;
+        RenderedSteps: () => JSX.Element;
+      }): void;
+    }) => {
       return (
         <Box flexDirection="column">
           <this.Question
@@ -237,20 +234,12 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
 
     override render(): React.ReactNode {
       const { Step } = this;
-      const isntance = Step(
-        {
-          input: this.props.input,
-          handleSteps: this.handleSteps,
-        },
-        10
-      );
       return (
         <>
           <Step
             input={this.props.input}
             handleSteps={this.handleSteps}
           />
-          {isntance}
         </>
       );
     }

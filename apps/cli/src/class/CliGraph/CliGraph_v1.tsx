@@ -8,6 +8,7 @@ export type CliGraph_v1ClassProps =
 export type CliGraph_v1AsChild = "CliGraph_v1AsChild";
 
 export class CliGraph extends AppGraph {}
+
 export class CliNode extends AppNode {
   type: string = "node";
   constructor(props: {

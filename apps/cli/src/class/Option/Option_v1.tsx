@@ -27,13 +27,3 @@ export class Option_v1 extends Component<Option_v1ClassProps> {
     this.value = [props.option, props.component];
   }
 }
-export class Option extends CliNode {
-  override type: string = "option";
-  constructor(props: {
-    id: string;
-    actions?: string[];
-    children?: string[];
-  }) {
-    super(props);
-  }
-}
