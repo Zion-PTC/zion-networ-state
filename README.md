@@ -26,6 +26,7 @@ world.
     - [testpack](#testpack)
     - [Ui](#ui)
     - [Utils](#utils)
+    - [ZionBase](#utils)
   - [Bin](#bin)
     - []()
 - [How it works](#how-it-works)
@@ -592,3 +593,39 @@ The `test` package is the upper most package. All the other
 packages have a dependency on this one.
 
 </br><image src="assets/pkg-graph.png" height=300px>
+
+# Disclaimer
+
+At the moment we are working on consolidating the `ui`
+package.
+We succesfully created classes for this pages:
+
+- profile
+- item
+
+We are currently working on the integration of `.md` files.
+
+We have some issues with exporting modules which use `fs`
+from the packages and import them in client applications.
+
+We created a next application inside the `ui` package to be
+able to visualize every class that we create.
+
+## working on libraries
+
+Working on the library requires a little extra-work:
+each time we make a change and we wish to have it reflecting
+in the browser we need to perform the following (in the
+project's root folder, NOT in the monorepo root folder):
+
+- `yarn run build`
+
+This commands runs a script that I put in `./bin/build.sh`.
+This folders shall be put global in your system in order for
+it to work.
+
+> Windows users shall install `git` utilities which has a
+> replica of `bash` in order to run this scripts.
+> I am working on the translation of those scripts in node
+> scripts so that they can be easily run with no stress. Thats
+> why I created the `CLI` application.
