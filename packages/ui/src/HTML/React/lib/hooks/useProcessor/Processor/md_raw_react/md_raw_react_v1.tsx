@@ -1,4 +1,4 @@
-import { Data } from "../../../../../../../../../../node_modules/vfile";
+// import { Data } from "../../../../../../../../../../node_modules/vfile";
 import { createElement, Fragment } from "react";
 import rehypeHighlight from "rehype-highlight";
 import dockerfile from "highlight.js/lib/languages/dockerfile";
@@ -13,12 +13,12 @@ import { visit } from "unist-util-visit";
 
 // export const md_raw_react_v2: Imd_raw_react_v2 = function () {};
 
-let storedPres:
-  | {
-      id: string;
-      position: Position | undefined;
-    }
-  | undefined;
+// let storedPres:
+//   | {
+//       id: string;
+//       position: any | undefined;
+//     }
+//   | undefined;
 
 export const md_raw_react_v1: Iprocessor =
   (text: string) => () =>
@@ -39,10 +39,10 @@ export const md_raw_react_v1: Iprocessor =
           if (!id) return;
           if (!id[1]) return;
           value = id[1];
-          storedPres = {
-            id: value,
-            position: pre.position,
-          };
+          // storedPres = {
+          //   id: value,
+          //   position: pre.position,
+          // };
         });
         if (!chartIdxs) return;
         chartIdxs.forEach(chartIdx => {
