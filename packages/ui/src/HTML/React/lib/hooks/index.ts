@@ -26,5 +26,8 @@ export * from "./mdParser";
 // ///////// readAndParseFile
 // export * from "./readAndParseFile";
 
-///////// useMdParser
-export * from "./useMdParser";
+// ///////// useMdParser
+// export * from "./useMdParser";
+
+///////// useProcessor
+export * from "./useProcessor";
