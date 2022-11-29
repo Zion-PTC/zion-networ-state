@@ -101,8 +101,10 @@ use to distribute the Elsewhere© and Underlords© projects.
 
 ### Disclaimer
 
-at the moment we are working on consolidating the `ui`
-package.
+AAA this app is not working. At the moment is pretty broken
+cause we are migrating the code to the library in order for
+the application to be way thinned
+
 We succesfully created classes for this pages:
 
 - profile
