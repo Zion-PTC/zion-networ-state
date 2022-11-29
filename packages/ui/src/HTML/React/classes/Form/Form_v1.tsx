@@ -1,27 +1,44 @@
+import { node } from "@zionstate/utils";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
+import { InputType, InputValue } from "../../lib/global";
+import { MakeAsChild, NoizDatas } from "../../lib/types";
+import { NoizProps } from "../../lib/types";
+import { handleChange } from "../../lib/util";
+import { callbackifyUseState } from "../../lib/util";
+import { handleSubmit } from "../../lib/util";
 import {
-  callbackifyUseState,
-  handleChange,
-  handleSubmit,
-} from "../../lib/util";
-import { Input, InputAsChild } from "../Basic";
+  Input,
+  InputAsChild,
+  Label as LabelledInput,
+  LabelAsChild,
+} from "../Basic";
+
+const guard = node.dataGuard;
 
 /////// TYPES
 export type Form_v1Data<
   T extends InputValue = InputValue
 > = {
-  type: InputType;
-  placeholder: string;
-  preventDefault: boolean;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: T;
-};
+  // type: InputType;
+  // placeholder: string;
+  // preventDefault: boolean;
+  // handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  // value: T;
+} & LabelAsChild;
+
 export type Form_v1Booleans = {};
+
 export type Form_v1Props = NoizProps<
-  Form_v1Data & Form_v1Booleans & InputAsChild
+  Form_v1Data & Form_v1Booleans
 >;
-export type Form_v1ClassProps = NoizDatas<Form_v1Props>;
+
+export type Form_v1ClassBooleans = { cia: boolean };
+
+export type Form_v1ClassProps = NoizDatas<
+  Form_v1Props & Form_v1Booleans
+>;
+
 export type Form_v1AsChild = MakeAsChild<
   "Form",
   Form_v1ClassProps
@@ -30,14 +47,15 @@ export type Form_v1AsChild = MakeAsChild<
 
 ////////CLASS
 export class Form_v1 extends BaseNoiz<
-  Form_v1Data & InputAsChild,
+  Form_v1Data & Form_v1Booleans,
   Form_v1Booleans
 > {
   constructor(props: Form_v1ClassProps) {
     super(props);
     // this.state.inputValue = ""
   }
-  Form = (props: Form_v1Props) => {
+  Html = (props: Form_v1Props) => {
+    const { Label } = props;
     const [inputValue, setInputValue] = useState("");
     const [formEntry, setFormEntry] = useState("");
 
@@ -54,29 +72,22 @@ export class Form_v1 extends BaseNoiz<
       callbackedSetInputValue,
     ]);
 
-    const inputProps: any = {
-      handleChange: _handleChange,
-      placeholder: "mi curi",
-      preventDefault: true,
-      type: "text",
-      value: inputValue,
-    };
-
     console.log(formEntry);
     return (
       <form
         className={props.className}
         onSubmit={_handleSubmit}
       >
-        <label>
-          <p>prova</p>
-          <Input datas={inputProps} />
-        </label>
+        {/* <Input datas={Input_.datas} /> */}
+        <LabelledInput datas={Label.datas}></LabelledInput>
       </form>
     );
   };
 
-  Style = styled(this.Form)``;
+  Style = styled(this.Html)`
+    display: grid;
+    grid-auto-columns: max-content;
+  `;
 
   Mapper = Form_v1.mapperFactory(this.Style);
 
