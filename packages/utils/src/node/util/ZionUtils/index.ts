@@ -10,3 +10,6 @@ export * from "./array";
 export * from "./math";
 export * from "./path";
 export * from "./guard";
+
+///////// swtch
+export * from "./swtch";
