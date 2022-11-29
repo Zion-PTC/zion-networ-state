@@ -1,4 +1,5 @@
 export * as classes from "./classes";
+export { Contract } from "./classes";
 
 export * as lib from "./lib";
 

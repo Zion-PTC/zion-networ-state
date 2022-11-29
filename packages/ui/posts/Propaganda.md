@@ -1,12 +1,24 @@
 ---
 title: "Gotek: Propaganda"
 date: "2022-10-27"
+chart:
+  id: 1
+  label: "Tokenomics"
+  labels:
+    [
+      ["Promozione", 10],
+      ["Investors", 5],
+      ["Programmazione", 10],
+      ["Stampa", 20],
+      ["Artisti", 55],
+    ]
 ---
 
-TekNoLogique Presenta:
+# TekNoLogique Presenta:
 
-<cacchina>asdfasdfas</cacchina>
 Gotek - Propaganda & il primo triplice disco decentralizzato
+
+<chart id="chart-1"/>
 
 Dopo aver preso la decisione di non distribuire più la propria musica sulle piattaforme come Spotify e Music, Gotek ha intrapreso la costruzione di una piattaforma decentralizzata. Si è dato da fare per studiare le tecnologie necessarie per dispiegare Smart Contracts e creare siti web dinamici.
 

@@ -3,9 +3,6 @@ import {
   useState,
   Fragment,
   createElement,
-  ReactElement,
-  JSXElementConstructor,
-  SetStateAction,
   Dispatch,
 } from "react";
 import rehypeHighlight from "rehype-highlight";
@@ -17,6 +14,7 @@ import { unified } from "unified";
 import dockerfile from "highlight.js/lib/languages/dockerfile";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
+import { visit } from "unist-util-visit";
 
 type ProcessorTypes =
   | "html-react"
@@ -26,20 +24,10 @@ type ProcessorTypes =
 class Processor {
   type: ProcessorTypes = "html-react";
   text: string;
-  setContent: Dispatch<
-    SetStateAction<ReactElement<
-      any,
-      string | JSXElementConstructor<any>
-    > | null>
-  >;
+  setContent: setContent;
   constructor(props: {
     text: string;
-    setContent: Dispatch<
-      SetStateAction<ReactElement<
-        any,
-        string | JSXElementConstructor<any>
-      > | null>
-    >;
+    setContent: setContent;
   }) {
     const { text, setContent } = props;
     this.text = text;
@@ -60,10 +48,19 @@ class Processor {
         });
     };
     this.md_react = () => {
+      let substitution: string;
       unified()
         .use(remarkParse)
         .use(remarkGfm)
         .use(remarkRehype)
+        .use(() => {
+          return tree => {
+            // visit(tree, "html", pre => {});
+            console.log(tree);
+
+            return tree;
+          };
+        })
         .use(rehypeHighlight, {
           languages: { dockerfile },
         })
@@ -88,13 +85,11 @@ class Processor {
         .use(rehypeHighlight, {
           languages: { dockerfile },
         })
-        .use(rehypeReact, {
-          createElement,
-          Fragment,
-          components: {},
-        })
         .use(rehypeStringify)
-        .process(this.text);
+        .process(this.text)
+        .then(file =>
+          setContent(file.value as unknown as string)
+        );
     };
   }
   html_react;
@@ -102,21 +97,9 @@ class Processor {
   md_string;
 }
 
-export interface IuseMdParser_v2 {
-  (text: string, type: ProcessorTypes): ReactElement<
-    any,
-    string | JSXElementConstructor<any>
-  > | null;
-}
-
 const makeProcessor = (
   text: string,
-  setContent: Dispatch<
-    SetStateAction<ReactElement<
-      any,
-      string | JSXElementConstructor<any>
-    > | null>
-  >,
+  setContent: setContent,
   type: ProcessorTypes
 ): (() => void) => {
   const processor = new Processor({ text, setContent });
@@ -142,18 +125,23 @@ const makeProcessor = (
   return res;
 };
 
+export interface IuseMdParser_v2 {
+  (text: string, type: "md-react"): JSX.Element;
+  (text: string, type: "md-string"): string;
+  (text: string, type: ProcessorTypes): Content;
+}
+
+type setContent = Dispatch<Content>;
+type Content = JSX.Element | string;
+
 export const useMdParser_v2: IuseMdParser_v2 = function (
-  text: string,
-  type: ProcessorTypes
-) {
-  const [Content, setContent] = useState(
-    Fragment as unknown as () => ReactElement<
-      any,
-      string | JSXElementConstructor<any>
-    > | null
+  text,
+  type
+): any {
+  const [Content, setContent] = useState<Content>(
+    Fragment as unknown as Content
   );
 
   useEffect(makeProcessor(text, setContent, type), [text]);
-
   return Content;
 };

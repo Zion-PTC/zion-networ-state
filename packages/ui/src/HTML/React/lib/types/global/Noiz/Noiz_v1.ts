@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Flatten } from "../../../utility";
-import { StyledDefault } from "../../utility/StyledDefault/StyledDefault_v1";
+import { StyledDefault } from "../../utility/StyledDefault/";
 
 /**
  * Adds StyledDefault {css:.., className:...}
@@ -93,4 +93,4 @@ export type NoizDatas_v3<Data> = Flatten<{
 export type MakeAsChild<
   DataId extends string,
   Datas extends { datas: any }
-> = { [k in DataId]: Datas["datas"] };
+> = { [k in DataId]: { datas: Datas["datas"] } };
