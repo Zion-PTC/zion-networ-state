@@ -18,7 +18,7 @@ import {
   NoizDatas as ND,
 } from "./types";
 import { FluidTheme as ft } from "./types/theme";
-import { BooleanizeUnions } from "./utility";
+import { BooleanizeUnions, Flatten } from "./utility";
 
 export {};
 /////////////////////////////
@@ -41,13 +41,13 @@ export {};
 
 type _AllHTMLAttributes<T> = allHTML<T>;
 
-type _InputValue =
+export type InputValue =
   | string
   | number
   | readonly string[]
   | undefined;
 
-type _InputType =
+export type InputType =
   | "button"
   | "checkbox"
   | "color"
@@ -234,8 +234,6 @@ type MakeBooleansFromUnion<T extends string> = {
 };
 ///// HTML
 type AllHTMLAttribute<T> = _AllHTMLAttributes<T>;
-type InputValue = _InputValue;
-type InputType = _InputType;
 
 ///// React
 
