@@ -1,7 +1,10 @@
 # UI
 
-This package containes utilities to build Fluid
-applications.
+This package containes utilities to build Noiz Fluid (due to
+an already existing application called `Zion`, which is also
+a web3 platform, we decided to start thinking about a name
+change and at the moment we opted for Noiz, which is Zion
+reversed) applications.
 
 ## File syntax formatting.
 
@@ -9,7 +12,7 @@ We found that we prefer having the types as closes as
 possible to the components. This means that, broadly
 speaking, a component should look always somehow like this:
 
-```ts
+```tsx
 // IMPORTS
 import { something } from "./somewhere";
 
@@ -28,7 +31,7 @@ export function Component() {
 
 - shall have as first child a basic jsx element:
 
-  ```ts
+  ```tsx
   ....
   return (
     <div><div>
@@ -38,7 +41,7 @@ export function Component() {
 - shall all receive className from their props. This enables
   the possibility to use the component in `styled(Component)`.
 
-  ```ts
+  ```tsx
   function Component(props:{className:string}){
     ....
     return (
@@ -50,7 +53,7 @@ export function Component() {
 - shall receive datas which are going to be consumed by the
   component in a datas object:
 
-  ```ts
+  ```tsx
   function Component(props: {
     datas: { text: string }[];
   }) {
@@ -61,7 +64,7 @@ export function Component() {
 - when used in another component it shall not receive spread
   props looking like this:
 
-  ```ts
+  ```tsx
   ...
   return (
     <div className={props.className}>
@@ -77,7 +80,7 @@ export function Component() {
     component can render multiple instances of itsels,
     simply by passing down more than one data object in
     the `props.datas` member.
-    ```ts
+    ```tsx
     type ComponentData = {
       name: string;
       surname: string;
@@ -85,7 +88,7 @@ export function Component() {
     ```
   - booleans: component shall be configurable via
     booleans. For example `main`, or `big`, `small` ..etc.
-    ```ts
+    ```tsx
     type ComponentBooleans = {
       main?: boolean;
       exotic: ?boolean;
@@ -93,7 +96,7 @@ export function Component() {
     ```
 - should receive a prop object which looks like this:
 
-  ```ts
+  ```tsx
   type ComponentProps = {
     datas: ComponentData[];
     main?: boolean;
@@ -106,8 +109,11 @@ export function Component() {
   members like `className`, `css` or
   `JSX.InstrinsicAttributes`. The final Component props
   shall look something like this:
+  **deprecated** a new version for this has been
+  implemented, I will describe it asap
+  TODO @giacomogagliano change the rule for Components props
 
-  ```ts
+  ```tsx
   type ComponentProps = StyledDefault<{
     datas: ComponentData[];
     main?: boolean;
@@ -115,7 +121,7 @@ export function Component() {
   }>;
   ```
 
-- Higher orderd components which import other components
+- Parent components which are composed by other components
   shall also provide a smart way to pass props downwards
   and avoid collisions. In order to do this Components
   should always provide a member, named as the child
@@ -123,7 +129,7 @@ export function Component() {
   type which wraps data of a single child component into a
   `datas` objects. This shall be declared with the props:
 
-  ```ts
+  ```tsx
   type HigherOrderComponent = StyledDefault<{
     datas: HigherOrderComponentData[];
     firemode?: boolean;
@@ -131,10 +137,10 @@ export function Component() {
   }>;
   ```
 
-- In the case the HigherOrder component has an higher
-  order component child, it shall declare require all of
+- In the case the Parent component has an higher
+  order component child, it shall require all of
   the child components datas this ways:
-  ```ts
+  ```tsx
   type HigherWithHigherComponent = StyledDefault<{
     datas: HigherWithHigherComponentData[];
     snowmode?: boolean;
@@ -144,3 +150,4 @@ export function Component() {
     };
   }>;
   ```
+  - in certain cases it can be useful to compose a

@@ -51,8 +51,10 @@ export class Label_v1 extends BaseNoiz<
       this.state = { isMultiple: false };
     else this.state = { isMultiple: true };
   }
+
   Html = (props: Label_v1Props) => {
     const {
+      name,
       handleChange,
       placeholder,
       type,
@@ -61,6 +63,7 @@ export class Label_v1 extends BaseNoiz<
       step,
       preventDefault,
     } = props;
+
     const inputProps: InputClassProps = {
       datas: [
         {
@@ -77,7 +80,7 @@ export class Label_v1 extends BaseNoiz<
     return (
       <>
         <label className={props.className}>
-          <p>{props.name}</p>
+          <p>{name}</p>
           <Input datas={inputProps.datas} />
         </label>
       </>

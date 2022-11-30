@@ -1,6 +1,6 @@
 - [ ] TODO understand why the `fs` module doesn't work when
       imported in `ui`.
-  - [ ] TODO move the `readAndParse` method in `database/FS` package
+  - [ ] move the `readAndParse` method in `database/FS` package
 - [ ] TODO find a way to embed a `Chart` element in an `md`
       document. Possible ways:
   - [ ] use `mdx`
@@ -46,3 +46,12 @@
 
 - [ ] rinominare Label in LabelledInput
   - [ ] creare cartella dentro
+
+## enhancements
+
+- [ ] TODO create a document class in /React/classes
+      This class shall contain different flavours of
+      `_document.tsx` files for `Next` applications.
+- [ ] TODO create an app class in /React/classes
+      This class shall contain several flavors of
+      `_application.tsx` files for `Next` apps.

@@ -1,4 +1,7 @@
 import styled, { css } from "styled-components";
+import { MakeAsChild, NoizDatas } from "../../lib/types";
+import { NoizProps } from "../../lib/types";
+import { Flatten } from "../../lib/utility";
 import { Icon } from "../Icon";
 
 /////// TYPES
@@ -14,7 +17,7 @@ export type Badge_v1Props = NoizProps<
 
 export type Badge_v1ClassBooleans = {};
 
-export type Badge_v1ClassProps = utility.Flatten<
+export type Badge_v1ClassProps = Flatten<
   NoizDatas<Badge_v1Props> & Badge_v1ClassBooleans
 >;
 

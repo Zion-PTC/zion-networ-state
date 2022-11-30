@@ -63,20 +63,17 @@ export class Input_v1 extends BaseNoiz<
       return props.handleChange(e);
     }
     return (
-      <>
-        <input
-          className={props.className}
-          css={props.css}
-          type={props.type}
-          placeholder={props.placeholder}
-          onChange={onChange}
-          value={props.value}
-          min={props.min}
-          max={props.max}
-          step={props.step}
-        />
-        {/* {this.state.isMultiple && <br />} */}
-      </>
+      <input
+        className={props.className}
+        css={props.css}
+        type={props.type}
+        placeholder={props.placeholder}
+        onChange={onChange}
+        value={props.value}
+        min={props.min}
+        max={props.max}
+        step={props.step}
+      />
     );
   };
 

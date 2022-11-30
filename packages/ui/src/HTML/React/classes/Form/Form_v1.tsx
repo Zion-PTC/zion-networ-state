@@ -45,15 +45,25 @@ export type Form_v1AsChild = MakeAsChild<
 >;
 /////////////
 
+interface Form_v1State {
+  input1?: string;
+}
 ////////CLASS
 export class Form_v1 extends BaseNoiz<
   Form_v1Data & Form_v1Booleans,
-  Form_v1Booleans
+  Form_v1Booleans,
+  Form_v1State
 > {
   constructor(props: Form_v1ClassProps) {
     super(props);
+    this.state = { input1: "" };
     // this.state.inputValue = ""
   }
+
+  handleInput1 = (e: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ input1: e.target.value });
+  };
+
   Html = (props: Form_v1Props) => {
     const { Label } = props;
     const [inputValue, setInputValue] = useState("");
@@ -73,6 +83,8 @@ export class Form_v1 extends BaseNoiz<
     ]);
 
     console.log(formEntry);
+    console.log(this.state.input1);
+
     return (
       <form
         className={props.className}

@@ -3,6 +3,12 @@
     {
       "name": "ui",
       "path": "."
+    },
+    {
+      "path": "src/HTML/React"
+    },
+    {
+      "path": "src/pages"
     }
   ],
   "settings": {}

@@ -4,22 +4,32 @@ import {
   SetStateAction,
 } from "react";
 
-/**
- * This helper creates a handleSubmit callback which is
- * meant to be passed down to event handlers
- * @param callBacks List of callback that should be called
- * by the handleSubmit handler.
- * @returns an handler function
- */
-export const handleSubmit_v1 =
+export interface submitEventHandler {
+  (e: FormEvent<HTMLFormElement>): void;
+}
+export interface gSubmitEventHandler<T> {
+  (e: T): void;
+}
+
+export interface IhandleSubmit_v1 {
   <T>(
-    callBacks: ((e: T) => void)[],
+    callBacks: gSubmitEventHandler<T>[],
     value: T,
     reset?: Dispatch<SetStateAction<string>>,
-    defaultValue: string = "",
-    preventDefault: boolean = true
+    defaultValue?: string,
+    preventDefault?: boolean
+  ): submitEventHandler;
+}
+
+export const handleSubmit_v1: IhandleSubmit_v1 =
+  (
+    callBacks,
+    value,
+    reset?,
+    defaultValue = "",
+    preventDefault = true
   ) =>
-  (e: FormEvent<HTMLFormElement>) => {
+  e => {
     if (preventDefault) e.preventDefault();
     callBacks.forEach(callBack => callBack(value));
     if (reset) reset(defaultValue);

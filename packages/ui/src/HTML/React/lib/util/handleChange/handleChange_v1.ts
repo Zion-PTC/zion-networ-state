@@ -1,20 +1,23 @@
 import { ChangeEvent } from "react";
 
+export interface changeEventHandler {
+  (e: ChangeEvent<HTMLInputElement>): void;
+}
+export interface IhandleChange_v1 {
+  (
+    callBacks: changeEventHandler[],
+    preventDefault?: boolean
+  ): changeEventHandler;
+}
 /**
- * This helper creates a handleChange callback which is
- * meant to be passed down to event handlers
- * @param callBacks List of callback that should be called
- * by the handleChange handler.
+ * This helper creates a handleChange callback which are
+ * meant to receive an event.
+ * @param callBacks @changeEventHandler List of changeEventHandlers
  * @returns an handler function
  */
-export const handleChange_v1 =
-  (
-    callBacks: ((
-      e: ChangeEvent<HTMLInputElement>
-    ) => void)[],
-    preventDefault: boolean = true
-  ) =>
-  (e: ChangeEvent<HTMLInputElement>) => {
+export const handleChange_v1: IhandleChange_v1 =
+  (callBacks, preventDefault = true) =>
+  e => {
     if (preventDefault) e.preventDefault();
     callBacks.forEach(callback => callback(e));
   };
