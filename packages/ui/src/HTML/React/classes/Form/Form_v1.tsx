@@ -1,25 +1,23 @@
-import { node } from "@zionstate/utils";
+// import { node } from "@zionstate/utils";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { InputType, InputValue } from "../../lib/global";
+// import { InputType, InputValue } from "../../lib/global";
 import { MakeAsChild, NoizDatas } from "../../lib/types";
 import { NoizProps } from "../../lib/types";
-import { handleChange } from "../../lib/util";
-import { callbackifyUseState } from "../../lib/util";
+// import { handleChange } from "../../lib/util";
+// import { callbackifyUseState } from "../../lib/util";
 import { handleSubmit } from "../../lib/util";
 import {
-  Input,
-  InputAsChild,
+  // Input,
+  // InputAsChild,
   Label as LabelledInput,
   LabelAsChild,
 } from "../Basic";
 
-const guard = node.dataGuard;
+// const guard = node.dataGuard;
 
 /////// TYPES
-export type Form_v1Data<
-  T extends InputValue = InputValue
-> = {
+export type Form_v1Data = {
   // type: InputType;
   // placeholder: string;
   // preventDefault: boolean;
@@ -75,12 +73,12 @@ export class Form_v1 extends BaseNoiz<
       setInputValue
     );
 
-    const callbackedSetInputValue =
-      callbackifyUseState(setInputValue);
+    // const callbackedSetInputValue =
+    //   callbackifyUseState(setInputValue);
 
-    const _handleChange = handleChange([
-      callbackedSetInputValue,
-    ]);
+    // const _handleChange = handleChange([
+    //   callbackedSetInputValue,
+    // ]);
 
     console.log(formEntry);
     console.log(this.state.input1);
