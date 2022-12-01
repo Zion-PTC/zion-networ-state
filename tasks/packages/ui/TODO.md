@@ -55,3 +55,6 @@
 - [ ] TODO create an app class in /React/classes
       This class shall contain several flavors of
       `_application.tsx` files for `Next` apps.
+- [ ] TODO #25 @ariannatnl trovare un modo per fare restare al
+      centro l'immagine, e che prenda sempre le propozioni che
+      la rendano sempre visibile.

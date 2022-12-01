@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Image } from "../../Image";
 
+// TODO @giacomogagliano mettere apposto
 /////// TYPES
 export type ItemPage_v1Data = {
   src: string;

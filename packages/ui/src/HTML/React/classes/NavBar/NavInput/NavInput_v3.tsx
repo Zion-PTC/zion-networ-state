@@ -1,9 +1,16 @@
+import { Flatten } from "@zionstate/zionbase/dist/Types/lib/Flatten/Flatten_v1";
 import styled from "styled-components";
+import { BaseNoiz_v2 } from "../../../lib/global";
+import {
+  MakeAsChild,
+  NoizDatas,
+  NoizProps,
+} from "../../../lib/types";
 import { P } from "../../../style";
 import { IconAsChild, IconClassProps } from "../../Icon";
 
 ///// TYPES
-export type NavInput_v3Data = utility.Flatten<
+export type NavInput_v3Data = Flatten<
   {
     inputId: string;
     inputName: string;
@@ -23,7 +30,7 @@ export type NavInput_v3ClassBooleans = {
   keyValueInput?: boolean;
   textInput?: boolean;
 };
-export type NavInput_v3ClassProps = utility.Flatten<
+export type NavInput_v3ClassProps = Flatten<
   NoizDatas<NavInput_v3Props> & NavInput_v3ClassBooleans
 >;
 export type NavInput_v3AsChild = MakeAsChild<
@@ -31,7 +38,7 @@ export type NavInput_v3AsChild = MakeAsChild<
   NavInput_v3ClassProps
 >;
 
-export const NavInput_v3 = class extends BaseNoiz<
+export const NavInput_v3 = class extends BaseNoiz_v2<
   NavInput_v3Data,
   NavInput_v3ClassBooleans
 > {

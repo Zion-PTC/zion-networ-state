@@ -23,6 +23,7 @@ export * as Pages from "./Pages";
 
 //// Basic
 export * as Basic from "./Basic";
+export { LabelProps } from "./Basic";
 
 //// Icon
 export * from "./Icon";

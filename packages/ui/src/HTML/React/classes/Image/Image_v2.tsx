@@ -1,8 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 import styled, { keyframes } from "styled-components";
 
-/////// TYPES
-export type Image_v1Data = {
+export interface Image_v2PropsType {
   width?: string;
   height?: string;
   maxWidth?: string;
@@ -10,53 +8,50 @@ export type Image_v1Data = {
   borderTop?: string;
   gridArea?: string;
   display?: string;
-  handleisLoading: Dispatch<SetStateAction<boolean>>;
+  // handleisLoading: Dispatch<SetStateAction<boolean>>;
   src: string;
+  fullBorder?: boolean;
+  // imageLoaded: boolean;
   image?: {
     width?: string;
     height?: string;
     maxWidth?: string;
   };
-};
+}
 
-export type Image_v1Booleans = {
-  fullBorder?: boolean;
-  imageLoaded: boolean;
-};
+export interface Image_v2Props
+  extends BuildProps<Image_v2PropsType>,
+    BaseNoizProps {}
 
-export type Image_v1Props = NoizProps<
-  Image_v1Data & Image_v1Booleans
->;
-
-export type Image_v1ClassBooleans = {
-  fullBorder?: boolean;
-  imageLoaded: boolean;
-};
-
-export type Image_v1ClassProps = NoizDatas<Image_v1Props> &
-  Image_v1ClassBooleans;
-
-export type Image_v1AsChild = MakeAsChild<
-  "Image",
-  Image_v1ClassProps
->;
-/////////////
-
-////////CLASS
-export class Image_v1 extends BaseNoiz<
-  Image_v1Data & Image_v1Booleans,
-  Image_v1ClassBooleans
-> {
-  constructor(props: Image_v1ClassProps) {
+export class Image_v2Props extends BaseNoizProps {
+  constructor(props: BuildProps<Image_v2PropsType>) {
     super(props);
-    this.state = { isLoading: false, src: "" };
+    this.datas = props.datas;
+  }
+}
+export interface Image_v2State {
+  isLoading: boolean;
+  src: string;
+}
+
+export class Image_v2 extends BaseNoiz<
+  Image_v2Props,
+  Image_v2State
+> {
+  constructor(props: Image_v2Props) {
+    super(props);
+    this.state = { isLoading: true, src: "" };
   }
 
-  componentDidMount() {
-    this.setState({ isLoading: true });
-  }
+  // componentDidMount() {
+  //   this.setState({ isLoading: false });
+  // }
 
-  LogoImage = (props: Image_v1Props) => {
+  handleIsLoading = (isLoading: boolean) => {
+    this.setState({ isLoading });
+  };
+
+  LogoImage = (props: Image_v2Props) => {
     return (
       <div className={props.className} css={props.css}>
         <circle />
@@ -79,17 +74,18 @@ export class Image_v1 extends BaseNoiz<
     }
   `;
 
-  Html = (props: Image_v1Props) => {
+  Html = (props: Image_v2Props) => {
     const handleOnLoad = () => {
-      if (props.handleisLoading)
-        props.handleisLoading(false);
+      console.log("loaded");
+
+      this.handleIsLoading(false);
     };
     return (
       <div className={props.className} css={props.css}>
         <img
           onLoad={handleOnLoad}
           src={props.src}
-          alt="nft"
+          // alt="nft"
           id="image"
         ></img>
         <div id="test"></div>
@@ -112,8 +108,8 @@ export class Image_v1 extends BaseNoiz<
   50% {height:5px;transform:translateY(0px);background:#9b59b6;}
   100% {height:5px;transform:translateY(0px);background:#9b59b6;}
   `;
-
-  Style = styled(this.Html)`
+  // #25 aggiungere qui
+  StyledHtml = styled(this.Html)`
     z-index: 1;
     overflow: hidden;
     grid-area: ${props => props.gridArea};
@@ -132,16 +128,16 @@ export class Image_v1 extends BaseNoiz<
     grid-template-columns: 100%;
     grid-template-rows: 100%;
     /* #test {
-    background-color: yellow;
-    width: 100%;
-    height: 100%;
-    place-self: center;
-    position:absolute
-  } */
+  background-color: yellow;
+  width: 100%;
+  height: 100%;
+  place-self: center;
+  position:absolute
+} */
     #image {
       border-image: none;
-      display: ${props =>
-        props.imageLoaded ? "block" : "none"};
+      display: ${() =>
+        !this.state.isLoading ? "block" : "none"};
       max-width: ${props => props.image?.maxWidth};
       width: ${props => props.image?.width};
       height: ${props => props.image?.height};
@@ -159,8 +155,10 @@ export class Image_v1 extends BaseNoiz<
       position: absolute;
       #loading-waves {
         place-self: center;
-        display: ${props => {
-          return props.imageLoaded ? "none" : "block";
+        display: ${() => {
+          console.log("state", this.state.isLoading);
+
+          return !this.state.isLoading ? "none" : "block";
         }};
         position: relative;
         span {
@@ -194,9 +192,8 @@ export class Image_v1 extends BaseNoiz<
     }
   `;
 
-  Mapper = Image_v1.mapperFactory(this.Style);
-
   render() {
-    return <this.Mapper {...this.props}></this.Mapper>;
+    let Element = this.makeElement();
+    return <Element {...this.props}></Element>;
   }
 }

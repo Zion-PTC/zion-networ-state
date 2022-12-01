@@ -57,9 +57,3 @@ export var BaseNoiz_v2 = class<
     return <this.Mapper {...this.props}></this.Mapper>;
   }
 };
-
-declare global {
-  var BaseNoiz: typeof BaseNoiz_v2;
-}
-
-globalThis.BaseNoiz = BaseNoiz_v2;

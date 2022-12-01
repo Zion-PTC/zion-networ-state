@@ -12,6 +12,16 @@ import {
   // CSSProp,
   // CSSObject
 } from "styled-components";
+export {
+  BaseNoiz_v2,
+  BaseNoiz_v3,
+  BaseNoizProps,
+} from "./global/BaseNoiz";
+export type {
+  BuildProps,
+  ClassComponent,
+  StyledClassComponent,
+} from "./global/BaseNoiz";
 import {
   NoizProps as NP,
   MakeAsChild as MAC,
@@ -162,7 +172,7 @@ type _CssAttributeValueTypes =
   | (number & {})
   | undefined;
 
-type _Position = {
+export type Position = {
   top?: string;
   right?: string;
   bottom?: string;
@@ -175,7 +185,7 @@ type _Direction = BooleanizeUnions<
   "horizontal" | "vertical"
 >;
 
-type _NavBarType = BooleanizeUnions<
+export type NavBarType = BooleanizeUnions<
   "icon" | "text" | "key-value"
 >;
 
@@ -211,9 +221,9 @@ type _BooleanDisplay = {
   display: boolean;
 };
 
-type _Sizes = "small" | "mid" | "big";
+export type Sizes = "small" | "mid" | "big";
 
-type _Size = { size: Sizes };
+export type Size = { size: Sizes };
 
 type _StyledDefault<T> = Flatten<
   T & {
@@ -244,19 +254,15 @@ type FunctionComponentElemen<P> =
 ///// CSS
 type CssProperties = keyof CSSProperties;
 type CssAttributeValueTypes = _CssAttributeValueTypes;
-type Position = _Position;
 type Dimensions = _Dimensions;
 type BasicLayoutProps = _BasicLayoutProps;
 type PropsWithJsxInstrinsicAttr<T> =
   _PropsWithJsxInstrinsicAttr<T>;
 type Direction = _Direction;
-type NavBarType = _NavBarType;
 
 ///// Styled
 type StyledDefault<T> = _StyledDefault<T>;
 type BasicFluidProps = _BasicProps;
-type Sizes = _Sizes;
-type Size = _Size;
 type BooleanSizes = _BooleanSizes;
 type BooleanDisplay = _BooleanDisplay;
 

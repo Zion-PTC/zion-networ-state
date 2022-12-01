@@ -1,13 +1,5 @@
-export { Icon_v2 as Icon } from "./Icon_v2";
-
-export type { Icon_v2Props } from "./Icon_v2";
-export { Icon_v1 } from "./Icon_v1";
-
-export type {
-  Icon_v1Props as IconProps,
-  Icon_v1AsChild as IconAsChild,
-  Icon_v1ClassProps as IconClassProps,
-} from "./Icon_v1";
+export { Icon_v3 as Icon } from "./Icon_v3";
+export type { Icon_v3Props as IconProps } from "./Icon_v3";
 
 //// Moon
 export * from "./Moon";

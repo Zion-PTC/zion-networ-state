@@ -1,5 +1,4 @@
 import React from "react";
-import { Flatten } from "../../../HTML/React";
 import { Chart } from "../../../HTML/React/classes";
 
 type RgbaString = string;
@@ -199,6 +198,5 @@ const datasets2 = [dataset2];
 const data2 = new Data(labels, datasets2);
 
 export default function index() {
-  // @ts-expect-error
-  return <Chart datas={[{ data: data2 }]}></Chart>;
+  return <Chart type="doughnut" data={data2}></Chart>;
 }
