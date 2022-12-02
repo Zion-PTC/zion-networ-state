@@ -3,7 +3,7 @@ import { P } from "../../../style";
 import { IconProps } from "../../Icon";
 import { BaseNoizProps } from "../../../lib/global";
 
-export interface NavInput_v4PropsType {
+export interface NavInput_v4Props extends BaseNoizProps {
   inputId: string;
   inputName: string;
   IconComponent: (props: IconProps) => JSX.Element;
@@ -14,17 +14,14 @@ export interface NavInput_v4PropsType {
   textInput?: boolean;
 }
 
-export interface NavInput_v4Props
-  extends BuildProps<NavInput_v4PropsType>,
-    BaseNoizProps {}
-
 export class NavInput_v4Props extends BaseNoizProps {
-  constructor(props: BuildProps<NavInput_v4PropsType>) {
+  constructor(props: NavInput_v4Props) {
     super(props);
-    this.datas = props.datas;
   }
 }
 export interface NavInput_v4State {}
+
+export class NavInput_v4State {}
 
 export interface NavInput_v4
   extends BaseNoiz<NavInput_v4Props, NavInput_v4State> {}
@@ -114,6 +111,7 @@ export class NavInput_v4 extends BaseNoiz<
     );
   };
 
+  // TODO @giacomogagliano prendere spunto da questo pattern
   mapperBuilder() {
     const props = this.props;
     const Text = this.Text;
@@ -133,7 +131,7 @@ export class NavInput_v4 extends BaseNoiz<
 
   StyledHtml = styled(this.Html)``;
   render() {
-    let Element = this.makeElement();
+    let Element = this.Style;
     return <Element {...this.props}></Element>;
   }
 }

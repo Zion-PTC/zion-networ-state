@@ -5,7 +5,13 @@ import styled, {
   StyledComponent,
 } from "styled-components";
 import { ReactNode } from "react";
-import { dataGuard } from "@zionstate/utils";
+
+interface DefaultProps_v4 {
+  css?: string;
+  className?: string;
+  children?: React.ReactNode;
+  key?: number;
+}
 
 type BaseProps<T, B = boolean> = {
   css?: string;
@@ -15,13 +21,11 @@ type BaseProps<T, B = boolean> = {
   multiply?: B;
 } & T;
 
-export type Multiplied_v3<T> = BaseProps<T> & {
+export type Multiplied_v4<T> = {
   datas?: BaseProps<T>[];
 };
 
-export type BuildProps_v3<T> = BaseProps<T> & {
-  datas?: BaseProps<T>[];
-};
+export type BuildProps_v4<T> = BaseProps<T>;
 
 export type GComponent<P> = (props: P) => JSX.Element;
 
@@ -38,9 +42,9 @@ export type StyledGComponent<P> = StyledComponent<
  * import React from "react";
  *
  * import {
- *   BaseNoiz_v3,
- *   BuildProps_v3,
- *   BaseNoiz_v3Props,
+ *   BaseNoiz_v4,
+ *   BuildProps,
+ *   BaseNoiz_v4Props,
  * } from "../../HTML/React/lib/global";
  *
  * interface NuPropsType {
@@ -48,19 +52,19 @@ export type StyledGComponent<P> = StyledComponent<
  * }
  *
  * interface NuProps
- *   extends BuildProps_v3<NuPropsType>,
- *     BaseNoiz_v3Props {}
+ *   extends BuildProps<NuPropsType>,
+ *     BaseNoiz_v4Props {}
  *
- * class NuProps extends BaseNoiz_v3Props {
- *   constructor(props: BuildProps_v3<NuPropsType>) {
+ * class NuProps extends BaseNoiz_v4Props {
+ *   constructor(props: BuildProps<NuPropsType>) {
  *     super(props);
  *     this.name = props.name;
  *     this.datas = props.datas;
  *   }
  * }
  *
- * class Nu extends BaseNoiz_v3<
- *   BuildProps_v3<{ name: string }>
+ * class Nu extends BaseNoiz_v4<
+ *   BuildProps<{ name: string }>
  * > {}
  *
  * const child1 = new NuProps({
@@ -94,50 +98,35 @@ export type StyledGComponent<P> = StyledComponent<
  * }
  * ```
  */
-export interface BaseNoiz_v3Props extends BaseProps<{}> {}
+export interface BaseNoiz_v4Props extends DefaultProps {}
 
-export class BaseNoiz_v3Props {
-  constructor(props: BaseNoiz_v3Props) {
+export class BaseNoiz_v4Props {
+  constructor(props: BaseNoiz_v4Props) {
     this.children = props.children;
     this.className = props.className;
     this.css = props.css;
     this.key = props.key;
-    this.multiply = props.multiply;
   }
 }
 
-export interface BaseNoiz_v3<
+export interface BaseNoiz_v4<
   T = {},
   S = {},
-  P = BuildProps_v3<T>
+  P = BuildProps<T>
 > extends Component<P, S> {
   Html: GComponent<P>;
   StyledHtml: StyledGComponent<P>;
 }
 
-export class BaseNoiz_v3<
+export class BaseNoiz_v4<
   T = {},
   S = {},
-  P extends BuildProps_v3<T> = BuildProps_v3<T>
+  P extends BuildProps<T> = BuildProps<T>
 > extends Component<P, S> {
   static styles = styles;
 
   constructor(props: P) {
     super(props);
-  }
-
-  multiplier(
-    Component: (props: BaseProps<T>) => JSX.Element,
-    datas: P["datas"]
-  ): GComponent<P> {
-    return (props: P) => (
-      <div className={props.className}>
-        {dataGuard(datas, "").map((data, id) => (
-          <Component key={id} {...data}></Component>
-        ))}
-        {props.children}
-      </div>
-    );
   }
 
   Html = (props: P) => (
@@ -148,21 +137,8 @@ export class BaseNoiz_v3<
 
   StyledHtml = styled(this.Html)``;
 
-  makeElement() {
-    let Element: GComponent<P> = this.StyledHtml;
-
-    if (this.props.multiply) {
-      if (!this.props.datas) throw new Error("no datas");
-      const datas = this.props.datas;
-      Element = this.multiplier(this.StyledHtml, datas);
-    }
-    return Element;
-  }
-
-  Element: GComponent<P> = this.makeElement();
-
   render(): ReactNode {
-    let Element: GComponent<P> = this.Element;
+    let Element: GComponent<P> = this.StyledHtml;
 
     return (
       <Element {...this.props}>
@@ -172,13 +148,15 @@ export class BaseNoiz_v3<
   }
 }
 
-// declare global {
-//   var BaseNoiz: typeof BaseNoiz_v3;
-//   type BaseNoiz<P, S> = BaseNoiz_v3<P, S>;
-//   var BaseNoizProps: typeof BaseNoiz_v3Props;
-//   type BaseNoizProps = BaseNoiz_v3Props;
-//   type BuildProps_v3<T> = BuildProps_v3<T>;
-// }
+declare global {
+  var BaseNoiz: typeof BaseNoiz_v4;
+  type BaseNoiz<P, S> = BaseNoiz_v4<P, S>;
+  var BaseNoizProps: typeof BaseNoiz_v4Props;
+  type BaseNoizProps = BaseNoiz_v4Props;
+  //
+  type BuildProps<T> = BuildProps_v4<T>;
+  type DefaultProps = DefaultProps_v4;
+}
 
-// globalThis.BaseNoiz = BaseNoiz_v3;
-// globalThis.BaseNoizProps = BaseNoiz_v3Props;
+globalThis.BaseNoiz = BaseNoiz_v4;
+globalThis.BaseNoizProps = BaseNoiz_v4Props;

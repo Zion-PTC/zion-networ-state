@@ -12,7 +12,9 @@ import {
   StyledGComponent,
 } from "../../lib/global/BaseNoiz/BaseNoiz_v3";
 
-export interface Chart_v2PropsType extends ChartProps {
+export interface Chart_v2Props
+  extends BaseNoizProps,
+    ChartProps {
   pie?: boolean;
   donut?: boolean;
   bar?: boolean;
@@ -20,14 +22,9 @@ export interface Chart_v2PropsType extends ChartProps {
   chart?: boolean;
 }
 
-export interface Chart_v2Props
-  extends BuildProps<Chart_v2PropsType>,
-    BaseNoizProps {}
-
 export class Chart_v2Props extends BaseNoizProps {
-  constructor(props: BuildProps<Chart_v2PropsType>) {
+  constructor(props: Chart_v2Props) {
     super(props);
-    this.datas = props.datas;
     this.pie = props.pie;
     this.donut = props.donut;
     this.bar = props.bar;
@@ -82,7 +79,7 @@ export class Chart_v2 extends BaseNoiz<
   `;
 
   render() {
-    let Element = this.makeElement();
+    let Element = this.StyledHtml;
     return (
       <Element
         data={this.props.data}

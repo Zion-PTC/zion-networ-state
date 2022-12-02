@@ -1,4 +1,11 @@
 export {
+Profile_v2
+} from './Profile_v2';
+
+export type {
+Profile_v2Props
+} from './Profile_v2';
+export {
   Profile_v1 as Profile,
 } from './Profile_v1';
 
@@ -9,4 +16,5 @@ export type {
   Profile_v1ClassProps as ProfileClassProps,
   Profile_v1AsChild as ProfileAsChild,
 } from './Profile_v1';
+
 

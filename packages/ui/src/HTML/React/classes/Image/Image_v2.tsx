@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
-export interface Image_v2PropsType {
+export interface Image_v2Props extends BaseNoizProps {
   width?: string;
   height?: string;
   maxWidth?: string;
@@ -19,20 +19,18 @@ export interface Image_v2PropsType {
   };
 }
 
-export interface Image_v2Props
-  extends BuildProps<Image_v2PropsType>,
-    BaseNoizProps {}
-
 export class Image_v2Props extends BaseNoizProps {
-  constructor(props: BuildProps<Image_v2PropsType>) {
+  constructor(props: Image_v2Props) {
     super(props);
-    this.datas = props.datas;
+    // TODO #28 @ariannatnl aggiungere tutte le props nel ctor
   }
 }
 export interface Image_v2State {
   isLoading: boolean;
   src: string;
 }
+
+export class Image_v2State {}
 
 export class Image_v2 extends BaseNoiz<
   Image_v2Props,
@@ -42,10 +40,6 @@ export class Image_v2 extends BaseNoiz<
     super(props);
     this.state = { isLoading: true, src: "" };
   }
-
-  // componentDidMount() {
-  //   this.setState({ isLoading: false });
-  // }
 
   handleIsLoading = (isLoading: boolean) => {
     this.setState({ isLoading });
@@ -88,7 +82,6 @@ export class Image_v2 extends BaseNoiz<
           // alt="nft"
           id="image"
         ></img>
-        <div id="test"></div>
         <div id="loading-waves-container">
           <div id="loading-waves">
             <span></span>
@@ -127,13 +120,6 @@ export class Image_v2 extends BaseNoiz<
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
-    /* #test {
-  background-color: yellow;
-  width: 100%;
-  height: 100%;
-  place-self: center;
-  position:absolute
-} */
     #image {
       border-image: none;
       display: ${() =>
@@ -193,7 +179,7 @@ export class Image_v2 extends BaseNoiz<
   `;
 
   render() {
-    let Element = this.makeElement();
+    let Element = this.StyledHtml;
     return <Element {...this.props}></Element>;
   }
 }

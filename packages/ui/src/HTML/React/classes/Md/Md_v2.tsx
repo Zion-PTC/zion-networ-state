@@ -12,7 +12,7 @@ interface Article {
   date: string;
 }
 
-export interface Md_v2PropsType {
+export interface Md_v2Props extends BaseNoizProps {
   contentHtml?: string;
   contentString?: string;
   matterResult?: GrayMatterFile<string>;
@@ -22,14 +22,10 @@ export interface Md_v2PropsType {
   article?: boolean;
 }
 
-export interface Md_v2Props
-  extends BuildProps<Md_v2PropsType>,
-    BaseNoizProps {}
-
 export class Md_v2Props extends BaseNoizProps {
-  constructor(props: BuildProps<Md_v2PropsType>) {
+  constructor(props: Md_v2Props) {
     super(props);
-    this.datas = props.datas;
+    // TODO #29 @giacomogagliano aggiungere props
   }
 }
 export interface Md_v2State {}
@@ -41,8 +37,8 @@ export class Md_v2 extends BaseNoiz<
   Md_v2Props,
   Md_v2State
 > {
-  ERR1 = "No data array was givend";
-  ERR2 = "No content string was givend";
+  ERR1 = "No data array was given";
+  ERR2 = "No content string was given";
 
   useProcessor = useProcessor;
 
@@ -175,13 +171,14 @@ export class Md_v2 extends BaseNoiz<
   Html = (props: Md_v2Props) => {
     return <h1>{props.children}</h1>;
   };
+
   StyledHtml = styled(this.Html)`
     img {
       width: 100vw;
     }
   `;
   render() {
-    let Element = this.makeElement();
+    let Element = this.StyledHtml;
     return <Element></Element>;
   }
 }

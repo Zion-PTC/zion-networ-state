@@ -1,6 +1,9 @@
+import { ComponentClass } from "react";
 import styled, { css } from "styled-components";
+import { StyledDefault } from "../../lib/types/utility";
 import { BooleanizeUnions } from "../../lib/utility";
-import { NavInput, NavInputProps } from "./NavInput";
+import { IconProps } from "../Icon";
+import { NavInput, NavInputState } from "./NavInput";
 
 export type Direction = BooleanizeUnions<
   "horizontal" | "vertical"
@@ -10,38 +13,61 @@ export type NavBarType = BooleanizeUnions<
   "icon" | "text" | "key-value"
 >;
 
-export interface NavBar_v4PropsType
-  extends Direction,
-    NavBarType {
-  datas: NavInputProps[];
-}
-
 export interface NavBar_v4Props
-  extends BuildProps<NavBar_v4PropsType>,
+  extends Direction,
+    NavBarType,
     BaseNoizProps {}
 
 export class NavBar_v4Props extends BaseNoizProps {
-  constructor(props: BuildProps<NavBar_v4PropsType>) {
+  constructor(props: NavBar_v4Props) {
     super(props);
-    this.datas = props.datas;
   }
 }
 export interface NavBar_v4State {}
 
+export class NavBar_v4State {}
+
 export interface NavBar_v4
-  extends BaseNoiz<NavBar_v4Props, NavBar_v4State> {}
+  extends BaseNoiz<NavBar_v4Props, NavBar_v4State> {
+  NavInput: ComponentClass<
+    StyledDefault<{
+      inputId: string;
+      inputName: string;
+      IconComponent: (props: IconProps) => JSX.Element;
+      value?: string;
+      checked?: boolean;
+      iconInput?: boolean;
+      keyValueInput?: boolean;
+      textInput?: boolean;
+    }>,
+    NavInputState
+  >;
+}
 
 export class NavBar_v4 extends BaseNoiz<
   NavBar_v4Props,
   NavBar_v4State
 > {
+  NavInput: ComponentClass<
+    StyledDefault<{
+      inputId: string;
+      inputName: string;
+      IconComponent: (props: IconProps) => JSX.Element;
+      value?: string;
+      checked?: boolean;
+      iconInput?: boolean;
+      keyValueInput?: boolean;
+      textInput?: boolean;
+    }>,
+    NavInputState
+  > = NavInput;
+
   TextNavBar = (props: NavBar_v4Props) => {
     return (
       <nav className={props.className}>
         <NavInput
           textInput
           multiply
-          datas={props.datas}
           inputId=""
           inputName=""
           IconComponent={() => <></>}
@@ -56,7 +82,6 @@ export class NavBar_v4 extends BaseNoiz<
         <NavInput
           keyValueInput
           multiply
-          datas={props.datas}
           inputId=""
           inputName=""
           IconComponent={() => <></>}
@@ -71,7 +96,6 @@ export class NavBar_v4 extends BaseNoiz<
         <NavInput
           iconInput
           multiply
-          datas={props.datas}
           inputId=""
           inputName=""
           IconComponent={() => <></>}
@@ -164,10 +188,8 @@ export class NavBar_v4 extends BaseNoiz<
     }
   `;
 
-  StyledHtml2 = this.mapperBuilder();
-
   render() {
-    let Element = this.makeElement();
+    let Element = this.mapperBuilder();
     return <Element {...this.props}></Element>;
   }
 }

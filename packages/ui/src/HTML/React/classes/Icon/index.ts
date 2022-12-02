@@ -1,5 +1,8 @@
-export { Icon_v3 as Icon } from "./Icon_v3";
-export type { Icon_v3Props as IconProps } from "./Icon_v3";
+export {
+  Icon_v3 as Icon,
+  Icon_v3Props as IconProps,
+  Icon_v3State as IconState,
+} from "./Icon_v3";
 
 //// Moon
 export * from "./Moon";

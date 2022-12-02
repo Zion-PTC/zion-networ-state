@@ -1,4 +1,6 @@
+import { ChangeEvent } from "react";
 import styled from "styled-components";
+import { InputType } from "../../../lib/global";
 import {
   GComponent,
   StyledGComponent,
@@ -6,19 +8,27 @@ import {
 import { InputProps, InputPropsType } from "../Input";
 import { Input_v2 } from "../Input/Input_v2";
 
-export interface Label_v2PropsType extends InputPropsType {
+export interface Label_v2PropsType<T>
+  extends InputPropsType {
   name: string;
+  type: InputType;
+  placeholder: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: T;
+  preventDefault?: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
-export interface Label_v2Props
-  extends BuildProps<Label_v2PropsType>,
+export interface Label_v2Props<T>
+  extends Label_v2PropsType<T>,
     BaseNoizProps {}
 
-export class Label_v2Props extends BaseNoizProps {
-  constructor(props: Label_v2Props) {
+export class Label_v2Props<T> extends BaseNoizProps {
+  constructor(props: Label_v2Props<T>) {
     super(props);
     this.name = props.name;
-    this.datas = props.datas;
     this.type = props.type;
     this.placeholder = props.placeholder;
     this.handleChange = props.handleChange;
@@ -31,17 +41,16 @@ export class Label_v2Props extends BaseNoizProps {
 }
 export interface Label_v2State {}
 
-export interface Label_v2
-  extends BaseNoiz<Label_v2Props, Label_v2State> {
-  Html: GComponent<Label_v2Props>;
-  StyledHtml: StyledGComponent<Label_v2Props>;
+export interface Label_v2<T>
+  extends BaseNoiz<Label_v2Props<T>, Label_v2State> {
+  Html: GComponent<Label_v2Props<T>>;
+  StyledHtml: StyledGComponent<Label_v2Props<T>>;
 }
 
-export class Label_v2 extends BaseNoiz<
-  Label_v2Props,
-  Label_v2State
-> {
-  Html = (props: Label_v2Props) => {
+export class Label_v2<
+  T extends string | number | readonly string[] | undefined
+> extends BaseNoiz<Label_v2Props<T>, Label_v2State> {
+  Html = (props: Label_v2Props<T>) => {
     const {
       name,
       handleChange,
@@ -51,20 +60,16 @@ export class Label_v2 extends BaseNoiz<
       max,
       step,
       preventDefault,
-      multiply,
-      datas,
       value,
     } = props;
 
-    const inputProps: InputProps = new InputProps({
+    const inputProps: InputProps<T> = new InputProps({
       handleChange,
       placeholder,
       type,
       max,
       min,
       step,
-      multiply,
-      datas,
       preventDefault,
       value,
     });
@@ -81,7 +86,7 @@ export class Label_v2 extends BaseNoiz<
   StyledHtml = styled(this.Html)``;
 
   render() {
-    let Element = this.makeElement();
+    let Element = this.StyledHtml;
     return <Element {...this.props}></Element>;
   }
 }

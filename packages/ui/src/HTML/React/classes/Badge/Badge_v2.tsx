@@ -6,22 +6,19 @@ import {
 } from "../../lib/global/BaseNoiz/BaseNoiz_v3";
 import { Icon } from "../Icon";
 
-export interface Badge_v2PropsType {
+export interface Badge_v2Props extends BaseNoizProps {
   size?: "small" | "mid" | "big";
 }
 
-export interface Badge_v2Props
-  extends BuildProps<Badge_v2PropsType>,
-    BaseNoizProps {}
-
 export class Badge_v2Props extends BaseNoizProps {
-  constructor(props: BuildProps<Badge_v2PropsType>) {
+  constructor(props: Badge_v2Props) {
     super(props);
     this.size = props.size;
-    this.datas = props.datas;
   }
 }
 export interface Badge_v2State {}
+
+export class Badge_v2State {}
 
 export interface Badge_v2 {
   width: number;
@@ -128,7 +125,7 @@ export class Badge_v2 extends BaseNoiz<
     }
   `;
   render() {
-    let Element = this.makeElement();
+    let Element = this.StyledHtml;
     return <Element></Element>;
   }
 }

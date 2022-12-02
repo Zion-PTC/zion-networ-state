@@ -1,6 +1,7 @@
 export {
   Image_v2 as Image,
   Image_v2Props as ImageProps,
+  Image_v2State as ImageState,
 } from "./Image_v2";
 // export type { Image_v2Props } from "./Image_v2";
 

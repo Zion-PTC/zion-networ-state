@@ -1,4 +1,11 @@
 export {
+ItemPage_v2
+} from './ItemPage_v2';
+
+export type {
+ItemPage_v2Props
+} from './ItemPage_v2';
+export {
   ItemPage_v1 as ItemPage,
 } from './ItemPage_v1';
 
@@ -9,4 +16,5 @@ export type {
   ItemPage_v1ClassProps as ItemPageClassProps,
   ItemPage_v1AsChild as ItemPageAsChild,
 } from './ItemPage_v1';
+
 

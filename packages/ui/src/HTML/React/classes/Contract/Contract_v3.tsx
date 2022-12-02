@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { InputData, LabelProps } from "../Basic";
+import { InputProps, LabelProps } from "../Basic";
 
-export interface Contract_v3PropsType {
+export interface Contract_v3PropsType {}
+
+export interface Contract_v3Props extends BaseNoizProps {
   contractAddr: string;
   supply: number;
   owner: string;
@@ -10,22 +12,17 @@ export interface Contract_v3PropsType {
   currency?: string;
 }
 
-export interface Contract_v3Props
-  extends BuildProps<Contract_v3PropsType>,
-    BaseNoizProps {}
-
 export class Contract_v3Props extends BaseNoizProps {
-  constructor(props: BuildProps<Contract_v3PropsType>) {
+  constructor(props: Contract_v3Props) {
     super(props);
-    this.datas = props.datas;
   }
 }
 export interface Contract_v3State {}
 
-export interface Contract_v3
+export interface Contract_v3<T>
   extends BaseNoiz<Contract_v3Props, Contract_v3State> {}
 
-export class Contract_v3 extends BaseNoiz<
+export class Contract_v3<T> extends BaseNoiz<
   Contract_v3Props,
   Contract_v3State
 > {
@@ -57,7 +54,7 @@ export class Contract_v3 extends BaseNoiz<
       setAmountToPay,
     } = this.useForm();
 
-    const input1: InputData = {
+    const input1: InputProps<T> = {
       placeholder: "quantity",
       type: "number",
       handleChange: e => {
@@ -71,10 +68,10 @@ export class Contract_v3 extends BaseNoiz<
       step: 50,
     };
 
-    const inputdatas1 = [input1];
-    const label1: LabelProps = {
+    // const inputdatas1 = [input1];
+    const label1: LabelProps<T> = {
       name: "quantity:",
-      Input: { datas: inputdatas1 },
+      // Input: { datas: inputdatas1 },
       placeholder: "quantity",
       type: "number",
       handleChange: e => {
@@ -208,7 +205,7 @@ export class Contract_v3 extends BaseNoiz<
     }
   `;
   render() {
-    let Element = this.makeElement();
+    let Element = this.StyledHtml;
     return <Element {...this.props}></Element>;
   }
 }

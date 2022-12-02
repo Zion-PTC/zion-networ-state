@@ -1,2 +1,5 @@
-export { Card_v2 as Card } from "./Card_v2";
-export type { Card_v2Props as CardProps } from "./Card_v2";
+export {
+  Card_v2 as Card,
+  Card_v2Props as CardProps,
+  Card_v2State as CardState,
+} from "./Card_v2";

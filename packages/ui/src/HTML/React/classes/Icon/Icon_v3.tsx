@@ -25,7 +25,15 @@ import {
   ScrollToTop as ScrollToTopIcon,
 } from "./";
 
-export interface Icon_v3PropsType {
+export interface Icon_v3PropsType {}
+
+export type StyledSvgProps = {
+  filled?: boolean;
+  stroked?: boolean;
+  secondary?: boolean;
+};
+
+export interface Icon_v3Props extends BaseNoizProps {
   like?: boolean;
   moon?: boolean;
   account?: boolean;
@@ -56,26 +64,17 @@ export interface Icon_v3PropsType {
   secondary?: boolean;
 }
 
-export type StyledSvgProps = {
-  filled?: boolean;
-  stroked?: boolean;
-  secondary?: boolean;
-};
-
-export interface Icon_v3Props
-  extends BuildProps<Icon_v3PropsType>,
-    BaseNoizProps {}
-
 export class Icon_v3Props extends BaseNoizProps {
   constructor(props: Icon_v3Props) {
     super(props);
-    this.datas = props.datas;
     this.account = props.account;
     this.album = props.album;
     // TODO #26 @ariannatnl aggiungere il reseto delle props
   }
 }
 export interface Icon_v3State {}
+
+export class Icon_v3State {}
 
 export class Svg<S extends string = string> {
   name: S;
@@ -182,6 +181,7 @@ export class Icon_v3 extends BaseNoiz<
     return <h1>{props.children}</h1>;
   };
   StyledHtml = styled(this.Html)``;
+
   render() {
     const LogoZion = this.LogoZion;
     let Icon:

@@ -14,7 +14,9 @@ import { RemainingPercentage } from "../../lib/util/classes/RemainingPercentage"
 import { Icon } from "../Icon";
 import { Image } from "../Image";
 
-export interface Card_v2PropsType {
+export interface Card_v2PropsType {}
+
+export interface Card_v2Props extends BaseNoizProps {
   id: number;
   slug: string;
   src: string;
@@ -30,14 +32,9 @@ export interface Card_v2PropsType {
   big?: boolean;
 }
 
-export interface Card_v2Props
-  extends BuildProps<Card_v2PropsType>,
-    BaseNoizProps {}
-
 export class Card_v2Props extends BaseNoizProps {
-  constructor(props: BuildProps<Card_v2PropsType>) {
+  constructor(props: Card_v2Props) {
     super(props);
-    this.datas = props.datas;
     this.id = props.id;
     this.slug = props.slug;
     this.src = props.src;

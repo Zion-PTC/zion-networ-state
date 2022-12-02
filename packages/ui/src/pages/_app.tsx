@@ -14,7 +14,11 @@ const bgcolor = `hsl(${210 + 90}, 55%, 75%)`;
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 10vh 80vh 10vh;
+  grid-template-areas:
+    "h"
+    "content"
+    "f";
   header {
     background-color: ${bgcolor};
   }
