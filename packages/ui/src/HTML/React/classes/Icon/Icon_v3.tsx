@@ -1,29 +1,14 @@
+import { dataGuard } from "@zionstate/utils";
 import styled, {
   DefaultTheme,
   StyledComponent,
 } from "styled-components";
-import {
-  Like as LikeIcon,
-  Moon as MoonIcon,
-  Account as AccountIcon,
-  LogoZion as ZionIcon,
-  Album as AlbumIcon,
-  ArrowBack as ArrowBackIcon,
-  ArrowLeft as ArrowLeftIcon,
-  ArrowRight as ArrowRightIcon,
-  FilterAlt as FilterAltIcon,
-  Home as HomeIcon,
-  Repost as RepostIcon,
-  Search as SearchIcon,
-  Sun as SunIcon,
-  Trending as TrendingIcon,
-  More_Normal as More_NormalIcon,
-  Queue as QueueIcon,
-  Share as ShareIcon,
-  Tracks as TracksIcon,
-  Twitter as TwitterIcon,
-  ScrollToTop as ScrollToTopIcon,
-} from "./";
+import { Account } from "./Account";
+import { Album } from "./Album";
+import { ArrowBack } from "./ArrowBack";
+import { ArrowLeft } from "./ArrowLeft";
+import { ArrowRight } from "./ArrowRight";
+import { LogoZion } from "./LogoZion";
 
 export interface Icon_v3PropsType {}
 
@@ -76,22 +61,26 @@ export interface Icon_v3State {}
 
 export class Icon_v3State {}
 
-export class Svg<S extends string = string> {
+export interface Svg<S extends string = string> {
   name: S;
-  component: (props: Icon_v3Props) => JSX.Element;
-  constructor(
-    name: S,
-    component: (props: Icon_v3Props) => JSX.Element
-  ) {
-    this.name = name;
-    this.component = component;
-  }
+  Component: () => JSX.Element;
+  bla: string;
 }
 
-const account = new Svg("account", AccountIcon);
-const album = new Svg("album", AlbumIcon);
-const arrowBack = new Svg("arrowBack", ArrowBackIcon);
-const arrowLeft = new Svg("arrowLeft", ArrowLeftIcon);
+export class Svg<S extends string = string> {
+  constructor(name: S, Component: () => JSX.Element) {
+    this.name = name;
+    this.Component = Component;
+  }
+}
+const ACCOUNT = "account";
+const account = new Svg(ACCOUNT, Account);
+const ALBUM = "album";
+const album = new Svg(ALBUM, Album);
+const arrowBack = new Svg("arrowBack", ArrowBack);
+const arrowLeft = new Svg("arrowLeft", ArrowLeft);
+const arrowRight = new Svg("arrowRight", ArrowRight);
+const logoZion = new Svg("logozion", LogoZion);
 
 export class Icon_v3 extends BaseNoiz<
   Icon_v3Props,
@@ -156,6 +145,8 @@ export class Icon_v3 extends BaseNoiz<
     album,
     arrowBack,
     arrowLeft,
+    arrowRight,
+    logoZion,
   ];
 
   static svgslist(): string[] {
@@ -173,9 +164,9 @@ export class Icon_v3 extends BaseNoiz<
   constructor(props: Icon_v3Props) {
     super(props);
   }
-  LogoZion = ZionIcon;
-  ArrowLeft = ArrowLeftIcon;
-  ArrowRight = ArrowRightIcon;
+  LogoZion = LogoZion;
+  // ArrowLeft = ArrowLeftIcon;
+  // ArrowRight = ArrowRightIcon;
 
   Html = (props: Icon_v3Props) => {
     return <h1>{props.children}</h1>;
@@ -192,8 +183,10 @@ export class Icon_v3 extends BaseNoiz<
           {},
           never
         > = LogoZion;
-    if (this.props.arrowLeft) Icon = this.ArrowLeft;
-    if (this.props.arrowRight) Icon = this.ArrowRight;
+    if (this.props.arrowLeft)
+      Icon = dataGuard(Icon_v3.Svgs[3], "").Component;
+    if (this.props.arrowRight)
+      Icon = dataGuard(Icon_v3.Svgs[4], "").Component;
     // TODO #27 @ariannatnl finire di mettere le icone anche qui
     // let Element = this.makeElement();
     return <Icon></Icon>;

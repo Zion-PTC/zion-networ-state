@@ -2,8 +2,11 @@ import { ComponentClass } from "react";
 import styled, { css } from "styled-components";
 import { StyledDefault } from "../../lib/types/utility";
 import { BooleanizeUnions } from "../../lib/utility";
-import { IconProps } from "../Icon";
-import { NavInput, NavInputState } from "./NavInput";
+import {
+  NavInput,
+  NavInputProps,
+  NavInputState,
+} from "./NavInput";
 
 export type Direction = BooleanizeUnions<
   "horizontal" | "vertical"
@@ -16,14 +19,18 @@ export type NavBarType = BooleanizeUnions<
 export interface NavBar_v4Props
   extends Direction,
     NavBarType,
-    BaseNoizProps {}
+    BaseNoizProps {
+  inputs?: NavInputProps[];
+}
 
 export class NavBar_v4Props extends BaseNoizProps {
   constructor(props: NavBar_v4Props) {
     super(props);
   }
 }
-export interface NavBar_v4State {}
+export interface NavBar_v4State {
+  inputs: NavInputProps[];
+}
 
 export class NavBar_v4State {}
 
@@ -33,7 +40,7 @@ export interface NavBar_v4
     StyledDefault<{
       inputId: string;
       inputName: string;
-      IconComponent: (props: IconProps) => JSX.Element;
+      IconComponent?: () => JSX.Element;
       value?: string;
       checked?: boolean;
       iconInput?: boolean;
@@ -52,7 +59,7 @@ export class NavBar_v4 extends BaseNoiz<
     StyledDefault<{
       inputId: string;
       inputName: string;
-      IconComponent: (props: IconProps) => JSX.Element;
+      IconComponent?: () => JSX.Element;
       value?: string;
       checked?: boolean;
       iconInput?: boolean;
@@ -62,16 +69,18 @@ export class NavBar_v4 extends BaseNoiz<
     NavInputState
   > = NavInput;
 
+  constructor(props: NavBar_v4Props) {
+    super(props);
+    let state = new NavBar_v4State();
+    if (this.props.inputs)
+      state.inputs = this.props.inputs;
+    this.state = state;
+  }
+
   TextNavBar = (props: NavBar_v4Props) => {
     return (
       <nav className={props.className}>
-        <NavInput
-          textInput
-          multiply
-          inputId=""
-          inputName=""
-          IconComponent={() => <></>}
-        ></NavInput>
+        {props.children}
       </nav>
     );
   };
@@ -79,13 +88,7 @@ export class NavBar_v4 extends BaseNoiz<
   KeyValueNavBar = (props: NavBar_v4Props) => {
     return (
       <nav className={props.className}>
-        <NavInput
-          keyValueInput
-          multiply
-          inputId=""
-          inputName=""
-          IconComponent={() => <></>}
-        ></NavInput>
+        {props.children}
       </nav>
     );
   };
@@ -93,103 +96,126 @@ export class NavBar_v4 extends BaseNoiz<
   IconNavBar = (props: NavBar_v4Props) => {
     return (
       <nav className={props.className}>
-        <NavInput
-          iconInput
-          multiply
-          inputId=""
-          inputName=""
-          IconComponent={() => <></>}
-        ></NavInput>
+        {props.children}
       </nav>
     );
   };
 
-  mapperBuilder() {
-    const props = this.props;
-    const TextNavBar = this.TextNavBar;
-    const KeyValueNavBar = this.KeyValueNavBar;
-    const IconNavBar = this.IconNavBar;
-    let html = styled(this.Html)``;
-    if (props.text)
-      html = styled(TextNavBar)`
-        ${this.Style1}
-      `;
-    if (props["key-value"])
-      html = styled(KeyValueNavBar)`
-        ${this.Style1}
-      `;
-    if (props.icon)
-      html = styled(IconNavBar)`
-        ${this.Style1}
-      `;
-    return html;
-  }
-  Html = (props: NavBar_v4Props) => {
-    return <h1>{props.children}</h1>;
-  };
-  Style1 = css<typeof this.props>`
-    display: grid;
-    grid-auto-flow: ${props => {
-      if (props.horizontal === true) {
-        return "column";
-      }
-      if (props.vertical === true) {
-        return "row";
-      }
-      return "column";
-    }};
-    input {
-      display: none;
-    }
-    label {
-      cursor: pointer;
-      background-color: #7c808316;
-      border-top: 0.05rem solid
-        ${props => props.theme.primary.borderColor};
-      font-size: 70%;
+  Style1 = (
+    Component: (props: NavBar_v4Props) => JSX.Element
+  ) => {
+    return styled(Component)`
       display: grid;
-      height: 100%;
-      width: 100%;
-      box-sizing: border-box;
-      place-content: center;
-      &:hover {
-        background-color: #b0b3b520;
-      }
-      div {
-        display: ${props => {
-          if (props.text === true) return "grid";
-          if (props.icon === true) return "grid";
-          if (props["key-value"] === true) return "inline";
-        }};
-        place-items: center;
-        p {
-          display: inline;
+      grid-auto-flow: ${props => {
+        if (props.horizontal === true) {
+          return "column";
         }
-        p:first-child {
-          margin-right: 0.3rem;
+        if (props.vertical === true) {
+          return "row";
         }
+        return "column";
+      }};
+      input {
+        display: none;
       }
-      ${props =>
-        props.icon === true &&
-        css`
-          div {
-            display: grid;
-            place-items: center;
+      label {
+        cursor: pointer;
+        background-color: #7c808316;
+        border-top: 0.05rem solid
+          ${props => props.theme.primary.borderColor};
+        font-size: 70%;
+        display: grid;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        place-content: center;
+        &:hover {
+          background-color: #b0b3b520;
+        }
+        div {
+          display: ${props => {
+            if (props.text === true) return "grid";
+            if (props.icon === true) return "grid";
+            if (props["key-value"] === true)
+              return "inline";
+          }};
+          place-items: center;
+          p {
+            display: inline;
           }
-        `}
-    }
-    input:checked + label {
-      border-top: 0.1rem solid
-        ${props => props.theme.primary.borderColor};
-      border-bottom: 2px solid
-        ${props => props.theme.secondary.borderColor};
-      background-color: ${props =>
-        props.theme.primary.backgroundColor};
-    }
-  `;
+          p:first-child {
+            margin-right: 0.3rem;
+          }
+        }
+        ${props =>
+          props.icon === true &&
+          css`
+            div {
+              display: grid;
+              place-items: center;
+            }
+          `}
+      }
+      input:checked + label {
+        border-top: 0.1rem solid
+          ${props => props.theme.primary.borderColor};
+        border-bottom: 2px solid
+          ${props => props.theme.secondary.borderColor};
+        background-color: ${props =>
+          props.theme.primary.backgroundColor};
+      }
+    `;
+  };
+
+  defineType(data: NavInputProps) {
+    if (this.props.text) data.textInput = true;
+    if (this.props.icon) data.iconInput = true;
+    if (this.props["key-value"]) data.keyValueInput = true;
+    else data.textInput = true;
+    return data;
+  }
+
+  mapNavInputs = (data: NavInputProps, idx: number) => {
+    console.log(data);
+    data = this.defineType(data);
+
+    return <NavInput {...data} key={idx} />;
+  };
+
+  mappedNavInputs = (inputs: NavInputProps[]) => (
+    <>{inputs.map(this.mapNavInputs)}</>
+  );
+
+  checkInputs() {
+    const inputs = this.state.inputs;
+    if (!inputs)
+      if (!this.props.children) return <>nothing</>;
+      else {
+        return <></>;
+      }
+    else return this.mappedNavInputs(inputs);
+  }
+
+  chooseLayout() {
+    const props = this.props;
+    const text = this.Style1(this.TextNavBar);
+    const keyvalue = this.Style1(this.KeyValueNavBar);
+    const icon = this.Style1(this.IconNavBar);
+    if (props.text) return text;
+    if (props["key-value"]) return keyvalue;
+    if (props.icon) return icon;
+    return this.Style1(this.TextNavBar);
+  }
 
   render() {
-    let Element = this.mapperBuilder();
-    return <Element {...this.props}></Element>;
+    const Inputs = this.checkInputs();
+    const Layout = this.chooseLayout();
+
+    return (
+      <Layout {...this.props}>
+        {Inputs}
+        {this.props.children}
+      </Layout>
+    );
   }
 }

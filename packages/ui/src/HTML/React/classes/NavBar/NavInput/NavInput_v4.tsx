@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { P } from "../../../style";
-import { IconProps } from "../../Icon";
 import { BaseNoizProps } from "../../../lib/global";
 
 export interface NavInput_v4Props extends BaseNoizProps {
   inputId: string;
   inputName: string;
-  IconComponent: (props: IconProps) => JSX.Element;
+  IconComponent?: () => JSX.Element;
   value?: string;
   checked?: boolean;
   iconInput?: boolean;
@@ -17,6 +16,9 @@ export interface NavInput_v4Props extends BaseNoizProps {
 export class NavInput_v4Props extends BaseNoizProps {
   constructor(props: NavInput_v4Props) {
     super(props);
+    this.inputId = props.inputId;
+    this.inputName = props.inputName;
+    this.IconComponent = props.IconComponent;
   }
 }
 export interface NavInput_v4State {}
@@ -89,9 +91,13 @@ export class NavInput_v4 extends BaseNoiz<
       inputName,
       checked,
       className,
-      IconComponent,
+      // IconComponent,
     } = props;
     const RADIO = "radio";
+    // let SafeIconComponent = dataGuard(
+    //   IconComponent,
+    //   "no component was passed"
+    // );
     return (
       <>
         <input
@@ -103,7 +109,9 @@ export class NavInput_v4 extends BaseNoiz<
         />
         <label htmlFor={inputId}>
           <div>
-            <IconComponent />
+            {/* <SafeIconComponent /> */}
+            {props.children}
+            {/* {IconComponent} */}
           </div>
           <p>{inputId.toLocaleUpperCase()}</p>
         </label>

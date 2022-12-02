@@ -30,6 +30,7 @@ const makeProcessor = (
 };
 
 export interface IuseProcessor_v3 {
+  (text: string, type: "html-react"): JSX.Element;
   (text: string, type: "md-react"): JSX.Element;
   (text: string, type: "md-raw-react"): JSX.Element;
   (text: string, type: "md-string"): string;

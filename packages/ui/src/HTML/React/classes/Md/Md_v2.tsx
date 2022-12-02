@@ -1,21 +1,38 @@
-import { dataGuard } from "@zionstate/utils";
+import { VFile } from "../../../../../../../node_modules/vfile";
 import { parseISO, format } from "date-fns";
+import { Fragment } from "ethers/lib/utils";
 import { GrayMatterFile } from "gray-matter";
 import styled from "styled-components";
 import {
-  IuseProcessor,
+  Processor,
+  ProcessorTypes,
   useProcessor,
 } from "../../lib/hooks";
-const guard = dataGuard;
-interface Article {
-  title: string;
-  date: string;
-}
+import {
+  JSXElementConstructor,
+  ReactElement,
+  ReactNode,
+} from "react";
 
-export interface Md_v2Props extends BaseNoizProps {
+interface Article {
+  title?: string;
+  date?: string;
+}
+type Content = JSX.Element | string;
+
+interface ProcessorArgs {
+  text: string;
+  type: ProcessorTypes;
+}
+class ProcessorArgs {}
+
+export interface Md_v2Props
+  extends BaseNoizProps,
+    Article {
   contentHtml?: string;
-  contentString?: string;
+  contentString: string;
   matterResult?: GrayMatterFile<string>;
+  html_react?: boolean;
   md_react?: boolean;
   md_string?: boolean;
   md_raw_react?: boolean;
@@ -25,13 +42,32 @@ export interface Md_v2Props extends BaseNoizProps {
 export class Md_v2Props extends BaseNoizProps {
   constructor(props: Md_v2Props) {
     super(props);
-    // TODO #29 @giacomogagliano aggiungere props
   }
 }
-export interface Md_v2State {}
+export interface Md_v2State {
+  Content: Content;
+  Element: () => JSX.Element;
+  processorArgs: ProcessorArgs;
+}
+
+export class Md_v2State {}
 
 export interface Md_v2
-  extends BaseNoiz<Md_v2Props, Md_v2State> {}
+  extends BaseNoiz<Md_v2Props, Md_v2State> {
+  Processor: typeof Processor;
+  makeProcessor(
+    text: string,
+    type: ProcessorTypes
+  ): () => Promise<
+    | (VFile & {
+        result: ReactElement<
+          unknown,
+          string | JSXElementConstructor<any>
+        >;
+      })
+    | VFile
+  >;
+}
 
 export class Md_v2 extends BaseNoiz<
   Md_v2Props,
@@ -40,66 +76,70 @@ export class Md_v2 extends BaseNoiz<
   ERR1 = "No data array was given";
   ERR2 = "No content string was given";
 
+  ProcessorArgs = ProcessorArgs;
+  Processor = Processor;
+
   useProcessor = useProcessor;
 
-  useMd2String(
-    props: Required<Pick<Md_v2Props, "matterResult">> &
-      Exclude<Md_v2Props, "matterResult">,
-    useProcessor: IuseProcessor,
-    Element: () => JSX.Element
-  ) {
-    const res = useProcessor(
-      guard(props.matterResult.content, ""),
-      "md-string"
-    );
-    let string: string = "<div>moserfocker</div>";
-    if (typeof res === "string") string = res;
-    Element = () => (
-      <div
-        className={props.className}
-        dangerouslySetInnerHTML={{
-          __html: string as string,
-        }}
-      ></div>
-    );
-    return Element;
+  constructor(props: Md_v2Props) {
+    super(props);
+
+    let state = new Md_v2State();
+    state.Content = Fragment as unknown as Content;
+    state.Element = () => <p>load it</p>;
+    let procArgs = new ProcessorArgs();
+    procArgs.text = this.props.contentString;
+    procArgs.type = this.checkType(procArgs.type);
+    state.processorArgs = procArgs;
+    this.state = state;
   }
 
-  useMd2React(
-    matterResult: GrayMatterFile<string>,
-    useProcessor_: IuseProcessor,
-    Element: () => JSX.Element
-  ) {
-    const res = useProcessor_(
-      guard(
-        matterResult.content,
-        "no matter result content"
-      ),
-      "md-react"
-    );
+  setContent = (Content: Content) =>
+    this.setState({ Content: Content });
 
-    if (typeof res !== "string") {
-      Element = () => guard(res, "");
-    }
+  setElement = (Element: () => JSX.Element) =>
+    this.setState({ Element: Element });
 
-    return Element;
+  checkType(type: ProcessorTypes): ProcessorTypes {
+    type = "html-react";
+    if (this.props.html_react) type = "html-react";
+    if (this.props.md_raw_react) type = "md-raw-react";
+    if (this.props.md_react) type = "md-react";
+    if (this.props.md_string) type = "md-string";
+    return type;
   }
 
-  useMd2RawReact(
-    matterResult: GrayMatterFile<string>,
-    useProcessor: IuseProcessor,
-    Element: () => JSX.Element
-  ) {
-    const res = useProcessor(
-      matterResult.content,
-      "md-raw-react"
+  makeParser(type: ProcessorTypes, processor: Processor) {
+    const cond1 = type === "html-react";
+    const cond2 = type === "md-raw-react";
+    const cond3 = type === "md-react";
+    const cond4 = type === "md-string";
+    if (cond1) return processor.html_react();
+    if (cond2) return processor.md_raw_react();
+    if (cond3) return processor.md_react();
+    if (cond4) return processor.md_string();
+    return processor.md_react();
+  }
+
+  makeElementAndSet = (
+    e:
+      | VFile
+      | (VFile & {
+          result: ReactElement<
+            unknown,
+            string | JSXElementConstructor<any>
+          >;
+        })
+  ) => this.setElement(() => <>{e.result as ReactNode}</>);
+
+  componentDidMount(): void {
+    const text = this.state.processorArgs.text;
+    const type = this.state.processorArgs.type;
+    const processor = new this.Processor({ text, type });
+    const parser = this.makeParser(type, processor);
+    parser.then(e =>
+      this.setElement(() => <>{e.result as ReactNode}</>)
     );
-
-    if (typeof res !== "string") {
-      Element = () => guard(res, "");
-    }
-
-    return Element;
   }
 
   Date(props: { dateString: string }) {
@@ -111,48 +151,32 @@ export class Md_v2 extends BaseNoiz<
     );
   }
 
+  Element = () => {
+    let Element: () => JSX.Element = this.state.Element;
+    return <Element></Element>;
+  };
+
+  Empty = (props: Md_v2Props) => (
+    <div className={props.className} id="md-content">
+      {props.children}
+    </div>
+  );
+
   Article = (props: Article & Md_v2Props) => {
-    const up = this.useProcessor;
-    const um2s = this.useMd2String;
-    const um2r = this.useMd2React;
-    const um2r2r = this.useMd2RawReact;
-    let Element: () => JSX.Element = () => (
-      <div>Loading</div>
-    );
-
-    const matterResult = guard(
-      props.matterResult,
-      "no matter results"
-    );
-
-    if (props.md_string)
-      Element = um2s(
-        props as Required<
-          Pick<Md_v2Props, "matterResult">
-        > &
-          Exclude<Md_v2Props, "matterResult">,
-        up,
-        Element
-      );
-
-    if (props.md_react)
-      Element = um2r(matterResult, up, Element);
-
-    if (props.md_raw_react)
-      Element = um2r2r(matterResult, up, Element);
-
     return (
       <article className={props.className}>
         <h1 id="headingXl">
           {props.matterResult?.data.title}
         </h1>
-        <this.Date
-          dateString={props.matterResult?.data.date}
-        />
-        <Element />
+        {props.children}
       </article>
     );
   };
+
+  chooseLayout() {
+    if (this.props.article) return this.StyledArticle;
+    return this.Empty;
+  }
 
   StyledArticle = styled(this.Article)`
     #headingXl {
@@ -177,8 +201,14 @@ export class Md_v2 extends BaseNoiz<
       width: 100vw;
     }
   `;
+
   render() {
-    let Element = this.StyledHtml;
-    return <Element></Element>;
+    let Element = this.Element;
+    let Component = this.chooseLayout();
+    return (
+      <Component {...this.props}>
+        <Element></Element>
+      </Component>
+    );
   }
 }

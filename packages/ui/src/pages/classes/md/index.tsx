@@ -17,5 +17,5 @@ export default function index(props) {
   //   datas: [{ contentString: text }],
   // }).Content;
 
-  return <Md datas={[{ contentString: text }]}></Md>;
+  return <Md contentString={text} html_react></Md>;
 }
