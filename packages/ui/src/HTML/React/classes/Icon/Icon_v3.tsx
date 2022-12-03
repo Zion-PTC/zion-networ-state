@@ -9,8 +9,21 @@ import { Album } from "./Album";
 import { ArrowBack } from "./ArrowBack";
 import { ArrowLeft } from "./ArrowLeft";
 import { ArrowRight } from "./ArrowRight";
+import { FilterAlt } from "./FilterAlt";
+import { Home } from "./Home";
+import { Like } from "./Like";
 import { LogoZion } from "./LogoZion";
 import { Moon } from "./Moon";
+import { More_Normal } from "./More_Normal";
+import { Queue } from "./Queue";
+import { Repost } from "./Repost";
+import { ScrollToTop } from "./ScrollToTop";
+import { Search } from "./Search";
+import { Share } from "./Share";
+import { Sun } from "./Sun";
+import { Tracks } from "./Tracks";
+import { Trending } from "./Trending";
+import { Twitter } from "./Twitter";
 
 export type StyledSvgProps = {
   filled?: boolean;
@@ -84,8 +97,27 @@ const album = new Svg(Icons.album, Album);
 const arrowBack = new Svg(Icons.arrowBack, ArrowBack);
 const arrowLeft = new Svg(Icons.arrowLeft, ArrowLeft);
 const arrowRight = new Svg(Icons.arrowRight, ArrowRight);
+const filterAlt = new Svg(Icons.filterAlt, FilterAlt);
+const home = new Svg(Icons.home, Home);
+const like = new Svg(Icons.like, Like);
 const moon = new Svg(Icons.moon, Moon);
 const logoZion = new Svg(Icons.logoZion, LogoZion);
+const more_normal = new Svg(
+  Icons.more_normal,
+  More_Normal
+);
+const queue = new Svg(Icons.queue, Queue);
+const repost = new Svg(Icons.repost, Repost);
+const scrollToTop = new Svg(
+  Icons.scrollToTop,
+  ScrollToTop
+);
+const search = new Svg(Icons.search, Search);
+const share = new Svg(Icons.share, Share);
+const sun = new Svg(Icons.sun, Sun);
+const tracks = new Svg(Icons.tracks, Tracks);
+const trending = new Svg(Icons.trending, Trending);
+const twitter = new Svg(Icons.twitter, Twitter);
 // una volta create tutte le icone come istance di SVCG,
 // aggiungerle nell'array più in basso
 
@@ -100,8 +132,21 @@ export class Icon_v3 extends BaseNoiz<
     arrowBack,
     arrowLeft,
     arrowRight,
+    filterAlt,
+    home,
+    like,
     logoZion,
     moon,
+    more_normal,
+    queue,
+    repost,
+    scrollToTop,
+    search,
+    share,
+    tracks,
+    sun,
+    trending,
+    twitter,
   ];
 
   static StyledSvg = styled.svg<StyledSvgProps>`
