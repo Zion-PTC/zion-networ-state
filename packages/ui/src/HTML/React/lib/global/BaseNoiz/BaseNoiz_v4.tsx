@@ -11,15 +11,11 @@ interface DefaultProps_v4 {
   className?: string;
   children?: React.ReactNode;
   key?: number;
+  layout?: "some";
+  style?: "some";
 }
 
-type BaseProps<T, B = boolean> = {
-  css?: string;
-  className?: string;
-  children?: React.ReactNode;
-  key?: number;
-  multiply?: B;
-} & T;
+type BaseProps<T> = DefaultProps_v4 & T;
 
 export type Multiplied_v4<T> = {
   datas?: BaseProps<T>[];
@@ -27,87 +23,18 @@ export type Multiplied_v4<T> = {
 
 export type BuildProps_v4<T> = BaseProps<T>;
 
-export type GComponent<P> = (props: P) => JSX.Element;
+export type GComponent_v4<P> = (props: P) => JSX.Element;
 
-export type StyledGComponent<P> = StyledComponent<
+export type StyledGComponent_v4<P> = StyledComponent<
   GComponent<P>,
   DefaultTheme,
   {},
   never
 >;
 
-/**
- * Usage:
- * ```tsx
- * import React from "react";
- *
- * import {
- *   BaseNoiz_v4,
- *   BuildProps,
- *   BaseNoiz_v4Props,
- * } from "../../HTML/React/lib/global";
- *
- * interface NuPropsType {
- *   name: string;
- * }
- *
- * interface NuProps
- *   extends BuildProps<NuPropsType>,
- *     BaseNoiz_v4Props {}
- *
- * class NuProps extends BaseNoiz_v4Props {
- *   constructor(props: BuildProps<NuPropsType>) {
- *     super(props);
- *     this.name = props.name;
- *     this.datas = props.datas;
- *   }
- * }
- *
- * class Nu extends BaseNoiz_v4<
- *   BuildProps<{ name: string }>
- * > {}
- *
- * const child1 = new NuProps({
- *   name: "1",
- *   children: <div>bullshit</div>,
- * });
- *
- * const child2 = new NuProps({
- *   name: "2",
- *   children: ["ciao2", "asdas"],
- * });
- *
- * const child3 = new NuProps({
- *   name: "3",
- *   children: { name: "strio" }.name,
- * });
- *
- * const child4 = new NuProps({
- *   name: "3",
- *   children: "ciao4",
- * });
- *
- * const props = new NuProps({
- *   name: "ciao",
- *   multiply: true,
- *   datas: [child1, child2, child3, child4],
- * });
- *
- * export default function index() {
- *   return <Nu {...props}>cioooo</Nu>;
- * }
- * ```
- */
 export interface BaseNoiz_v4Props extends DefaultProps {}
 
-export class BaseNoiz_v4Props {
-  constructor(props: BaseNoiz_v4Props) {
-    this.children = props.children;
-    this.className = props.className;
-    this.css = props.css;
-    this.key = props.key;
-  }
-}
+export class BaseNoiz_v4Props {}
 
 export interface BaseNoiz_v4<
   T = {},
@@ -129,21 +56,55 @@ export class BaseNoiz_v4<
     super(props);
   }
 
-  Html = (props: P) => (
+  Html = (props: P): JSX.Element => (
     <div className={props.className}>
       {props.children ? props.children : "BaseNoiz"}
     </div>
   );
 
-  StyledHtml = styled(this.Html)``;
+  setHtml(Html: (props: P) => JSX.Element) {
+    this.Html = Html;
+    return this;
+  }
+
+  StyledHtml: StyledGComponent<P> = styled(this.Html)``;
+
+  setStyled(style: StyledGComponent<P>) {
+    this.StyledHtml = style;
+    return this;
+  }
+
+  SomeLayout = (props: P): JSX.Element => (
+    <div className={props.className}>
+      <p></p>
+      {props.children ? props.children : "BaseNoiz"}
+    </div>
+  );
+  SomeStyle = styled(this.Html)``;
+
+  /**
+   * function which chooses the layout of the Component that
+   * will be rendered
+   */
+  chooseLayout(): GComponent<P> {
+    if (this.props.layout === "some")
+      this.setHtml(this.SomeLayout);
+    return this.Html;
+  }
+
+  chooseStyle(): StyledGComponent<P> {
+    if (this.props.style === "some")
+      this.setStyled(this.SomeStyle);
+    return this.StyledHtml;
+  }
 
   render(): ReactNode {
+    let Layout: GComponent<P> = this.chooseLayout();
     let Element: GComponent<P> = this.StyledHtml;
-
     return (
-      <Element {...this.props}>
+      <Layout {...this.props}>
         {this.props.children}
-      </Element>
+      </Layout>
     );
   }
 }
@@ -152,10 +113,66 @@ declare global {
   var BaseNoiz: typeof BaseNoiz_v4;
   type BaseNoiz<P, S> = BaseNoiz_v4<P, S>;
   var BaseNoizProps: typeof BaseNoiz_v4Props;
+  /**
+   * Usage:
+   * ```tsx
+   * import React from "react";
+   *
+   * import {
+   *   BaseNoiz,
+   *   BaseNoizProps,
+   * } from "../../HTML/React/lib/global";
+   *
+   *
+   * interface NuProps extends BaseNoizProps {
+   *   name: string;
+   * }
+   * class NuProps extends BaseNoizProps {}
+   *
+   * interface NuState extends BaseNoizState {}
+   * class NuState extends BaseNoizeState {}
+   *
+   * interface Nu extends BaseNoiz<
+   *   NuProps,
+   *   NuState
+   * > {}
+   * class Nu extends BaseNoiz<
+   *   NuProps,
+   *   NuState
+   * > {}
+   *
+   * const child1 = new NuProps();
+   * child1.name = "1"
+   * child2.children = <div>I'm child 1</div>
+   *
+   * const child2 = new NuProps();
+   * child2.name = "2"
+   * child2.children = ["ciao2", "asdas"]
+   *
+   * const child3 = new NuProps();
+   * child3.name = "3"
+   * child3.children = ["ciao3", "asdas"]
+   *
+   * const child4 = new NuProps();
+   * child4.name = "4"
+   * child4.children = ["ciao4", "asdas"]
+   *
+   * const props = new NuProps();
+   * props.name = "ciao"
+   * props.datas = [child1, child2, child3, child4]
+   *
+   * export default function index() {
+   *   return <Nu {...props}>cioooo</Nu>;
+   * }
+   * ```
+   */
   type BaseNoizProps = BaseNoiz_v4Props;
   //
   type BuildProps<T> = BuildProps_v4<T>;
   type DefaultProps = DefaultProps_v4;
+  //
+  type GComponent<T> = GComponent_v4<T>;
+  type StyledGComponent<T> = StyledGComponent_v4<T>;
 }
 
 globalThis.BaseNoiz = BaseNoiz_v4;

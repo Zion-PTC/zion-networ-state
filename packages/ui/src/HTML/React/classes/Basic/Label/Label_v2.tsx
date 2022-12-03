@@ -8,49 +8,37 @@ import {
 import { InputProps, InputPropsType } from "../Input";
 import { Input_v2 } from "../Input/Input_v2";
 
-export interface Label_v2PropsType<T>
-  extends InputPropsType {
+export interface Label_v2PropsType extends InputPropsType {
   name: string;
   type: InputType;
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value?: T;
+  value?: string | number | readonly string[];
   preventDefault?: boolean;
   min?: number;
   max?: number;
   step?: number;
 }
 
-export interface Label_v2Props<T>
-  extends Label_v2PropsType<T>,
+export interface Label_v2Props
+  extends Label_v2PropsType,
     BaseNoizProps {}
+export class Label_v2Props extends BaseNoizProps {}
 
-export class Label_v2Props<T> extends BaseNoizProps {
-  constructor(props: Label_v2Props<T>) {
-    super(props);
-    this.name = props.name;
-    this.type = props.type;
-    this.placeholder = props.placeholder;
-    this.handleChange = props.handleChange;
-    this.value = props.value;
-    this.preventDefault = props.preventDefault;
-    this.min = props.min;
-    this.max = props.max;
-    this.step = props.step;
-  }
-}
 export interface Label_v2State {}
+export class Label_v2State {}
 
-export interface Label_v2<T>
-  extends BaseNoiz<Label_v2Props<T>, Label_v2State> {
-  Html: GComponent<Label_v2Props<T>>;
-  StyledHtml: StyledGComponent<Label_v2Props<T>>;
+export interface Label_v2
+  extends BaseNoiz<Label_v2Props, Label_v2State> {
+  Html: GComponent<Label_v2Props>;
+  StyledHtml: StyledGComponent<Label_v2Props>;
 }
 
-export class Label_v2<
-  T extends string | number | readonly string[] | undefined
-> extends BaseNoiz<Label_v2Props<T>, Label_v2State> {
-  Html = (props: Label_v2Props<T>) => {
+export class Label_v2 extends BaseNoiz<
+  Label_v2Props,
+  Label_v2State
+> {
+  Html = (props: Label_v2Props) => {
     const {
       name,
       handleChange,
@@ -63,16 +51,15 @@ export class Label_v2<
       value,
     } = props;
 
-    const inputProps: InputProps<T> = new InputProps({
-      handleChange,
-      placeholder,
-      type,
-      max,
-      min,
-      step,
-      preventDefault,
-      value,
-    });
+    const inputProps: InputProps = new InputProps();
+    inputProps.preventDefault = preventDefault;
+    inputProps.handleChange = handleChange;
+    inputProps.placeholder = placeholder;
+    inputProps.value = value;
+    inputProps.step = step;
+    inputProps.type = type;
+    inputProps.max = max;
+    inputProps.min = min;
     return (
       <>
         <label className={props.className}>

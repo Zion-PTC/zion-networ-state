@@ -6,51 +6,41 @@ import {
 } from "../../../lib/global";
 import { GComponent } from "../../../lib/global/BaseNoiz/BaseNoiz_v3";
 
-export interface Input_v2Props<T> extends BaseNoizProps {
+export interface Input_v2Props extends BaseNoizProps {
   type: InputType;
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value?: T;
+  value?: string | number | readonly string[];
   preventDefault?: boolean;
   min?: number;
   max?: number;
   step?: number;
 }
+export class Input_v2Props extends BaseNoizProps {}
 
-export class Input_v2Props<T> extends BaseNoizProps {
-  constructor(props: Input_v2Props<T>) {
-    super(props);
-    this.type = props.type;
-    this.placeholder = props.placeholder;
-    this.handleChange = props.handleChange;
-    this.value = props.value;
-    this.preventDefault = props.preventDefault;
-    this.min = props.min;
-    this.max = props.max;
-    this.step = props.step;
-  }
-}
 export interface Input_v2State {}
+export class Input_v2State {}
 
-export interface Input_v2<T>
-  extends BaseNoiz<Input_v2Props<T>, Input_v2State> {
+export interface Input_v2
+  extends BaseNoiz<Input_v2Props, Input_v2State> {
   onChange(
-    props: Input_v2Props<T>
+    props: Input_v2Props
   ): (e: ChangeEvent<HTMLInputElement>) => void;
-  Html: GComponent<Input_v2Props<T>>;
+  Html: GComponent<Input_v2Props>;
 }
 
-export class Input_v2<
-  T extends string | number | readonly string[] | undefined
-> extends BaseNoiz<Input_v2Props<T>, Input_v2State> {
+export class Input_v2 extends BaseNoiz<
+  Input_v2Props,
+  Input_v2State
+> {
   onChange =
-    (props: Input_v2Props<T>) =>
+    (props: Input_v2Props) =>
     (e: ChangeEvent<HTMLInputElement>) => {
       if (props.preventDefault) e.preventDefault();
       return props.handleChange(e);
     };
 
-  Html = (props: Input_v2Props<T>) => {
+  Html = (props: Input_v2Props) => {
     return (
       <input
         className={props.className}

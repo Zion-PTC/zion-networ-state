@@ -3,14 +3,14 @@ import styled, {
   DefaultTheme,
   StyledComponent,
 } from "styled-components";
+import { BooleanizeUnions } from "../../lib/utility";
 import { Account } from "./Account";
 import { Album } from "./Album";
 import { ArrowBack } from "./ArrowBack";
 import { ArrowLeft } from "./ArrowLeft";
 import { ArrowRight } from "./ArrowRight";
 import { LogoZion } from "./LogoZion";
-
-export interface Icon_v3PropsType {}
+import { Moon } from "./Moon";
 
 export type StyledSvgProps = {
   filled?: boolean;
@@ -18,70 +18,74 @@ export type StyledSvgProps = {
   secondary?: boolean;
 };
 
-export interface Icon_v3Props extends BaseNoizProps {
-  like?: boolean;
-  moon?: boolean;
-  account?: boolean;
-  album?: boolean;
-  arrowBack?: boolean;
-  arrowLeft?: boolean;
-  arrowRight?: boolean;
-  filterAlt?: boolean;
-  home?: boolean;
-  repost?: boolean;
-  search?: boolean;
-  sun?: boolean;
-  trending?: boolean;
-  more_Normal?: boolean;
-  queue?: boolean;
-  share?: boolean;
-  tracks?: boolean;
-  twitter?: boolean;
-  scrollToTop?: boolean;
-  buttoned?: boolean;
+enum Icons {
+  account = "account",
+  album = "album",
+  like = "like",
+  arrowBack = "arrowBack",
+  arrowLeft = "arrowLeft",
+  arrowRight = "arrowRight",
+  logoZion = "logoZion",
+  moon = "moon",
+  filterAlt = "filterAlt",
+  home = "home",
+  repost = "repost",
+  search = "search",
+  sun = "sun",
+  trending = "trending",
+  more_normal = "more_normal",
+  queue = "queue",
+  share = "share",
+  tracks = "tracks",
+  twitter = "twitter",
+  scrollToTop = "scrollToTop",
+  buttoned = "buttoned",
+  filled = "filled",
+  stroked = "stroked",
+  secondary = "secondary",
+}
+type IconsType = keyof typeof Icons;
+type IconsOptions = BooleanizeUnions<IconsType>;
+
+export interface Icon_v3Props
+  extends BaseNoizProps,
+    IconsOptions {
   svg?: {
     filled?: boolean | undefined;
     stroked?: boolean | undefined;
     secondary?: boolean | undefined;
   };
-  filled?: boolean;
-  stroked?: boolean;
-  secondary?: boolean;
 }
 
 export class Icon_v3Props extends BaseNoizProps {
-  constructor(props: Icon_v3Props) {
-    super(props);
-    this.account = props.account;
-    this.album = props.album;
-    // TODO #26 @ariannatnl aggiungere il reseto delle props
-  }
+  // TODO #26 @ariannatnl aggiungere il reseto delle props
 }
 export interface Icon_v3State {}
 
 export class Icon_v3State {}
 
-export interface Svg<S extends string = string> {
-  name: S;
+export interface Svg {
+  name: IconsType;
   Component: () => JSX.Element;
   bla: string;
 }
 
-export class Svg<S extends string = string> {
-  constructor(name: S, Component: () => JSX.Element) {
+export class Svg {
+  constructor(
+    name: IconsType,
+    Component: () => JSX.Element
+  ) {
     this.name = name;
     this.Component = Component;
   }
 }
-const ACCOUNT = "account";
-const account = new Svg(ACCOUNT, Account);
-const ALBUM = "album";
-const album = new Svg(ALBUM, Album);
-const ARROWBACK = "arrowBack";
-const arrowBack = new Svg(ARROWBACK, ArrowBack);
-const arrowLeft = new Svg("arrowLeft", ArrowLeft);
-const arrowRight = new Svg("arrowRight", ArrowRight);
-const logoZion = new Svg("logozion", LogoZion);
+const account = new Svg(Icons.account, Account);
+const album = new Svg(Icons.album, Album);
+const arrowBack = new Svg(Icons.arrowBack, ArrowBack);
+const arrowLeft = new Svg(Icons.arrowLeft, ArrowLeft);
+const arrowRight = new Svg(Icons.arrowRight, ArrowRight);
+const moon = new Svg(Icons.moon, Moon);
+const logoZion = new Svg(Icons.logoZion, LogoZion);
 // una volta create tutte le icone come istance di SVCG,
 // aggiungerle nell'array più in basso
 
@@ -97,6 +101,7 @@ export class Icon_v3 extends BaseNoiz<
     arrowLeft,
     arrowRight,
     logoZion,
+    moon,
   ];
 
   static StyledSvg = styled.svg<StyledSvgProps>`
@@ -177,6 +182,16 @@ export class Icon_v3 extends BaseNoiz<
   };
   StyledHtml = styled(this.Html)``;
 
+  chooseIcon() {
+    const LogoZion = this.LogoZion;
+    let Icon: () => JSX.Element = LogoZion;
+    Icon_v3.Svgs.forEach((svg, idx) => {
+      if (this.props[svg.name] === true)
+        Icon = dataGuard(Icon_v3.Svgs[idx], "").Component;
+    });
+    return Icon;
+  }
+
   render() {
     const LogoZion = this.LogoZion;
     let Icon:
@@ -186,13 +201,7 @@ export class Icon_v3 extends BaseNoiz<
           DefaultTheme,
           {},
           never
-        > = LogoZion;
-    if (this.props.arrowLeft)
-      Icon = dataGuard(Icon_v3.Svgs[3], "").Component;
-    if (this.props.arrowRight)
-      Icon = dataGuard(Icon_v3.Svgs[4], "").Component;
-    // TODO #27 @ariannatnl finire di mettere le icone anche qui
-    // let Element = this.makeElement();
+        > = this.chooseIcon();
     return <Icon></Icon>;
   }
 }

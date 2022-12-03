@@ -22,12 +22,8 @@ export interface NavBar_v4Props
     BaseNoizProps {
   inputs?: NavInputProps[];
 }
+export class NavBar_v4Props extends BaseNoizProps {}
 
-export class NavBar_v4Props extends BaseNoizProps {
-  constructor(props: NavBar_v4Props) {
-    super(props);
-  }
-}
 export interface NavBar_v4State {
   inputs: NavInputProps[];
 }
@@ -77,23 +73,7 @@ export class NavBar_v4 extends BaseNoiz<
     this.state = state;
   }
 
-  TextNavBar = (props: NavBar_v4Props) => {
-    return (
-      <nav className={props.className}>
-        {props.children}
-      </nav>
-    );
-  };
-
-  KeyValueNavBar = (props: NavBar_v4Props) => {
-    return (
-      <nav className={props.className}>
-        {props.children}
-      </nav>
-    );
-  };
-
-  IconNavBar = (props: NavBar_v4Props) => {
+  Html = (props: NavBar_v4Props) => {
     return (
       <nav className={props.className}>
         {props.children}
@@ -196,20 +176,9 @@ export class NavBar_v4 extends BaseNoiz<
     else return this.mappedNavInputs(inputs);
   }
 
-  chooseLayout() {
-    const props = this.props;
-    const text = this.Style1(this.TextNavBar);
-    const keyvalue = this.Style1(this.KeyValueNavBar);
-    const icon = this.Style1(this.IconNavBar);
-    if (props.text) return text;
-    if (props["key-value"]) return keyvalue;
-    if (props.icon) return icon;
-    return this.Style1(this.TextNavBar);
-  }
-
   render() {
     const Inputs = this.checkInputs();
-    const Layout = this.chooseLayout();
+    const Layout = this.Style1(this.Html);
 
     return (
       <Layout {...this.props}>

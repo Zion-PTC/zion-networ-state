@@ -15,29 +15,23 @@ class InputState {
   value = "";
 }
 
-export interface Form_v3Props<T> extends BaseNoizProps {
+export interface Form_v3Props extends BaseNoizProps {
   name: string;
-  inputs: LabelledInputProps<T>[];
+  inputs: LabelledInputProps[];
   reset?: boolean;
 }
+export class Form_v3Props extends BaseNoizProps {}
 
-export class Form_v3Props<T> extends BaseNoizProps {
-  constructor(props: Form_v3Props<T>) {
-    super(props);
-    this.name = props.name;
-    this.inputs = props.inputs;
-    this.reset = props.reset;
-  }
-}
 export interface Form_v3State {
   inputs: { input: string; value: string }[];
 }
+export class Form_v3State {}
 
 export interface Form_v3<
   T extends string | number | readonly string[] | undefined
-> extends BaseNoiz<Form_v3Props<T>, Form_v3State> {
+> extends BaseNoiz<Form_v3Props, Form_v3State> {
   InputState: typeof InputState;
-  inputs: LabelledInputProps<T>[];
+  inputs: LabelledInputProps[];
   newInputState(): InputState;
   computeInputs(currInput: string): {
     input: string;
@@ -54,18 +48,17 @@ export interface Form_v3<
   handleChanges(
     id: number
   ): (e: ChangeEvent<HTMLInputElement>) => void;
-  buildInputs(): LabelledInputProps<T>[];
+  buildInputs(): LabelledInputProps[];
   LabelledInputs(
-    el: LabelledInputProps<T>,
+    el: LabelledInputProps,
     id: number
   ): JSX.Element;
   mapLabelledInputs(): JSX.Element;
-  Html: GComponent<Form_v3Props<T>>;
-  StyledHtml: StyledGComponent<Form_v3Props<T>>;
+  Html: GComponent<Form_v3Props>;
+  StyledHtml: StyledGComponent<Form_v3Props>;
 }
-
-export class Form_v3<T> extends BaseNoiz<
-  Form_v3Props<T>,
+export class Form_v3<T = string> extends BaseNoiz<
+  Form_v3Props,
   Form_v3State
 > {
   InputState = InputState;
@@ -74,7 +67,7 @@ export class Form_v3<T> extends BaseNoiz<
 
   newInputState = () => new this.InputState();
 
-  constructor(props: Form_v3Props<T>) {
+  constructor(props: Form_v3Props) {
     super(props);
     let ins = props.inputs;
     this.inputs = props.inputs;
@@ -100,6 +93,9 @@ export class Form_v3<T> extends BaseNoiz<
     return nuInsState;
   };
 
+  /**
+   * handles form submit
+   */
   handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const currIns = this.inputs;
@@ -107,7 +103,7 @@ export class Form_v3<T> extends BaseNoiz<
     this.setState({ inputs });
   };
 
-  handleChanges =
+  buildHandleChanges =
     (id: number) => (e: ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       let inputs = [...this.state.inputs];
@@ -117,29 +113,35 @@ export class Form_v3<T> extends BaseNoiz<
       this.setState({ inputs });
     };
 
+  /**
+   * builds inputs' handle changes
+   */
   buildInputs() {
     const inputs = this.inputs;
     inputs.forEach((input, idx) => {
       const curIn = this.state.inputs[idx];
       const safeInput = dataGuard(curIn, "");
-      input.value = safeInput.input as NonNullable<T>;
-      input.handleChange = this.handleChanges(idx);
+      input.value = safeInput.input as NonNullable<string>;
+      input.handleChange = this.buildHandleChanges(idx);
     });
     return inputs;
   }
 
   LabelledInputs = (
-    el: LabelledInputProps<T>,
+    el: LabelledInputProps,
     id: number
   ) => <LabelledInput key={id} {...el}></LabelledInput>;
 
+  /**
+   * builds labelled inputs React compon
+   */
   mapLabelledInputs() {
     const inputs = this.buildInputs();
     let mappedInputs = inputs.map(this.LabelledInputs);
     return <>{mappedInputs}</>;
   }
 
-  Html = (props: Form_v3Props<T>) => {
+  Html = (props: Form_v3Props) => {
     let mappedLabelledInputs = this.mapLabelledInputs();
     return (
       <form

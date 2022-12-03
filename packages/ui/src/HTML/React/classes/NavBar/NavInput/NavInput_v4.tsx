@@ -12,28 +12,17 @@ export interface NavInput_v4Props extends BaseNoizProps {
   keyValueInput?: boolean;
   textInput?: boolean;
 }
+export class NavInput_v4Props extends BaseNoizProps {}
 
-export class NavInput_v4Props extends BaseNoizProps {
-  constructor(props: NavInput_v4Props) {
-    super(props);
-    this.inputId = props.inputId;
-    this.inputName = props.inputName;
-    this.IconComponent = props.IconComponent;
-    // TODO #30 @ariannatnl riempire =)
-  }
-}
 export interface NavInput_v4State {}
-
 export class NavInput_v4State {}
 
 export interface NavInput_v4
   extends BaseNoiz<NavInput_v4Props, NavInput_v4State> {}
-
 export class NavInput_v4 extends BaseNoiz<
   NavInput_v4Props,
   NavInput_v4State
 > {
-  // constructor(props: Partial<NavInput_v4Props>)
   constructor(props: NavInput_v4Props) {
     super(props);
   }
