@@ -1,7 +1,7 @@
-export {}
+export {};
 
 //// Profile
-export * from './Profile';
+export * from "./Profile";
 
 //// ItemPage
-export * from './ItemPage';
+export * from "./ItemPage";

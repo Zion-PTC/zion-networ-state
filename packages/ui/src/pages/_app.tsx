@@ -15,6 +15,7 @@ const bgcolor = `hsl(${210 + 90}, 55%, 75%)`;
 const Layout = styled.div`
   display: grid;
   grid-template-rows: 10vh 80vh 10vh;
+  overflow: auto;
   grid-template-areas:
     "h"
     "content"

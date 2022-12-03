@@ -101,7 +101,6 @@ export class ItemsArea_v2 extends BaseNoiz<
     display: grid;
     grid-area: content;
     height: 100%;
-    overflow: auto;
     width: ${() => this.state.width}px;
     grid-auto-rows: ${() => this.state.blockSize + "px"};
     grid-template-columns: repeat(

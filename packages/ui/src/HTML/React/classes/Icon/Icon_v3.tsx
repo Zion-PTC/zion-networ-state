@@ -77,15 +77,28 @@ const ACCOUNT = "account";
 const account = new Svg(ACCOUNT, Account);
 const ALBUM = "album";
 const album = new Svg(ALBUM, Album);
-const arrowBack = new Svg("arrowBack", ArrowBack);
+const ARROWBACK = "arrowBack";
+const arrowBack = new Svg(ARROWBACK, ArrowBack);
 const arrowLeft = new Svg("arrowLeft", ArrowLeft);
 const arrowRight = new Svg("arrowRight", ArrowRight);
 const logoZion = new Svg("logozion", LogoZion);
+// una volta create tutte le icone come istance di SVCG,
+// aggiungerle nell'array più in basso
 
 export class Icon_v3 extends BaseNoiz<
   Icon_v3Props,
   Icon_v3State
 > {
+  // aggiungere icone qui
+  static Svgs: Svg[] = [
+    account,
+    album,
+    arrowBack,
+    arrowLeft,
+    arrowRight,
+    logoZion,
+  ];
+
   static StyledSvg = styled.svg<StyledSvgProps>`
     // #10 aggiungere qui
     path {
@@ -139,15 +152,6 @@ export class Icon_v3 extends BaseNoiz<
       {props.children}
     </Icon_v3.StyledSvg>
   );
-
-  static Svgs: Svg[] = [
-    account,
-    album,
-    arrowBack,
-    arrowLeft,
-    arrowRight,
-    logoZion,
-  ];
 
   static svgslist(): string[] {
     return Icon_v3.Svgs.map(Svg => {

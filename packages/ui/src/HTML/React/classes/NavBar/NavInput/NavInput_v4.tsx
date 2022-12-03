@@ -19,6 +19,7 @@ export class NavInput_v4Props extends BaseNoizProps {
     this.inputId = props.inputId;
     this.inputName = props.inputName;
     this.IconComponent = props.IconComponent;
+    // TODO #30 @ariannatnl riempire =)
   }
 }
 export interface NavInput_v4State {}
@@ -120,7 +121,7 @@ export class NavInput_v4 extends BaseNoiz<
   };
 
   // TODO @giacomogagliano prendere spunto da questo pattern
-  mapperBuilder() {
+  chooseLayout() {
     const props = this.props;
     const Text = this.Text;
     const KeyValue = this.KeyValue;
@@ -131,15 +132,9 @@ export class NavInput_v4 extends BaseNoiz<
     if (props.iconInput) html = styled(Icon)``;
     return html;
   }
-  Html = (props: NavInput_v4Props) => {
-    return <h1>{props.children}</h1>;
-  };
 
-  Style = this.mapperBuilder();
-
-  StyledHtml = styled(this.Html)``;
   render() {
-    let Element = this.Style;
+    let Element = this.chooseLayout();
     return <Element {...this.props}></Element>;
   }
 }

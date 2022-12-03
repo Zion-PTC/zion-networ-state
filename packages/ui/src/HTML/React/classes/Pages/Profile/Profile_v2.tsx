@@ -113,17 +113,7 @@ export class Profile_v2 extends BaseNoiz<
       <div className={props.className} css={props.css}>
         <div id="bg-upper"></div>
         <div id="profile-avatar">
-          <Image
-            src="https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc"
-            // datas={[
-            //   {
-            //     src: "https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc",
-            //     imageLoaded: !isAvatarImageLoaded,
-            //     handleisLoading: setIsAvatarImageLoaded,
-            //   },
-            // ]}
-            // imageLoaded={!isAvatarImageLoaded}
-          ></Image>
+          <Image src="https://ipfs.io/ipfs/QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc?filename=QmPGGowQG4oPoRf884Hz9WXivACoDni1GsdDYkRdXVLfJc"></Image>
         </div>
         <div id="infos">
           <p id="account">{"<account name>"}</p>
@@ -173,7 +163,7 @@ export class Profile_v2 extends BaseNoiz<
             bid_link=""
             id={10}
             item_id=""
-            likeCounts=""
+            likeCounts="200"
             price=""
             slug=""
             src=""
@@ -205,6 +195,7 @@ export class Profile_v2 extends BaseNoiz<
   ". content .";
     width: 100%;
     height: 100%;
+    overflow: auto;
     #bg-upper {
       grid-area: bg;
       z-index: -1;
@@ -231,7 +222,6 @@ export class Profile_v2 extends BaseNoiz<
     #infos {
       grid-area: infos;
       display: grid;
-      overflow: hidden;
       place-self: center;
       /* place-items: center; */
       grid-template-rows: 1.5rem 1.5rem 2rem 2rem 2rem 1.5rem 3.5rem;

@@ -20,6 +20,7 @@ export * from "./ItemsArea";
 export * from "./Card";
 
 export * as Pages from "./Pages";
+export { Profile } from "./Pages";
 
 //// Basic
 export * as Basic from "./Basic";
