@@ -1,80 +1,80 @@
 import styled from "styled-components";
 
-export interface Svg_v1Props extends BaseNoizProps {
-  layout?: LayoutTypes;
-  style?: StyleTypes;
+enum layouts {
+  Svg24 = "Svg24",
+  Svg51 = "Svg51",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
+export interface Svg_v1Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   filled?: boolean;
   stroked?: boolean;
   secondary?: boolean;
 }
-export class Svg_v1Props extends BaseNoizProps {}
+export class Svg_v1Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
-export interface Svg_v1State {}
+export interface Svg_v1State
+  extends BaseNoizState<Svg_v1Props> {}
 export class Svg_v1State {}
-
-enum Layouts {
-  Svg24 = "Svg24",
-  Svg51 = "Svg51",
-}
-type LayoutTypes = keyof typeof Layouts;
-
-class SvgLayouts extends BaseNoizLayout<
-  LayoutTypes,
-  Svg_v1Props
-> {}
-
-enum Styles {
-  defaultStyle = "defaultStyle",
-}
-type StyleTypes = keyof typeof Styles;
-class SvgStyles extends BaseNoizStyledLayout<
-  StyleTypes,
-  Svg_v1Props
-> {}
-const Svg24 = new SvgLayouts();
-Svg24.name = Layouts.Svg24;
-Svg24.component = (props: Svg_v1Props) => (
-  <svg
-    className={props.className}
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-  >
-    {props.children}
-  </svg>
-);
-
-const Svg51 = new SvgLayouts();
-Svg51.name = Layouts.Svg51;
-Svg51.component = (props: Svg_v1Props) => (
-  <svg
-    className={props.className}
-    width="51"
-    height="51"
-    viewBox="0 0 51 51"
-    fill="none"
-  >
-    {props.children}
-  </svg>
-);
 
 export interface Svg_v1
   extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
     Svg_v1Props,
-    Svg_v1State,
-    SvgLayouts,
-    SvgStyles
+    Svg_v1State
   > {}
 export class Svg_v1 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Svg_v1Props,
-  Svg_v1State,
-  SvgLayouts,
-  SvgStyles
+  Svg_v1State
 > {
-  layouts = [Svg24, Svg51];
+  Svg24 = (props: Svg_v1Props) => (
+    <svg
+      className={props.className}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      {props.children}
+    </svg>
+  );
 
-  defaultStyle = styled(this.chooseLayout())`
+  Svg51 = (props: Svg_v1Props) => (
+    <svg
+      className={props.className}
+      width="51"
+      height="51"
+      viewBox="0 0 51 51"
+      fill="none"
+    >
+      {props.children}
+    </svg>
+  );
+
+  layouts = [
+    new this.Layout({
+      name: layouts.Svg24,
+      component: this.Svg24,
+    }),
+    new this.Layout({
+      name: layouts.Svg51,
+      component: this.Svg51,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)`
     // #10 aggiungere qui
     path {
       fill: ${props => {
@@ -111,23 +111,17 @@ export class Svg_v1 extends BaseNoiz<
   `;
 
   styledlayouts = [
-    new SvgStyles({
-      name: Styles.defaultStyle,
+    new this.Style({
+      name: styles.defaultStyle,
       style: this.defaultStyle,
     }),
   ];
 
-  render() {
-    this.chooseLayout();
-    let Element = this.chooseStyle();
-    return (
-      <Element
-        filled={this.props.filled}
-        stroked={this.props.stroked}
-        secondary={this.props.secondary}
-      >
-        {this.props.children}
-      </Element>
-    );
+  constructor(props: Svg_v1Props) {
+    super(props);
+    this.state = {
+      layout: () => <>prova</>,
+      style: styled(this.Html)``,
+    };
   }
 }

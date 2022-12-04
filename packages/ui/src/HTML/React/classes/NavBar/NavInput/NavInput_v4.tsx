@@ -2,7 +2,17 @@ import styled from "styled-components";
 import { P } from "../../../style";
 import { BaseNoizProps } from "../../../lib/global";
 
-export interface NavInput_v4Props extends BaseNoizProps {
+enum layouts {
+  main = "main",
+}
+type layoutTypes = keyof typeof layouts;
+enum styles {
+  normal = "normal",
+}
+type styleTypes = keyof typeof styles;
+
+export interface NavInput_v4Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   inputId: string;
   inputName: string;
   IconComponent?: () => JSX.Element;
@@ -12,14 +22,24 @@ export interface NavInput_v4Props extends BaseNoizProps {
   keyValueInput?: boolean;
   textInput?: boolean;
 }
-export class NavInput_v4Props extends BaseNoizProps {}
+export class NavInput_v4Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
 export interface NavInput_v4State {}
 export class NavInput_v4State {}
 
 export interface NavInput_v4
-  extends BaseNoiz<NavInput_v4Props, NavInput_v4State> {}
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    NavInput_v4Props,
+    NavInput_v4State
+  > {}
 export class NavInput_v4 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   NavInput_v4Props,
   NavInput_v4State
 > {

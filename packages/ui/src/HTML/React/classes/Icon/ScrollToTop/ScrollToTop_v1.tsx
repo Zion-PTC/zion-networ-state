@@ -56,5 +56,7 @@ scrollToTop_.name = Icons.scrollToTop;
 scrollToTop_.Component = ScrollToTop_v1;
 scrollToTop_.JsxPath = ScrollToTop_v2;
 scrollToTop_.stroked = true;
+scrollToTop_.filled = false;
+scrollToTop_.layout = "Svg51";
 
 export const scrollToTop = scrollToTop_;

@@ -16,27 +16,30 @@ export type NavBarType = BooleanizeUnions<
   "icon" | "text" | "key-value"
 >;
 
-enum NavBar_v4Layouts {
+enum layouts {
   main = "main",
   tropical = "tropical",
 }
-type NavBar_v4LayoutTypes = keyof typeof NavBar_v4Layouts;
+type layoutTypes = keyof typeof layouts;
 
-enum NavBar_v4Styles {
+enum styles {
   borderOnTop = "borderOnTop",
   nostyle = "nostyle",
 }
-type NavBar_v2StyleTypes = keyof typeof NavBar_v4Styles;
+type styleTypes = keyof typeof styles;
 
 export interface NavBar_v4Props
   extends Direction,
     NavBarType,
-    BaseNoizProps {
+    BaseNoizProps<layoutTypes, styleTypes> {
   inputs?: NavInputProps[];
-  layout?: NavBar_v4LayoutTypes;
-  styles?: NavBar_v2StyleTypes;
+  layout?: layoutTypes;
+  styles?: styleTypes;
 }
-export class NavBar_v4Props extends BaseNoizProps {}
+export class NavBar_v4Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
 export interface NavBar_v4State {
   inputs: NavInputProps[];
@@ -44,11 +47,11 @@ export interface NavBar_v4State {
 export class NavBar_v4State {}
 
 class NavBarLayout extends BaseNoizLayout<
-  NavBar_v4LayoutTypes,
+  layoutTypes,
   NavBar_v4Props
 > {}
 const main = new NavBarLayout();
-main.name = NavBar_v4Layouts.main;
+main.name = layouts.main;
 main.component = (props: NavBar_v4Props) => {
   return (
     <nav className={props.className}>
@@ -56,8 +59,9 @@ main.component = (props: NavBar_v4Props) => {
     </nav>
   );
 };
+
 const tropical = new NavBarLayout();
-tropical.name = NavBar_v4Layouts.tropical;
+tropical.name = layouts.tropical;
 tropical.component = (props: NavBar_v4Props) => {
   return (
     <nav className={props.className}>
@@ -68,16 +72,16 @@ tropical.component = (props: NavBar_v4Props) => {
 };
 
 class NavBar_v4StyledLayout extends BaseNoizStyledLayout<
-  NavBar_v2StyleTypes,
+  styleTypes,
   NavBar_v4Props
 > {}
 
 export interface NavBar_v4
   extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
     NavBar_v4Props,
-    NavBar_v4State,
-    NavBarLayout,
-    NavBar_v4StyledLayout
+    NavBar_v4State
   > {
   NavInput: ComponentClass<
     StyledDefault<{
@@ -94,10 +98,10 @@ export interface NavBar_v4
   >;
 }
 export class NavBar_v4 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   NavBar_v4Props,
-  NavBar_v4State,
-  NavBarLayout,
-  NavBar_v4StyledLayout
+  NavBar_v4State
 > {
   layouts: NavBarLayout[] = [main, tropical];
 
