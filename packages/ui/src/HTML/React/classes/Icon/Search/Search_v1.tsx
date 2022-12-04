@@ -1,4 +1,5 @@
 import { Icon } from "..";
+import { IconPath, Icons } from "../../IconPath";
 
 export type Search_v1Data = "Search_v1Data";
 export type Search_v1Booleans = "Search_v1Booleans";
@@ -17,3 +18,22 @@ export const Search_v1 = () => (
     ></path>
   </Icon.Svg24>
 );
+export const Search_v2 = (
+  <>
+    <circle cx="10" cy="10" r="7" strokeWidth="2"></circle>
+    <path
+      d="M15 15L21 21"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></path>
+  </>
+);
+
+const search_ = new IconPath();
+search_.name = Icons.search;
+search_.Component = Search_v1;
+search_.JsxPath = Search_v2;
+search_.stroked = true;
+
+export const search = search_;

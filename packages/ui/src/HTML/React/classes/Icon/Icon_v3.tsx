@@ -1,7 +1,5 @@
 import { dataGuard } from "@zionstate/utils";
 import styled from "styled-components";
-import { account } from "./Account/Account_v1";
-import { ArrowLeft } from "./ArrowLeft";
 import { ArrowRight } from "./ArrowRight";
 import { FilterAlt } from "./FilterAlt";
 import { Home } from "./Home";
@@ -22,6 +20,8 @@ import { Svg as SvgClass } from "../Basic/Svg";
 import { album } from "./Album/Album_v1";
 import path from "node:path/posix";
 import { arrowBack } from "./ArrowBack/ArrowBack_v1";
+import { account } from "./Account/Account_v1";
+import { Arrowleft } from "./ArrowLeft/ArrowLeft_v1";
 import {
   IconPath,
   IconPathOptions,
@@ -84,7 +84,7 @@ export class Icon_v3 extends BaseNoiz<
     account,
     album,
     arrowBack,
-    arrowLeft,
+    Arrowleft,
     arrowRight,
     filterAlt,
     home,

@@ -5,3 +5,5 @@
 "${TM_FILENAME_BASE/(.*)/${1:/downcase}/}.filled = true;",
 "",
 "export const ${TM_FILENAME_BASE/(.*)/${1:/downcase}/} = ${TM_FILENAME_BASE/(.*)/${1:/downcase}/};",
+
+ 
