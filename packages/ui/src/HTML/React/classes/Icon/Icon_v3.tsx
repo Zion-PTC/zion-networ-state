@@ -1,32 +1,29 @@
 import { dataGuard } from "@zionstate/utils";
 import styled from "styled-components";
-import { ArrowRight } from "./ArrowRight";
-import { FilterAlt } from "./FilterAlt";
-import { Home } from "./Home";
-import { Like } from "./Like";
 import { LogoZion } from "./LogoZion";
-import { Moon } from "./Moon";
-import { More_Normal } from "./More_Normal";
-import { Queue } from "./Queue";
-import { Repost } from "./Repost";
-import { ScrollToTop } from "./ScrollToTop";
-import { Search } from "./Search";
-import { Share } from "./Share";
-import { Sun } from "./Sun";
-import { Tracks } from "./Tracks";
-import { Trending } from "./Trending";
-import { Twitter } from "./Twitter";
 import { Svg as SvgClass } from "../Basic/Svg";
 import { album } from "./Album/Album_v1";
 import path from "node:path/posix";
 import { arrowBack } from "./ArrowBack/ArrowBack_v1";
 import { account } from "./Account/Account_v1";
 import { Arrowleft } from "./ArrowLeft/ArrowLeft_v1";
-import {
-  IconPath,
-  IconPathOptions,
-  Icons,
-} from "../IconPath";
+import { IconPath, IconPathOptions } from "../IconPath";
+import { arrowRight } from "./ArrowRight/ArrowRight_v1";
+import { filterAlt } from "./FilterAlt/FilterAlt_v1";
+import { twitter } from "./Twitter/Twitter_v1";
+import { trending } from "./Trending/Trending_v1";
+import { tracks } from "./Tracks/Tracks_v1";
+import { logoZion } from "./LogoZion/LogoZion_v1";
+import { home } from "./Home/Home_v1";
+import { sun } from "./Sun/Sun_v1";
+import { share } from "./Share/Share_v1";
+import { search } from "./Search/Search_v1";
+import { scrollToTop } from "./ScrollToTop/ScrollToTop_v1";
+import { repost } from "./Repost/Repost_v1";
+import { queue } from "./Queue/Queue_v1";
+import { like } from "./Like/Like_v1";
+import { moon } from "./Moon/Moon_v1";
+import { more_normal } from "./More_Normal/More_Normal_v1";
 
 export type StyledSvgProps = {
   filled?: boolean;
@@ -47,34 +44,6 @@ export class Icon_v3Props extends BaseNoizProps {}
 
 export interface Icon_v3State {}
 export class Icon_v3State {}
-
-const arrowLeft = new IconPath(Icons.arrowLeft, ArrowLeft);
-const arrowRight = new IconPath(
-  Icons.arrowRight,
-  ArrowRight
-);
-const filterAlt = new IconPath(Icons.filterAlt, FilterAlt);
-const home = new IconPath(Icons.home, Home);
-const like = new IconPath(Icons.like, Like);
-const moon = new IconPath(Icons.moon, Moon);
-const logoZion = new IconPath(Icons.logoZion, LogoZion);
-const more_normal = new IconPath(
-  Icons.more_normal,
-  More_Normal
-);
-const queue = new IconPath(Icons.queue, Queue);
-const repost = new IconPath(Icons.repost, Repost);
-const scrollToTop = new IconPath(
-  Icons.scrollToTop,
-  ScrollToTop,
-  "Svg51"
-);
-const search = new IconPath(Icons.search, Search);
-const share = new IconPath(Icons.share, Share);
-const sun = new IconPath(Icons.sun, Sun);
-const tracks = new IconPath(Icons.tracks, Tracks);
-const trending = new IconPath(Icons.trending, Trending);
-const twitter = new IconPath(Icons.twitter, Twitter);
 
 export class Icon_v3 extends BaseNoiz<
   Icon_v3Props,
