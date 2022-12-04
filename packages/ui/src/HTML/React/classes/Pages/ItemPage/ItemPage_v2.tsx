@@ -1,15 +1,37 @@
 import { ComponentClass } from "react";
 import styled from "styled-components";
 import { StyledDefault } from "../../../lib/types/utility";
+import { Icon } from "../../Icon";
 import {
   // ImageProps,
   ImageState,
   Image,
 } from "../../Image";
 
+enum ItemPage_v2Layouts {
+  main = "main",
+}
+type ItemPage_v2LayoutTypes =
+  keyof typeof ItemPage_v2Layouts;
+class ItemPage_v2Layout extends BaseNoizLayout<
+  ItemPage_v2LayoutTypes,
+  ItemPage_v2Props
+> {}
+
+enum ItemPage_v2Styles {
+  defaultStyle = "defaultStyle",
+}
+type ItemPage_v2StyleTypes =
+  keyof typeof ItemPage_v2Styles;
+class ItemPage_v2Style extends BaseNoizStyledLayout<
+  ItemPage_v2StyleTypes,
+  ItemPage_v2Props
+> {}
+
 export interface ItemPage_v2Props extends BaseNoizProps {
   src: string;
-  likeIcon: JSX.Element;
+  layout?: ItemPage_v2LayoutTypes;
+  style?: ItemPage_v2StyleTypes;
   data: {
     title: string;
     description: string;
@@ -21,11 +43,7 @@ export interface ItemPage_v2Props extends BaseNoizProps {
   };
 }
 
-export class ItemPage_v2Props extends BaseNoizProps {
-  constructor(props: ItemPage_v2Props) {
-    super(props);
-  }
-}
+export class ItemPage_v2Props extends BaseNoizProps {}
 export interface ItemPage_v2State {
   src: string;
   isLoading: boolean;
@@ -33,6 +51,66 @@ export interface ItemPage_v2State {
 }
 
 export class ItemPage_v2State {}
+
+const main = new ItemPage_v2Layout();
+main.name = ItemPage_v2Layouts.main;
+main.component = function (
+  this: ItemPage_v2,
+  props: ItemPage_v2Props
+) {
+  // const src = this.state.src;
+  // const Image = this.Image;
+  const COLLECTION = "Collection";
+  const CREATOR = "Creator";
+  const ROYALTIES = "Royalties";
+  const HIGHEST_BID = "highest bid:";
+
+  return (
+    <div className={props.className} css={props.css}>
+      <div id="bg-upper"></div>
+      {/* <Image src={src} gridArea="image"></Image> */}
+      <div id="social">
+        <button>
+          <Icon like />
+        </button>
+        <button>
+          <Icon like />
+        </button>
+      </div>
+      <div id="infos">
+        <h1>{props.data.title}</h1>
+        <p>{props.data.description}</p>
+        <div id="infos-text">
+          <p>{HIGHEST_BID}</p>
+          <p id="bold">{props.data.highestBid}</p>
+          <p id="bold">{props.data.currency}</p>
+        </div>
+      </div>
+      <div id="links">
+        <div id="sublink">
+          <div id="sublink-text-area">
+            <p>{CREATOR}</p>
+            <p>{props.data.royalties}</p>
+            <p>{ROYALTIES}</p>
+          </div>
+          <div id="profile">
+            <div id="avatar"></div>
+            <p id="profile-id">Profile Name</p>
+          </div>
+        </div>
+        <div id="sublink">
+          <div id="sublink-text-area">
+            <p>{COLLECTION}</p>
+          </div>
+          <div id="collection">
+            <div id="avatar"></div>
+            <p id="collection-id">Collection Name</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export interface ItemPage_v2
   extends BaseNoiz<ItemPage_v2Props, ItemPage_v2State> {
@@ -45,10 +123,8 @@ export interface ItemPage_v2
       borderTop?: string;
       gridArea?: string;
       display?: string;
-      // handleisLoading: Dispatch<SetStateAction<boolean>>;
       src: string;
       fullBorder?: boolean;
-      // imageLoaded: boolean;
       image?: {
         width?: string;
         height?: string;
@@ -63,139 +139,9 @@ export class ItemPage_v2 extends BaseNoiz<
   ItemPage_v2Props,
   ItemPage_v2State
 > {
-  Image: ComponentClass<
-    StyledDefault<{
-      width?: string;
-      height?: string;
-      maxWidth?: string;
-      backgroundColor?: string;
-      borderTop?: string;
-      gridArea?: string;
-      display?: string;
-      // handleisLoading: Dispatch<SetStateAction<boolean>>;
-      src: string;
-      fullBorder?: boolean;
-      // imageLoaded: boolean;
-      image?: {
-        width?: string;
-        height?: string;
-        maxWidth?: string;
-      };
-    }>,
-    ImageState
-  > = Image;
+  layouts = [main];
 
-  constructor(props: ItemPage_v2Props) {
-    super(props);
-    let state = new ItemPage_v2State();
-    state.isLoading = true;
-    state.imageLoaded = false;
-    state.src = props.src;
-  }
-
-  setIsLoading = (isLoading: boolean) => {
-    this.setState({ isLoading: isLoading });
-  };
-  setImageLoaded = (imageLoaded: boolean) => {
-    this.setState({ imageLoaded: imageLoaded });
-  };
-  setSrc = (src: string) => {
-    this.setState({ src: src });
-  };
-
-  checkLoadingStatus = () => {
-    !this.state.isLoading
-      ? this.setImageLoaded(true)
-      : this.setImageLoaded(false);
-    this.setSrc(this.props.src);
-  };
-
-  componentDidMount() {
-    this.checkLoadingStatus();
-  }
-
-  Html = (props: ItemPage_v2Props) => {
-    // const isLoading = this.state.isLoading;
-    // const setIsLoading = this.setIsLoading;
-    // const imageLoaded = this.state.imageLoaded;
-    // const setImageLoaded = this.setImageLoaded;
-    // const setSrc = this.setSrc;
-    const src = this.state.src;
-    const COLLECTION = "Collection";
-    const CREATOR = "Creator";
-    const ROYALTIES = "Royalties";
-    const HIGHEST_BID = "highest bid:";
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [imageLoaded, setImageLoaded] = useState(false);
-    // const [src, setSrc] = useState("");
-
-    // useEffect(() => {
-    //   !isLoading
-    //     ? setImageLoaded(true)
-    //     : setImageLoaded(false);
-    //   setSrc(props.src);
-    // }, [isLoading]);
-
-    return (
-      <div className={props.className} css={props.css}>
-        <div id="bg-upper"></div>
-        <Image
-          src={src}
-          // imageLoaded={imageLoaded}
-          // handleIsLoading={setIsLoading}
-          gridArea="image"
-          // datas={[
-          //   {
-          //     src,
-          //     imageLoaded,
-          //     handleisLoading: setIsLoading,
-          //     gridArea: "image",
-          //   },
-          // ]}
-          // src={src}
-          // imageLoaded={imageLoaded}
-          // handleisLoading={setIsLoading}
-          // gridArea="image"
-        ></Image>
-        <div id="social">
-          <button>{props.likeIcon}</button>
-          <button>{props.likeIcon}</button>
-        </div>
-        <div id="infos">
-          <h1>{props.data.title}</h1>
-          <p>{props.data.description}</p>
-          <div id="infos-text">
-            <p>{HIGHEST_BID}</p>
-            <p id="bold">{props.data.highestBid}</p>
-            <p id="bold">{props.data.currency}</p>
-          </div>
-        </div>
-        <div id="links">
-          <div id="sublink">
-            <div id="sublink-text-area">
-              <p>{CREATOR}</p>
-              <p>{props.data.royalties}</p>
-              <p>{ROYALTIES}</p>
-            </div>
-            <div id="profile">
-              <div id="avatar"></div>
-              <p id="profile-id">Profile Name</p>
-            </div>
-          </div>
-          <div id="sublink">
-            <div id="sublink-text-area">
-              <p>{COLLECTION}</p>
-            </div>
-            <div id="collection">
-              <div id="avatar"></div>
-              <p id="collection-id">Collection Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-  StyledHtml = styled(this.Html)`
+  defaultStyle = styled(this.chooseLayout())`
     display: grid;
     width: 100%;
     height: 100%;
@@ -296,8 +242,72 @@ export class ItemPage_v2 extends BaseNoiz<
       }
     }
   `;
+
+  styledlayouts = [
+    new ItemPage_v2Style({
+      name: ItemPage_v2Styles.defaultStyle,
+      style: this.StyledHtml,
+    }),
+  ];
+
+  Image: ComponentClass<
+    StyledDefault<{
+      width?: string;
+      height?: string;
+      maxWidth?: string;
+      backgroundColor?: string;
+      borderTop?: string;
+      gridArea?: string;
+      display?: string;
+      // handleisLoading: Dispatch<SetStateAction<boolean>>;
+      src: string;
+      fullBorder?: boolean;
+      // imageLoaded: boolean;
+      image?: {
+        width?: string;
+        height?: string;
+        maxWidth?: string;
+      };
+    }>,
+    ImageState
+  > = Image;
+
+  constructor(props: ItemPage_v2Props) {
+    super(props);
+    let state = new ItemPage_v2State();
+    state.isLoading = true;
+    state.imageLoaded = false;
+    state.src = props.src;
+    this.layouts[0]?.component.bind(this);
+    this.state = state;
+  }
+
+  setIsLoading = (isLoading: boolean) => {
+    this.setState({ isLoading: isLoading });
+  };
+  setImageLoaded = (imageLoaded: boolean) => {
+    this.setState({ imageLoaded: imageLoaded });
+  };
+  setSrc = (src: string) => {
+    this.setState({ src: src });
+  };
+
+  checkLoadingStatus = () => {
+    !this.state.isLoading
+      ? this.setImageLoaded(true)
+      : this.setImageLoaded(false);
+    this.setSrc(this.props.src);
+  };
+
+  componentDidMount() {
+    this.checkLoadingStatus();
+  }
+
   render() {
-    let Element = this.StyledHtml;
+    let Element = this.chooseStyle();
+    console.log(Element);
+    Element = this.defaultStyle;
+
     return <Element {...this.props}></Element>;
   }
 }

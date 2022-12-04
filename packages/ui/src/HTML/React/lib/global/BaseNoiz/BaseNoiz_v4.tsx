@@ -6,26 +6,44 @@ import styled, {
 } from "styled-components";
 import { ReactNode } from "react";
 
+interface BaseNoiz_v4Layout<L, P> {
+  name: L;
+  component: (p: P) => JSX.Element;
+}
+class BaseNoiz_v4Layout<L, P> {}
+/////////
+///////////
+interface BaseNoiz_v4StyledLayout<S, P> {
+  name: S;
+  style: StyledGComponent<P>;
+}
+class BaseNoiz_v4StyledLayout<S, P> {
+  constructor(props: BaseNoiz_v4StyledLayout<S, P>) {
+    this.name = props.name;
+    this.style = props.style;
+  }
+}
+/////////
+///////
+
 interface DefaultProps_v4 {
   css?: string;
   className?: string;
   children?: React.ReactNode;
   key?: number;
-  layout?: "some";
-  style?: "some";
+  layout?: string;
+  style?: string;
 }
 
-type BaseProps<T> = DefaultProps_v4 & T;
+type BaseProps_v4<T> = DefaultProps_v4 & T;
 
-export type Multiplied_v4<T> = {
-  datas?: BaseProps<T>[];
+type Multiplied_v4<T> = {
+  datas?: BaseProps_v4<T>[];
 };
 
-export type BuildProps_v4<T> = BaseProps<T>;
+type GComponent_v4<P> = (props: P) => JSX.Element;
 
-export type GComponent_v4<P> = (props: P) => JSX.Element;
-
-export type StyledGComponent_v4<P> = StyledComponent<
+type StyledGComponent_v4<P> = StyledComponent<
   GComponent<P>,
   DefaultTheme,
   {},
@@ -33,74 +51,96 @@ export type StyledGComponent_v4<P> = StyledComponent<
 >;
 
 export interface BaseNoiz_v4Props extends DefaultProps {}
-
 export class BaseNoiz_v4Props {}
 
 export interface BaseNoiz_v4<
-  T = {},
+  P extends DefaultProps = {},
   S = {},
-  P = BuildProps<T>
-> extends Component<P, S> {
-  Html: GComponent<P>;
-  StyledHtml: StyledGComponent<P>;
-}
-
+  L extends BaseNoiz_v4Layout<any, P> = BaseNoiz_v4Layout<
+    any,
+    P
+  >,
+  SL extends BaseNoiz_v4StyledLayout<
+    any,
+    P
+  > = BaseNoiz_v4StyledLayout<any, P>
+> extends Component<P, S> {}
 export class BaseNoiz_v4<
-  T = {},
+  P extends DefaultProps = {},
   S = {},
-  P extends BuildProps<T> = BuildProps<T>
+  L extends BaseNoiz_v4Layout<any, P> = BaseNoiz_v4Layout<
+    any,
+    P
+  >,
+  SL extends BaseNoiz_v4StyledLayout<
+    any,
+    P
+  > = BaseNoiz_v4StyledLayout<any, P>
 > extends Component<P, S> {
   static styles = styles;
+
+  layouts: L[] = [];
+
+  styledlayouts: SL[] = [];
+
+  #Html: GComponent<P> = (props: P): JSX.Element => (
+    <div className={props.className}>
+      BaseNoiz
+      {props.children ? props.children : "BaseNoiz"}
+    </div>
+  );
+  get Html(): GComponent<P> {
+    return this.#Html;
+  }
+  set Html(Html: GComponent<P>) {
+    this.#Html = Html;
+  }
+
+  #StyledHtml: StyledGComponent<P> = styled(this.Html)``;
+  get StyledHtml() {
+    return this.#StyledHtml;
+  }
+  set StyledHtml(style: StyledGComponent<P>) {
+    this.#StyledHtml = style;
+  }
 
   constructor(props: P) {
     super(props);
   }
 
-  Html = (props: P): JSX.Element => (
-    <div className={props.className}>
-      {props.children ? props.children : "BaseNoiz"}
-    </div>
-  );
-
-  setHtml(Html: (props: P) => JSX.Element) {
-    this.Html = Html;
-    return this;
+  filterLayout(layout: L) {
+    if (this.props.layout === layout.name) {
+      this.Html = layout.component;
+    }
   }
-
-  StyledHtml: StyledGComponent<P> = styled(this.Html)``;
-
-  setStyled(style: StyledGComponent<P>) {
-    this.StyledHtml = style;
-    return this;
-  }
-
-  SomeLayout = (props: P): JSX.Element => (
-    <div className={props.className}>
-      <p></p>
-      {props.children ? props.children : "BaseNoiz"}
-    </div>
-  );
-  SomeStyle = styled(this.Html)``;
-
   /**
    * function which chooses the layout of the Component that
    * will be rendered
    */
   chooseLayout(): GComponent<P> {
-    if (this.props.layout === "some")
-      this.setHtml(this.SomeLayout);
+    if (this.layouts) {
+      this.layouts.forEach(this.filterLayout.bind(this));
+    }
     return this.Html;
   }
 
+  filterStyle(style: SL) {
+    if (this.props.style === style.name) {
+      this.StyledHtml = style.style;
+    }
+  }
+  /**
+   * function which chooses the layout of the Component that
+   * will be rendered
+   */
   chooseStyle(): StyledGComponent<P> {
-    if (this.props.style === "some")
-      this.setStyled(this.SomeStyle);
+    const filter = this.filterStyle;
+    this.styledlayouts.forEach(filter.bind(this));
     return this.StyledHtml;
   }
 
   render(): ReactNode {
     let Layout: GComponent<P> = this.chooseLayout();
-    let Element: GComponent<P> = this.StyledHtml;
     return (
       <Layout {...this.props}>
         {this.props.children}
@@ -110,8 +150,27 @@ export class BaseNoiz_v4<
 }
 
 declare global {
+  // layout
+  var BaseNoizLayout: typeof BaseNoiz_v4Layout;
+  type BaseNoizLayout<L, P> = BaseNoiz_v4Layout<L, P>;
+  // styles
+  var BaseNoizStyledLayout: typeof BaseNoiz_v4StyledLayout;
+  type BaseNoizStyledLayout<S, P> =
+    BaseNoiz_v4StyledLayout<S, P>;
+  // class
   var BaseNoiz: typeof BaseNoiz_v4;
-  type BaseNoiz<P, S> = BaseNoiz_v4<P, S>;
+  type BaseNoiz<
+    P extends DefaultProps,
+    S,
+    L extends BaseNoiz_v4Layout<
+      any,
+      P
+    > = BaseNoiz_v4Layout<any, P>,
+    SL extends BaseNoiz_v4StyledLayout<
+      any,
+      P
+    > = BaseNoiz_v4StyledLayout<any, P>
+  > = BaseNoiz_v4<P, S, L, SL>;
   var BaseNoizProps: typeof BaseNoiz_v4Props;
   /**
    * Usage:
@@ -168,7 +227,7 @@ declare global {
    */
   type BaseNoizProps = BaseNoiz_v4Props;
   //
-  type BuildProps<T> = BuildProps_v4<T>;
+  type BaseProps<T> = BaseProps_v4<T>;
   type DefaultProps = DefaultProps_v4;
   //
   type GComponent<T> = GComponent_v4<T>;
@@ -177,3 +236,5 @@ declare global {
 
 globalThis.BaseNoiz = BaseNoiz_v4;
 globalThis.BaseNoizProps = BaseNoiz_v4Props;
+globalThis.BaseNoizLayout = BaseNoiz_v4Layout;
+globalThis.BaseNoizStyledLayout = BaseNoiz_v4StyledLayout;

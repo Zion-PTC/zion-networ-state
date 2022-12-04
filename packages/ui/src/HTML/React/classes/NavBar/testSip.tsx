@@ -1,41 +1,90 @@
 import styled from "styled-components";
 
-/////// TYPES
-export type testSipData = { age: number };
+interface Layout<L, P> {
+  name: L;
+  component: (p: P) => JSX.Element;
+}
+class Layout<L, P> {}
 
-export type testSipBooleans = { small?: boolean };
+interface StyledLayout<S, P> {
+  name: S;
+  style: StyledGComponent<P>;
+}
+class StyledLayout<S, P> {
+  constructor(props: StyledLayout<S, P>) {
+    this.name = props.name;
+    this.style = props.style;
+  }
+}
 
-export type testSipProps = NoizProps<
-  testSipData & testSipBooleans
->;
+export interface testSipProps extends BaseNoizProps {}
+export class testSipProps extends BaseNoizProps {}
 
-export type testSipClassProps = NoizDatas<testSipProps>;
+export interface testSipState {}
+export class testSipState {}
 
-export type testSipAsChild = MakeAsChild<
-  "NavBar",
-  testSipClassProps
->;
-/////////////
+enum testSipLayouts {
+  main = "main",
+  istia = "istia",
+}
+type testSipLayoutTypes = keyof typeof testSipLayouts;
+class testLayout extends Layout<
+  testSipLayoutTypes,
+  testSipProps
+> {}
+const main = new testLayout();
+main.name = testSipLayouts.main;
+main.component = (p: testSipProps) => (
+  <div>
+    {p.children}
+    <p>1</p>
+  </div>
+);
+const testlay2 = new testLayout();
+main.name = testSipLayouts.istia;
+main.component = (props: testSipProps) => (
+  <div>
+    {props.children}
+    <p>2</p>
+  </div>
+);
 
-////////CLASS
-export class testSip extends BaseNoiz<
-  testSipData,
-  testSipBooleans
+enum testSipStyles {
+  fiesta = "fiesta",
+  grande = "grande",
+}
+type testSipStyleTypes = keyof typeof testSipStyles;
+class testStyle extends StyledLayout<
+  testSipStyleTypes,
+  testSipProps
 > {
-  constructor(props: testSipClassProps) {
+  constructor(props: testStyle) {
     super(props);
   }
-  Html = (props: testSipProps) => {
-    return (
-      <div className={props.className}>{props.age}</div>
-    );
-  };
+}
 
-  Style = styled(this.Html)``;
-
-  Mapper = testSip.mapperFactory(this.Style);
-
+export interface testSip
+  extends BaseNoiz<
+    testSipProps,
+    testSipState,
+    testLayout,
+    testStyle
+  > {}
+export class testSip extends BaseNoiz<
+  testSipProps,
+  testSipState,
+  testLayout,
+  testStyle
+> {
+  layouts = [main, testlay2];
+  styles = [
+    new testStyle({
+      name: testSipStyles.fiesta,
+      style: styled(this.chooseLayout())``,
+    }),
+  ];
   render() {
-    return <this.Mapper {...this.props}></this.Mapper>;
+    let Element = this.StyledHtml;
+    return <Element {...this.props}></Element>;
   }
 }
