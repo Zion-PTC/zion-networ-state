@@ -21,6 +21,8 @@ enum styles {
 type layoutTypes = keyof typeof layouts;
 type styleTypes = keyof typeof styles;
 
+///TODO #33 ci sono dei problemi qui
+
 export interface Chart_v2Props
   extends BaseNoizProps<layoutTypes, styleTypes>,
     ChartProps {

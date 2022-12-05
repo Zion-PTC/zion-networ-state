@@ -2,34 +2,49 @@ import { dataGuard } from "@zionstate/utils";
 import { ChangeEvent, FormEvent } from "react";
 import styled from "styled-components";
 import {
-  GComponent,
-  StyledGComponent,
-} from "../../lib/global/BaseNoiz/BaseNoiz_v3";
-import {
   Label as LabelledInput,
   LabelProps as LabelledInputProps,
 } from "../Basic";
+
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
 
 class InputState {
   input = "";
   value = "";
 }
 
-export interface Form_v3Props extends BaseNoizProps {
+export interface Form_v3Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   name: string;
   inputs: LabelledInputProps[];
   reset?: boolean;
 }
-export class Form_v3Props extends BaseNoizProps {}
+export class Form_v3Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
-export interface Form_v3State {
+export interface Form_v3State
+  extends BaseNoizState<Form_v3Props> {
   inputs: { input: string; value: string }[];
 }
-export class Form_v3State {}
+export class Form_v3State extends BaseNoizState<Form_v3Props> {}
 
 export interface Form_v3<
   T extends string | number | readonly string[] | undefined
-> extends BaseNoiz<Form_v3Props, Form_v3State> {
+> extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Form_v3Props,
+    Form_v3State
+  > {
   InputState: typeof InputState;
   inputs: LabelledInputProps[];
   newInputState(): InputState;
@@ -54,10 +69,12 @@ export interface Form_v3<
     id: number
   ): JSX.Element;
   mapLabelledInputs(): JSX.Element;
-  Html: GComponent<Form_v3Props>;
-  StyledHtml: StyledGComponent<Form_v3Props>;
+  //// Html: GComponent<Form_v3Props>;
+  ////// StyledHtml: StyledGComponent<Form_v3Props>;
 }
 export class Form_v3<T = string> extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Form_v3Props,
   Form_v3State
 > {
@@ -72,7 +89,7 @@ export class Form_v3<T = string> extends BaseNoiz<
     let ins = props.inputs;
     this.inputs = props.inputs;
     let inputs = ins.map(this.newInputState);
-    this.state = { inputs };
+    /// this.state = { inputs };
   }
 
   computeInputs(currInput: string) {
@@ -141,7 +158,7 @@ export class Form_v3<T = string> extends BaseNoiz<
     return <>{mappedInputs}</>;
   }
 
-  Html = (props: Form_v3Props) => {
+  main = (props: Form_v3Props) => {
     let mappedLabelledInputs = this.mapLabelledInputs();
     return (
       <form
@@ -155,22 +172,24 @@ export class Form_v3<T = string> extends BaseNoiz<
     );
   };
 
-  StyledHtml = styled(this.Html)`
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)`
     display: grid;
     grid-auto-columns: max-content;
     #submit-button {
       display: none;
     }
   `;
-
-  render() {
-    let Element = this.StyledHtml;
-    console.log(this.state);
-    return (
-      <Element
-        inputs={this.props.inputs}
-        name=""
-      ></Element>
-    );
-  }
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
