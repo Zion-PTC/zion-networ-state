@@ -14,6 +14,15 @@ import {
   ReactNode,
 } from "react";
 
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
 interface Article {
   title?: string;
   date?: string;
@@ -27,7 +36,7 @@ interface ProcessorArgs {
 class ProcessorArgs {}
 
 export interface Md_v2Props
-  extends BaseNoizProps,
+  extends BaseNoizProps<layoutTypes, styleTypes>,
     Article {
   contentHtml?: string;
   contentString: string;
@@ -39,21 +48,26 @@ export interface Md_v2Props
   article?: boolean;
 }
 
-export class Md_v2Props extends BaseNoizProps {
-  constructor(props: Md_v2Props) {
-    super(props);
-  }
-}
-export interface Md_v2State {
+export class Md_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+
+export interface Md_v2State
+  extends BaseNoizState<Md_v2Props> {
   Content: Content;
   Element: () => JSX.Element;
   processorArgs: ProcessorArgs;
 }
-
-export class Md_v2State {}
+export class Md_v2State extends BaseNoizState<Md_v2Props> {}
 
 export interface Md_v2
-  extends BaseNoiz<Md_v2Props, Md_v2State> {
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Md_v2Props,
+    Md_v2State
+  > {
   Processor: typeof Processor;
   makeProcessor(
     text: string,
@@ -70,6 +84,8 @@ export interface Md_v2
 }
 
 export class Md_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Md_v2Props,
   Md_v2State
 > {
@@ -192,15 +208,29 @@ export class Md_v2 extends BaseNoiz<
     }
   `;
 
-  Html = (props: Md_v2Props) => {
+  main = (props: Md_v2Props) => {
     return <h1>{props.children}</h1>;
   };
 
-  StyledHtml = styled(this.Html)`
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)`
     img {
       width: 100vw;
     }
   `;
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 
   render() {
     let Element = this.Element;
