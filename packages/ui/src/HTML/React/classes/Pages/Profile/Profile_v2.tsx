@@ -27,7 +27,17 @@ import {
   NavBarState,
 } from "../../NavBar";
 
-export interface Profile_v2Props extends BaseNoizProps {
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
+export interface Profile_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   tracks: number;
   followers: number;
   following: number;
@@ -36,19 +46,24 @@ export interface Profile_v2Props extends BaseNoizProps {
   setIsShowMore: Dispatch<SetStateAction<boolean>>;
 }
 
-export class Profile_v2Props extends BaseNoizProps {
-  constructor(props: Profile_v2Props) {
-    super(props);
-  }
-}
-export interface Profile_v2State {
+export class Profile_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+export interface Profile_v2State
+  extends BaseNoizState<Profile_v2Props> {
   isAvatarImageLoaded?: boolean;
 }
 
-export class Profile_v2State {}
+export class Profile_v2State extends BaseNoizState<Profile_v2Props> {}
 
 export interface Profile_v2
-  extends BaseNoiz<Profile_v2Props, Profile_v2State> {
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Profile_v2Props,
+    Profile_v2State
+  > {
   Icon: ComponentClass<IconProps, IconState>;
   NavBar: ComponentClass<NavBarProps, NavBarState>;
   Badge: ComponentClass<BadgeProps, BadgeState>;
@@ -59,8 +74,10 @@ export interface Profile_v2
   >;
   Card: ComponentClass<CardProps, CardState>;
 }
-
+///TODO #37 @giacomogagliano, icons da problemi qui sotto
 export class Profile_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Profile_v2Props,
   Profile_v2State
 > {
@@ -95,7 +112,7 @@ export class Profile_v2 extends BaseNoiz<
     this.setState({ isAvatarImageLoaded: isAvLoaded });
   };
 
-  Html = (props: Profile_v2Props) => {
+  main = (props: Profile_v2Props) => {
     // const setIsAvatarImageLoaded =
     //   this.setIsAvatarImageLoaded;
     // const isAvatarImageLoaded =
@@ -139,7 +156,7 @@ export class Profile_v2 extends BaseNoiz<
               </button>
             </div>
             <Icon buttoned share></Icon>
-            <Icon buttoned more_Normal></Icon>
+            <Icon buttoned more_normal></Icon>
           </div>
           <div id="description">
             <p>{props.description}</p>
@@ -174,8 +191,14 @@ export class Profile_v2 extends BaseNoiz<
       </div>
     );
   };
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
 
-  StyledHtml = styled(this.Html)`
+  defaultStyle = styled(this.Html)`
     display: grid;
     grid-template-columns: 2rem 1fr 2rem;
     grid-template-rows: 2rem 15rem auto 3rem auto;
@@ -317,8 +340,10 @@ export class Profile_v2 extends BaseNoiz<
     }
   `;
 
-  render() {
-    let Element = this.StyledHtml;
-    return <Element {...this.props}></Element>;
-  }
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
