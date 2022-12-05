@@ -8,9 +8,9 @@ import { Style } from "./Style";
 import {
   DefaultProps_v1,
   StyledGComponent_v1,
-} from "../Types";
-import { GComponent_v1 } from "../Types/";
-import { BaseProps_v1 } from "../Types/";
+} from "./Types";
+import { GComponent_v1 } from "./Types";
+import { BaseProps_v1 } from "./Types";
 
 interface Child<CT, LT> {
   name: CT;

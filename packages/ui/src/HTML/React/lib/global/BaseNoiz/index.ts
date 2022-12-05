@@ -23,3 +23,13 @@ export * from './BaseNoizProps';
 
 //// BaseNoizState
 export * from './BaseNoizState';
+
+//// ComponentDecorator
+export * from './ComponentDecorator';
+
+//// Layout
+export * from './Layout';
+
+//// Style
+export * from './Style';
+export * as Types from './Types'
