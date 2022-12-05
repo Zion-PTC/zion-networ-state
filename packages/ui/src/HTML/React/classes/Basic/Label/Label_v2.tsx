@@ -20,6 +20,33 @@ export interface Label_v2PropsType extends InputPropsType {
   step?: number;
 }
 
+/**
+ * TODO #32 @arianna sistemare i file per farli funzionare con
+ * la nuova BaseNoiz:
+ * - aggiungere gli enum standard. Ho creato uno snippet che
+ *   te li fa. si trova in questa cartella
+ * - fatti gli enum, vanno aggiunti i due type nei generici
+ *   di BaseNoizProps, cosi :
+ *   `BaseNoizProps<layoutTypes,styleTypes>`
+ * - estendere la classe State di ogni file con la classe
+ *   `BaseNoizState`.
+ * - fatto quello va aggiunto `BaseNoizProps` come generico
+ *   in `BaseNoizState`
+ * - aggiungere i due types delle enum nei generici della
+ *   classe principale (quella che estende BaseNoiz).
+ * - cambiare il nome al componente nella classe e nominarlo
+ *   main
+ * - aggiungere un elemento `layouts` subito dopo il
+ *   componente e iniziare un array
+ * - nell'array creare `new this.Layout` con le info `name`
+ *   e `component`
+ * - rinominare lo stile in `defaultStyle`
+ * - creare un array `styledlayouts` e inserirvici dei `new
+ *   this.Style()` con le info necessarie.
+ *
+ * a questo punto dovrebbe funzionare tutto ok.
+ */
+
 export interface Label_v2Props
   extends Label_v2PropsType,
     BaseNoizProps {}

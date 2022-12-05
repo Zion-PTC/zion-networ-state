@@ -1,26 +1,36 @@
 import styled, { css } from "styled-components";
 import { FlattenSimpleInterpolation } from "styled-components";
-import {
-  GComponent,
-  StyledGComponent,
-} from "../../lib/global/BaseNoiz/BaseNoiz_v3";
 import { Icon } from "../Icon";
 
-export interface Badge_v2Props extends BaseNoizProps {
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
+export interface Badge_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   size?: "small" | "mid" | "big";
 }
+export class Badge_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
-export class Badge_v2Props extends BaseNoizProps {
-  constructor(props: Badge_v2Props) {
-    super(props);
-    this.size = props.size;
-  }
-}
-export interface Badge_v2State {}
+export interface Badge_v2State
+  extends BaseNoizState<Badge_v2Props> {}
+export class Badge_v2State extends BaseNoizState<Badge_v2Props> {}
 
-export class Badge_v2State {}
-
-export interface Badge_v2 {
+export interface Badge_v2
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Badge_v2Props,
+    Badge_v2State
+  > {
   width: number;
   height: number;
   ratio: number;
@@ -33,11 +43,11 @@ export interface Badge_v2 {
   checkSize(
     props?: Badge_v2Props
   ): FlattenSimpleInterpolation | undefined;
-  Html: GComponent<Badge_v2Props>;
-  StyledHtml: StyledGComponent<Badge_v2Props>;
 }
 
 export class Badge_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Badge_v2Props,
   Badge_v2State
 > {
@@ -47,6 +57,7 @@ export class Badge_v2 extends BaseNoiz<
   smallSize = this.calculateSize(this.ratio, 3);
   midSize = this.calculateSize(this.ratio, 4);
   bigSize = this.calculateSize(this.ratio, 5);
+
   defaultSize = css`
     width: 100%;
     height: 100%;
@@ -68,7 +79,7 @@ export class Badge_v2 extends BaseNoiz<
     if (props.size === "big") return this.bigSize;
   };
 
-  Html = (props: Badge_v2Props) => {
+  main = (props: Badge_v2Props) => {
     return (
       <div className={props.className}>
         <div id="logo">
@@ -84,7 +95,14 @@ export class Badge_v2 extends BaseNoiz<
     );
   };
 
-  StyledHtml = styled(this.Html)`
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)`
     display: grid;
     ${props => this.checkSize(props)}
     grid-template-columns: 10% 23% 57% 10%;
@@ -124,8 +142,11 @@ export class Badge_v2 extends BaseNoiz<
       }
     }
   `;
-  render() {
-    let Element = this.StyledHtml;
-    return <Element></Element>;
-  }
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }

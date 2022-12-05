@@ -1,12 +1,18 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
-import {
-  InputType,
-  BaseNoizProps,
-} from "../../../lib/global";
-import { GComponent } from "../../../lib/global/BaseNoiz/BaseNoiz_v3";
+import { InputType } from "../../../lib/global";
 
-export interface Input_v2Props extends BaseNoizProps {
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
+export interface Input_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   type: InputType;
   placeholder: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -16,20 +22,30 @@ export interface Input_v2Props extends BaseNoizProps {
   max?: number;
   step?: number;
 }
-export class Input_v2Props extends BaseNoizProps {}
+export class Input_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
-export interface Input_v2State {}
-export class Input_v2State {}
+export interface Input_v2State
+  extends BaseNoizState<Input_v2Props> {}
+export class Input_v2State extends BaseNoizState<Input_v2Props> {}
 
 export interface Input_v2
-  extends BaseNoiz<Input_v2Props, Input_v2State> {
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Input_v2Props,
+    Input_v2State
+  > {
   onChange(
     props: Input_v2Props
   ): (e: ChangeEvent<HTMLInputElement>) => void;
-  Html: GComponent<Input_v2Props>;
 }
 
 export class Input_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Input_v2Props,
   Input_v2State
 > {
@@ -40,7 +56,7 @@ export class Input_v2 extends BaseNoiz<
       return props.handleChange(e);
     };
 
-  Html = (props: Input_v2Props) => {
+  main = (props: Input_v2Props) => {
     return (
       <input
         className={props.className}
@@ -56,10 +72,19 @@ export class Input_v2 extends BaseNoiz<
     );
   };
 
-  StyledHtml = styled(this.Html)``;
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
 
-  render() {
-    let Element = this.StyledHtml;
-    return <Element {...this.props}></Element>;
-  }
+  defaultStyle = styled(this.Html)``;
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
