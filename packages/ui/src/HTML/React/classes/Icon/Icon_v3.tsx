@@ -24,7 +24,6 @@ import { queue } from "./Queue/Queue_v1";
 import { like } from "./Like/Like_v1";
 import { moon } from "./Moon/Moon_v1";
 import { more_normal } from "./More_Normal/More_Normal_v1";
-import { Component } from "react";
 
 enum layouts {
   main = "main",
@@ -89,8 +88,8 @@ export class Icon_v3 extends BaseNoiz<
   ];
 
   static defaultProps = {
-    layout: "main",
-    style: "defaultStyle",
+    layout: layouts.main,
+    style: styles.defaultStyle,
   };
 
   static svgslist(): string[] {

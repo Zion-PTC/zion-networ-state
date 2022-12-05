@@ -27,8 +27,9 @@ export class NavInput_v4Props extends BaseNoizProps<
   styleTypes
 > {}
 
-export interface NavInput_v4State {}
-export class NavInput_v4State {}
+export interface NavInput_v4State
+  extends BaseNoizState<NavInput_v4Props> {}
+export class NavInput_v4State extends BaseNoizState<NavInput_v4Props> {}
 
 export interface NavInput_v4
   extends BaseNoiz<

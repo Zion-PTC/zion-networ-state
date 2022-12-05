@@ -10,26 +10,27 @@ export * from "./Css";
 export * from "./Props";
 
 //// ComponentDecorator
-export * from './ComponentDecorator';
+export * from "./ComponentDecorator";
 
 //// Layout
-export * from './Layout';
+export * from "./Layout";
 
 //// Style
-export * from './Style';
+export * from "./Style";
 
-//// BaseNoizProps
-export * from './BaseNoizProps';
+// //// BaseNoizProps
+// export * from './BaseNoizProps';
 
-//// BaseNoizState
-export * from './BaseNoizState';
+// //// BaseNoizState
+// export * from './BaseNoizState';
 
 //// ComponentDecorator
-export * from './ComponentDecorator';
+export * from "./ComponentDecorator";
 
 //// Layout
-export * from './Layout';
+export * from "./Layout";
 
 //// Style
-export * from './Style';
-export * as Types from './Types'
+export * from "./Style";
+
+export * as Types from "./Types";

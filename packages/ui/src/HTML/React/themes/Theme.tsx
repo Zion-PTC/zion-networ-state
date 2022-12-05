@@ -1,3 +1,5 @@
+import { FluidTheme } from "../lib/types/theme";
+
 const black = "#090909";
 const white = "#fafafa";
 const darkgrey = "hsl(0, 0%, 53%)";
@@ -16,7 +18,7 @@ const palette = {
   white: "hsl(300, 100%, 99%)",
   smoke: "hsl(317,1%,29%)",
 };
-// TODO #9 arianna mission
+
 export const darkTheme: FluidTheme = {
   body: black,
   textColor: white,

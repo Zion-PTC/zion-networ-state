@@ -188,15 +188,29 @@ export class BaseNoiz_v4<
     this.chooseLayout();
   }
 
-  componentDidUpdate(
-    _: Readonly<P>,
+  debugState = false;
+  debugUpdate = false;
+
+  didUpdate = (
+    prevProps: Readonly<P>,
     prevState: Readonly<S>,
-    __?: any
+    snapshot?: any
+  ) => {
+    this.debugUpdate &&
+      console.log(prevState, prevProps, snapshot);
+  };
+
+  componentDidUpdate(
+    prevProps: Readonly<P>,
+    prevState: Readonly<S>,
+    snapshot?: any
   ): void {
+    this.debugState && console.log(this.state);
     if (this.layouts.length === 0) return;
     if (this.styledlayouts.length === 0) return;
     const cond = prevState.layout !== this.state.layout;
     cond && this.chooseStyle();
+    this.didUpdate(prevProps, prevState, snapshot);
   }
 }
 

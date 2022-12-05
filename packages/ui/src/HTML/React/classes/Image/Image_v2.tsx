@@ -85,7 +85,6 @@ export class Image_v2 extends BaseNoiz<
         <img
           onLoad={handleOnLoad}
           src={props.src}
-          // alt="nft"
           id="image"
         ></img>
         <div id="loading-waves-container">

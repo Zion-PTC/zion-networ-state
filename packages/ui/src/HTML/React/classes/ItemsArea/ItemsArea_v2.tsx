@@ -27,12 +27,13 @@ export class ItemsArea_v2Props extends BaseNoizProps<
   layoutTypes,
   styleTypes
 > {}
+
 export interface ItemsArea_v2State {
   blockSize?: number;
   width?: number;
   columns?: number;
+  parentSize: ParentSize;
 }
-
 export class ItemsArea_v2State extends BaseNoizState<ItemsArea_v2Props> {}
 
 export interface ItemsArea_v2
@@ -44,13 +45,16 @@ export interface ItemsArea_v2
   > {
   itemsArea: RefObject<HTMLDivElement>;
 }
-
 export class ItemsArea_v2 extends BaseNoiz<
   layoutTypes,
   styleTypes,
   ItemsArea_v2Props,
   ItemsArea_v2State
 > {
+  static defaultProps = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+  };
   ParentSize = ParentSize;
   rows = 14;
   columns = 8;
@@ -58,7 +62,9 @@ export class ItemsArea_v2 extends BaseNoiz<
     this.setState({ blockSize: blocksize });
   setWidth = (width: number) =>
     this.setState({ width: width });
-  calculateFluidGrid() {
+  setParentSize = (parentSize: ParentSize) =>
+    this.setState({ parentSize });
+  handleParentSize() {
     if (!this.itemsArea.current) return;
     const itemsArea = this.itemsArea.current;
     const parent_ = itemsArea.parentElement;
@@ -69,13 +75,20 @@ export class ItemsArea_v2 extends BaseNoiz<
     const parentSize = new this.ParentSize();
     parentSize.width = clientRec.height;
     parentSize.height = clientRec.width;
+    this.setParentSize(parentSize);
+    console.log(parentSize);
+  }
+
+  handleBlockAndWidth() {
+    const parentSize = this.state.parentSize;
     if (!parentSize.height) return;
     if (parentSize.height === 0) return;
+    console.log(this.state.parentSize);
     const SCALE = 1000000000000;
     const ratio = this.calculateRatio(parentSize.height);
     const blockSize = this.scale(ratio, SCALE);
-    this.setBlockSize(blockSize);
     const width = blockSize * this.columns;
+    this.setBlockSize(blockSize);
     this.setWidth(width);
   }
 
@@ -85,20 +98,6 @@ export class ItemsArea_v2 extends BaseNoiz<
 
   scale(num: number, scale: number) {
     return Math.round(num * scale) / scale;
-  }
-
-  constructor(props: ItemsArea_v2Props) {
-    super(props);
-    this.itemsArea = createRef();
-    let state = new ItemsArea_v2State();
-    state.blockSize = 0;
-    state.width = 0;
-    state.columns = this.columns;
-    this.state = state;
-  }
-
-  componentDidMount() {
-    this.calculateFluidGrid();
   }
 
   main = (props: ItemsArea_v2Props) => {
@@ -121,13 +120,14 @@ export class ItemsArea_v2 extends BaseNoiz<
 
   defaultStyle = styled(this.Html)`
     display: grid;
+    background-color: aliceblue;
     grid-area: content;
     height: 100%;
     width: ${() => this.state.width}px;
-    grid-auto-rows: ${() => this.state.blockSize + "px"};
+    grid-auto-rows: ${() => this.state.blockSize}px;
     grid-template-columns: repeat(
       ${() => this.state.columns},
-      ${() => this.state.blockSize + "px"}
+      ${() => this.state.blockSize}px
     );
     place-self: center;
   `;
@@ -139,31 +139,37 @@ export class ItemsArea_v2 extends BaseNoiz<
     }),
   ];
 
-  ///////// OLD
-  Area = styled.div<any>`
-    display: grid;
-    grid-area: content;
-    height: 100%;
-    overflow: auto;
-    width: ${props => props.width}px;
-    grid-auto-rows: ${props => props.blockSize + "px"};
-    grid-template-columns: repeat(
-      ${props => props.columns},
-      ${props => props.blockSize + "px"}
-    );
-    place-self: center;
-  `;
+  constructor(props: ItemsArea_v2Props) {
+    super(props);
+    this.itemsArea = createRef();
+    let state = new ItemsArea_v2State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    state.blockSize = 0;
+    state.width = 0;
+    state.columns = this.columns;
+    state.parentSize = new this.ParentSize();
+    this.state = state;
+  }
 
-  ItemsArea_v1(props: ItemsArea_v2Props) {
-    return (
-      <this.Area
-        ref={this.itemsArea}
-        blockSize={this.state.blockSize}
-        columns={this.state.columns}
-        width={this.state.width}
-      >
-        {props.children}
-      </this.Area>
-    );
+  debugState = true;
+
+  didUpdate = (
+    _: any,
+    prevState: ItemsArea_v2State,
+    __: any
+  ) => {
+    const layout = prevState.layout !== this.state.layout;
+    const style = prevState.style !== this.state.style;
+    const parentSize =
+      prevState.parentSize.height !==
+      this.state.parentSize.height;
+    console.log(layout, style, parentSize);
+    style && this.handleParentSize();
+    parentSize && this.handleBlockAndWidth();
+  };
+
+  componentDidMount() {
+    this.chooseLayout();
   }
 }

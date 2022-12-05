@@ -12,16 +12,7 @@ import {
   // CSSProp,
   // CSSObject
 } from "styled-components";
-export {
-  BaseNoiz_v2,
-  BaseNoiz_v3,
-  BaseNoizProps,
-} from "./global/BaseNoiz";
-export type {
-  BuildProps,
-  ClassComponent,
-  StyledClassComponent,
-} from "./global/BaseNoiz";
+export { BaseNoizProps } from "./global/BaseNoiz";
 import {
   NoizProps as NP,
   MakeAsChild as MAC,

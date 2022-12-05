@@ -17,16 +17,6 @@ enum styles {
 type layoutTypes = keyof typeof layouts;
 type styleTypes = keyof typeof styles;
 
-class ItemPage_v2Layout extends BaseNoizProps<
-  layoutTypes,
-  styleTypes
-> {}
-
-class ItemPage_v2Style extends BaseNoizProps<
-  layoutTypes,
-  styleTypes
-> {}
-
 export interface ItemPage_v2Props
   extends BaseNoizProps<layoutTypes, styleTypes> {
   src: string;
@@ -42,82 +32,26 @@ export interface ItemPage_v2Props
     currency: string;
   };
 }
-
 export class ItemPage_v2Props extends BaseNoizProps<
   layoutTypes,
   styleTypes
 > {}
+
 export interface ItemPage_v2State
   extends BaseNoizState<ItemPage_v2Props> {
   src: string;
   isLoading: boolean;
   imageLoaded: boolean;
 }
-
 export class ItemPage_v2State extends BaseNoizState<ItemPage_v2Props> {}
 
-const main = new ItemPage_v2Layout();
-main.name = ItemPage_v2Layouts.main;
-main.component = function (
-  this: ItemPage_v2,
-  props: ItemPage_v2Props
-) {
-  // const src = this.state.src;
-  // const Image = this.Image;
-  const COLLECTION = "Collection";
-  const CREATOR = "Creator";
-  const ROYALTIES = "Royalties";
-  const HIGHEST_BID = "highest bid:";
-
-  return (
-    <div className={props.className} css={props.css}>
-      <div id="bg-upper"></div>
-      {/* <Image src={src} gridArea="image"></Image> */}
-      <div id="social">
-        <button>
-          <Icon like />
-        </button>
-        <button>
-          <Icon like />
-        </button>
-      </div>
-      <div id="infos">
-        <h1>{props.data.title}</h1>
-        <p>{props.data.description}</p>
-        <div id="infos-text">
-          <p>{HIGHEST_BID}</p>
-          <p id="bold">{props.data.highestBid}</p>
-          <p id="bold">{props.data.currency}</p>
-        </div>
-      </div>
-      <div id="links">
-        <div id="sublink">
-          <div id="sublink-text-area">
-            <p>{CREATOR}</p>
-            <p>{props.data.royalties}</p>
-            <p>{ROYALTIES}</p>
-          </div>
-          <div id="profile">
-            <div id="avatar"></div>
-            <p id="profile-id">Profile Name</p>
-          </div>
-        </div>
-        <div id="sublink">
-          <div id="sublink-text-area">
-            <p>{COLLECTION}</p>
-          </div>
-          <div id="collection">
-            <div id="avatar"></div>
-            <p id="collection-id">Collection Name</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export interface ItemPage_v2
-  extends BaseNoiz<ItemPage_v2Props, ItemPage_v2State> {
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    ItemPage_v2Props,
+    ItemPage_v2State
+  > {
   Image: ComponentClass<
     StyledDefault<{
       width?: string;
@@ -145,6 +79,68 @@ export class ItemPage_v2 extends BaseNoiz<
   ItemPage_v2Props,
   ItemPage_v2State
 > {
+  main = (props: ItemPage_v2Props) => {
+    // const src = this.state.src;
+    // const Image = this.Image;
+    const COLLECTION = "Collection";
+    const CREATOR = "Creator";
+    const ROYALTIES = "Royalties";
+    const HIGHEST_BID = "highest bid:";
+
+    return (
+      <div className={props.className} css={props.css}>
+        <div id="bg-upper"></div>
+        {/* <Image src={src} gridArea="image"></Image> */}
+        <div id="social">
+          <button>
+            <Icon like />
+          </button>
+          <button>
+            <Icon like />
+          </button>
+        </div>
+        <div id="infos">
+          <h1>{props.data.title}</h1>
+          <p>{props.data.description}</p>
+          <div id="infos-text">
+            <p>{HIGHEST_BID}</p>
+            <p id="bold">{props.data.highestBid}</p>
+            <p id="bold">{props.data.currency}</p>
+          </div>
+        </div>
+        <div id="links">
+          <div id="sublink">
+            <div id="sublink-text-area">
+              <p>{CREATOR}</p>
+              <p>{props.data.royalties}</p>
+              <p>{ROYALTIES}</p>
+            </div>
+            <div id="profile">
+              <div id="avatar"></div>
+              <p id="profile-id">Profile Name</p>
+            </div>
+          </div>
+          <div id="sublink">
+            <div id="sublink-text-area">
+              <p>{COLLECTION}</p>
+            </div>
+            <div id="collection">
+              <div id="avatar"></div>
+              <p id="collection-id">Collection Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
   defaultStyle = styled(this.chooseLayout())`
     display: grid;
     width: 100%;
