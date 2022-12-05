@@ -1,6 +1,16 @@
 import styled, { keyframes } from "styled-components";
 
-export interface Image_v2Props extends BaseNoizProps {
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
+export interface Image_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   width?: string;
   height?: string;
   maxWidth?: string;
@@ -19,28 +29,24 @@ export interface Image_v2Props extends BaseNoizProps {
   };
 }
 
-export class Image_v2Props extends BaseNoizProps {
-  constructor(props: Image_v2Props) {
-    super(props);
-    // TODO #28 @ariannatnl aggiungere tutte le props nel ctor
-  }
-}
-export interface Image_v2State {
+export class Image_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+export interface Image_v2State
+  extends BaseNoizState<Image_v2Props> {
   isLoading: boolean;
   src: string;
 }
 
-export class Image_v2State {}
+export class Image_v2State extends BaseNoizState<Image_v2Props> {}
 
 export class Image_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Image_v2Props,
   Image_v2State
 > {
-  constructor(props: Image_v2Props) {
-    super(props);
-    this.state = { isLoading: true, src: "" };
-  }
-
   handleIsLoading = (isLoading: boolean) => {
     this.setState({ isLoading });
   };
@@ -68,7 +74,7 @@ export class Image_v2 extends BaseNoiz<
     }
   `;
 
-  Html = (props: Image_v2Props) => {
+  main = (props: Image_v2Props) => {
     const handleOnLoad = () => {
       console.log("loaded");
 
@@ -95,6 +101,13 @@ export class Image_v2 extends BaseNoiz<
     );
   };
 
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
   LoadingAnimation = keyframes`
   0% {height:5px;transform:translateY(0px);background:#9b59b6;}
   25% {height:30px;transform:translateY(15px);background:#3498db;}
@@ -102,7 +115,7 @@ export class Image_v2 extends BaseNoiz<
   100% {height:5px;transform:translateY(0px);background:#9b59b6;}
   `;
   // #25 aggiungere qui
-  StyledHtml = styled(this.Html)`
+  defaultStyle = styled(this.Html)`
     z-index: 1;
     overflow: hidden;
     grid-area: ${props => props.gridArea};
@@ -177,9 +190,10 @@ export class Image_v2 extends BaseNoiz<
       }
     }
   `;
-
-  render() {
-    let Element = this.StyledHtml;
-    return <Element {...this.props}></Element>;
-  }
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
