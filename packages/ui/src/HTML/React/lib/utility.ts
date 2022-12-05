@@ -4,7 +4,7 @@ import {
   Interpolation,
   ThemedStyledProps,
 } from "styled-components";
-import { StyledDefault } from "./types/utility/StyledDefault/StyledDefault_v1";
+import { StyledDefault } from "./types/utility";
 
 type _EnumToUnion<T> = keyof T;
 

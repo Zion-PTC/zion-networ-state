@@ -76,14 +76,12 @@ export class ItemsArea_v2 extends BaseNoiz<
     parentSize.width = clientRec.height;
     parentSize.height = clientRec.width;
     this.setParentSize(parentSize);
-    console.log(parentSize);
   }
 
   handleBlockAndWidth() {
     const parentSize = this.state.parentSize;
     if (!parentSize.height) return;
     if (parentSize.height === 0) return;
-    console.log(this.state.parentSize);
     const SCALE = 1000000000000;
     const ratio = this.calculateRatio(parentSize.height);
     const blockSize = this.scale(ratio, SCALE);
@@ -121,7 +119,7 @@ export class ItemsArea_v2 extends BaseNoiz<
   defaultStyle = styled(this.Html)`
     display: grid;
     background-color: aliceblue;
-    grid-area: content;
+    /* grid-area: content; */
     height: 100%;
     width: ${() => this.state.width}px;
     grid-auto-rows: ${() => this.state.blockSize}px;
@@ -152,7 +150,7 @@ export class ItemsArea_v2 extends BaseNoiz<
     this.state = state;
   }
 
-  debugState = true;
+  // debugState = true;
 
   didUpdate = (
     _: any,
@@ -164,12 +162,7 @@ export class ItemsArea_v2 extends BaseNoiz<
     const parentSize =
       prevState.parentSize.height !==
       this.state.parentSize.height;
-    console.log(layout, style, parentSize);
     style && this.handleParentSize();
     parentSize && this.handleBlockAndWidth();
   };
-
-  componentDidMount() {
-    this.chooseLayout();
-  }
 }

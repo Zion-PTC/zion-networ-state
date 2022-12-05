@@ -184,8 +184,11 @@ export class BaseNoiz_v4<
     );
   }
 
+  didMount(): void {}
+
   componentDidMount(): void {
     this.chooseLayout();
+    this.didMount();
   }
 
   debugState = false;
@@ -197,7 +200,12 @@ export class BaseNoiz_v4<
     snapshot?: any
   ) => {
     this.debugUpdate &&
-      console.log(prevState, prevProps, snapshot);
+      console.log(
+        "previous props",
+        prevState,
+        prevProps,
+        snapshot
+      );
   };
 
   componentDidUpdate(
@@ -205,11 +213,13 @@ export class BaseNoiz_v4<
     prevState: Readonly<S>,
     snapshot?: any
   ): void {
-    this.debugState && console.log(this.state);
+    this.debugState &&
+      console.log("current state", this.state);
     if (this.layouts.length === 0) return;
     if (this.styledlayouts.length === 0) return;
     const cond = prevState.layout !== this.state.layout;
     cond && this.chooseStyle();
+    ////// NON CANCELLLARE
     this.didUpdate(prevProps, prevState, snapshot);
   }
 }
