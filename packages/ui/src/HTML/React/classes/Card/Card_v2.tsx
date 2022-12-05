@@ -14,9 +14,19 @@ import { RemainingPercentage } from "../../lib/util/classes/RemainingPercentage"
 import { Icon } from "../Icon";
 import { Image } from "../Image";
 
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
 export interface Card_v2PropsType {}
 
-export interface Card_v2Props extends BaseNoizProps {
+export interface Card_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   id: number;
   slug: string;
   src: string;
@@ -32,31 +42,25 @@ export interface Card_v2Props extends BaseNoizProps {
   big?: boolean;
 }
 
-export class Card_v2Props extends BaseNoizProps {
-  constructor(props: Card_v2Props) {
-    super(props);
-    this.id = props.id;
-    this.slug = props.slug;
-    this.src = props.src;
-    this.small = props.small;
-    this.mid = props.mid;
-    this.big = props.big;
-    this.likeCounts = props.likeCounts;
-    this.title = props.title;
-    this.item_id = props.item_id;
-    this.price = props.price;
-    this.bid_link = props.bid_link;
-  }
-}
-export interface Card_v2State {
+export class Card_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+export interface Card_v2State
+  extends BaseNoizState<Card_v2Props> {
   headHeight: number;
   src: string;
   debug?: boolean;
 }
-export class Card_v2State {}
+export class Card_v2State extends BaseNoizState<Card_v2Props> {}
 
 export interface Card_v2
-  extends BaseNoiz<Card_v2Props, Card_v2State> {
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Card_v2Props,
+    Card_v2State
+  > {
   widthinblocks: number;
   totalHeightInBlocks: number;
   ratio: number;
@@ -105,6 +109,8 @@ export interface Card_v2
 }
 
 export class Card_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Card_v2Props,
   Card_v2State
 > {
@@ -148,9 +154,9 @@ export class Card_v2 extends BaseNoiz<
     this.state = state;
     this.container = createRef();
   }
-  Head = (
+  main = (
     props: StyledDefault<{
-      clientHeight: number;
+      ///  clientHeight: number;
     }>
   ) => {
     return (
@@ -167,6 +173,22 @@ export class Card_v2 extends BaseNoiz<
       </div>
     );
   };
+
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)``;
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 
   StyledHead = styled(this.Head)`
     ${this.CardHeadDebug.value};
@@ -474,9 +496,4 @@ export class Card_v2 extends BaseNoiz<
       overflow: auto;
     }
   `;
-
-  render() {
-    let Element = this.Card_v3;
-    return <Element {...this.props}></Element>;
-  }
 }
