@@ -1,38 +1,53 @@
 import { createRef, RefObject } from "react";
 import styled from "styled-components";
 
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
 interface ParentSize {
   width?: number;
   height?: number;
 }
 class ParentSize {}
 
-export interface ItemsArea_v2Props extends BaseNoizProps {
+export interface ItemsArea_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   height: number;
   avatarSize: number;
   ref?: RefObject<HTMLDivElement>;
 }
 
-export class ItemsArea_v2Props extends BaseNoizProps {
-  constructor(props: ItemsArea_v2Props) {
-    super(props);
-    // TODO @ariannatnl aggiungere props al costruttore
-  }
-}
+export class ItemsArea_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 export interface ItemsArea_v2State {
   blockSize?: number;
   width?: number;
   columns?: number;
 }
 
-export class ItemsArea_v2State {}
+export class ItemsArea_v2State extends BaseNoizState<ItemsArea_v2Props> {}
 
 export interface ItemsArea_v2
-  extends BaseNoiz<ItemsArea_v2Props, ItemsArea_v2State> {
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    ItemsArea_v2Props,
+    ItemsArea_v2State
+  > {
   itemsArea: RefObject<HTMLDivElement>;
 }
 
 export class ItemsArea_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   ItemsArea_v2Props,
   ItemsArea_v2State
 > {
@@ -86,7 +101,7 @@ export class ItemsArea_v2 extends BaseNoiz<
     this.calculateFluidGrid();
   }
 
-  Html = (props: ItemsArea_v2Props) => {
+  main = (props: ItemsArea_v2Props) => {
     return (
       <div
         ref={this.itemsArea}
@@ -97,7 +112,14 @@ export class ItemsArea_v2 extends BaseNoiz<
     );
   };
 
-  StyledHtml = styled(this.Html)`
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)`
     display: grid;
     grid-area: content;
     height: 100%;
@@ -110,12 +132,13 @@ export class ItemsArea_v2 extends BaseNoiz<
     place-self: center;
   `;
 
-  render() {
-    let Element = this.StyledHtml;
-    console.log(this.state);
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 
-    return <Element {...this.props}></Element>;
-  }
   ///////// OLD
   Area = styled.div<any>`
     display: grid;
