@@ -37,9 +37,8 @@ export interface Form_v3State
 }
 export class Form_v3State extends BaseNoizState<Form_v3Props> {}
 
-export interface Form_v3<
-  T extends string | number | readonly string[] | undefined
-> extends BaseNoiz<
+export interface Form_v3
+  extends BaseNoiz<
     layoutTypes,
     styleTypes,
     Form_v3Props,
@@ -72,7 +71,7 @@ export interface Form_v3<
   //// Html: GComponent<Form_v3Props>;
   ////// StyledHtml: StyledGComponent<Form_v3Props>;
 }
-export class Form_v3<T = string> extends BaseNoiz<
+export class Form_v3 extends BaseNoiz<
   layoutTypes,
   styleTypes,
   Form_v3Props,
@@ -89,7 +88,13 @@ export class Form_v3<T = string> extends BaseNoiz<
     let ins = props.inputs;
     this.inputs = props.inputs;
     let inputs = ins.map(this.newInputState);
-    /// this.state = { inputs };
+    this.state = {
+      inputs: inputs,
+      layout: () => <>fottiti, sto caricando...</>,
+      style: styled(this.Html)`
+        background-color: red;
+      `,
+    };
   }
 
   computeInputs(currInput: string) {
