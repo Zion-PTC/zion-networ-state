@@ -41,10 +41,11 @@ export class NavBar_v4Props extends BaseNoizProps<
   styleTypes
 > {}
 
-export interface NavBar_v4State {
+export interface NavBar_v4State
+  extends BaseNoizState<NavBar_v4Props> {
   inputs: NavInputProps[];
 }
-export class NavBar_v4State {}
+export class NavBar_v4State extends BaseNoizState<NavBar_v4Props> {}
 
 class NavBarLayout extends BaseNoizLayout<
   layoutTypes,
