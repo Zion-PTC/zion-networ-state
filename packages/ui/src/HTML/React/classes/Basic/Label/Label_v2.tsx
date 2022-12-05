@@ -1,24 +1,18 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { InputType } from "../../../lib/global";
-import {
-  GComponent,
-  StyledGComponent,
-} from "../../../lib/global/BaseNoiz/BaseNoiz_v3";
-import { InputProps, InputPropsType } from "../Input";
+import { InputProps } from "../Input";
 import { Input_v2 } from "../Input/Input_v2";
 
-export interface Label_v2PropsType extends InputPropsType {
-  name: string;
-  type: InputType;
-  placeholder: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number | readonly string[];
-  preventDefault?: boolean;
-  min?: number;
-  max?: number;
-  step?: number;
+enum layouts {
+  main = "main",
 }
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
 
 /**
  * TODO #32 @arianna sistemare i file per farli funzionare con
@@ -48,24 +42,41 @@ export interface Label_v2PropsType extends InputPropsType {
  */
 
 export interface Label_v2Props
-  extends Label_v2PropsType,
-    BaseNoizProps {}
-export class Label_v2Props extends BaseNoizProps {}
+  extends BaseNoizProps<layoutTypes, styleTypes> {
+  name: string;
+  type: InputType;
+  placeholder: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number | readonly string[];
+  preventDefault?: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
+}
+export class Label_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
 
-export interface Label_v2State {}
-export class Label_v2State {}
+export interface Label_v2State
+  extends BaseNoizState<Label_v2Props> {}
+export class Label_v2State extends BaseNoizState<Label_v2Props> {}
 
 export interface Label_v2
-  extends BaseNoiz<Label_v2Props, Label_v2State> {
-  Html: GComponent<Label_v2Props>;
-  StyledHtml: StyledGComponent<Label_v2Props>;
-}
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Label_v2Props,
+    Label_v2State
+  > {}
 
 export class Label_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Label_v2Props,
   Label_v2State
 > {
-  Html = (props: Label_v2Props) => {
+  main = (props: Label_v2Props) => {
     const {
       name,
       handleChange,
@@ -97,10 +108,19 @@ export class Label_v2 extends BaseNoiz<
     );
   };
 
-  StyledHtml = styled(this.Html)``;
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
 
-  render() {
-    let Element = this.StyledHtml;
-    return <Element {...this.props}></Element>;
-  }
+  defaultStyle = styled(this.Html)``;
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
