@@ -12,8 +12,17 @@ import {
   StyledGComponent,
 } from "../../lib/global/BaseNoiz/BaseNoiz_v3";
 
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
 export interface Chart_v2Props
-  extends BaseNoizProps,
+  extends BaseNoizProps<layoutTypes, styleTypes>,
     ChartProps {
   pie?: boolean;
   donut?: boolean;
@@ -22,25 +31,36 @@ export interface Chart_v2Props
   chart?: boolean;
 }
 
-export class Chart_v2Props extends BaseNoizProps {
-  constructor(props: Chart_v2Props) {
-    super(props);
-    this.pie = props.pie;
-    this.donut = props.donut;
-    this.bar = props.bar;
-    this.bubble = props.bubble;
-    this.chart = props.chart;
-  }
+export class Chart_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {
+  ///{
+  //// this.pie = props.pie;
+  //// this.donut = props.donut;
+  //// this.bar = props.bar;
+  //// this.bubble = props.bubble;
+  //// this.chart = props.chart;
+  /// }
 }
-export interface Chart_v2State {}
+export interface Chart_v2State
+  extends BaseNoizState<Chart_v2Props> {}
+export class Chart_v2State extends BaseNoizState<Chart_v2Props> {}
 
 export interface Chart_v2
-  extends BaseNoiz<Chart_v2Props, Chart_v2State> {
-  Html: GComponent<Chart_v2Props>;
-  StyledHtml: StyledGComponent<Chart_v2Props>;
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    Chart_v2Props,
+    Chart_v2State
+  > {
+  // Html: GComponent<Chart_v2Props>;
+  // StyledHtml: StyledGComponent<Chart_v2Props>;
 }
 
 export class Chart_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   Chart_v2Props,
   Chart_v2State
 > {
@@ -59,7 +79,7 @@ export class Chart_v2 extends BaseNoiz<
     ChartJS.register(ArcElement, Tooltip, Legend);
   }
 
-  Html = (props: Chart_v2Props) => {
+  main = (props: Chart_v2Props) => {
     let Chart: (props: any) => JSX.Element;
     Chart = this.Doughnut;
     return (
@@ -68,8 +88,16 @@ export class Chart_v2 extends BaseNoiz<
       </div>
     );
   };
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
 
-  StyledHtml: StyledGComponent<Chart_v2Props> = styled(
+  //defaultStyle = styled(this.Html)``;
+
+  defaultStyle: StyledGComponent<Chart_v2Props> = styled(
     this.Html
   )`
     width: 23em;
@@ -77,14 +105,10 @@ export class Chart_v2 extends BaseNoiz<
     place-self: center;
     ${(props: { dynamic: any }) => props.dynamic};
   `;
-
-  render() {
-    let Element = this.StyledHtml;
-    return (
-      <Element
-        data={this.props.data}
-        type={this.props.type}
-      ></Element>
-    );
-  }
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
