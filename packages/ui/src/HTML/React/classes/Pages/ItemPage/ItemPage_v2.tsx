@@ -8,30 +8,30 @@ import {
   Image,
 } from "../../Image";
 
-enum ItemPage_v2Layouts {
+enum layouts {
   main = "main",
 }
-type ItemPage_v2LayoutTypes =
-  keyof typeof ItemPage_v2Layouts;
-class ItemPage_v2Layout extends BaseNoizLayout<
-  ItemPage_v2LayoutTypes,
-  ItemPage_v2Props
-> {}
-
-enum ItemPage_v2Styles {
+enum styles {
   defaultStyle = "defaultStyle",
 }
-type ItemPage_v2StyleTypes =
-  keyof typeof ItemPage_v2Styles;
-class ItemPage_v2Style extends BaseNoizStyledLayout<
-  ItemPage_v2StyleTypes,
-  ItemPage_v2Props
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
+
+class ItemPage_v2Layout extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
 > {}
 
-export interface ItemPage_v2Props extends BaseNoizProps {
+class ItemPage_v2Style extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+
+export interface ItemPage_v2Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   src: string;
-  layout?: ItemPage_v2LayoutTypes;
-  style?: ItemPage_v2StyleTypes;
+  layout?: layoutTypes;
+  style?: styleTypes;
   data: {
     title: string;
     description: string;
@@ -43,14 +43,18 @@ export interface ItemPage_v2Props extends BaseNoizProps {
   };
 }
 
-export class ItemPage_v2Props extends BaseNoizProps {}
-export interface ItemPage_v2State {
+export class ItemPage_v2Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+export interface ItemPage_v2State
+  extends BaseNoizState<ItemPage_v2Props> {
   src: string;
   isLoading: boolean;
   imageLoaded: boolean;
 }
 
-export class ItemPage_v2State {}
+export class ItemPage_v2State extends BaseNoizState<ItemPage_v2Props> {}
 
 const main = new ItemPage_v2Layout();
 main.name = ItemPage_v2Layouts.main;
@@ -136,11 +140,11 @@ export interface ItemPage_v2
 }
 
 export class ItemPage_v2 extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
   ItemPage_v2Props,
   ItemPage_v2State
 > {
-  layouts = [main];
-
   defaultStyle = styled(this.chooseLayout())`
     display: grid;
     width: 100%;
@@ -244,9 +248,9 @@ export class ItemPage_v2 extends BaseNoiz<
   `;
 
   styledlayouts = [
-    new ItemPage_v2Style({
-      name: ItemPage_v2Styles.defaultStyle,
-      style: this.StyledHtml,
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
     }),
   ];
 
@@ -301,13 +305,5 @@ export class ItemPage_v2 extends BaseNoiz<
 
   componentDidMount() {
     this.checkLoadingStatus();
-  }
-
-  render() {
-    let Element = this.chooseStyle();
-    console.log(Element);
-    Element = this.defaultStyle;
-
-    return <Element {...this.props}></Element>;
   }
 }
