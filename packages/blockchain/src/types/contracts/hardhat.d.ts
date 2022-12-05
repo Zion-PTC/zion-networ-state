@@ -13,22 +13,6 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "ERC1155TokenShop",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC1155TokenShop__factory>;
-    getContractFactory(
-      name: "ERC1155MasterTokenShop",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC1155MasterTokenShop__factory>;
-    getContractFactory(
-      name: "IERC1155MasterTokenShop",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC1155MasterTokenShop__factory>;
-    getContractFactory(
-      name: "IERC1155TokenShop",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC1155TokenShop__factory>;
-    getContractFactory(
       name: "IzERC1155MasterTokenShop",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IzERC1155MasterTokenShop__factory>;
@@ -120,6 +104,10 @@ declare module "hardhat/types/runtime" {
       name: "ProvaMaster",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ProvaMaster__factory>;
+    getContractFactory(
+      name: "SimpleStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimpleStorage__factory>;
     getContractFactory(
       name: "USDC",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -229,26 +217,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
 
-    getContractAt(
-      name: "ERC1155TokenShop",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC1155TokenShop>;
-    getContractAt(
-      name: "ERC1155MasterTokenShop",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ERC1155MasterTokenShop>;
-    getContractAt(
-      name: "IERC1155MasterTokenShop",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC1155MasterTokenShop>;
-    getContractAt(
-      name: "IERC1155TokenShop",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC1155TokenShop>;
     getContractAt(
       name: "IzERC1155MasterTokenShop",
       address: string,
@@ -364,6 +332,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ProvaMaster>;
+    getContractAt(
+      name: "SimpleStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimpleStorage>;
     getContractAt(
       name: "USDC",
       address: string,

@@ -7,10 +7,6 @@ import { ChartProps, Doughnut } from "react-chartjs-2";
 import { Line, Pie } from "react-chartjs-2";
 import { PolarArea, Radar } from "react-chartjs-2";
 import { Scatter } from "react-chartjs-2";
-import {
-  GComponent,
-  StyledGComponent,
-} from "../../lib/global/BaseNoiz/BaseNoiz_v3";
 
 enum layouts {
   main = "main",
@@ -21,8 +17,7 @@ enum styles {
 type layoutTypes = keyof typeof layouts;
 type styleTypes = keyof typeof styles;
 
-///TODO #33 ci sono dei problemi qui
-
+// TODO #36 @giacomogagliano sistemare il delirio
 export interface Chart_v2Props
   extends BaseNoizProps<layoutTypes, styleTypes>,
     ChartProps {

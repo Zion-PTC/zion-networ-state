@@ -46,13 +46,14 @@ export class Card_v2Props extends BaseNoizProps<
   layoutTypes,
   styleTypes
 > {}
+
 export interface Card_v2State
   extends BaseNoizState<Card_v2Props> {
   headHeight: number;
   src: string;
   debug?: boolean;
 }
-export class Card_v2State extends BaseNoizState<Card_v2Props> {}
+export class Card_v2State {}
 
 export interface Card_v2
   extends BaseNoiz<
@@ -154,9 +155,9 @@ export class Card_v2 extends BaseNoiz<
     this.state = state;
     this.container = createRef();
   }
-  main = (
+  Head = (
     props: StyledDefault<{
-      ///  clientHeight: number;
+      clientHeight: number;
     }>
   ) => {
     return (
@@ -173,22 +174,6 @@ export class Card_v2 extends BaseNoiz<
       </div>
     );
   };
-
-  layouts = [
-    new this.Layout({
-      name: layouts.main,
-      component: this.main,
-    }),
-  ];
-
-  defaultStyle = styled(this.Html)``;
-
-  styledlayouts = [
-    new this.Style({
-      name: styles.defaultStyle,
-      style: this.defaultStyle,
-    }),
-  ];
 
   StyledHead = styled(this.Head)`
     ${this.CardHeadDebug.value};
@@ -425,7 +410,7 @@ export class Card_v2 extends BaseNoiz<
     }
   }
 
-  Card = (props: Card_v2Props) => {
+  main = (props: Card_v2Props) => {
     const Head = this.StyledHead;
     const StyledInfos = this.StyledInfos;
     const StyledSocial = this.StyledSocial;
@@ -451,7 +436,14 @@ export class Card_v2 extends BaseNoiz<
     );
   };
 
-  Card_v3 = styled(this.Card)`
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+
+  defaultStyle = styled(this.Html)`
     display: grid;
     grid-column: span 8;
     grid-row: span 14;
@@ -496,4 +488,11 @@ export class Card_v2 extends BaseNoiz<
       overflow: auto;
     }
   `;
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }

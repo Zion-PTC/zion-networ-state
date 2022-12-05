@@ -4,7 +4,7 @@ import { BaseNoizProps } from "../../../HTML/React/lib/global";
 import { BooleanizeUnions } from "../../../HTML/React/lib/utility";
 enum layouts {
   main = "main",
-  sbaglio = "sbaglio",
+  test = "test",
 }
 type layoutTypes = keyof typeof layouts;
 type test = typeof layouts;
@@ -43,8 +43,8 @@ export class BaseTest extends BaseNoiz<
     <div className={p.className}>test it</div>
   );
 
-  sbaglio = (p: BaseTestProps) => (
-    <p className={p.className}>sbaglio</p>
+  test = (p: BaseTestProps) => (
+    <p className={p.className}>test</p>
   );
 
   layouts = [
@@ -53,8 +53,8 @@ export class BaseTest extends BaseNoiz<
       component: this.main,
     }),
     new this.Layout({
-      name: layouts.sbaglio,
-      component: this.sbaglio,
+      name: layouts.test,
+      component: this.test,
     }),
   ];
 
@@ -90,6 +90,6 @@ export class BaseTest extends BaseNoiz<
 
 export default function index() {
   return (
-    <BaseTest layout="sbaglio" style="redback"></BaseTest>
+    <BaseTest layout="test" style="redback"></BaseTest>
   );
 }

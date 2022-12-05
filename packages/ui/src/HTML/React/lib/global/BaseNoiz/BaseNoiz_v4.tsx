@@ -1,102 +1,40 @@
 import { styles } from "../../../style/common/CommonStyles";
 import React, { Component } from "react";
-import styled, {
-  DefaultTheme,
-  StyledComponent,
-} from "styled-components";
+import styled from "styled-components";
 import { ReactNode } from "react";
+import { ComponentDecorator } from "./ComponentDecorator";
+import { Layout } from "./Layout";
+import { Style } from "./Style";
+import {
+  DefaultProps_v1,
+  StyledGComponent_v1,
+} from "../Types";
+import { GComponent_v1 } from "../Types/";
+import { BaseProps_v1 } from "../Types/";
 
-//////// COMPONENTDECORATOR
-////////
-
-interface ComponentDecorator<
-  L,
-  S,
-  P extends BaseNoizProps<L, S> = BaseNoizProps<L, S>
-> {
-  component: GComponent<P>;
-  decorate(component: GComponent<P>): this;
-  with(style: StyledGComponent<P>): StyledGComponent<P>;
+interface Child<CT, LT> {
+  name: CT;
+  Component: () => JSX.Element;
+  layout: LT;
+  JsxPath: JSX.Element;
+  filled?: boolean;
+  stroked?: boolean;
+  secondary?: boolean;
 }
-class ComponentDecorator<
-  L,
-  S,
-  P extends BaseNoizProps<L, S> = BaseNoizProps<L, S>
-> {
-  component: GComponent<P> = props => (
-    <div className={props.className}></div>
-  );
-  constructor(component?: GComponent<P>) {
-    if (component) this.component = component;
-    this.decorate = function (component) {
-      this.component = component;
-      return this;
-    };
-    this.with = function (StyledComp) {
-      const decorated = (props: P) => (
-        <StyledComp
-          as={this.component as StyledGComponent<P>}
-          {...props}
-        >
-          {props.children}
-        </StyledComp>
-      );
-      const Styled = styled(decorated)``;
-      return Styled;
-    };
+
+class Child<CT, LT> {
+  constructor(
+    name: CT,
+    Component: () => JSX.Element = () => <></>,
+    layout: LT,
+    JsxPath: JSX.Element = <path></path>
+  ) {
+    this.name = name;
+    this.Component = Component;
+    this.layout = layout;
+    this.JsxPath = JsxPath;
   }
 }
-
-//////// LAYOUT
-////////
-interface BaseNoiz_v4Layout<L, P> {
-  name: L;
-  component: (p: P) => JSX.Element;
-}
-class BaseNoiz_v4Layout<L, P> {
-  constructor(p?: BaseNoiz_v4Layout<L, P>) {
-    if (!p) return;
-    this.name = p.name;
-    this.component = p.component;
-  }
-}
-/////////// STYLEDLAYOUT
-///////////
-interface BaseNoiz_v4StyledLayout<S, P> {
-  name: S;
-  style: StyledGComponent<P>;
-}
-class BaseNoiz_v4StyledLayout<S, P> {
-  constructor(props: BaseNoiz_v4StyledLayout<S, P>) {
-    this.name = props.name;
-    this.style = props.style;
-  }
-}
-///////// UTILITY
-/////////
-interface DefaultProps_v4<LT = string, SLT = string> {
-  css?: string;
-  className?: string;
-  children?: React.ReactNode;
-  key?: number;
-  layout?: LT;
-  style?: SLT;
-}
-
-type BaseProps_v4<T> = DefaultProps_v4 & T;
-
-export type Multiplied_v4<T> = {
-  datas?: BaseProps_v4<T>[];
-};
-
-type GComponent_v4<P> = (props: P) => JSX.Element;
-
-type StyledGComponent_v4<P> = StyledComponent<
-  GComponent<P>,
-  DefaultTheme,
-  {},
-  never
->;
 
 ////// PROPS
 //////
@@ -117,36 +55,26 @@ export interface BaseNoiz_v4<
   SLT = string,
   P extends BaseNoiz_v4Props<LT, SLT> = {},
   S extends BaseNoiz_v4State<P> = BaseNoiz_v4State<P>,
-  L extends BaseNoiz_v4Layout<LT, P> = BaseNoiz_v4Layout<
-    LT,
-    P
-  >,
-  SL extends BaseNoiz_v4StyledLayout<
-    SLT,
-    P
-  > = BaseNoiz_v4StyledLayout<SLT, P>
+  L extends BaseNoizLayout<LT, P> = BaseNoizLayout<LT, P>,
+  SL extends Style<SLT, P> = Style<SLT, P>,
+  CT extends string = string
 > extends Component<P, S> {}
 export class BaseNoiz_v4<
   LT = string,
   SLT = string,
   P extends BaseNoiz_v4Props<LT, SLT> = {},
   S extends BaseNoiz_v4State<P> = BaseNoiz_v4State<P>,
-  L extends BaseNoiz_v4Layout<LT, P> = BaseNoiz_v4Layout<
-    LT,
-    P
-  >,
-  SL extends BaseNoiz_v4StyledLayout<
-    SLT,
-    P
-  > = BaseNoiz_v4StyledLayout<SLT, P>
+  L extends Layout<LT, P> = Layout<LT, P>,
+  SL extends Style<SLT, P> = Style<SLT, P>,
+  CT extends string = string
 > extends Component<P, S> {
   static styles = styles;
 
   ComponentDecorator = ComponentDecorator<LT, SLT, P>;
 
-  Layout = BaseNoiz_v4Layout<LT, P>;
+  Layout = Layout<LT, P>;
 
-  Style = BaseNoiz_v4StyledLayout<SLT, P>;
+  Style = Style<SLT, P>;
 
   layouts: L[] = [];
 
@@ -223,10 +151,31 @@ export class BaseNoiz_v4<
     return this.StyledHtml;
   }
 
+  Child = Child;
+  children: Child<CT, LT>[] = [];
+
+  chooseChild() {
+    let Style: StyledGComponent<P> = this.state.style;
+    let El: () => JSX.Element = () => <div>ciao</div>;
+    this.children.forEach(child => {
+      // TODO #34 @giacomogagliano chooseChild ts
+      // capire come fare per permettere a ts di sapere
+      // quali saranno i nomi dei child che ricevera. Nel
+      // caso del layout e style usiamo un membro che può
+      // essere un unione di valori, in questo caso dobbiamo
+      // usare un membro per child di tipo boolean, che deve
+      // essere aggiunto alla lista delle props
+      // @ts-expect-error
+      if (this.props[child.name] === true)
+        // @ts-expect-error
+        El = () => <Style>{child.JsxPath}</Style>;
+    });
+    return El;
+  }
+
   render(): ReactNode {
     let Layout: GComponent<P> = this.state.layout;
     let Style = this.state.style;
-
     Layout = Style;
     return (
       <Layout {...this.props}>
@@ -234,9 +183,11 @@ export class BaseNoiz_v4<
       </Layout>
     );
   }
+
   componentDidMount(): void {
     this.chooseLayout();
   }
+
   componentDidUpdate(
     _: Readonly<P>,
     prevState: Readonly<S>,
@@ -245,36 +196,35 @@ export class BaseNoiz_v4<
     if (this.layouts.length === 0) return;
     if (this.styledlayouts.length === 0) return;
     const cond = prevState.layout !== this.state.layout;
-
     cond && this.chooseStyle();
   }
 }
 
 declare global {
-  // layout
-  var BaseNoizLayout: typeof BaseNoiz_v4Layout;
-  type BaseNoizLayout<L, P> = BaseNoiz_v4Layout<L, P>;
-  // styles
-  var BaseNoizStyledLayout: typeof BaseNoiz_v4StyledLayout;
-  type BaseNoizStyledLayout<S, P> =
-    BaseNoiz_v4StyledLayout<S, P>;
-  // class
-  var BaseNoiz: typeof BaseNoiz_v4;
-  type BaseNoiz<
-    LT extends string,
-    SLT extends string,
-    P extends DefaultProps<LT, SLT>,
-    S extends BaseNoiz_v4State<P>,
-    L extends BaseNoiz_v4Layout<LT, P> = BaseNoiz_v4Layout<
-      LT,
-      P
-    >,
-    SL extends BaseNoiz_v4StyledLayout<
-      SLT,
-      P
-    > = BaseNoiz_v4StyledLayout<SLT, P>
-  > = BaseNoiz_v4<LT, SLT, P, S, L, SL>;
-  // props
+  ////// LAYOUT
+  var BaseNoizLayout: typeof Layout;
+  type BaseNoizLayout<L, P> = Layout<L, P>;
+  ////// STYLE
+  var BaseNoizStyledLayout: typeof Style;
+  type BaseNoizStyledLayout<S, P> = Style<S, P>;
+  ////// PROPS
+  /**
+   * This class is meant to be an help with creating
+   * arguments for components. It represents the shape of
+   * the props that the component will receive but at the
+   * same time it is class which generates objects suite to
+   * be passed as spread operators to components like this:
+   * ```ts
+   * class ComponentProps extends BaseNoizPros {}
+   * const builtProps = new ComponentProps()
+   * props.name = "name"
+   * ... later on in the component
+   * {
+   * ...
+   * return <Component {...builtProps} />
+   * }
+   * ```
+   */
   var BaseNoizProps: typeof BaseNoiz_v4Props;
   /**
    * Usage:
@@ -330,19 +280,151 @@ declare global {
    * ```
    */
   type BaseNoizProps<LT, SLT> = BaseNoiz_v4Props<LT, SLT>;
-  // state
+  ////// STATE
+  /**
+   * This class contains 2 members:
+   * - layout: it represents the layout which is rendered
+   * - style: representse the style to be applied to the
+   *   chosen layout.
+   *   it shall be extended when creating a new class in the
+   *   Noiz protocol.
+   * Usage:
+   * ```tsx
+   * // earlier we defined the props and we pass it as generic
+   * // to the State class
+   * class ComponenState extends BaseNoizState<ComponentProps> {}
+   * ```
+   */
   var BaseNoizState: typeof BaseNoiz_v4State;
   type BaseNoizState<P> = BaseNoiz_v4State<P>;
+  ////// CLASS
+  /**
+   * BaseNoiz class is meant to gather all the common
+   * actions which are done on a class.
+   * The concept is base on a class being able to render
+   * several layouts which can be styled with several styles.
+   * In order to achieve this the class has 2 built in
+   * classes: `Layout` and `Style`, with which we create
+   * instances of layouts and styles that we place in the
+   * corresponding arrays:
+   * - layouts
+   * - styledlayouts
+   *
+   * The class performs a check against the props when the
+   * component is built and sets the layout in the state.
+   * In the `componentShouldUpdate` we perform a check
+   * agains changements happened on the layout and we run
+   * the `chooseStyle` method.
+   * Here under a minimal working code to use this class.
+   * Usage:
+   * ```tsx
+   * enum layouts {
+   *   main = "main",
+   *   test = "test",
+   * }
+   * type layoutTypes = keyof typeof layouts;
+   * type test = typeof layouts;
+   *
+   * enum styles {
+   *   normal = "normal",
+   *   redback = "redback",
+   * }
+   * type styleTypes = keyof typeof styles;
+   *
+   * export interface BaseTestProps
+   *   extends BaseNoizProps<layoutTypes, styleTypes> {}
+   * export class BaseTestProps extends BaseNoizProps<
+   *   layoutTypes,
+   *   styleTypes
+   * > {}
+   *
+   * export interface BaseTestState
+   *   extends BaseNoizState<BaseTestProps> {}
+   * export class BaseTestState extends BaseNoizState<BaseTestProps> {}
+   *
+   * export interface BaseTest
+   *   extends BaseNoiz<
+   *     layoutTypes,
+   *     styleTypes,
+   *     BaseTestProps,
+   *     BaseTestState
+   *   > {}
+   * export class BaseTest extends BaseNoiz<
+   *   layoutTypes,
+   *   styleTypes,
+   *   BaseTestProps,
+   *   BaseTestState
+   * > {
+   *   main = (p: BaseTestProps) => (
+   *     <div className={p.className}>test it</div>
+   *   );
+   *
+   *   test = (p: BaseTestProps) => (
+   *     <p className={p.className}>test</p>
+   *   );
+   *
+   *   layouts = [
+   *     new this.Layout({
+   *       name: layouts.main,
+   *       component: this.main,
+   *     }),
+   *     new this.Layout({
+   *       name: layouts.test,
+   *       component: this.test,
+   *     }),
+   *   ];
+   *
+   *   bold = styled(this.Html)`
+   *     font-weight: bold;
+   *   `;
+   *
+   *   redBack = styled(this.Html)`
+   *     background-color: red;
+   *   `;
+   *
+   *   styledlayouts = [
+   *     new this.Style({
+   *       name: styles.normal,
+   *       style: this.bold,
+   *     }),
+   *     new this.Style({
+   *       name: styles.redback,
+   *       style: this.redBack,
+   *     }),
+   *   ];
+   *
+   *   constructor(p: BaseTestProps) {
+   *     super(p);
+   *     this.state = {
+   *       layout: p => (
+   *         <div className={p.className}>bloom</div>
+   *       ),
+   *       style: styled(this.main)``,
+   *     };
+   *   }
+   * }
+   * ```
+   */
+  var BaseNoiz: typeof BaseNoiz_v4;
+  type BaseNoiz<
+    LT extends string,
+    SLT extends string,
+    P extends DefaultProps<LT, SLT>,
+    S extends BaseNoiz_v4State<P>,
+    L extends Layout<LT, P> = Layout<LT, P>,
+    SL extends Style<SLT, P> = Style<SLT, P>,
+    CT extends string = string
+  > = BaseNoiz_v4<LT, SLT, P, S, L, SL>;
   //
-  type BaseProps<T> = BaseProps_v4<T>;
-  type DefaultProps<LT, SLT> = DefaultProps_v4<LT, SLT>;
+  type BaseProps<T> = BaseProps_v1<T>;
+  type DefaultProps<LT, SLT> = DefaultProps_v1<LT, SLT>;
   //
-  type GComponent<T> = GComponent_v4<T>;
-  type StyledGComponent<T> = StyledGComponent_v4<T>;
+  type GComponent<T> = GComponent_v1<T>;
+  type StyledGComponent<T> = StyledGComponent_v1<T>;
 }
 
 globalThis.BaseNoiz = BaseNoiz_v4;
 globalThis.BaseNoizProps = BaseNoiz_v4Props;
 globalThis.BaseNoizState = BaseNoiz_v4State;
-globalThis.BaseNoizLayout = BaseNoiz_v4Layout;
-globalThis.BaseNoizStyledLayout = BaseNoiz_v4StyledLayout;
+globalThis.BaseNoizLayout = Layout;
+globalThis.BaseNoizStyledLayout = Style;

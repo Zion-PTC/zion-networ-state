@@ -1,64 +1,93 @@
 import React from "react";
 import styled from "styled-components";
-
-interface NuPropsType {
-  name: string;
+enum layouts {
+  main = "main",
+  test = "test",
 }
+type layoutTypes = keyof typeof layouts;
+type test = typeof layouts;
 
-interface NuProps
-  extends BuildProps<NuPropsType>,
-    BaseNoizProps {}
+enum styles {
+  normal = "normal",
+  redback = "redback",
+}
+type styleTypes = keyof typeof styles;
 
-class NuProps extends BaseNoizProps {
-  constructor(props: BuildProps<NuPropsType>) {
-    super(props);
-    this.name = props.name;
-    this.datas = props.datas;
+export interface BaseTestProps
+  extends BaseNoizProps<layoutTypes, styleTypes> {}
+export class BaseTestProps extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+
+export interface BaseTestState
+  extends BaseNoizState<BaseTestProps> {}
+export class BaseTestState extends BaseNoizState<BaseTestProps> {}
+
+export interface BaseTest
+  extends BaseNoiz<
+    layoutTypes,
+    styleTypes,
+    BaseTestProps,
+    BaseTestState
+  > {}
+export class BaseTest extends BaseNoiz<
+  layoutTypes,
+  styleTypes,
+  BaseTestProps,
+  BaseTestState
+> {
+  main = (p: BaseTestProps) => (
+    <div className={p.className}>test it</div>
+  );
+
+  test = (p: BaseTestProps) => (
+    <p className={p.className}>test</p>
+  );
+
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+    new this.Layout({
+      name: layouts.test,
+      component: this.test,
+    }),
+  ];
+
+  bold = styled(this.Html)`
+    font-weight: bold;
+  `;
+
+  redBack = styled(this.Html)`
+    background-color: red;
+  `;
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.normal,
+      style: this.bold,
+    }),
+    new this.Style({
+      name: styles.redback,
+      style: this.redBack,
+    }),
+  ];
+
+  constructor(p: BaseTestProps) {
+    super(p);
+    this.state = {
+      layout: p => (
+        <div className={p.className}>bloom</div>
+      ),
+      style: styled(this.main)``,
+    };
   }
 }
-
-class Nu extends BaseNoiz<BuildProps<{ name: string }>> {
-  Html = (props: BuildProps<{ name: string }>) => {
-    return <h1>{props.children}</h1>;
-  };
-  StyledHtml = styled(this.Html)``;
-  render() {
-    let Element = this.makeElement();
-    return (
-      <Element name="">
-        <li>odo</li>
-        <p>{this.props.children}</p>
-      </Element>
-    );
-  }
-}
-
-const child1 = new NuProps({
-  name: "1",
-  children: <div>bullshit</div>,
-});
-
-const child2 = new NuProps({
-  name: "2",
-  children: ["ciao2", "asdas"],
-});
-
-const child3 = new NuProps({
-  name: "3",
-  children: { name: "strio" }.name,
-});
-
-const child4 = new NuProps({
-  name: "3",
-  children: "ciao4",
-});
-
-const props = new NuProps({
-  name: "ciao",
-  multiply: true,
-  datas: [child1, child2, child3, child4],
-});
 
 export default function index() {
-  return <Nu {...props}>cioooo</Nu>;
+  return (
+    <BaseTest layout="test" style="redback"></BaseTest>
+  );
 }

@@ -3,6 +3,7 @@
 /* eslint-disable */
 export { Membership__factory } from "./Membership__factory";
 export { ProvaMaster__factory } from "./ProvaMaster__factory";
+export { SimpleStorage__factory } from "./SimpleStorage__factory";
 export { USDC__factory } from "./USDC__factory";
 export { ZionDao__factory } from "./ZionDao__factory";
 export { ZionGovernor__factory } from "./ZionGovernor__factory";
