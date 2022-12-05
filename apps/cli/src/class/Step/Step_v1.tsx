@@ -145,11 +145,11 @@ export const Step_v1 = (config: StepConfiguration_v1) =>
         // deve essere `dimmed` (grigio), il secondo
         // colorato acceso, e il terzo bianco.
         return (
-          <Text>
-            {cursor}
-            {icon}
-            {props.children}
-          </Text>
+          <>
+            <Text color="dimmed">{cursor}</Text>
+            <Text color="red">{icon}</Text>
+            <Text color="white">{props.children}</Text>
+          </>
         );
       };
 
