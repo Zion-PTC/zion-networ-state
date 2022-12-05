@@ -75,6 +75,7 @@ export interface Profile_v2
   Card: ComponentClass<CardProps, CardState>;
 }
 ///TODO #37 @giacomogagliano, icons da problemi qui sotto
+
 export class Profile_v2 extends BaseNoiz<
   layoutTypes,
   styleTypes,
