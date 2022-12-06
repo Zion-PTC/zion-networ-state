@@ -117,6 +117,10 @@ export class Image_v2 extends BaseNoiz<
   defaultStyle = styled(this.Html)`
     z-index: 1;
     overflow: hidden;
+    place-content: center;
+    place-items: center;
+    justify-content: center;
+    justify-items: center;
     grid-area: ${props => props.gridArea};
     background-color: ${props =>
       props.backgroundColor
@@ -134,6 +138,7 @@ export class Image_v2 extends BaseNoiz<
     grid-template-rows: 100%;
     #image {
       border-image: none;
+      place-self: center;
       display: ${() =>
         !this.state.isLoading ? "block" : "none"};
       max-width: ${props => props.image?.maxWidth};
