@@ -51,12 +51,26 @@ export class Badge_v2 extends BaseNoiz<
   Badge_v2Props,
   Badge_v2State
 > {
+  static defaultProps: Badge_v2Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    size: "big",
+  };
+
   width = 20;
   height = 6;
   ratio = this.width / this.height;
   smallSize = this.calculateSize(this.ratio, 3);
   midSize = this.calculateSize(this.ratio, 4);
   bigSize = this.calculateSize(this.ratio, 5);
+
+  constructor(props: Badge_v2Props) {
+    super(props);
+    const state = new Badge_v2State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
 
   defaultSize = css`
     width: 100%;
@@ -84,7 +98,7 @@ export class Badge_v2 extends BaseNoiz<
       <div className={props.className}>
         <div id="logo">
           <div id="badge-circle">
-            <Icon></Icon>
+            <Icon logoZion></Icon>
           </div>
         </div>
         <div id="badge-infos">

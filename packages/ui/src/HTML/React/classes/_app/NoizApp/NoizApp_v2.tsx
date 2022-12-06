@@ -166,7 +166,7 @@ export class NoizApp_v2 extends BaseNoiz<
     const Layout = this.standard1;
     return (
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
+        <GlobalStyle theme={this.state.theme} />
         <Layout>
           <header>
             I am the header
