@@ -13,8 +13,20 @@ export type {
 } from "./Mixin";
 export * as Zion from "./Zion/index";
 export * as DataStructures from "./DataStructures";
-export { Base, BaseCtor, Base_v2 } from "./Class";
-export type { Base_v2Props } from "./Class";
+export {
+  Base,
+  BaseCtor,
+  Base_v2,
+  ProcessingNoiz,
+} from "./Class";
+export type {
+  Base_v2Props,
+  processor,
+  plugin,
+  functionality,
+  fromScratch,
+  decoratePlugin,
+} from "./Class";
 export {
   Array,
   ArrayCtor,
