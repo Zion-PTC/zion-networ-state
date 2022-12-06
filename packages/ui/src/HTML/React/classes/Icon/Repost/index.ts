@@ -1,6 +1,4 @@
-export {
-  Repost_v1 as Repost,
-} from './Repost_v1';
+export { Repost_v2 as Repost } from "./Repost_v1";
 
 export type {
   Repost_v1Data as RepostData,
@@ -8,5 +6,4 @@ export type {
   Repost_v1Props as RepostProps,
   Repost_v1ClassProps as RepostClassProps,
   Repost_v1AsChild as RepostAsChild,
-} from './Repost_v1';
-
+} from "./Repost_v1";

@@ -1,6 +1,4 @@
-export {
-  FilterAlt_v1 as FilterAlt,
-} from './FilterAlt_v1';
+export { FilterAlt_v2 as FilterAlt } from "./FilterAlt_v1";
 
 export type {
   FilterAlt_v1Data as FilterAltData,
@@ -8,5 +6,4 @@ export type {
   FilterAlt_v1Props as FilterAltProps,
   FilterAlt_v1ClassProps as FilterAltClassProps,
   FilterAlt_v1AsChild as FilterAltAsChild,
-} from './FilterAlt_v1';
-
+} from "./FilterAlt_v1";
