@@ -183,6 +183,11 @@ export class Icon_v3 extends BaseNoiz<
   ];
 
   defaultStyle = styled(this.Html)`
+    display: grid;
+    place-content: center;
+    place-items: center;
+    justify-items: center;
+    justify-content: center;
     // #10 aggiungere qui
     path {
       fill: ${props =>

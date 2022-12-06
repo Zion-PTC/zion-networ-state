@@ -1,6 +1,4 @@
-export {
-  ScrollToTop_v1 as ScrollToTop,
-} from './ScrollToTop_v1';
+export { ScrollToTop_v2 as ScrollToTop } from "./ScrollToTop_v1";
 
 export type {
   ScrollToTop_v1Data as ScrollToTopData,
@@ -8,5 +6,4 @@ export type {
   ScrollToTop_v1Props as ScrollToTopProps,
   ScrollToTop_v1ClassProps as ScrollToTopClassProps,
   ScrollToTop_v1AsChild as ScrollToTopAsChild,
-} from './ScrollToTop_v1';
-
+} from "./ScrollToTop_v1";

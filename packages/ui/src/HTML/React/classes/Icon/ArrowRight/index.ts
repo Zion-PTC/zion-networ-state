@@ -1,6 +1,4 @@
-export {
-  ArrowRight_v1 as ArrowRight,
-} from './ArrowRight_v1';
+export { ArrowRight_v2 as ArrowRight } from "./ArrowRight_v1";
 
 export type {
   ArrowRight_v1Data as ArrowRightData,
@@ -8,5 +6,4 @@ export type {
   ArrowRight_v1Props as ArrowRightProps,
   ArrowRight_v1ClassProps as ArrowRightClassProps,
   ArrowRight_v1AsChild as ArrowRightAsChild,
-} from './ArrowRight_v1';
-
+} from "./ArrowRight_v1";

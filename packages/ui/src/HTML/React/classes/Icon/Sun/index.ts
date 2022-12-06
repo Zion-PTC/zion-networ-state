@@ -1,6 +1,4 @@
-export {
-  Sun_v1 as Sun,
-} from './Sun_v1';
+export { Sun_v2 as Sun } from "./Sun_v1";
 
 export type {
   Sun_v1Data as SunData,
@@ -8,5 +6,4 @@ export type {
   Sun_v1Props as SunProps,
   Sun_v1ClassProps as SunClassProps,
   Sun_v1AsChild as SunAsChild,
-} from './Sun_v1';
-
+} from "./Sun_v1";

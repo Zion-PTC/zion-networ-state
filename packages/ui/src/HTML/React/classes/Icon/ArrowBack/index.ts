@@ -1,6 +1,4 @@
-export {
-  ArrowBack_v1 as ArrowBack,
-} from './ArrowBack_v1';
+export { ArrowBack_v2 as ArrowBack } from "./ArrowBack_v1";
 
 export type {
   ArrowBack_v1Data as ArrowBackData,
@@ -8,5 +6,4 @@ export type {
   ArrowBack_v1Props as ArrowBackProps,
   ArrowBack_v1ClassProps as ArrowBackClassProps,
   ArrowBack_v1AsChild as ArrowBackAsChild,
-} from './ArrowBack_v1';
-
+} from "./ArrowBack_v1";
