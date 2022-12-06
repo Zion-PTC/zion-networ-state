@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+///TODO #38 questa classe non riesco a capire bene come farla
 
 /////// TYPES
 export type Loading_v1Data = {};
