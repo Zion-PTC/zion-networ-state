@@ -19,6 +19,7 @@ import {
 import { ethers } from "ethers";
 import {
   detect,
+  getSignerAddress,
   handleAccountsChangedCallbackFactory,
   handleAccountsChangedFactory,
   handleNetworkChange,
@@ -27,6 +28,7 @@ import {
   requestAccounts,
 } from "../../../lib/hooks";
 import { WindowEthRequired } from "../../../lib/hooks/useEthereum/useEthereum_v2";
+import { dataGuard } from "@zionstate/utils";
 
 ////////ETH
 
@@ -138,11 +140,14 @@ export class NoizApp_v2 extends BaseNoiz<
     state.buttonMess = NoizApp_v2.BUTTON_MESSAGE1;
     state.signerAddress = null;
     state.contract = null;
-    state.contractAddress = null;
-    state.contractFactory = null;
+    state.contractAddress =
+      "0x3DEABA8Ab7192FEa543539C4A717b94022862d34";
+    state.contractFactory = "ERC1155IndividualURI";
     state.provider = null;
     state.metamask = null;
     state.evm = null;
+    state.handleClick = () => console.log("anvedi");
+
     this.state = state;
   }
   main = (props: { Component: FC }) => {
@@ -226,7 +231,7 @@ export class NoizApp_v2 extends BaseNoiz<
       width: 100%;
       overflow: auto;
       display: grid;
-      background-color: ${props =>
+      background-color: ${() =>
         this.state.theme.backgroundColor};
     }
     footer {
@@ -266,35 +271,72 @@ export class NoizApp_v2 extends BaseNoiz<
       : this.setPrefersColorScheme("dark");
   };
 
-  setMetamask = (metamask: MetaMaskEthereumProvider) =>
+  setMetamask = (metamask: MetaMaskEthereumProvider) => {
     this.setState({ metamask });
+    return this;
+  };
 
-  setIsConnected = (isConnected: boolean) =>
+  setIsConnected = (isConnected: boolean) => {
     this.setState({ isConnected });
+    return this;
+  };
 
-  setIsMetamask = (isMetamask: boolean) =>
+  setIsMetamask = (isMetamask: boolean) => {
     this.setState({ isMetamask });
+    return this;
+  };
 
-  setButtonMess = (buttonMess: string) =>
+  setButtonMess = (buttonMess: string) => {
     this.setState({ buttonMess });
+    return this;
+  };
 
-  setEvm = (evm: EVMweb) => this.setState({ evm });
+  setEvm = (evm: EVMweb) => {
+    this.setState({ evm });
+    return this;
+  };
 
   setProvider = (
     provider: ethers.providers.Web3Provider
-  ) => this.setState({ provider });
+  ) => {
+    this.setState({ provider });
+    return this;
+  };
 
-  setHandleClick = (handleClick: () => void) =>
+  setHandleClick = (handleClick: () => void) => {
     this.setState({ handleClick });
+    return this;
+  };
 
-  setContract = (contract: ethers.Contract) =>
+  setContract = (contract: ethers.Contract) => {
     this.setState({ contract });
+    return this;
+  };
+
+  setSignerAddress = (signerAddress: string) => {
+    this.setState({ signerAddress });
+    return this;
+  };
 
   EVMweb = EVMweb;
 
-  listAccounts = () => {
+  handleConnection = () => {
+    const isConnected = this.state.isConnected;
     const metamask = this.state.metamask;
-    if (!metamask) return;
+    const connectMess = NoizApp_v2.CONNECT_METAMASK;
+    const setButtonMess = this.setButtonMess;
+    const evm = this.state.evm;
+    const setSignerAddress = this.setSignerAddress;
+    if (!isConnected && metamask && connectMess)
+      setButtonMess(connectMess);
+    if (isConnected && evm)
+      getSignerAddress(evm.signer, [
+        setButtonMess,
+        setSignerAddress,
+      ]);
+  };
+
+  listAccounts = (metamask: MetaMaskEthereumProvider) => {
     const provider = this.state.provider;
     const setIsConnected = this.setIsConnected;
     const setButtonMess = this.setButtonMess;
@@ -328,7 +370,7 @@ export class NoizApp_v2 extends BaseNoiz<
     const isMetamask = this.state.metamask;
     const contract = this.state.contractFactory;
     if (!isMetamask) return;
-    if (!contract) throw new Error("no contract addr");
+    if (!contract) throw new Error("no contract factory");
     const evm = new this.EVMweb({
       window: window as WindowEthRequired,
     });
@@ -336,66 +378,102 @@ export class NoizApp_v2 extends BaseNoiz<
     const factory = evm.contractFactories[contract];
     const provider = evm.provider;
     provider.on("network", this.handleNetworkChange);
-    this.setEvm(evm);
-    this.setProvider(provider);
-    this.setHandleClick(() => requestAccounts(provider));
-    this.setContract(factory.attach(contractAddress));
+    this.setEvm(evm)
+      .setProvider(provider)
+      .setHandleClick(requestAccounts(provider))
+      .setContract(factory.attach(contractAddress));
   };
 
   handleNetworkChange = handleNetworkChange;
 
-  detectEth = () => {
-    let data: useEthereumData_v2 = {
-      connectMetamaskMessage: NoizApp_v2.CONNECT_METAMASK,
-      contractAddress: "",
-      metamaskNotInstalled:
-        NoizApp_v2.METAMASK_NOT_INSTALLED,
-    };
-    detect(window, detectEthereumProvider)
-      .then(metamask => {
-        this.setMetamask(metamask);
-        this.setIsMetamask(true);
-      })
-      .catch(() =>
-        this.setButtonMess(data.metamaskNotInstalled)
-      );
+  handleMetamaskDetected = (metamask: any) => {
+    this.setMetamask(metamask);
+    this.setIsMetamask(true);
   };
+
+  handleMetamaskNotDetected = () =>
+    this.setButtonMess(NoizApp_v2.METAMASK_NOT_INSTALLED);
+
+  detectEth = () => {
+    const metamaskDetected = this.handleMetamaskDetected;
+    detect(window, detectEthereumProvider)
+      .then(metamaskDetected)
+      .catch(this.handleMetamaskNotDetected);
+  };
+
+  hasUpdated<T>(prev: T, curr: T) {
+    return prev !== curr;
+  }
+
+  UpdateHandler = class<T> {
+    current?: T;
+    previous?: T;
+    has(current: T) {
+      this.current = current;
+      return this;
+    }
+    changedFrom(previous: T) {
+      this.previous = previous;
+      if (!this.current) return false;
+      if (!this.previous) return true;
+      return this.previous !== this.current;
+    }
+  };
+  updateHandler = new this.UpdateHandler();
 
   didUpdate = (
     _: Readonly<NoizApp_v2Props>,
     prevState: Readonly<NoizApp_v2State>,
     __?: any
   ) => {
+    const hasUpdated = this.hasUpdated;
+    const initizalizeWeb3 = this.initizalizeWeb3;
+    const listAccounts = this.listAccounts;
+    const updateHandler = this.updateHandler;
+    const has = this.updateHandler.has.bind(updateHandler);
+    const themes = this.themes;
+    const currMtmsk = this.state.metamask;
+    const prevMtmsk = prevState.metamask;
     const currScheme = this.state.prefersColorScheme;
     const prevScheme = prevState.prefersColorScheme;
-    const currMetamask = this.state.isMetamask;
-    const prevMetamask = prevState.isMetamask;
-    const themes = this.themes;
-    // CONDITIONS
-    const prefsScheme_c = currScheme !== prevScheme;
-    const isMetamask_c = currMetamask !== prevMetamask;
+    const currIsConn = this.state.isConnected;
+    const prevIsConn = prevState.isConnected;
+    const currPrvdr = this.state.provider;
+    const prevPrvdr = prevState.provider;
+    // statechanges
+    const prefScheme = hasUpdated(prevScheme, currScheme);
+    const metamask = hasUpdated(prevMtmsk, currMtmsk);
+    const provider = hasUpdated(prevPrvdr, currPrvdr);
+    const isConn = has(currIsConn).changedFrom(prevIsConn);
     // EXECUTIONS
-    prefsScheme_c && this.setTheme(themes[currScheme]);
-    isMetamask_c && console.log("metamask changed");
+    prefScheme && this.setTheme(themes[currScheme]);
+    metamask && initizalizeWeb3();
+    provider && listAccounts(dataGuard(currMtmsk, ""));
+    isConn && this.handleConnection();
+  };
+
+  isDarkColorScheme = () =>
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .matches;
+
+  handleColorSchemeChange = (
+    event: MediaQueryListEvent
+  ) => {
+    const newColorScheme = event.matches
+      ? themes.dark
+      : themes.light;
+    this.setPrefersColorScheme(newColorScheme);
   };
 
   didMount() {
+    const isDark = this.isDarkColorScheme();
+    const handleClrScheme = this.handleColorSchemeChange;
     this.detectEth();
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-    ) {
-      this.setPrefersColorScheme("dark");
-    }
+    if (isDark) this.setPrefersColorScheme(themes.dark);
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", event => {
-        const newColorScheme = event.matches
-          ? "dark"
-          : "light";
-        this.setPrefersColorScheme(newColorScheme);
-      });
+      .addEventListener("change", handleClrScheme);
   }
   // debugState = true;
   // debugUpdate = true;

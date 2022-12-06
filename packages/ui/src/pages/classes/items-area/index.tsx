@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ItemsArea } from "../../../HTML/React/classes";
 
-const Div = styled.div<{ color_number: number }>`
-  background-color: ${props => {
-    return `hsl(${props.color_number},100%,50%)`;
-  }};
-`;
+const date = new Date();
+const secs = date.getSeconds();
+
+const Div = styled.div.attrs<{ color_number: number }>(
+  props => ({
+    style: {
+      backgroundColor: `hsl(${props.color_number},50%,50%)`,
+    },
+  })
+)<{ color_number: number }>``;
 
 export default function index() {
-  const array10 = new Array(150).fill("");
+  const array10 = new Array(300).fill("");
+
   return (
     <ItemsArea
       avatarSize={0}
