@@ -12,7 +12,11 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     height: 100vh;
     background: ${props => props.theme.body};
-    color: ${props => props.theme.textColor};
+    color: ${props => {
+      console.log(props);
+
+      return props.theme.textColor;
+    }};
     /* transition: .3s ease; */
     box-sizing: border-box;
     position:fixed;
@@ -35,5 +39,8 @@ export const GlobalStyle = createGlobalStyle`
   main{
     width: 100%;
     height:100%;
+  }
+  a {
+    color : ${props => props.theme.textColor};
   }
 `;
