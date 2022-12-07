@@ -47,6 +47,22 @@ export class Image_v2 extends BaseNoiz<
   Image_v2Props,
   Image_v2State
 > {
+  static defaultProps: Image_v2Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    src: "",
+  };
+
+  constructor(props: Image_v2Props) {
+    super(props);
+    let state = new Image_v2State();
+    state.isLoading = true;
+    state.layout = () => <></>;
+    state.src = "";
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
+
   handleIsLoading = (isLoading: boolean) => {
     this.setState({ isLoading });
   };

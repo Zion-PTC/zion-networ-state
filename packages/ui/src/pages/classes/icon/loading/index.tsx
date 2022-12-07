@@ -1,6 +1,9 @@
 import React from "react";
-import { Icon } from "../../../../HTML/React/classes";
+import {
+  Icon,
+  Loading,
+} from "../../../../HTML/React/classes";
 
 export default function index() {
-  return <Icon loading datas={[]}></Icon>;
+  return <Loading display></Loading>;
 }

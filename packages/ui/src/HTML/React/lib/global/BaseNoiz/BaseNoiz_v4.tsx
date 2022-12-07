@@ -102,6 +102,7 @@ export class BaseNoiz_v4<
 
   constructor(props: P) {
     super(props);
+    this.debugLog("ctor", this.styledlayouts[0]);
   }
 
   setLayout(Layout: GComponent<P>) {
@@ -146,8 +147,11 @@ export class BaseNoiz_v4<
    * will be rendered
    */
   chooseStyle(): StyledGComponent<P> {
+    const slLength = this.styledlayouts.length;
     const filter = this.filterStyle;
-    this.styledlayouts.forEach(filter.bind(this));
+    this.debugLog("chooseStyle", this.styledlayouts);
+    if (!slLength) this.setStyle(this.#StyledHtml);
+    else this.styledlayouts.forEach(filter.bind(this));
     return this.StyledHtml;
   }
 
@@ -187,12 +191,18 @@ export class BaseNoiz_v4<
   didMount(): void {}
 
   componentDidMount(): void {
+    this.debugLog("componentDidMount", this.styledlayouts);
+
     this.chooseLayout();
     this.didMount();
   }
 
+  debug = false;
   debugState = false;
   debugUpdate = false;
+  debugLog = (...args: any[]) => {
+    this.debug && console.log(...args);
+  };
 
   didUpdate = (
     prevProps: Readonly<P>,
@@ -215,13 +225,17 @@ export class BaseNoiz_v4<
   ): void {
     this.debugState &&
       console.log("current state", this.state);
+    this.debugLog(
+      "componentDidUpdate",
+      this.styledlayouts
+    );
     if (this.layouts.length === 0) return;
-    if (this.styledlayouts.length === 0) return;
     const cond = prevState.layout !== this.state.layout;
     cond && this.chooseStyle();
     ////// NON CANCELLLARE
     this.didUpdate(prevProps, prevState, snapshot);
   }
+  lob = this.debugLog("reload", this.styledlayouts[0]);
 }
 
 declare global {

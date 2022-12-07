@@ -12,11 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100vw;
     height: 100vh;
     background: ${props => props.theme.body};
-    color: ${props => {
-      console.log(props);
-
-      return props.theme.textColor;
-    }};
+    color: ${props => props.theme.textColor};
     /* transition: .3s ease; */
     box-sizing: border-box;
     position:fixed;

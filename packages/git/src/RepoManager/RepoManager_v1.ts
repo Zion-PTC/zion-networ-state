@@ -1,6 +1,8 @@
-import { Repo } from "./Repo";
+import { Repo } from "../Repo";
 
-export interface RepoManager {
+export interface IRepoManager_v1 {}
+
+export interface RepoManager_v1 {
   createPackage(): void;
   deletePackage(): void;
   createApp(): void;
@@ -15,7 +17,15 @@ export interface RepoManager {
   createImage(): void;
   setTestResult(test: string, result: boolean): void;
   // repo mgmt
-  addFolder(type: "commit" | "not-commit"): RepoManager;
+  addFolder(type: "commit" | "not-commit"): this;
   // npm
   checkDeps(npmpkg: string): string[];
 }
+
+export class RepoManager_v1 implements IRepoManager_v1 {}
+
+export type RepoManager_v1Ctor = {
+  new (name: string): RepoManager_v1;
+};
+
+export const RepoManager_v1Ctor: RepoManager_v1Ctor = RepoManager_v1;

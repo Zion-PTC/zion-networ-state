@@ -443,7 +443,7 @@ export class Card_v2 extends BaseNoiz<
       >
         <div id="card">
           <Head clientHeight={this.state.headHeight} />
-          {/* <Image src={this.state.src} /> */}
+          <Image src={this.state.src} />
           <StyledInfos
             bid_link={props.bid_link}
             id={props.item_id}

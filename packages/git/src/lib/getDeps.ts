@@ -1,8 +1,5 @@
-import { js } from "@zionstate/utils";
+import { ZionError } from "@zionstate/utils";
 import { Repo } from "../Repo";
-
-const { ZionError: ze } = js;
-const { ZionError } = ze;
 
 const NAME = getDeps.name;
 const NOPKGJSONERROR = "no pkg.json in repo";

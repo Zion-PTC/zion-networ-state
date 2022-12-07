@@ -41,8 +41,8 @@ const chart = maker("chart", "notter ⛔️");
 const contract = maker("contract", "notter ⛔️");
 const form = maker("form", "default-noiz");
 const icon = maker("icon", "icons-not-showing");
-const image = maker("image", "notter ⛔️");
-const navbar = maker("navbar", "notter ⛔️");
+// const image = maker("image", "working ✅");
+// const navbar = maker("navbar", "notter ⛔️");
 const pages = maker("pages", "index-??");
 
 export function getStaticProps() {
@@ -57,8 +57,8 @@ export function getStaticProps() {
     .map(contract)
     .map(form)
     .map(icon)
-    .map(image)
-    .map(navbar)
+    // .map(image)
+    // .map(navbar)
     .map(pages);
   return { props: { data: JSON.stringify(neww) } };
 }

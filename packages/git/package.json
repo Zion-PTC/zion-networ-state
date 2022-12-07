@@ -21,21 +21,21 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@octokit/rest": "^18.12.0",
+    "@octokit/rest": "^19.0.5",
     "@zionstate/database": "0.0.1",
     "@zionstate/test": "0.0.1",
     "@zionstate/utils": "0.0.1",
     "@zionstate/zionbase": "0.0.1",
     "dotenv": "^16.0.2",
-    "simple-git": "^3.10.0"
+    "simple-git": "^3.15.1"
   },
   "devDependencies": {
-    "@octokit/rest": "^18.12.0",
+    "@octokit/rest": "^19.0.5",
     "@zionstate/database": "0.0.1",
     "@zionstate/test": "0.0.1",
     "@zionstate/utils": "0.0.1",
     "@zionstate/zionbase": "0.0.1",
     "dotenv": "^16.0.2",
-    "simple-git": "^3.10.0"
+    "simple-git": "^3.15.1"
   }
 }

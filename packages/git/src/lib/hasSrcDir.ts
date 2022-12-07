@@ -1,10 +1,8 @@
 import { FS } from "@zionstate/database";
-import { js } from "@zionstate/utils";
-import { Repo } from "../Repo.js";
+import { ZionError } from "@zionstate/utils";
+import { Repo } from "../Repo";
 
 const { system } = FS;
-const { ZionError: ze } = js;
-const { ZionError } = ze;
 const { joinPaths, existsSync } = system;
 
 const NOTREPONORSTRING_ERROR = "not an instance of repo nor of string";

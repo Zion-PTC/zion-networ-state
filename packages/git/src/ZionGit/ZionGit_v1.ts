@@ -13,10 +13,16 @@ import { FS } from "@zionstate/database";
 // BUG also here it give the import but, but only from one entry point
 // import {} from "@zionstate/database/EVM";
 import {} from "@zionstate/utils";
-import { IZionGit } from "./Types/Git";
+import { InitResult } from "simple-git";
+import { ZionGit } from ".";
+
 const { system } = FS;
 
-export class ZionGit implements IZionGit {
+export interface IZionGit_v1 {}
+
+export interface ZionGit_v1 {}
+
+export class ZionGit_v1 implements IZionGit {
   #options: Partial<SimpleGitOptions> = {
     baseDir: process.cwd(),
     binary: "git",
@@ -118,6 +124,37 @@ export class ZionGit implements IZionGit {
   //     return (date = new Date(0));
   //   }
   // }
+}
+
+export type ZionGit_v1Ctor = {
+  new (path?: string[] | string): ZionGit_v1;
+};
+
+export const ZionGit_v1Ctor: ZionGit_v1Ctor = ZionGit_v1;
+
+export type isRepo = (
+  action?: CheckRepoActions,
+  callback?: SimpleGitTaskCallback<boolean, GitError>
+) => Promise<boolean>;
+
+export type initRepo = (
+  bare: boolean,
+  options?: TaskOptions<Options>
+) => SimpleGit & Promise<InitResult>;
+
+export type repoStatus = (
+  options?: TaskOptions<Options>,
+  callback?: SimpleGitTaskCallback<StatusResult, GitError>
+) => Promise<StatusResult>;
+
+export interface IZionGit {
+  options: Partial<SimpleGitOptions>;
+  isRepo: isRepo;
+  init: initRepo;
+  status: repoStatus;
+  hasRemote(): any;
+  // TODO add lastupdate
+  // latestUpdate(): Promise<Date | undefined>;
 }
 
 /**

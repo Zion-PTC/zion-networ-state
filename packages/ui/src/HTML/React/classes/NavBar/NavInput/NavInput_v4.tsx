@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import { P } from "../../../style";
 import { BaseNoizProps } from "../../../lib/global";
+import { Icon } from "../../Icon";
 
 enum layouts {
   main = "main",
+  text = "text",
+  icon = "icon",
+  "key-value" = "key-value",
 }
 type layoutTypes = keyof typeof layouts;
 enum styles {
-  normal = "normal",
+  defaultStyle = "defaultStyle",
 }
 type styleTypes = keyof typeof styles;
 
@@ -18,9 +22,6 @@ export interface NavInput_v4Props
   IconComponent?: () => JSX.Element;
   value?: string;
   checked?: boolean;
-  iconInput?: boolean;
-  keyValueInput?: boolean;
-  textInput?: boolean;
 }
 export class NavInput_v4Props extends BaseNoizProps<
   layoutTypes,
@@ -44,9 +45,33 @@ export class NavInput_v4 extends BaseNoiz<
   NavInput_v4Props,
   NavInput_v4State
 > {
+  static defaultProps: NavInput_v4Props = {
+    layout: layouts.text,
+    style: styles.defaultStyle,
+    inputId: "input id",
+    inputName: "input name",
+    value: "value",
+    IconComponent: () => <Icon logoZion></Icon>,
+  };
+
+  static getDerivedStateFromProps(
+    props: NavInput_v4Props,
+    state: NavInput_v4State
+  ) {
+    console.log(props, state);
+  }
+
   constructor(props: NavInput_v4Props) {
     super(props);
+    let state = new NavInput_v4State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
   }
+
+  main = (props: NavInput_v4Props) => {
+    return <h1>{props.children}blabl</h1>;
+  };
 
   KeyValue = (props: NavInput_v4Props) => {
     const {
@@ -102,13 +127,14 @@ export class NavInput_v4 extends BaseNoiz<
       inputName,
       checked,
       className,
-      // IconComponent,
+      IconComponent,
     } = props;
     const RADIO = "radio";
     // let SafeIconComponent = dataGuard(
     //   IconComponent,
     //   "no component was passed"
     // );
+    if (!IconComponent) return <>where is the icon???</>;
     return (
       <>
         <input
@@ -122,7 +148,7 @@ export class NavInput_v4 extends BaseNoiz<
           <div>
             {/* <SafeIconComponent /> */}
             {props.children}
-            {/* {IconComponent} */}
+            <IconComponent />
           </div>
           <p>{inputId.toLocaleUpperCase()}</p>
         </label>
@@ -130,21 +156,22 @@ export class NavInput_v4 extends BaseNoiz<
     );
   };
 
-  // TODO @giacomogagliano prendere spunto da questo pattern
-  chooseLayout() {
-    const props = this.props;
-    const Text = this.Text;
-    const KeyValue = this.KeyValue;
-    const Icon = this.Icon;
-    let html = styled(this.Html)``;
-    if (props.textInput) html = styled(Text)``;
-    if (props.keyValueInput) html = styled(KeyValue)``;
-    if (props.iconInput) html = styled(Icon)``;
-    return html;
-  }
-
-  render() {
-    let Element = this.chooseLayout();
-    return <Element {...this.props}></Element>;
-  }
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+    new this.Layout({
+      name: layouts.text,
+      component: this.Text,
+    }),
+    new this.Layout({
+      name: layouts.icon,
+      component: this.Icon,
+    }),
+    new this.Layout({
+      name: layouts["key-value"],
+      component: this.KeyValue,
+    }),
+  ];
 }

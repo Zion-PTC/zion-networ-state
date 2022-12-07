@@ -10,7 +10,8 @@ type layoutTypes = keyof typeof layouts;
 type test = typeof layouts;
 
 enum styles {
-  normal = "normal",
+  defaultStyle = "defaultStyle",
+  bold = "bold",
   redback = "redback",
 }
 type styleTypes = keyof typeof styles;
@@ -39,8 +40,13 @@ export class BaseTest extends BaseNoiz<
   BaseTestProps,
   BaseTestState
 > {
+  static defaultProps: BaseTestProps = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+  };
+
   main = (p: BaseTestProps) => (
-    <div className={p.className}>test it</div>
+    <div className={p.className}>main</div>
   );
 
   test = (p: BaseTestProps) => (
@@ -58,6 +64,8 @@ export class BaseTest extends BaseNoiz<
     }),
   ];
 
+  defaultStyle = styled(this.Html)``;
+
   bold = styled(this.Html)`
     font-weight: bold;
   `;
@@ -68,7 +76,11 @@ export class BaseTest extends BaseNoiz<
 
   styledlayouts = [
     new this.Style({
-      name: styles.normal,
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+    new this.Style({
+      name: styles.bold,
       style: this.bold,
     }),
     new this.Style({
@@ -76,20 +88,17 @@ export class BaseTest extends BaseNoiz<
       style: this.redBack,
     }),
   ];
-
   constructor(p: BaseTestProps) {
     super(p);
-    this.state = {
-      layout: p => (
-        <div className={p.className}>bloom</div>
-      ),
-      style: styled(this.main)``,
-    };
+    let state = new BaseTestState();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
   }
 }
 
 export default function index() {
   return (
-    <BaseTest layout="test" style="redback"></BaseTest>
+    <BaseTest layout="main" style="redback"></BaseTest>
   );
 }

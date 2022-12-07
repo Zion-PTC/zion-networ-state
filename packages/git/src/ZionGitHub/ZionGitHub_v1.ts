@@ -1,5 +1,25 @@
+export interface IZionGitHub_v1 {
+  name: string;
+}
+
+export interface ZionGitHub_v1 {
+  name: string;
+}
+
+export class ZionGitHub_v1 implements IZionGitHub_v1 {
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+export type ZionGitHub_v1Ctor = {
+  new (name: string): ZionGitHub_v1;
+};
+
+export const ZionGitHub_v1Ctor: ZionGitHub_v1Ctor = ZionGitHub_v1;
+
 import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
-import { OctokitOptions } from "./Types/Oktokit";
+import { OctokitOptions } from "../Types/Oktokit";
 
 enum Owners {
   giacomogagliano = "giacomogagliano",
@@ -68,8 +88,8 @@ export class ZionGitHub implements IZionGitHub {
       this.zionOctoKit.repos.listForAuthenticatedUser
     );
     const regexp = /.*(?=\/)/g;
-    return res.map((repo) => [
-      repo.full_name.match(regexp)?.filter((res) => res !== "")[0],
+    return res.map(repo => [
+      repo.full_name.match(regexp)?.filter(res => res !== "")[0],
       repo.name,
     ]);
   }

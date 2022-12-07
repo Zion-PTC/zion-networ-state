@@ -37,6 +37,17 @@ export class _variable_ extends BaseNoiz<
   _variable_Props,
   _variable_State
 > {
+  static defaultProps: _variable_Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+  };
+  constructor(props: _variable_Props) {
+    super(props);
+    let state = new _variable_State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
   main = (props: _variable_Props) => {
     return <h1>{props.children}</h1>;
   };
@@ -57,4 +68,10 @@ export class _variable_ extends BaseNoiz<
     let Element = this.StyledHtml;
     return <Element {...this.props}></Element>;
   }
+  didMount() {}
+  didUpdate = (
+    prevPros: _variable_Props,
+    prevState: _variable_State,
+    snapshot: any
+  ) => {};
 }

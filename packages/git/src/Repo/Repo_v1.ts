@@ -1,11 +1,7 @@
 import { FS } from "@zionstate/database";
-import { ZionGit } from "./Git.js";
-import { ZionGitHub } from "./GitHub.js";
-import { js } from "@zionstate/utils";
-import { IRepo, RepoTypes } from "./Types/Repo.js";
-
-const { ZionError: ze } = js;
-const { ZionError } = ze;
+import { ZionError } from "@zionstate/utils";
+import { ZionGit } from "../ZionGit";
+import { ZionGitHub } from "../ZionGitHub";
 
 const {
   classes: {
@@ -18,6 +14,72 @@ const { joinPaths, existsSync } = system;
 const PACKAGESTRINGERROR = "Weirdly package.json was parsed as a string";
 const NOPACKAGEJSONERROR = "No package.json is present in the repo folder";
 const NOPATHERROR = "No path was set for the repo";
+
+type package_json = FS.lib.types.packageJSON.DataType2;
+type tsconfig_json = FS.lib.types.tsconfigJSON.DataType;
+type jsconfig_json = FS.lib.types.jsconfigJSON.DataType;
+type prettierrc_json = FS.lib.types.prettierrcJSON.DataType;
+type dependency = FS.lib.types.packageJSON.Dependency;
+
+export enum PackagesSubFolders {
+  "@zionstate" = "@zionstate",
+  "@zionrepack" = "@zionrepack",
+  "@zionstate_js" = "@zionstate_js",
+  "@zionstate_node" = "@zionstate_node",
+}
+
+export enum AppPackPrefix {
+  zionapps = "@zionapps",
+}
+
+export type PackagesSubFoldersTypes = keyof typeof PackagesSubFolders;
+
+export type Directories = {
+  packagesDir?: string;
+  appDir?: string;
+  packages?: { [k: string]: string };
+  apps?: { [k: string]: string };
+};
+
+export enum TypeFolders {
+  app = "apps",
+  package = "packages",
+}
+
+export type RepoTypes = "app" | "package";
+
+export type CreateRepoOptions = {
+  name?: string;
+  subFolder?: PackagesSubFoldersTypes | TypeFolders;
+  type?: RepoTypes;
+};
+export interface IRepo {
+  git: ZionGit;
+  github: ZionGitHub;
+  packageJSON?: package_json | string;
+  tsconfigJSON?: tsconfig_json | string;
+  prettierrcJSON?: prettierrc_json;
+  jsconfigJSON?: jsconfig_json;
+  isRoot(): Promise<boolean>;
+  hasRemote(): Promise<boolean>;
+  isCommitted(): Promise<boolean>;
+  dependencies(): dependency | string;
+  // latestUpdate(): Promise<Date | undefined>;
+  version(): string | undefined;
+  /////
+  hasTypesInConfigTS(): boolean | null;
+  // packageJSON(): Promise<object>;
+}
+
+export type REPO = {
+  name: string | boolean | string[];
+  packageName: string | boolean | string[];
+  isRoot: string | boolean;
+  hasTypesInConfig: string | boolean | string[];
+  isWorking: string | boolean | string[];
+  isCommitted: string | boolean | string[];
+  dependencies(): dependency;
+};
 
 export class Status {
   constructor(
@@ -36,11 +98,15 @@ export class Status {
   ) {}
 }
 
-type tsconfig_json = FS.lib.types.tsconfigJSON.DataType;
-type package_json = FS.lib.types.packageJSON.DataType2;
-type dependency = FS.lib.types.packageJSON.Dependency;
+export interface IRepo_v1 {
+  name: string;
+}
 
-export class Repo implements IRepo {
+export interface Repo_v1 {
+  name: string;
+}
+
+export class Repo_v1 implements IRepo {
   path?: string;
   git: ZionGit;
   github: ZionGitHub;
@@ -149,3 +215,18 @@ export class Repo implements IRepo {
     return result;
   }
 }
+
+export type Repo_v1Ctor = {
+  new (
+    name: string,
+    packageName: string,
+    monorepo: string,
+    auth: string,
+    isWorking: boolean,
+    __type: RepoTypes,
+    subfolder: string,
+    toKeep: boolean
+  ): Repo_v1;
+};
+
+export const Repo_v1Ctor: Repo_v1Ctor = Repo_v1;

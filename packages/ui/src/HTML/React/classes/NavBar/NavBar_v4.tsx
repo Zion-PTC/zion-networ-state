@@ -23,8 +23,8 @@ enum layouts {
 type layoutTypes = keyof typeof layouts;
 
 enum styles {
+  defaultStyle = "defaultStyle",
   borderOnTop = "borderOnTop",
-  nostyle = "nostyle",
 }
 type styleTypes = keyof typeof styles;
 
@@ -44,6 +44,7 @@ export class NavBar_v4Props extends BaseNoizProps<
 export interface NavBar_v4State
   extends BaseNoizState<NavBar_v4Props> {
   inputs: NavInputProps[];
+  Inputs: JSX.Element;
 }
 export class NavBar_v4State extends BaseNoizState<NavBar_v4Props> {}
 
@@ -104,9 +105,46 @@ export class NavBar_v4 extends BaseNoiz<
   NavBar_v4Props,
   NavBar_v4State
 > {
-  layouts: NavBarLayout[] = [main, tropical];
+  constructor(props: NavBar_v4Props) {
+    super(props);
+    let state = new NavBar_v4State();
+    if (this.props.inputs)
+      state.inputs = this.props.inputs;
+    state.Inputs = <></>;
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
 
-  BorderOnTop = styled(this.chooseLayout())`
+  main = (props: NavBar_v4Props) => {
+    return (
+      <nav className={props.className}>
+        {props.children}
+      </nav>
+    );
+  };
+
+  tropical = (props: NavBar_v4Props) => {
+    return (
+      <nav className={props.className}>
+        <p>tropical</p>
+        {props.children}
+      </nav>
+    );
+  };
+
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+    new this.Layout({
+      name: layouts.tropical,
+      component: this.tropical,
+    }),
+  ];
+
+  BorderOnTop = styled(this.Html)`
     display: grid;
     grid-auto-flow: ${props => {
       if (props.horizontal === true) {
@@ -167,7 +205,7 @@ export class NavBar_v4 extends BaseNoiz<
     }
   `;
 
-  noStyle = styled(this.chooseLayout())``;
+  defaultStyle = styled(this.Html)``;
 
   styledlayouts: NavBar_v4StyledLayout[] = [
     new NavBar_v4StyledLayout({
@@ -175,11 +213,12 @@ export class NavBar_v4 extends BaseNoiz<
       style: this.BorderOnTop,
     }),
     new NavBar_v4StyledLayout({
-      name: "nostyle",
-      style: this.noStyle,
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
     }),
   ];
 
+  // @ts-expect-error // TODO @giacomogagliano sistemare
   NavInput: ComponentClass<
     StyledDefault<{
       inputId: string;
@@ -194,19 +233,11 @@ export class NavBar_v4 extends BaseNoiz<
     NavInputState
   > = NavInput;
 
-  constructor(props: NavBar_v4Props) {
-    super(props);
-    let state = new NavBar_v4State();
-    if (this.props.inputs)
-      state.inputs = this.props.inputs;
-    this.state = state;
-  }
-
   defineType(data: NavInputProps) {
-    if (this.props.text) data.textInput = true;
-    if (this.props.icon) data.iconInput = true;
-    if (this.props["key-value"]) data.keyValueInput = true;
-    else data.textInput = true;
+    if (this.props.text) data.layout = "text";
+    if (this.props.icon) data.layout = "icon";
+    if (this.props["key-value"]) data.layout = "key-value";
+    else data.layout = "text";
     return data;
   }
 
@@ -229,17 +260,23 @@ export class NavBar_v4 extends BaseNoiz<
     else return this.mappedNavInputs(inputs);
   }
 
-  render() {
-    const Inputs = this.checkInputs();
-    let Style = this.BorderOnTop;
-    const Res = this.chooseStyle();
-    Style = Res;
+  setInput = (Inputs: JSX.Element) =>
+    this.setState({ Inputs });
 
+  didMount() {
+    const Inputs = this.checkInputs();
+    this.setInput(Inputs);
+  }
+
+  render() {
+    let Layout: GComponent<NavBar_v4Props> =
+      this.state.layout;
+    let Style = this.state.style;
+    Layout = Style;
     return (
-      <Style {...this.props}>
-        {Inputs}
+      <Layout {...this.props}>
         {this.props.children}
-      </Style>
+      </Layout>
     );
   }
 }

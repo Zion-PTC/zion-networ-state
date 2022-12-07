@@ -10,5 +10,9 @@ export function handleNetworkChange_v1(
         " to " +
         newNetwork.name
     );
-  else console.log(newNetwork.name);
+  else
+    console.log(
+      "this function shall implement interactivity when networs are switched. At the moment you are connected on:",
+      newNetwork.name
+    );
 }
