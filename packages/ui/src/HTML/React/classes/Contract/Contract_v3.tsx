@@ -2,9 +2,20 @@ import { useState } from "react";
 import styled from "styled-components";
 import { InputProps, LabelProps } from "../Basic";
 
-export interface Contract_v3PropsType {}
+enum layouts {
+  main = "main",
+}
+enum styles {
+  defaultStyle = "defaultStyle",
+}
+type layoutTypes = keyof typeof layouts;
+type styleTypes = keyof typeof styles;
 
-export interface Contract_v3Props extends BaseNoizProps {
+export interface Contract_v3PropsType
+  extends BaseNoizProps<layoutTypes, styleTypes> {}
+
+export interface Contract_v3Props
+  extends BaseNoizProps<layoutTypes, styleTypes> {
   contractAddr: string;
   supply: number;
   owner: string;
@@ -12,19 +23,27 @@ export interface Contract_v3Props extends BaseNoizProps {
   currency?: string;
 }
 
-export class Contract_v3Props extends BaseNoizProps {
-  constructor(props: Contract_v3Props) {
-    super(props);
-  }
-}
-export interface Contract_v3State {}
+export class Contract_v3Props extends BaseNoizProps<
+  layoutTypes,
+  styleTypes
+> {}
+export interface Contract_v3State
+  extends BaseNoizState<Contract_v3Props> {}
+export class Contract_v3State extends BaseNoizState<Contract_v3Props> {}
 
-export interface Contract_v3<T>
-  extends BaseNoiz<Contract_v3Props, Contract_v3State> {}
+export interface Contract_v3
+  extends BaseNoiz<
+    Contract_v3Props,
+    Contract_v3State,
+    layoutTypes,
+    styleTypes
+  > {}
 
-export class Contract_v3<T> extends BaseNoiz<
+export class Contract_v3 extends BaseNoiz<
   Contract_v3Props,
-  Contract_v3State
+  Contract_v3State,
+  layoutTypes,
+  styleTypes
 > {
   useForm() {
     const [form, setForm] = useState({
@@ -42,7 +61,8 @@ export class Contract_v3<T> extends BaseNoiz<
       setAmountToPay,
     };
   }
-  Html = (props: Contract_v3Props) => {
+
+  main = (props: Contract_v3Props) => {
     const { contractAddr, owner, supply, price } = props;
     const { currency } = props;
     const {
@@ -54,7 +74,7 @@ export class Contract_v3<T> extends BaseNoiz<
       setAmountToPay,
     } = this.useForm();
 
-    const input1: InputProps<T> = {
+    const input1: InputProps = {
       placeholder: "quantity",
       type: "number",
       handleChange: e => {
@@ -69,7 +89,7 @@ export class Contract_v3<T> extends BaseNoiz<
     };
 
     // const inputdatas1 = [input1];
-    const label1: LabelProps<T> = {
+    const label1: LabelProps = {
       name: "quantity:",
       // Input: { datas: inputdatas1 },
       placeholder: "quantity",
@@ -155,7 +175,14 @@ export class Contract_v3<T> extends BaseNoiz<
       {props.currency && <p>{props.currency}</p>}
     </section>
   );
-  StyledHtml = styled(this.Html)`
+
+  layouts = [
+    new this.Layout({
+      name: layouts.main,
+      component: this.main,
+    }),
+  ];
+  defaultStyle = styled(this.Html)`
     position: relative;
     text-align: center;
 
@@ -204,8 +231,11 @@ export class Contract_v3<T> extends BaseNoiz<
       color: #fff;
     }
   `;
-  render() {
-    let Element = this.StyledHtml;
-    return <Element {...this.props}></Element>;
-  }
+
+  styledlayouts = [
+    new this.Style({
+      name: styles.defaultStyle,
+      style: this.defaultStyle,
+    }),
+  ];
 }
