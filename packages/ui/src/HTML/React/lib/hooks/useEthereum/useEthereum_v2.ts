@@ -44,6 +44,7 @@ const step2 =
       window: window as WindowEthRequired,
     });
     const factory = evm.contractFactories[contract];
+
     const provider = evm.provider;
     provider.on("network", handleNetworkChange);
     setEvm(evm);
@@ -123,7 +124,7 @@ export const useEthereum_v2: UseEthereum_v2 = (
     console.log("clicked");
   }
 ) => {
-  const [metamask, setMetamask] =
+  const [metamask, setMetamask] = //
     useState<MetamaskUseState>(undefined);
   const [contract, setContract] =
     useState<ContractUseState>(undefined);
@@ -141,23 +142,6 @@ export const useEthereum_v2: UseEthereum_v2 = (
   const [handleClick, setHandleClick] = useState(
     () => noMetamaskClick
   );
-
-  const listAccountsCallbacks =
-    listAccountsCallbacksFactory(setIsConnected);
-
-  const handleAccountsChangedCallbacks =
-    handleAccountsChangedCallbackFactory(
-      setIsConnected,
-      setButtonMess,
-      provider
-    );
-
-  const handleAccountsChanged =
-    handleAccountsChangedFactory(
-      listAccounts,
-      provider,
-      handleAccountsChangedCallbacks
-    );
 
   useEffect(() => {
     detect(window, detectEthereumProvider)
@@ -184,6 +168,22 @@ export const useEthereum_v2: UseEthereum_v2 = (
   useEffect(step2Callback, [isMetamask]);
 
   useEffect(() => {
+    const listAccountsCallbacks =
+      listAccountsCallbacksFactory(setIsConnected);
+
+    const handleAccountsChangedCallbacks =
+      handleAccountsChangedCallbackFactory(
+        setIsConnected,
+        setButtonMess,
+        provider
+      );
+
+    const handleAccountsChanged =
+      handleAccountsChangedFactory(
+        listAccounts,
+        provider,
+        handleAccountsChangedCallbacks
+      );
     if (!metamask || !provider) return;
     listAccounts(provider, [listAccountsCallbacks]);
     metamask.on("accountsChanged", handleAccountsChanged);
