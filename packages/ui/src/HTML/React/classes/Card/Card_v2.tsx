@@ -3,10 +3,6 @@ import styled, {
   css,
   FlattenSimpleInterpolation,
 } from "styled-components";
-import {
-  GComponent,
-  StyledGComponent,
-} from "../../lib/global/BaseNoiz/BaseNoiz_v3";
 import { StyledDefault } from "../../lib/types/utility";
 import { roundDecimals } from "../../lib/util";
 import { DebugColor } from "../../lib/util/classes";
@@ -148,11 +144,13 @@ export class Card_v2 extends BaseNoiz<
 
   constructor(props: Card_v2Props) {
     super(props);
-    let state = new Card_v2State();
+    const state = new Card_v2State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
     state.headHeight = 0;
     state.src = props.src;
     state.debug = false;
-    this.state = state;
     this.container = createRef();
   }
   Head = (
