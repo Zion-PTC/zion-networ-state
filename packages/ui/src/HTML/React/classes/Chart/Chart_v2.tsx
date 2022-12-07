@@ -74,6 +74,10 @@ export class Chart_v2 extends BaseNoiz<
   constructor(props: Chart_v2Props) {
     super(props);
     ChartJS.register(ArcElement, Tooltip, Legend);
+    const state = new Chart_v2State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
   }
 
   main = (props: Chart_v2Props) => {
