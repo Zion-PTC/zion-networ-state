@@ -228,6 +228,7 @@ export class NoizApp_v2 extends BaseNoiz<
     section {
       container-type: size;
       grid-area: content;
+      place-items: center;
       width: 100%;
       overflow: auto;
       display: grid;
