@@ -1,0 +1,5 @@
+{
+  "main": "dist/zionstate-database-RAM.cjs.js",
+  "module": "dist/zionstate-database-RAM.esm.js",
+  "types": "../dist/RAM/index.d.ts"
+}

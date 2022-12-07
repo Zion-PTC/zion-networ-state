@@ -23,3 +23,5 @@ export {
 
 //// Writer
 export * from "./Writer";
+export * as Git from "./Git";
+export { Dati } from "./Git";

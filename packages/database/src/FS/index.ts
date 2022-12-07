@@ -19,5 +19,8 @@ export * from "./System";
 // lib/chokidar
 // export * from "./lib/chokidar/stop.js";
 export * as classes from "./classes";
+export { Dati } from "./classes";
 export * as lib from "./lib";
 export * as scripts from "./scripts";
+
+export const bla = "cla";
