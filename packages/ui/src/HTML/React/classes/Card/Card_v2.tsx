@@ -10,8 +10,12 @@ import { RemainingPercentage } from "../../lib/util/classes/RemainingPercentage"
 import { Icon } from "../Icon";
 import { Image } from "../Image";
 
+const SRC =
+  "https://ipfs.io/ipfs/QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R?filename=QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R";
+
 enum layouts {
   main = "main",
+  test = "test",
 }
 enum styles {
   defaultStyle = "defaultStyle",
@@ -111,6 +115,19 @@ export class Card_v2 extends BaseNoiz<
   Card_v2Props,
   Card_v2State
 > {
+  static defaultProps: Card_v2Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    id: 0,
+    bid_link: "/some/link",
+    item_id: "item id",
+    likeCounts: "100",
+    price: "0.1",
+    slug: "card-slug",
+    src: SRC,
+    title: "title here",
+  };
+
   widthinblocks = 8;
   totalHeightInBlocks = 14;
   ratio = 4 / 5;
@@ -136,6 +153,7 @@ export class Card_v2 extends BaseNoiz<
     this.debug
   );
   debug = false;
+  debugState = true;
   CardHeadDebug = new DebugColor("red", this.debug);
   titleDebug = new DebugColor("yellow", this.debug);
   floorPriceDebug = new DebugColor("#001eff", this.debug);
@@ -147,11 +165,11 @@ export class Card_v2 extends BaseNoiz<
     const state = new Card_v2State();
     state.layout = () => <></>;
     state.style = styled(this.Html)``;
-    this.state = state;
     state.headHeight = 0;
     state.src = props.src;
     state.debug = false;
     this.container = createRef();
+    this.state = state;
   }
   Head = (
     props: StyledDefault<{
@@ -385,28 +403,33 @@ export class Card_v2 extends BaseNoiz<
     this.setState({ headHeight });
   };
 
-  componentDidMount() {
-    setTimeout(
-      () =>
-        this.setState({
-          src: "https://ipfs.io/ipfs/QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R?filename=QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R",
-        }),
-      2000
-    );
-    const self = this.container;
-    if (self) {
-      if (self.current) {
-        if (self.current.firstChild) {
-          if (self.current.firstChild.firstChild) {
-            const head = self.current.firstChild
-              .firstChild as HTMLDivElement;
-            const height = head.clientHeight;
-            this.handleHeadHeight(height);
-          }
-        }
-      }
-    }
-  }
+  // componentDidMount() {
+  //   this.chooseLayout();
+  //   setTimeout(
+  //     () =>
+  //       this.setState({
+  //         src: "https://ipfs.io/ipfs/QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R?filename=QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R",
+  //       }),
+  //     2000
+  //   );
+  //   const self = this.container;
+  //   if (self) {
+  //     if (self.current) {
+  //       if (self.current.firstChild) {
+  //         if (self.current.firstChild.firstChild) {
+  //           const head = self.current.firstChild
+  //             .firstChild as HTMLDivElement;
+  //           const height = head.clientHeight;
+  //           this.handleHeadHeight(height);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  test = (props: Card_v2Props) => {
+    return <div>{props.item_id}</div>;
+  };
 
   main = (props: Card_v2Props) => {
     const Head = this.StyledHead;
@@ -420,7 +443,7 @@ export class Card_v2 extends BaseNoiz<
       >
         <div id="card">
           <Head clientHeight={this.state.headHeight} />
-          <Image src={this.state.src} />
+          {/* <Image src={this.state.src} /> */}
           <StyledInfos
             bid_link={props.bid_link}
             id={props.item_id}
@@ -438,6 +461,10 @@ export class Card_v2 extends BaseNoiz<
     new this.Layout({
       name: layouts.main,
       component: this.main,
+    }),
+    new this.Layout({
+      name: layouts.test,
+      component: this.test,
     }),
   ];
 

@@ -37,8 +37,8 @@ export default class IndexPage extends Component<IndexPageProps> {
   static filterDs = IndexPage.filter(".DS_Store");
   static filterIndex = IndexPage.filter("index.tsx");
 
-  constructor({ data, path }: IndexPageProps) {
-    super({ data, path });
+  constructor(props: IndexPageProps) {
+    super(props);
   }
   render() {
     const { data, path } = this.props;
