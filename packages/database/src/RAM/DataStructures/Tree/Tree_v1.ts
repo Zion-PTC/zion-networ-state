@@ -19,28 +19,19 @@ const { util } = node;
 const { zionUtil } = util;
 export type TTTT = TreeNode;
 
-export interface ITree {
+export interface Tree {
   id: number;
-  get nodes(): (File | Root | Folder | TreeNode)[];
-  add(node: File | Root | Folder | TreeNode): ITree;
-  remove(
-    nodeToRemove: File | Root | Folder | TreeNode
-  ): number;
-  isPresent(
-    node2Check: File | Root | Folder | TreeNode
-  ): boolean;
-  // TODO #2 mettere a posto fidnByLeverl()
-  findByLevel(
-    depth: number
-  ): (File | Root | Folder | TreeNode)[];
+  add(node: TreeNode): Tree;
+  remove(nodeToRemove: TreeNode): number;
+  isPresent(node2Check: TreeNode): boolean;
+  findByLevel(depth: number): TreeNode[];
 }
 
-export class Tree implements ITree {
+export class Tree {
   static #trees: Tree[] = [];
-  #nodes: (File | Root | Folder | TreeNode)[] = [];
+  #nodes: TreeNode[] = [];
   get nodes() {
-    let servedArray: (File | Root | Folder | TreeNode)[] =
-      [...this.#nodes];
+    let servedArray: TreeNode[] = [...this.#nodes];
     Object.freeze(servedArray);
     return servedArray;
   }
@@ -54,12 +45,14 @@ export class Tree implements ITree {
     this.id = Tree.#trees.length;
   }
   errors = TreeErrors;
+
   isArray = (nodeToRemove: TreeNode) =>
     Array.isArray(nodeToRemove);
+
   isTNode = (nodeToRemove: TreeNode) =>
     nodeToRemove.constructor === TreeNode;
 
-  add(node: File | Root | Folder | TreeNode) {
+  add(node: TreeNode) {
     const errArray = this.errors.ARRAY;
     if (!node) throw new Error(this.errors.NO_NODE);
     if (Array.isArray(node)) throw new Error(errArray);
@@ -85,7 +78,7 @@ export class Tree implements ITree {
     this.#nodeToRemove = newNodeToRemove;
   }
 
-  remove(nodeToRemove: File | Root | Folder | TreeNode) {
+  remove(nodeToRemove: TreeNode) {
     const isArray = this.isArray(nodeToRemove);
     const isTNode = this.isTNode(nodeToRemove);
     const nodes = this.#nodes;
@@ -105,7 +98,7 @@ export class Tree implements ITree {
     return idxOfNode2Rm;
   }
 
-  isPresent(node2Check: File | Root | Folder | TreeNode) {
+  isPresent(node2Check: TreeNode) {
     const isArray = Array.isArray(node2Check);
     const isTsNode = this.isTNode(node2Check);
     if (!node2Check)
@@ -118,7 +111,7 @@ export class Tree implements ITree {
     return result === -1 ? false : true;
   }
 
-  find(nodoDaCercare: File | Root | Folder | TreeNode) {
+  find(nodoDaCercare: TreeNode) {
     const errMess1 = this.errors.NOTHIN_TO_FD;
     const errMess2 = this.errors.ARRAY;
     const errMess3 = this.errors.NO_TREE_NODE;
@@ -131,11 +124,8 @@ export class Tree implements ITree {
     return find(nodoDaCercare);
   }
 
-  findByLevel(
-    depth: number
-  ): (File | Root | Folder | TreeNode)[] {
-    let servedArray: (File | Root | Folder | TreeNode)[] =
-      [];
+  findByLevel(depth: number): TreeNode[] {
+    let servedArray: TreeNode[] = [];
     const forEach = (node: TreeNode) => {
       if (node.depth === depth) servedArray.push(node);
     };
