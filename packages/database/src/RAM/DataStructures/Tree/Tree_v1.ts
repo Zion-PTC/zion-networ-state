@@ -128,7 +128,7 @@ export class Tree implements ITree {
     if (isArray) throw new Error(errMess2);
     if (!isTrNode) throw new Error(errMess3);
     const find = this.findNodeByName(nodoDaCercare);
-    return find();
+    return find(nodoDaCercare);
   }
 
   findByLevel(

@@ -21,6 +21,5 @@ export * from "../FS/classes/System";
 // export * from "./lib/chokidar/stop.js";
 export * as classes from "./classes";
 export { reader, Reader } from "./classes";
-export { Dati } from "./classes";
 export * as lib from "./lib";
 export * as scripts from "./scripts";

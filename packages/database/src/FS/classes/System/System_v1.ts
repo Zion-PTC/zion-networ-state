@@ -4,10 +4,10 @@ import { fileURLToPath } from "url";
 import { Abortable } from "events";
 import { js, node } from "@zionstate/utils";
 import { TreeNode } from "../../../RAM/DataStructures/Tree/TreeNode";
-import { Tree } from "../../../RAM/DataStructures/Tree/Tree";
 import { Root } from "../../../RAM/DataStructures/Tree/Root";
 import { Folder } from "../../../RAM/DataStructures/Tree/Folder";
 import { File } from "../../../RAM/DataStructures/Tree/File";
+import { Tree } from "../../../RAM";
 
 export interface ISystem_v1 {}
 
@@ -17,7 +17,8 @@ const { ZionError } = js;
 const { util } = node;
 const { zionUtil } = util;
 
-export const JOINPATHSERROR = "arguments must be of type string[]";
+export const JOINPATHSERROR =
+  "arguments must be of type string[]";
 
 export type Dirent = fs.Dirent;
 export class System_v1 {
@@ -46,7 +47,9 @@ export class System_v1 {
       if (match[0]) return match[0];
     } else {
       let jointSpacesPath = path.replace(/ /g, "_");
-      let res = jointSpacesPath.match(/(?<=[/])\w*[.]\w*/g);
+      let res = jointSpacesPath.match(
+        /(?<=[/])\w*[.]\w*/g
+      );
       if (!res) return "no match";
       if (res[0]) return res[0];
     }
@@ -60,7 +63,7 @@ export class System_v1 {
         // vengono esclusi i risultati che contengono un '.'
         // in quanto si tratta di nomi di files e non
         // di cartelle
-        (directoryEntity) => directoryEntity.isDirectory()
+        directoryEntity => directoryEntity.isDirectory()
       );
   };
   arrayOfFilesInDirectory = (path: string) => {
@@ -72,7 +75,7 @@ export class System_v1 {
         // vengono esclusi i risultati che contengono un '.'
         // in quanto si tratta di nomi di files e non
         // di cartelle
-        (directoryEntity) => directoryEntity.isFile()
+        directoryEntity => directoryEntity.isFile()
       );
   };
   arrayOfNamesOfFilesInFolder = (
@@ -80,8 +83,8 @@ export class System_v1 {
   ): { name: string; path: string }[] => {
     return fs
       .readdirSync(path)
-      .filter((item) => !/(^|\/)\.['\/\.]/g.test(item))
-      .map((fileName) => {
+      .filter(item => !/(^|\/)\.['\/\.]/g.test(item))
+      .map(fileName => {
         return {
           name: fileName,
           path: `${path}/${fileName}`,
@@ -95,7 +98,9 @@ export class System_v1 {
    * @returns {String}  the complete path to the file from
    * which this function is called.
    */
-  pathOfFileFromImportMetaUrl = (importMetaUrl: string) => {
+  pathOfFileFromImportMetaUrl = (
+    importMetaUrl: string
+  ) => {
     return `${dirname(fileURLToPath(importMetaUrl))}`;
   };
   /**
@@ -116,7 +121,10 @@ export class System_v1 {
    * @param {String} data data to insert in the file
    * @returns
    */
-  writePng(path: string, data: string | NodeJS.ArrayBufferView) {
+  writePng(
+    path: string,
+    data: string | NodeJS.ArrayBufferView
+  ) {
     return fs.writeFileSync(path, data);
   }
   /**
@@ -126,7 +134,8 @@ export class System_v1 {
    */
   createNestedDir(dir: string): string | undefined {
     //example './tmp/but/then/nested';
-    if (!fs.existsSync(dir)) return fs.mkdirSync(dir, { recursive: true });
+    if (!fs.existsSync(dir))
+      return fs.mkdirSync(dir, { recursive: true });
   }
   /**
    * @title buildTree()
@@ -144,13 +153,25 @@ export class System_v1 {
     if (TreeNode.types[typeNumber])
       // TODO resolve type error due to mismatch of types in
       // tree node and function build tress
-      // @ts-expect-error
-      name = this.setNameForTreeNode(rootPath, TreeNode.types[typeNumber]);
+      name = this.setNameForTreeNode(
+        rootPath,
+        // @ts-expect-error
+        TreeNode.types[typeNumber]
+      );
     let root;
-    if (name) root = new Root(name, rootPath, typeNumber, undefined, 0);
+    if (name)
+      root = new Root(
+        name,
+        rootPath,
+        typeNumber,
+        undefined,
+        0
+      );
     if (!root) throw new Error("No root give");
     newTree.add(root);
-    const stack: (Root | File | Folder | TreeNode)[] = [root];
+    const stack: (Root | File | Folder | TreeNode)[] = [
+      root,
+    ];
     while (stack.length) {
       let currentNode = stack.pop();
       if (currentNode) {
@@ -160,17 +181,23 @@ export class System_v1 {
         let DSStore = system.blackListFileNames[0];
         // TODO aggiunta variabile per zittare ts, sistemare
         DSStore;
-        if (children[0] === DSStore) zionUtil.popFirst(children);
+        if (children[0] === DSStore)
+          zionUtil.popFirst(children);
         for (let child of children) {
           let childPath = `${currentNode.path}/${child}`;
           let type = system.getTreeNodeType(childPath);
           // TODO resolve type error due to mismatch of types in
           // tree node and function build tress
-          // @ts-expect-error
-          let name = this.setNameForTreeNode(childPath, TreeNode.types[type]);
+
+          let name = this.setNameForTreeNode(
+            childPath,
+            // @ts-expect-error
+            TreeNode.types[type]
+          );
           let childNode: File | Folder;
           if (!name) throw new Error("No name");
-          if (!currentNode.depth) throw new Error("no depth");
+          if (!currentNode.depth)
+            throw new Error("no depth");
           if (_types[type] === _types[0]) {
             childNode = new Folder(
               name,
@@ -196,13 +223,16 @@ export class System_v1 {
           }
           currentNode.connettiAFiglio(childNode);
           if (!childNode.path) throw new Error("no path");
-          if (system.getTreeNodeType(childNode.path) === 0) {
+          if (
+            system.getTreeNodeType(childNode.path) === 0
+          ) {
             childNode.type = _types[0];
             stack.push(childNode);
           } else {
             childNode.type = _types[1];
           }
-          if (currentNode.children) currentNode.children.push(childNode);
+          if (currentNode.children)
+            currentNode.children.push(childNode);
         }
       }
     }
@@ -228,7 +258,10 @@ export class System_v1 {
    * @param {Object} options oggetto con opzioni
    * @returns fs.rmdirSync
    */
-  deleteFolder(path: fs.PathLike, options?: fs.RmDirOptions) {
+  deleteFolder(
+    path: fs.PathLike,
+    options?: fs.RmDirOptions
+  ) {
     return fs.rmdirSync(path, options);
   }
   /**
@@ -237,7 +270,10 @@ export class System_v1 {
    * @returns fs.rmSync()
    */
   deleteRecursiveDir(path: fs.PathLike) {
-    return fs.rmSync(path, { recursive: true, force: true });
+    return fs.rmSync(path, {
+      recursive: true,
+      force: true,
+    });
   }
   /**
    *
@@ -262,7 +298,9 @@ export class System_v1 {
   }
   getTreeNodeType(path: fs.PathLike) {
     let result;
-    fs.statSync(path).isDirectory() ? (result = 0) : (result = 1);
+    fs.statSync(path).isDirectory()
+      ? (result = 0)
+      : (result = 1);
     return result;
   }
   // work on files
@@ -286,7 +324,10 @@ export class System_v1 {
   ): string {
     return fs.readFileSync(path, options).toString();
   }
-  doo(path: fs.PathLike, options?: { withFileTypes?: boolean }) {
+  doo(
+    path: fs.PathLike,
+    options?: { withFileTypes?: boolean }
+  ) {
     // TODO ts errore
     //@ts-expect-error
     if (options) return fs.readdirSync(path, options);
@@ -298,7 +339,11 @@ export class System_v1 {
   joinPaths(paths: string[]) {
     // const functionName = this.joinPaths.name;
     if (!Array.isArray(paths))
-      throw new ZionError(JOINPATHSERROR, "joinPaths()", arguments);
+      throw new ZionError(
+        JOINPATHSERROR,
+        "joinPaths()",
+        arguments
+      );
 
     return path.join(...paths);
   }

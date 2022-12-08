@@ -2,5 +2,4 @@ export * as FS from "./FS";
 export * as IPFS from "./IPFS";
 export * as RAM from "./RAM";
 export * as EVM from "./EVM";
-export * as RAM from './RAM'
-export * as Git from './Git'
+export * as Git from "./Git";
