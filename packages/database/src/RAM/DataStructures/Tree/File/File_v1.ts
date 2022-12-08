@@ -1,12 +1,22 @@
-// import { Size } from '../../GenerativeArtMachine/Size.js';
-import { TreeNode, ITreeNode } from "./TreeNode.js";
+import { TreeNode } from "../TreeNode";
 
-export interface IFile extends ITreeNode {
+enum filesStatuses {
+  "working ✅" = "working ✅",
+  "notter ⛔️" = "notter ⛔️",
+  "default-noiz" = "default-noiz",
+  "icons-not-showing" = "icons-not-showing",
+  "index-??" = "index-??",
+}
+type fileStatusesTypes = keyof typeof filesStatuses;
+
+export interface File_v1 extends TreeNode {
   extension?: string;
   fileSize?: number;
+  status: fileStatusesTypes;
 }
 
-export class File extends TreeNode implements ITreeNode, IFile {
+export class File_v1 extends TreeNode implements TreeNode {
+  status: fileStatusesTypes = "working ✅";
   constructor(
     public name: string,
     public path: string,

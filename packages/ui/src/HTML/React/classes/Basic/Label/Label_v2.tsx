@@ -76,6 +76,22 @@ export class Label_v2 extends BaseNoiz<
   Label_v2Props,
   Label_v2State
 > {
+  static defaultProps: Label_v2Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    handleChange: () =>
+      console.log("I will handle it, i swear!!"),
+    name: "name",
+    placeholder: "placeholder",
+    type: "text",
+  };
+  constructor(props: Label_v2Props) {
+    super(props);
+    let state = new Label_v2State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
   main = (props: Label_v2Props) => {
     const {
       name,

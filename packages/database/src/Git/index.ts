@@ -1,6 +1,3 @@
-export * as Types from "./Types/index.js";
-export * as lib from "./lib/index.js";
-
 //// RepoManager
 export * from "./RepoManager";
 

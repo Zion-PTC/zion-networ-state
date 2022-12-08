@@ -1,7 +1,7 @@
 import { readdirSync } from "fs";
 import { aggiungiPath } from "../../../RAM/DataStructures/Array";
 import { NoizPath } from "../../classes";
-import { system } from "../../System";
+import { system } from "../../classes/System";
 
 export function read_v1(folder: string): string[] {
   const workingDir = process.cwd();

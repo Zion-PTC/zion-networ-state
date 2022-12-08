@@ -1,10 +1,13 @@
-import { TreeNode, ITreeNode } from "./TreeNode.js";
+import { TreeNode } from "../TreeNode";
 
-export interface IRoot extends ITreeNode {
+export interface Root_v1 extends TreeNode {
   root: boolean;
 }
 
-export class Root extends TreeNode implements ITreeNode, IRoot {
+export class Root_v1
+  extends TreeNode
+  implements TreeNode
+{
   static #roots: TreeNode[] = [];
   #type = "root";
   constructor(
@@ -16,8 +19,7 @@ export class Root extends TreeNode implements ITreeNode, IRoot {
   ) {
     super(name, path, typeNumber, treeId, depth);
     this.root = true;
-    // TODO aggiunto per zittare ts
     this.#type;
-    Root.#roots.push(this);
+    Root_v1.#roots.push(this);
   }
 }

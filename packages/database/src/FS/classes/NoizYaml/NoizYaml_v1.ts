@@ -1,5 +1,5 @@
 import yaml from "yaml";
-import { Dirent, system } from "../../System.js";
+import { Dirent, system } from "../System";
 
 export interface INoizYaml_v1<T> {
   string: string;

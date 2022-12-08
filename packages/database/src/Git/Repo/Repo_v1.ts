@@ -1,24 +1,22 @@
 import { ZionError } from "@zionstate/utils";
-import { FS } from "../../../..";
+import { FS } from "../..";
 import { ZionGit } from "../ZionGit";
 import { ZionGitHub } from "../ZionGitHub";
 
-const {
-  classes: {
-    reader: { reader },
-  },
-  system,
-} = FS;
+const { reader, system } = FS;
 
 const { joinPaths, existsSync } = system;
-const PACKAGESTRINGERROR = "Weirdly package.json was parsed as a string";
-const NOPACKAGEJSONERROR = "No package.json is present in the repo folder";
+const PACKAGESTRINGERROR =
+  "Weirdly package.json was parsed as a string";
+const NOPACKAGEJSONERROR =
+  "No package.json is present in the repo folder";
 const NOPATHERROR = "No path was set for the repo";
 
 type package_json = FS.lib.types.packageJSON.DataType2;
 type tsconfig_json = FS.lib.types.tsconfigJSON.DataType;
 type jsconfig_json = FS.lib.types.jsconfigJSON.DataType;
-type prettierrc_json = FS.lib.types.prettierrcJSON.DataType;
+type prettierrc_json =
+  FS.lib.types.prettierrcJSON.DataType;
 type dependency = FS.lib.types.packageJSON.Dependency;
 
 export enum PackagesSubFolders {
@@ -32,7 +30,8 @@ export enum AppPackPrefix {
   zionapps = "@zionapps",
 }
 
-export type PackagesSubFoldersTypes = keyof typeof PackagesSubFolders;
+export type PackagesSubFoldersTypes =
+  keyof typeof PackagesSubFolders;
 
 export type Directories = {
   packagesDir?: string;
@@ -133,13 +132,19 @@ export class Repo_v1 implements IRepo {
     public subfolder: string = "",
     public toKeep: boolean = false
   ) {
-    let folder = this.__type === "app" ? "apps" : "packages";
+    let folder =
+      this.__type === "app" ? "apps" : "packages";
 
     let path;
     if (this.__type === "app")
       path = joinPaths([this.monorepo, folder, this.name]);
     if (this.__type === "package")
-      path = joinPaths([this.monorepo, folder, this.subfolder, this.name]);
+      path = joinPaths([
+        this.monorepo,
+        folder,
+        this.subfolder,
+        this.name,
+      ]);
     this.path = path;
     this.git = new ZionGit(path);
     this.github = new ZionGitHub(auth);
@@ -148,9 +153,13 @@ export class Repo_v1 implements IRepo {
     this.hasPackageJSON = existsSync(packageJSONPath);
     this.hasTSconfigJSON = existsSync(tsconfigJSONPath);
     if (this.hasPackageJSON)
-      this.packageJSON = reader.readPackageJSON(packageJSONPath);
+      this.packageJSON = reader.readPackageJSON(
+        packageJSONPath
+      );
     if (this.hasTSconfigJSON)
-      this.tsconfigJSON = reader.readTSconfigJSON(tsconfigJSONPath);
+      this.tsconfigJSON = reader.readTSconfigJSON(
+        tsconfigJSONPath
+      );
   }
   async isRoot(): Promise<boolean> {
     return await this.git.isRepo();
@@ -161,10 +170,14 @@ export class Repo_v1 implements IRepo {
   hasTypesInConfigTS(): boolean | null {
     if (!this.tsconfigJSON) return null;
     if (typeof this.tsconfigJSON === "string") return null;
-    return this.tsconfigJSON.compilerOptions?.types ? true : false;
+    return this.tsconfigJSON.compilerOptions?.types
+      ? true
+      : false;
   }
   async isCommitted(): Promise<boolean> {
-    return (await this.git.git.status()).modified.length === 0;
+    return (
+      (await this.git.git.status()).modified.length === 0
+    );
   }
   dependencies(): dependency | string {
     if (!this.packageJSON) return "no pkg.json";
@@ -191,11 +204,13 @@ export class Repo_v1 implements IRepo {
     statusUpdate.hasTSconfigJSON = this.hasTSconfigJSON;
     statusUpdate.isRoot = await this.isRoot();
     statusUpdate.hasRemote = await this.hasRemote();
-    statusUpdate.hasTypesInConfig = this.hasTypesInConfigTS();
+    statusUpdate.hasTypesInConfig =
+      this.hasTypesInConfigTS();
     statusUpdate.isCommitted = await this.isCommitted();
     // statusUpdate.latestUpdate = (await this.latestUpdate())?.toLocaleString();
     let deps = this.dependencies();
-    statusUpdate.dependencies = typeof deps === "object" ? true : deps;
+    statusUpdate.dependencies =
+      typeof deps === "object" ? true : deps;
     statusUpdate.toKeep = this.toKeep;
     return statusUpdate;
   }
@@ -204,13 +219,20 @@ export class Repo_v1 implements IRepo {
     deps = [];
     devDeps = [];
     if (!this.path) throw new ZionError(NOPATHERROR);
-    if (!this.packageJSON) throw new ZionError(NOPACKAGEJSONERROR);
+    if (!this.packageJSON)
+      throw new ZionError(NOPACKAGEJSONERROR);
     if (typeof this.packageJSON === "string")
-      throw new ZionError(PACKAGESTRINGERROR, this.getDeps.name, [this.path]);
+      throw new ZionError(
+        PACKAGESTRINGERROR,
+        this.getDeps.name,
+        [this.path]
+      );
     if (this.packageJSON.dependencies)
       deps = Object.keys(this.packageJSON.dependencies);
     if (this.packageJSON.devDependencies)
-      devDeps = Object.keys(this.packageJSON.devDependencies);
+      devDeps = Object.keys(
+        this.packageJSON.devDependencies
+      );
     result = deps.concat(devDeps);
     return result;
   }

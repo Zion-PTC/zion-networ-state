@@ -1,5 +1,5 @@
 import { parse } from "csv-parse/sync";
-import { system } from "../../System.js";
+import { system } from "../System";
 
 export interface INoizCsv_v1<T> {
   parsed: T;

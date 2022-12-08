@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { FS } from "@zionstate/database";
+import { Dati } from "@zionstate/database/FileSystem";
+import { File } from "@zionstate/database/RAM";
 import { join } from "path";
-import type { FS as fsT } from "@zionstate/database";
 import styled from "styled-components";
 import Link from "next/link";
-
-const Dati = FS.Dati;
-interface Dati extends fsT.Dati {}
 
 const Div = styled.div`
   display: grid;
@@ -24,14 +21,29 @@ interface IndexPageProps {
 }
 export default class IndexPage extends Component<IndexPageProps> {
   static makeDati = (el: string) => {
+    // const newDati = new File(el);
     const dati = new Dati();
     dati.name = el;
     dati.status = "working ✅";
     return dati;
   };
+  static maker =
+    (name: string, status: Dati["status"]) =>
+    (el: Dati) => {
+      if (el.name === name) {
+        el.status = status;
+      }
+      return el;
+    };
   static filter = (file: string) => (dir: string) => {
     if (dir === file) return false;
     else return true;
+  };
+  static setStatus = (
+    file: File,
+    status: File["status"]
+  ) => {
+    return (file.status = status);
   };
 
   static filterDs = IndexPage.filter(".DS_Store");
@@ -44,7 +56,7 @@ export default class IndexPage extends Component<IndexPageProps> {
     const { data, path } = this.props;
     const parsed = JSON.parse(data);
 
-    console.log(parsed);
+    // console.log(parsed);
     return (
       <Div>
         <ul>

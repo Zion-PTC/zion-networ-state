@@ -14,7 +14,7 @@ import {
 import {} from "@zionstate/utils";
 import { InitResult } from "simple-git";
 import { ZionGit } from ".";
-import { FS } from "../../../..";
+import { FS } from "../..";
 
 const { system } = FS;
 
@@ -84,7 +84,10 @@ export class ZionGit_v1 implements IZionGit {
    * preferring whichever appears last in the arguments.
    * @returns A promise
    */
-  init(bare: boolean = false, options?: TaskOptions<Options>) {
+  init(
+    bare: boolean = false,
+    options?: TaskOptions<Options>
+  ) {
     return this.git.init(bare, options);
   }
   /**
@@ -92,7 +95,10 @@ export class ZionGit_v1 implements IZionGit {
    */
   status(
     options?: TaskOptions<Options>,
-    callback?: SimpleGitTaskCallback<StatusResult, GitError>
+    callback?: SimpleGitTaskCallback<
+      StatusResult,
+      GitError
+    >
   ) {
     return this.git.status(options, callback);
   }
@@ -203,14 +209,18 @@ export async function repoStatus(
   options?: TaskOptions<Options>
 ) {
   if (!Array.isArray(path)) path = splitPath(path);
-  if (!(await testRepo(path))) throw new Error("Path is not a repo");
+  if (!(await testRepo(path)))
+    throw new Error("Path is not a repo");
   const git = new ZionGit(path);
   return git.status(options);
 }
 
-export async function repoHasRemote(path: string[] | string): Promise<boolean> {
+export async function repoHasRemote(
+  path: string[] | string
+): Promise<boolean> {
   if (!Array.isArray(path)) path = splitPath(path);
-  if (!(await testRepo(path))) throw new Error("Path is not a repo");
+  if (!(await testRepo(path)))
+    throw new Error("Path is not a repo");
   const git = new ZionGit(path);
   return await git.hasRemote();
 }

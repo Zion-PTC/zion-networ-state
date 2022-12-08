@@ -15,16 +15,24 @@
       "default": "./EVM/dist/zionstate-database-EVM.cjs.js"
     },
     "./FS": {
-      "module": "./EVM/dist/zionstate-database-FS.esm.js",
-      "default": "./EVM/dist/zionstate-database-FS.cjs.js"
+      "module": "./FS/dist/zionstate-database-FS.esm.js",
+      "default": "./FS/dist/zionstate-database-FS.cjs.js"
     },
     "./IPFS": {
-      "module": "./EVM/dist/zionstate-database-IPFS.esm.js",
-      "default": "./EVM/dist/zionstate-database-IPFS.cjs.js"
+      "module": "./IPFS/dist/zionstate-database-IPFS.esm.js",
+      "default": "./IPFS/dist/zionstate-database-IPFS.cjs.js"
     },
     "./RAM": {
-      "module": "./EVM/dist/zionstate-database-RAM.esm.js",
-      "default": "./EVM/dist/zionstate-database-RAM.cjs.js"
+      "module": "./RAM/dist/zionstate-database-RAM.esm.js",
+      "default": "./RAM/dist/zionstate-database-RAM.cjs.js"
+    },
+    "./FileSystem": {
+      "module": "./FileSystem/dist/zionstate-database-FileSystem.esm.js",
+      "default": "./FileSystem/dist/zionstate-database-FileSystem.cjs.js"
+    },
+    "./Git": {
+      "module": "./Git/dist/zionstate-database-Git.esm.js",
+      "default": "./Git/dist/zionstate-database-Git.cjs.js"
     },
     "./package.json": "./package.json"
   },
@@ -34,7 +42,9 @@
     "EVM",
     "FS",
     "IPFS",
-    "RAM"
+    "RAM",
+    "FileSystem",
+    "Git"
   ],
   "preconstruct": {
     "exports": true,
@@ -43,7 +53,9 @@
       "EVM/index.ts",
       "FS/index.ts",
       "IPFS/index.ts",
-      "RAM/index.ts"
+      "RAM/index.ts",
+      "FileSystem/index.ts",
+      "Git/index.ts"
     ]
   },
   "scripts": {

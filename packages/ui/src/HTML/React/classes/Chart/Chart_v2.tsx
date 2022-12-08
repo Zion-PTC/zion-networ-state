@@ -61,6 +61,12 @@ export class Chart_v2 extends BaseNoiz<
   Chart_v2Props,
   Chart_v2State
 > {
+  static defaultProps: Chart_v2Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    data: { datasets: [] },
+    type: "doughnut",
+  };
   Bar = Bar;
   Bubble = Bubble;
   ChartJS = ChartJs;

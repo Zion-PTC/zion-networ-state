@@ -49,6 +49,20 @@ export class Input_v2 extends BaseNoiz<
   Input_v2Props,
   Input_v2State
 > {
+  static defaultProps: Input_v2Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    handleChange: () => {},
+    placeholder: "placeholder",
+    type: "text",
+  };
+  constructor(props: Input_v2Props) {
+    super(props);
+    let state = new Input_v2State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
   onChange =
     (props: Input_v2Props) =>
     (e: ChangeEvent<HTMLInputElement>) => {

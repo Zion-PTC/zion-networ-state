@@ -1,4 +1,4 @@
-export * as reader from "./Reader";
+export * from "./Reader";
 
 //// NoizPath
 export * from "./NoizPath";
@@ -23,5 +23,6 @@ export {
 
 //// Writer
 export * from "./Writer";
-export * as Git from "./Git";
-export { Dati } from "./Git";
+
+//// System
+export * from "./System";

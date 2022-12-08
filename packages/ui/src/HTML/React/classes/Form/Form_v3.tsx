@@ -77,6 +77,13 @@ export class Form_v3 extends BaseNoiz<
   Form_v3Props,
   Form_v3State
 > {
+  static defaultProps: Form_v3Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    inputs: [],
+    name: "name",
+  };
+
   InputState = InputState;
 
   inputs;
@@ -88,13 +95,11 @@ export class Form_v3 extends BaseNoiz<
     let ins = props.inputs;
     this.inputs = props.inputs;
     let inputs = ins.map(this.newInputState);
-    this.state = {
-      inputs: inputs,
-      layout: () => <>fottiti, sto caricando...</>,
-      style: styled(this.Html)`
-        background-color: red;
-      `,
-    };
+    let state = new Form_v3State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    state.inputs = inputs;
+    this.state = state;
   }
 
   computeInputs(currInput: string) {
@@ -189,6 +194,10 @@ export class Form_v3 extends BaseNoiz<
     grid-auto-columns: max-content;
     #submit-button {
       display: none;
+    }
+    label {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
   `;
 

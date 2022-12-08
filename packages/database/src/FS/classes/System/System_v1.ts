@@ -2,15 +2,16 @@ import fs from "fs";
 import path, { dirname, extname } from "path";
 import { fileURLToPath } from "url";
 import { Abortable } from "events";
-
-// import { zionUtil } from "@zionstate_node/zion-util";
-// import { ZionError } from "@zionstate_js/error";
-import { ITree, Tree } from "../RAM/DataStructures/Tree/Tree.js";
-import { TreeNode, ITreeNode } from "../RAM/DataStructures/Tree/TreeNode.js";
-import { Root, IRoot } from "../RAM/DataStructures/Tree/Root.js";
-import { Folder, IFolder } from "../RAM/DataStructures/Tree/Folder.js";
-import { File, IFile } from "../RAM/DataStructures/Tree/File.js";
 import { js, node } from "@zionstate/utils";
+import { TreeNode } from "../../../RAM/DataStructures/Tree/TreeNode";
+import { Tree } from "../../../RAM/DataStructures/Tree/Tree";
+import { Root } from "../../../RAM/DataStructures/Tree/Root";
+import { Folder } from "../../../RAM/DataStructures/Tree/Folder";
+import { File } from "../../../RAM/DataStructures/Tree/File";
+
+export interface ISystem_v1 {}
+
+export interface System_v1 {}
 
 const { ZionError } = js;
 const { util } = node;
@@ -19,7 +20,7 @@ const { zionUtil } = util;
 export const JOINPATHSERROR = "arguments must be of type string[]";
 
 export type Dirent = fs.Dirent;
-export class System {
+export class System_v1 {
   #blackListFileNames = [".DS_Store"];
   get blackListFileNames() {
     return this.#blackListFileNames;
@@ -50,12 +51,6 @@ export class System {
       if (res[0]) return res[0];
     }
   };
-  /**
-   * @param {String} path percorso target
-   * @returns {String[]} ritorna un array contenente la
-   * lista dei nomi delle carelle contenute nel percorso
-   * target.
-   */
   arrayOfFoldersInDirectory = (path: string) => {
     return fs
       .readdirSync(path, {
@@ -68,11 +63,18 @@ export class System {
         (directoryEntity) => directoryEntity.isDirectory()
       );
   };
-  /**
-   * @param {String} path target path
-   * @returns {}  an array of name of the files contained in
-   * the target path
-   */
+  arrayOfFilesInDirectory = (path: string) => {
+    return fs
+      .readdirSync(path, {
+        withFileTypes: true,
+      })
+      .filter(
+        // vengono esclusi i risultati che contengono un '.'
+        // in quanto si tratta di nomi di files e non
+        // di cartelle
+        (directoryEntity) => directoryEntity.isFile()
+      );
+  };
   arrayOfNamesOfFilesInFolder = (
     path: string
   ): { name: string; path: string }[] => {
@@ -152,6 +154,8 @@ export class System {
     while (stack.length) {
       let currentNode = stack.pop();
       if (currentNode) {
+        if (!currentNode.path) throw new Error("no path");
+
         let children = fs.readdirSync(currentNode.path);
         let DSStore = system.blackListFileNames[0];
         // TODO aggiunta variabile per zittare ts, sistemare
@@ -166,6 +170,7 @@ export class System {
           let name = this.setNameForTreeNode(childPath, TreeNode.types[type]);
           let childNode: File | Folder;
           if (!name) throw new Error("No name");
+          if (!currentNode.depth) throw new Error("no depth");
           if (_types[type] === _types[0]) {
             childNode = new Folder(
               name,
@@ -190,6 +195,7 @@ export class System {
             nodes.push(childNode);
           }
           currentNode.connettiAFiglio(childNode);
+          if (!childNode.path) throw new Error("no path");
           if (system.getTreeNodeType(childNode.path) === 0) {
             childNode.type = _types[0];
             stack.push(childNode);
@@ -301,11 +307,17 @@ export class System {
   }
 }
 // /Users/WAW/Documents/Projects/ZION/node_modules/@types/node/events.d.ts
-export let TreeNodeExport = TreeNode;
-export type ITreeNodeExport = ITreeNode;
-export type ITreeExport = ITree;
-export type IFileExport = IFile;
-export type IFolderExport = IFolder;
-export type IRootExport = IRoot;
-export let system: System = new System();
+// export let TreeNodeExport = TreeNode;
+// export type ITreeNodeExport = ITreeNode;
+// export type ITreeExport = ITree;
+// export type IFileExport = IFile;
+// export type IFolderExport = IFolder;
+// export type IRootExport = IRoot;
+export let system: System_v1 = new System_v1();
 Object.assign(system, fs);
+
+export type System_v1Ctor = {
+  new (): System_v1;
+};
+
+export const System_v1Ctor: System_v1Ctor = System_v1;
