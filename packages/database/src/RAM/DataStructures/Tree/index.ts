@@ -1,3 +1,4 @@
+export { Tree } from "./Tree_v1";
 //// File
 export * from "./File";
 

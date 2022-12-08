@@ -1,7 +1,5 @@
-export {}
-
 //// Array
-export * from './Array';
+export * from "./Array";
 
 //// Tree
-export * from './Tree';
+export * from "./Tree";

@@ -9,6 +9,5 @@ export type { Parameter } from "./DataStructures/Array";
 export type { find1 } from "./DataStructures/Array";
 
 // Tree
-export * as Tree from "./DataStructures/Tree";
-export { File, Folder } from "./DataStructures/Tree";
+export { File, Folder, Tree } from "./DataStructures/Tree";
 export { TreeNode } from "./DataStructures/Tree";
