@@ -3,11 +3,13 @@ import path, { dirname, extname } from "path";
 import { fileURLToPath } from "url";
 import { Abortable } from "events";
 import { js, node } from "@zionstate/zionbase/utils";
-import { TreeNode } from "../../../RAM/DataStructures/Tree/TreeNode";
-import { Root } from "../../../RAM/DataStructures/Tree/Root";
-import { Folder } from "../../../RAM/DataStructures/Tree/Folder";
-import { File } from "../../../RAM/DataStructures/Tree/File";
-import { Tree } from "../../../RAM";
+import {
+  Folder,
+  Root,
+  Tree,
+  TreeNode,
+  File,
+} from "@zionstate/zionbase/zionbase";
 
 export interface ISystem_v1 {}
 

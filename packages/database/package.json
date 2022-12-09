@@ -22,10 +22,6 @@
       "module": "./IPFS/dist/zionstate-database-IPFS.esm.js",
       "default": "./IPFS/dist/zionstate-database-IPFS.cjs.js"
     },
-    "./RAM": {
-      "module": "./RAM/dist/zionstate-database-RAM.esm.js",
-      "default": "./RAM/dist/zionstate-database-RAM.cjs.js"
-    },
     "./FileSystem": {
       "module": "./FileSystem/dist/zionstate-database-FileSystem.esm.js",
       "default": "./FileSystem/dist/zionstate-database-FileSystem.cjs.js"
@@ -46,7 +42,6 @@
     "EVM",
     "FS",
     "IPFS",
-    "RAM",
     "FileSystem",
     "Git",
     "Blockchain"
@@ -58,7 +53,6 @@
       "EVM/index.ts",
       "FS/index.ts",
       "IPFS/index.ts",
-      "RAM/index.ts",
       "FileSystem/index.ts",
       "Git/index.ts",
       "Blockchain/index.ts"
@@ -85,7 +79,6 @@
     "@tableland/sdk": "^2.0.1",
     "@types/node": "^18.7.18",
     "@zionstate/test": "0.0.1",
-    "@zionstate/utils": "0.0.1",
     "@zionstate/zionbase": "0.0.1",
     "arweave": "^1.11.4",
     "chai": "^4.3.6",
@@ -134,7 +127,6 @@
     "@typechain/hardhat": "^6.1.4",
     "@types/node": "^18.7.18",
     "@zionstate/test": "0.0.1",
-    "@zionstate/utils": "0.0.1",
     "@zionstate/zionbase": "0.0.1",
     "arweave": "^1.11.4",
     "chai": "^4.3.6",
