@@ -11,7 +11,6 @@ import {
 } from "simple-git";
 // BUG also here it give the import but, but only from one entry point
 // import {} from "@zionstate/database/EVM";
-import {} from "@zionstate/utils";
 import { InitResult } from "simple-git";
 import { ZionGit } from ".";
 import { FS } from "../..";

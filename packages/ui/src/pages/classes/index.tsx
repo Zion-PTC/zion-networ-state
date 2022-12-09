@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import fs from "fs";
 import styled from "styled-components";
-// import "@zionstate/git";
+import { Dati } from "@zionstate/database/Git";
 import type { FS as FsTypes } from "@zionstate/database";
-import "@zionstate/zionbase";
+import "@zionstate/zionbase/utils";
 import "@zionstate/utils";
 import "@zionstate/blockchain";
 import IndexPage from "../components/IndexPage";
@@ -16,8 +16,6 @@ import {
   TreeNode,
 } from "@zionstate/database/RAM";
 
-const Dati = FS.Dati;
-interface Dati extends FsTypes.Dati {}
 const Reader = FS.Reader;
 
 const maker = IndexPage.maker;
@@ -59,6 +57,8 @@ export function getStaticProps() {
   const nodes = data.map(data => {
     const path = data.path + "/" + data.name;
     const res = foldersInDir(path);
+    // @ts-expect-error
+    // TODO @giacomogagliano
     TreeNode.makeNodes(res, data);
     return data;
   });

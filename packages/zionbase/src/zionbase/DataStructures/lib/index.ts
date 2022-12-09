@@ -7,9 +7,6 @@ export * from "./findAdjacentNodes";
 ///////// isConnected
 export * from "./isConnected";
 
-///////// bfs
-export * from "./bfs";
-
 ///////// dfs
 export * from "./dfs";
 

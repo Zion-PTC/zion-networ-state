@@ -1,4 +1,4 @@
-import { node } from "@zionstate/utils";
+import { node } from "@zionstate/zionbase/utils";
 import { ParsedUrlQuery } from "querystring";
 import { withPathsReturn } from "../Types/";
 
@@ -7,7 +7,9 @@ const handleFetch = node.fetch.handleFetch;
 export function handleFetchWithPaths<
   Data extends { [key: string]: any },
   Query extends ParsedUrlQuery = ParsedUrlQuery,
-  PageData extends { [key: string]: Data } = { [key: string]: Data },
+  PageData extends { [key: string]: Data } = {
+    [key: string]: Data;
+  },
   Field extends keyof PageData = keyof PageData,
   QueryKey extends keyof Query = keyof Query,
   Paths extends { params: Query }[] = { params: Query }[]
@@ -24,7 +26,9 @@ export function handleFetchWithPaths<
   return {
     getStaticPaths: async () => {
       let paths: Paths | [] = [];
-      const res = await handleFetch<{ [key: string]: Data }>(origin);
+      const res = await handleFetch<{
+        [key: string]: Data;
+      }>(origin);
       for (let key in res) {
         res[key];
         // @ts-expect-error
@@ -44,7 +48,9 @@ export function handleFetchWithPaths<
       console.log("called handlefetchwithpaths", params);
       // @ts-expect-error
       const id = params[query];
-      const res = await handleFetch<Data>(origin + "/" + id);
+      const res = await handleFetch<Data>(
+        origin + "/" + id
+      );
       const obj = {};
       // @ts-expect-error
       obj[field] = res;

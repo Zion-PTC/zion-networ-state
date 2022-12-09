@@ -20,4 +20,7 @@ export * from "./Node";
 export * from "./AppGraph";
 
 //// Tree
-export * from './Tree';
+export * from "./Tree";
+
+//// Dag
+export * from "./DAG";

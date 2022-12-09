@@ -1,4 +1,4 @@
-import { ZionError } from "@zionstate/utils";
+import { ZionError } from "@zionstate/zionbase/utils";
 import { FS } from "../..";
 import { ZionGit } from "../ZionGit";
 import { ZionGitHub } from "../ZionGitHub";

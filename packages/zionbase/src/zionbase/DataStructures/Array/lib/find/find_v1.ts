@@ -1,3 +1,4 @@
+// @ts-nocheck
 export interface find1<T, L, K> {
   key: string;
   constructor: T;
@@ -7,7 +8,7 @@ export interface find1<T, L, K> {
   callback: string;
 }
 
-export function findItem<T, N, L, K>(
+export function find_v1<T, N, L, K>(
   key: string,
   constructor: T,
   parameter: string,
@@ -15,7 +16,7 @@ export function findItem<T, N, L, K>(
   instance: K,
   callback: string
 ): void;
-export function findItem<T, N, L, K>(
+export function find_v1<T, N, L, K>(
   key: string,
   constructor: T,
   parameter: string,
@@ -24,7 +25,7 @@ export function findItem<T, N, L, K>(
   callback: string,
   paramToParse: string
 ): void;
-export function findItem<T, N, L, K>(
+export function find_v1<T, N, L, K>(
   key: string,
   constructor: T,
   parameter: string,

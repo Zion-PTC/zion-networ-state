@@ -1,4 +1,4 @@
-import { node } from "@zionstate/utils";
+import { node } from "@zionstate/zionbase/utils";
 import { File } from "./File";
 import { Folder } from "./Folder";
 import { Root } from "./Root";

@@ -11,7 +11,8 @@ export function read_v1(folder: string): string[] {
   let path = new NoizPath(libpath).path;
 
   return (() => {
-    const filesInFolder = system.arrayOfNamesOfFilesInFolder(path);
+    const filesInFolder =
+      system.arrayOfNamesOfFilesInFolder(path);
     let paths: string[] = [];
     filesInFolder.forEach(aggiungiPath, paths);
     return paths;
@@ -27,7 +28,7 @@ export function read2(
     if (filetypes) options = { withFileTypes: filetypes };
     if (!options)
       return readdirSync(folder)
-        .filter((ent) => ent[0] !== ".")
-        .filter((ent) => ent !== "giacomo");
+        .filter(ent => ent[0] !== ".")
+        .filter(ent => ent !== "giacomo");
   }
 }

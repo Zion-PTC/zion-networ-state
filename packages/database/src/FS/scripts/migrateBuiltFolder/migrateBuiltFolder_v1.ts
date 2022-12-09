@@ -3,7 +3,7 @@ import { join } from "path";
 import {
   js,
   // node
-} from "@zionstate/utils";
+} from "@zionstate/zionbase/utils";
 import {
   changePackJson,
   changeTsConfig,
@@ -11,9 +11,13 @@ import {
   getKnownData,
   writeFile,
 } from "../../lib";
-import { jsconfigJSON, tsconfigJSON } from "../../lib/types";
+import {
+  jsconfigJSON,
+  tsconfigJSON,
+} from "../../lib/types";
 
-export const migrateBuiltFolder_v1 = "migrateBuiltFolder_v1";
+export const migrateBuiltFolder_v1 =
+  "migrateBuiltFolder_v1";
 // const runProcess = node.process.runProcess;
 
 const { ZionRegExp } = js;
@@ -35,10 +39,17 @@ const getTsConfig = getKnownData<tsconfigJSON.DataType>;
 
 export async function main() {
   const dirent: string[] = fs.readdirSync(sourceRepo);
-  const hasBuilt = dirent.some((entity) => entity === targetName);
-  hasBuilt ? await deleteFolder(join(sourceRepo, targetName)) : {};
+  const hasBuilt = dirent.some(
+    entity => entity === targetName
+  );
+  hasBuilt
+    ? await deleteFolder(join(sourceRepo, targetName))
+    : {};
   const packJson = await getPackJson(packJsonPath);
-  const updatedJson = await changePackJson(packJson, newFolderName);
+  const updatedJson = await changePackJson(
+    packJson,
+    newFolderName
+  );
   const tsConfigJson = await getTsConfig(tsConfigPath);
   const updatedTs = await changeTsConfig(
     tsConfigJson,
@@ -49,8 +60,11 @@ export async function main() {
     [updatedJson, packJsonPath],
     [updatedTs, tsConfigPath],
   ].forEach(
-    async (tuple) =>
-      await writeFile(tuple[1] as string, JSON.stringify(tuple[0]))
+    async tuple =>
+      await writeFile(
+        tuple[1] as string,
+        JSON.stringify(tuple[0])
+      )
   );
 }
 

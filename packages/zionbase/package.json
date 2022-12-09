@@ -13,12 +13,12 @@
       "default": "./dist/zionstate-zionbase.cjs.js"
     },
     "./utils": {
-      "module": "./utils/dist/zionstate-database-utils.esm.js",
-      "default": "./utils/dist/zionstate-database-utils.cjs.js"
+      "module": "./utils/dist/zionstate-zionbase-utils.esm.js",
+      "default": "./utils/dist/zionstate-zionbase-utils.cjs.js"
     },
     "./zionbase": {
-      "module": "./zionbase/dist/zionstate-database-zionbase.esm.js",
-      "default": "./zionbase/dist/zionstate-database-zionbase.cjs.js"
+      "module": "./zionbase/dist/zionstate-zionbase-zionbase.esm.js",
+      "default": "./zionbase/dist/zionstate-zionbase-zionbase.cjs.js"
     },
     "./package.json": "./package.json"
   },
