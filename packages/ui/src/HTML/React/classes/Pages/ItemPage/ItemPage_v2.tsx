@@ -278,7 +278,8 @@ export class ItemPage_v2 extends BaseNoiz<
     state.isLoading = true;
     state.imageLoaded = false;
     state.src = props.src;
-    this.layouts[0]?.component.bind(this);
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
     this.state = state;
   }
 
@@ -299,7 +300,7 @@ export class ItemPage_v2 extends BaseNoiz<
     this.setSrc(this.props.src);
   };
 
-  componentDidMount() {
+  didMount() {
     this.checkLoadingStatus();
   }
 }
