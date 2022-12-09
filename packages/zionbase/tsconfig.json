@@ -4,6 +4,7 @@
   "exclude": [
     "dist",
     "src/giacomo",
-    "src/zionbase/giacomo"
+    "src/zionbase/giacomo",
+    "test"
   ]
 }

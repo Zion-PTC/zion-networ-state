@@ -61,4 +61,4 @@ export type {
 } from "./Types";
 export {};
 export * as Algorythms from "./Algorythms";
-export { Bfs } from "./Algorythms";
+export { Bfs, Dfs } from "./Algorythms";

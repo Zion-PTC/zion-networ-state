@@ -1,16 +1,8 @@
-interface BasicNode<I = number, T = {}> {
-  id: I;
-  children: BasicNode<I, T>["id"][];
-  value: T;
-}
-
-interface graph<N> {
-  nodes: N[];
-}
-
-interface processor<T> {
-  (e: T): T;
-}
+import type {
+  BasicNode,
+  graph,
+  processor,
+} from "../Types";
 
 export interface IBfs_v1<
   I = number,

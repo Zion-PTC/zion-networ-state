@@ -1,11 +1,10 @@
-import { Bfs } from "../zionbase";
-
-console.log(Bfs);
+import { Bfs, Dfs } from "../zionbase";
 
 interface ValueType {
   name: string;
 }
 const bfs = new Bfs<number, ValueType, Node_v1>();
+const dfs = new Dfs<number, ValueType, Node_v1>();
 
 interface Node_v1 {
   type?: string;
@@ -53,7 +52,10 @@ const proc1: (c: Node_v1) => Node_v1 = (curr: Node_v1) => {
 };
 
 const bot = bfs.traverse().use(proc1).process(graph);
+const vot = dfs.traverse().use(proc1).process(graph);
 
 if (!bot?.nodes[0]) throw new Error("");
+if (!vot?.nodes[0]) throw new Error("");
 
 console.log(bot.nodes[0].value);
+console.log(vot.nodes[0].value);
