@@ -1,5 +1,18 @@
-///// EXPORT
-export { Tree_v1 as Tree } from "./Tree_v1";
-export type { Tree_v1Ctor as TreeCtor } from "./Tree_v1";
-////////////
-export * as Trees from './Trees'
+export { Tree } from "./Tree_v1";
+//// File
+export * from "./File";
+
+//// Folder
+export * from "./Folder";
+
+//// LeafNode
+export * from "./LeafNode";
+
+//// Root
+export * from "./Root";
+
+//// TreeNode
+export * from "./TreeNode";
+
+//// FileSystemTree
+export * from "./FileSystemTree";
