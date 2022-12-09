@@ -13,3 +13,6 @@ export * from "./Root";
 
 //// TreeNode
 export * from "./TreeNode";
+
+//// FileSystemTree
+export * from './FileSystemTree';

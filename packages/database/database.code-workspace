@@ -17,6 +17,9 @@
     },
     {
       "path": "src/Git"
+    },
+    {
+      "path": "src/Blockchain"
     }
   ],
   "settings": {}

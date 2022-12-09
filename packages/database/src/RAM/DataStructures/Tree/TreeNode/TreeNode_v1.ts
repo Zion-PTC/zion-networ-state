@@ -275,9 +275,7 @@ export class TreeNode_v1 implements TreeNode_v1 {
       if (!this.genitore) return;
       if (!treeNode.genitore[0]) return;
       if (
-        treeNode.genitore[0].name ===
-        // @ts-expect-error
-        this.genitore[0].name
+        treeNode.genitore[0].name === this.genitore[0].name
       ) {
         // console.log(treeNode.genitore[0]);
         servedArray.push(treeNode);

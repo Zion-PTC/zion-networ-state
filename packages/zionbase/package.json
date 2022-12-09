@@ -7,12 +7,31 @@
   "main": "dist/zionstate-zionbase.cjs.js",
   "module": "dist/zionstate-zionbase.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "module": "./dist/zionstate-zionbase.esm.js",
+      "default": "./dist/zionstate-zionbase.cjs.js"
+    },
+    "./utils": {
+      "module": "./utils/dist/zionstate-database-utils.esm.js",
+      "default": "./utils/dist/zionstate-database-utils.cjs.js"
+    },
+    "./zionbase": {
+      "module": "./zionbase/dist/zionstate-database-zionbase.esm.js",
+      "default": "./zionbase/dist/zionstate-database-zionbase.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
-    "dist"
+    "dist",
+    "utils",
+    "zionbase"
   ],
   "preconstruct": {
-    "entrypoint": [
-      "src/index.ts"
+    "entrypoints": [
+      "index.ts",
+      "utils/index.ts",
+      "zionbase/index.ts"
     ]
   },
   "scripts": {
@@ -28,5 +47,15 @@
   "peerDependencies": {
     "@babel/plugin-proposal-decorators": "^7.20.2",
     "@zionstate/test": "0.0.1"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@typechain/ethers-v5": "^10.1.0",
+    "@typechain/hardhat": "^6.1.4"
   }
 }

@@ -88,3 +88,15 @@ export interface Plan {
 
 export type gooo =
   RestEndpointMethodTypes["users"]["getAuthenticated"]["response"];
+
+export type GitHubUserBasic = Pick<
+  GetAuthenticatedUser["data"],
+  | "id"
+  | "name"
+  | "login"
+  | "avatar_url"
+  | "url"
+  | "html_url"
+  | "organizations_url"
+  | "type"
+>;
