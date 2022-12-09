@@ -1,7 +1,10 @@
-import { BinaryTree, BinaryTreeTuple } from "../Trees";
+import {
+  BinaryTree,
+  TupleBinaryTree,
+} from "../Graph/Tree/Trees";
 
 export type IGraphTraverse = {
-  graph: BinaryTree | BinaryTreeTuple;
+  graph: BinaryTree | TupleBinaryTree;
 };
 
 export class GraphTraverse {

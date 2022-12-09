@@ -28,7 +28,7 @@ import {
   requestAccounts,
 } from "../../../lib/hooks";
 import { WindowEthRequired } from "../../../lib/hooks/useEthereum/useEthereum_v2";
-import { dataGuard } from "@zionstate/utils";
+import { dataGuard } from "@zionstate/zionbase/utils";
 
 ////////ETH
 

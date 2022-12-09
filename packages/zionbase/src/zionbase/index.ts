@@ -51,3 +51,6 @@ export type {
   GConstructor,
   NCtor,
 } from "./Types";
+export {};
+export * as Algorythms from "./Algorythms";
+export { Bfs } from "./Algorythms";

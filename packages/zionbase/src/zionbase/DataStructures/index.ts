@@ -8,7 +8,4 @@ export * from "./Array";
 //// Graph
 export * from "./Graph";
 
-//// Dag
-export * from "./DAG";
-
 export * as lib from "./lib";

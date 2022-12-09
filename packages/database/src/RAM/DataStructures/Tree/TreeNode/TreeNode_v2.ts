@@ -63,7 +63,7 @@ export class TreeNode_v2<T = any>
     data.type = data.types?.index;
   }
 
-  #type: treeNodeTypeType;
+  #type: treeNodeTypeType = TreeNode_v2.#types.root;
   get type() {
     return this.#type;
   }

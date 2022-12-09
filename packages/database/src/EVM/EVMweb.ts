@@ -3,10 +3,10 @@ import { detect } from "./detect";
 import { MetaMaskEthereumProvider } from "./detectEthereumProvider";
 import { ZionContractFactories } from "./Types/ZionContractFactories";
 
-type RequireOnlyOne<T, Keys extends keyof T = keyof T> = Pick<
+export type RequireOnlyOne<
   T,
-  Exclude<keyof T, Keys>
-> &
+  Keys extends keyof T = keyof T
+> = Pick<T, Exclude<keyof T, Keys>> &
   {
     [K in Keys]-?: Required<Pick<T, K>> &
       Partial<Record<Exclude<Keys, K>, undefined>>;
@@ -39,7 +39,9 @@ export class EVMweb implements IEVMweb {
   contractFactories: typeof ZionContractFactories["prototype"]["contractFactories"];
   constructor(args: EVMwebArgs) {
     this.window = args.window;
-    this.provider = new ethers.providers.Web3Provider(this.window.ethereum);
+    this.provider = new ethers.providers.Web3Provider(
+      this.window.ethereum
+    );
     this.signer = this.provider.getSigner();
     this.contractFactories = new ZionContractFactories(
       this.signer

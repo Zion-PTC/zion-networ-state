@@ -1,4 +1,4 @@
-export function aggiungiPath(
+export function add_v1Path(
   this: string[],
   fileInFolder: { name: string; path: string }
 ) {
@@ -8,20 +8,20 @@ export function aggiungiPath(
 export type Parameter = string;
 export type Key = string;
 
-export function aggiungi<T>(
+export function add_v1<T>(
   obj1: unknown,
   key: string,
   obj: unknown,
   parameter: string
 ): T;
-export function aggiungi<T>(
+export function add_v1<T>(
   obj1: T,
   key: string,
   obj: unknown,
   parameter: string,
   map: boolean
 ): T;
-export function aggiungi<T>(
+export function add_v1<T>(
   obj1: T,
   key: string,
   obj: unknown,
@@ -29,7 +29,7 @@ export function aggiungi<T>(
   map: boolean,
   path: string[]
 ): T;
-export function aggiungi<T>(
+export function add_v1<T>(
   obj1: T,
   key: string,
   obj: unknown,

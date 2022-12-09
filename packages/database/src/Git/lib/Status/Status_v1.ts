@@ -5,7 +5,7 @@ enum filesStatuses {
   "icons-not-showing" = "icons-not-showing",
   "index-??" = "index-??",
 }
-type fileStatusesTypes = keyof typeof filesStatuses;
+export type fileStatusesTypes = keyof typeof filesStatuses;
 
 export interface IStatus_v1 {
   name: string;

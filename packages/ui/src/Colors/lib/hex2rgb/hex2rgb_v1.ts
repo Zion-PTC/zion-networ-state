@@ -1,4 +1,4 @@
-import { ZionError } from "@zionstate/utils";
+import { ZionError } from "@zionstate/zionbase/utils";
 
 /**
  * converts an hex string to a tuple of rgb numbers
