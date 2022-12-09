@@ -169,9 +169,11 @@ export class NoizApp_v2 extends BaseNoiz<
 
   istia(props: NoizApp_v2Props) {
     const Layout = this.standard1;
+    console.log("istia", theme.primary.color);
+
     return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyle theme={this.state.theme} />
+      <ThemeProvider theme={this.state.theme}>
+        <GlobalStyle />
         <Layout>
           <header>
             I am the header
