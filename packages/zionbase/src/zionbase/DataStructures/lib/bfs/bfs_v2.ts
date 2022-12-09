@@ -8,32 +8,6 @@ interface graph<N> {
   root: N;
 }
 
-export function traverseBfs<T, N extends BasicNode<T>>(
-  graph: graph<N>
-) {
-  return function (proc: (node: N) => {}) {
-    graph.nodes = [graph.root];
-    while (graph.nodes.length) {
-      let curr = graph.nodes.shift();
-      if (!curr) return;
-      graph.curr = curr;
-      pushChildren.bind(graph)(graph.curr, graph.nodes);
-      proc(graph.curr);
-    }
-    return graph;
-  };
-}
-
-function pushChildren<T, N extends BasicNode<T>>(
-  graph: graph<N>
-) {
-  if (graph.curr.children) {
-    graph.curr.children.forEach(c =>
-      graph.queue.push(c as N)
-    );
-  }
-}
-
 export interface IBfs_v2<T, N extends BasicNode<T>> {
   queue: N[];
   curr: N;
@@ -49,15 +23,19 @@ export interface Bfs_v2<T, N extends BasicNode<T>> {
 export class Bfs_v2<T, N extends BasicNode<T>>
   implements IBfs_v2<T, N>
 {
+  reduce = (_: (node: N) => N, curr: (node: N) => N) => {
+    this.curr = curr(this.curr);
+  };
   traverseBfs(graph: graph<N>) {
+    this.queue = [graph.root];
+    while (this.queue.length) {
+      let curr = this.queue.shift();
+      if (!curr) return;
+      this.curr = curr;
+      this.queue.push(curr);
+    }
     return function (proc: ((node: N) => N)[]) {
-      this.queue = [graph.root];
-      while (this.queue.length) {
-        let curr = this.queue.shift();
-        if (!curr) return;
-        this.curr = curr;
-        pushChildren.bind(graph)(graph.curr, this.queue);
-      }
+      proc.reduce(this.reduce);
       return graph;
     };
   }
