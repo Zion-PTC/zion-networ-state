@@ -186,6 +186,11 @@ export class Icon_v3 extends BaseNoiz<
     // #10 aggiungere qui
     width: 100%;
     height: 100%;
+    ${props => {
+      if (props.like)
+        console.log(props.theme.primary.color);
+      return "";
+    }}
     path {
       fill: ${props =>
         props.filled
@@ -218,20 +223,6 @@ export class Icon_v3 extends BaseNoiz<
       style: this.defaultStyle,
     }),
   ];
-
-  chooseIcon() {
-    const LogoZion = this.LogoZion;
-    let Icon: () => JSX.Element = LogoZion;
-    Icon_v3.IconPaths.forEach((path, idx) => {
-      if (this.props[path.name] === true) {
-        Icon = dataGuard(
-          Icon_v3.IconPaths[idx],
-          ""
-        ).Component;
-      }
-    });
-    return Icon;
-  }
 
   chooseIcon2() {
     let El: () => JSX.Element = () => <div>ciao</div>;
