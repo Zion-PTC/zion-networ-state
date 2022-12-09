@@ -11,3 +11,4 @@ export type { find1 } from "./DataStructures/Array";
 // Tree
 export { File, Folder, Tree } from "./DataStructures/Tree";
 export { TreeNode } from "./DataStructures/Tree";
+export * as lib from './lib'

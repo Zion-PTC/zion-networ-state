@@ -12,3 +12,4 @@ export * from "./Monorepo";
 
 //// ZionGitHub
 export * from "./ZionGitHub";
+export * as lib from './lib'
