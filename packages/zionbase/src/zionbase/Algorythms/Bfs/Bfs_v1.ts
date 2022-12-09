@@ -1,47 +1,91 @@
 interface BasicNode<I = number, T = {}> {
   id: I;
-  children: BasicNode<T>[];
+  children: BasicNode<I, T>["id"][];
+  value: T;
 }
 
 interface graph<N> {
   nodes: N[];
-  curr: N;
-  root: N;
 }
 
-export interface IBfs_v1<T, N extends BasicNode<T>> {
+interface processor<T> {
+  (e: T): T;
+}
+
+export interface IBfs_v1<
+  I = number,
+  T = {},
+  N extends BasicNode<I, T> = BasicNode<I, T>
+> {
+  graph: graph<N> | undefined;
   queue: N[];
   curr: N;
-  root: N;
+  processors: processor<N>[];
 }
 
-export interface Bfs_v1<T, N extends BasicNode<T>> {
+export interface Bfs_v1<
+  I = number,
+  T = {},
+  N extends BasicNode<I, T> = BasicNode<I, T>
+> {
+  graph: graph<N> | undefined;
   queue: N[];
   curr: N;
-  root: N;
+  processors: processor<N>[];
+  traverse(): this;
+  use(p: processor<N>): this;
+  treat: (p: processor<N>) => void;
+  pushInQueue: (id: I) => void;
+  process(graph: graph<N>): graph<N>;
 }
 
-export class Bfs_v1<T, N extends BasicNode<T>>
-  implements IBfs_v1<T, N>
-{
-  process = (processor: (node: N) => N) => {
-    this.curr = processor(this.curr);
+export class Bfs_v1<
+  I = number,
+  T = {},
+  N extends BasicNode<I, T> = BasicNode<I, T>
+> {
+  constructor() {
+    this.queue = [];
+    this.processors = [];
+  }
+
+  traverse() {
+    return this;
+  }
+
+  use(processor: processor<N>) {
+    this.processors.push(processor);
+    return this;
+  }
+
+  treat = (p: processor<N>) => {
+    if (!this.curr) return;
+    this.curr = p(this.curr);
   };
-  traverseBfs(graph: graph<N>) {
-    this.queue = [graph.root];
+
+  pushInQueue = (c: I) => {
+    if (!this.graph) return;
+    const node = this.graph.nodes[c as number];
+    this.queue.push(node as N);
+  };
+
+  process(graph: graph<N>) {
+    this.graph = graph;
+    let root = graph.nodes[0];
+    if (!root) return;
+    this.queue = [root];
     while (this.queue.length) {
       let curr = this.queue.shift();
       if (!curr) return;
       this.curr = curr;
-      this.queue.push(curr);
+      const children = curr.children;
+      children.forEach(this.pushInQueue);
+      // process
+      if (this.processors) {
+        this.processors.forEach(this.treat);
+      }
     }
-    return function (
-      this: Bfs_v1<T, N>,
-      proc: ((node: N) => N)[]
-    ) {
-      proc.forEach(this.process);
-      return graph;
-    };
+    return graph;
   }
 }
 
