@@ -1,48 +1,73 @@
-interface BasicNode {
-  children: any[];
-  name: string;
+interface BasicNode<T> {
+  children: BasicNode<T>[];
 }
 
-export function traverseBfs<
-  T extends BasicNode,
-  R extends string
->(root: T, res: R[]) {
-  return function (cb: (node: BasicNode) => {}) {
-    let queue: BasicNode[] = [root];
-    while (queue.length) {
-      let curr = queue.shift();
-      if (curr) {
-        pushChildren(curr, queue);
-        cb(curr);
-      }
+interface graph<N> {
+  nodes: N[];
+  curr: N;
+  root: N;
+}
+
+export function traverseBfs<T, N extends BasicNode<T>>(
+  graph: graph<N>
+) {
+  return function (proc: (node: N) => {}) {
+    graph.nodes = [graph.root];
+    while (graph.nodes.length) {
+      let curr = graph.nodes.shift();
+      if (!curr) return;
+      graph.curr = curr;
+      pushChildren.bind(graph)(graph.curr, graph.nodes);
+      proc(graph.curr);
     }
+    return graph;
   };
 }
-function pushChildren(
-  curr: BasicNode,
-  queue: BasicNode[]
+
+function pushChildren<T, N extends BasicNode<T>>(
+  graph: graph<N>
 ) {
-  if (curr.children) {
-    curr.children.forEach(c => queue.push(c));
+  if (graph.curr.children) {
+    graph.curr.children.forEach(c =>
+      graph.queue.push(c as N)
+    );
   }
 }
 
-export interface IBfs_v2 {
-  name: string;
+export interface IBfs_v2<T, N extends BasicNode<T>> {
+  queue: N[];
+  curr: N;
+  root: N;
 }
 
-export interface Bfs_v2 {
-  name: string;
+export interface Bfs_v2<T, N extends BasicNode<T>> {
+  queue: N[];
+  curr: N;
+  root: N;
 }
 
-export class Bfs_v2 implements IBfs_v2 {
-  constructor(name: string) {
-    this.name = name;
+export class Bfs_v2<T, N extends BasicNode<T>>
+  implements IBfs_v2<T, N>
+{
+  traverseBfs(graph: graph<N>) {
+    return function (proc: ((node: N) => N)[]) {
+      this.queue = [graph.root];
+      while (this.queue.length) {
+        let curr = this.queue.shift();
+        if (!curr) return;
+        this.curr = curr;
+        pushChildren.bind(graph)(graph.curr, this.queue);
+      }
+      return graph;
+    };
   }
 }
 
-export type Bfs_v2Ctor = {
-  new (name: string): Bfs_v2;
+export type Bfs_v2Ctor<
+  T = {},
+  N extends BasicNode<T> = BasicNode<T>
+> = {
+  new (): Bfs_v2<T, N>;
 };
 
 export const Bfs_v2Ctor: Bfs_v2Ctor = Bfs_v2;
