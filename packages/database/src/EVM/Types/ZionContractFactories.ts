@@ -1,9 +1,11 @@
-import { types, Factories } from "@zionstate/blockchain";
-import { ZERC1155TokenShop__factory } from "@zionstate/blockchain/dist/types/contracts";
-import { Membership__factory } from "@zionstate/blockchain/dist/types/contracts";
-import { ProvaMaster__factory } from "@zionstate/blockchain/dist/types/contracts";
-import { USDC__factory } from "@zionstate/blockchain/dist/types/contracts";
 import { ethers, Signer } from "ethers";
+import { Factories, types } from "../../Blockchain";
+import {
+  Membership__factory,
+  ProvaMaster__factory,
+  USDC__factory,
+  ZERC1155TokenShop__factory,
+} from "../../Blockchain/src/types/contracts";
 
 export type ERC1155IndividualURI_Factory =
   types.ZionContractsTypeScript.ERC1155IndividualURI__factory;
@@ -24,8 +26,10 @@ export class ZionContractFactories {
   };
   constructor(public signer?: Signer) {
     if (!signer) throw new Error("");
-    const ERC1155IndividualURI = Factories.getERC1155IndividualURI(signer);
-    const ERC1155TokenShop = Factories.getERC1155TokenShop(signer);
+    const ERC1155IndividualURI =
+      Factories.getERC1155IndividualURI(signer);
+    const ERC1155TokenShop =
+      Factories.getERC1155TokenShop(signer);
     const Membership = Factories.getMembership(signer);
     const ProvaMaster = Factories.getProvaMaster(signer);
     const USDC = Factories.getUSDC(signer);

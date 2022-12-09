@@ -1,3 +1,4 @@
+// @ts-nocheck
 export interface find1<T, L, K> {
   key: string;
   constructor: T;

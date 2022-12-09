@@ -1,4 +1,4 @@
-import { LeafNode_v2 as v2, LeafNode_v2Props as v2Props } from './LeafNode_v2';
+import { LeafNode_v2 as v2 } from "./LeafNode_v2";
 ///// EXPORT
 // export { LeafNode_v1 as LeafNode } from "./LeafNode_v1";
 // export type { LeafNode_v1Ctor as LeafNodeCtor } from "./LeafNode_v1";
@@ -6,4 +6,3 @@ import { LeafNode_v2 as v2, LeafNode_v2Props as v2Props } from './LeafNode_v2';
 export {};
 
 export const LeafNode_v2 = v2;
-export type LeafNode_v2Props = v2Props;

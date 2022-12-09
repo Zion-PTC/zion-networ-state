@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { File } from "@zionstate/database/RAM";
+import { Dati } from "@zionstate/database/Git";
 import { Factories } from "@zionstate/database/Blockchain";
 import { join } from "path";
 import styled from "styled-components";
@@ -22,15 +22,15 @@ interface IndexPageProps {
 }
 export default class IndexPage extends Component<IndexPageProps> {
   static makeDati = (el: string) => {
-    // const newDati = new File(el);
-    const dati = new File(el, "", 0, undefined, 0, "");
+    // const newDati = new Dati(el);
+    const dati = new Dati();
     dati.name = el;
     dati.status = "working ✅";
     return dati;
   };
   static maker =
-    (name: string, status: File["status"]) =>
-    (el: File) => {
+    (name: string, status: Dati["status"]) =>
+    (el: Dati) => {
       if (el.name === name) {
         el.status = status;
       }
@@ -41,8 +41,8 @@ export default class IndexPage extends Component<IndexPageProps> {
     else return true;
   };
   static setStatus = (
-    file: File,
-    status: File["status"]
+    file: Dati,
+    status: Dati["status"]
   ) => {
     return (file.status = status);
   };
@@ -61,7 +61,7 @@ export default class IndexPage extends Component<IndexPageProps> {
     return (
       <Div>
         <ul>
-          {parsed.map((el: File, idx: number) => {
+          {parsed.map((el: Dati, idx: number) => {
             let jointpath;
             if (path)
               jointpath = "/" + join(...path, el.name);

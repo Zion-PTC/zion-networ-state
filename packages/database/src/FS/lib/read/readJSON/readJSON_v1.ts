@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { extname } from "path";
-import { js } from "@zionstate/utils";
+import { js } from "@zionstate/zionbase/utils";
 
 const { ZionRegExp } = js;
 const regexp = ZionRegExp.allTsComments;
@@ -16,7 +16,8 @@ export function readJSON_v1<T>(path: string): T | string {
   if (extension !== ".json") throw "not json";
   let string = readFileSync(path).toString();
   const hasMatches = regexpdasubs.test(string);
-  if (hasMatches) string = string.replace(regexpdasubs, "");
+  if (hasMatches)
+    string = string.replace(regexpdasubs, "");
   string = string.replace(regexp2, "");
   try {
     obj = JSON.parse(string);

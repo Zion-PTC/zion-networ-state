@@ -1,2 +1,0 @@
-//// handleFetch
-export * from "./handleFetch";

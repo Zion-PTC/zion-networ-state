@@ -1,7 +1,7 @@
 import { FileSystemTree } from "../FileSystemTree";
-import { TreeNode, TreeNode_v2 } from "../TreeNode";
+import { TreeNode_v2 } from "../TreeNode";
 
-enum fileTypes {
+export enum fileTypes {
   ts,
   tsx,
   js,

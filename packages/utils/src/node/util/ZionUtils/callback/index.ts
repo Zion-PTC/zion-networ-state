@@ -1,2 +1,0 @@
-///////// chiamaNVolteCallback
-export * from "./chiamaNVolteCallback";

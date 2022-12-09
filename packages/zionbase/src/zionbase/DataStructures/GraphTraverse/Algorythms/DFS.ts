@@ -1,5 +1,5 @@
 import { GraphTraverse } from "..";
-import { BinaryTree } from "../../Trees";
+import { BinaryTree } from "../../Graph/Tree/Trees";
 
 export class DFS extends GraphTraverse {
   traverseDFS() {

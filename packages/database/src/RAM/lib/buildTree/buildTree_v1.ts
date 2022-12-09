@@ -1,4 +1,4 @@
-import { zionUtil } from "@zionstate/utils/dist/node/util";
+import { node } from "@zionstate/zionbase/utils";
 import fs from "fs";
 import { System, system } from "../../../FileSystem";
 import {
@@ -12,6 +12,8 @@ import {
 export interface IbuildTree_v1 {
   (a: any): any;
 }
+
+const zionUtil = node.util.zionUtil;
 
 export const buildTree_v1: IbuildTree_v1 = function () {};
 

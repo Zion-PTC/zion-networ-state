@@ -1,16 +1,43 @@
 // import ethers from "ethers";
-import { getProvider, getProviderType } from "./getProvider";
-import { formatEther, formatEtherType } from "./formatEthers";
-import { formatUnits, formatUnitsType } from "./formatUnits";
+import {
+  getProvider,
+  getProviderType,
+} from "./getProvider";
+import {
+  formatEther,
+  formatEtherType,
+} from "./formatEthers";
+import {
+  formatUnits,
+  formatUnitsType,
+} from "./formatUnits";
 import { getBalance, getBalanceType } from "./getBalance";
-import { getGasPrice, getGasPriceType } from "./getGasPrice";
+import {
+  getGasPrice,
+  getGasPriceType,
+} from "./getGasPrice";
 import { getJsonRpc, getJsonRpcType } from "./getJsonRpc";
-import { buildProviders, buildProvidersType } from "./buildProviders";
+import {
+  buildProviders,
+  buildProvidersType,
+} from "./buildProviders";
 import { ethers, Signer } from "ethers";
-import { makeContract, makeContractType } from "./getContract";
-import { deployContract, deployContractType } from "./deployContract";
-import { retrieveTxDatas, retrieveTxDatasType } from "./retrieveTxDatas";
-import { calculateTxCosts, calculateTxCostsType } from "./calculateTxCosts";
+import {
+  makeContract,
+  makeContractType,
+} from "./getContract";
+import {
+  deployContract,
+  deployContractType,
+} from "./deployContract";
+import {
+  retrieveTxDatas,
+  retrieveTxDatasType,
+} from "./retrieveTxDatas";
+import {
+  calculateTxCosts,
+  calculateTxCostsType,
+} from "./calculateTxCosts";
 // import { printTxLog, printTxLogType } from "./printTxLog";
 import { ZionContractFactories } from "./Types/ZionContractFactories";
 import {
@@ -28,7 +55,7 @@ import {
   InfuraProvider,
   JsonRpcProvider,
 } from "./Types";
-import "@zionstate/zionbase";
+import { RequireOnlyOne } from "./EVMweb";
 
 export type EVMCtorArgs = {
   signer?: Signer;
@@ -59,8 +86,8 @@ export type RpcUrl = {
   block_scout: string;
 };
 
-type KeysRequired = ZionTypes.RequireOnlyOne<Keys>;
-type RpcRequired = ZionTypes.RequireOnlyOne<RpcUrl>;
+type KeysRequired = RequireOnlyOne<Keys>;
+type RpcRequired = RequireOnlyOne<RpcUrl>;
 
 export interface IEVM {
   signer?: Signer;
