@@ -2,7 +2,7 @@ import React from "react";
 import fs from "fs";
 import "./tesx";
 import IndexPage from "./components/IndexPage";
-// import "../HTML/React";
+
 const makeDati = IndexPage.makeDati;
 const filter = IndexPage.filter;
 const ds = IndexPage.filterDs;
@@ -23,7 +23,7 @@ export function getStaticProps() {
     .filter(app);
 
   const neww = filtered.map(makeDati);
-  console.log(neww);
+  // console.log(neww);
 
   return { props: { data: JSON.stringify(neww) } };
 }
