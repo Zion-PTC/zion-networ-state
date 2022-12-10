@@ -38,27 +38,27 @@ class Djik {
       parents[this.vertices[i]] = null;
     }
 
-    let currVertex = this.vertexWithMinDistance(
-      distances,
-      visited
-    );
+//     let currVertex = this.vertexWithMinDistance(
+//       distances,
+//       visited
+//     );
 
-    while (currVertex !== null) {
-      let distance = distances[currVertex],
-        neighbors = this.adjacencyList[currVertex];
-      for (let neighbor in neighbors) {
-        let newDistance = distance + neighbors[neighbor];
-        if (distances[neighbor] > newDistance) {
-          distances[neighbor] = newDistance;
-          parents[neighbor] = currVertex;
-        }
-      }
-      visited.add(currVertex);
-      currVertex = this.vertexWithMinDistance(
-        distances,
-        visited
-      );
-    }
+//     while (currVertex !== null) {
+//       let distance = distances[currVertex],
+//         neighbors = this.adjacencyList[currVertex];
+//       for (let neighbor in neighbors) {
+//         let newDistance = distance + neighbors[neighbor];
+//         if (distances[neighbor] > newDistance) {
+//           distances[neighbor] = newDistance;
+//           parents[neighbor] = currVertex;
+//         }
+//       }
+//       visited.add(currVertex);
+//       currVertex = this.vertexWithMinDistance(
+//         distances,
+//         visited
+//       );
+//     }
 
     console.log(parents);
     console.log(distances);
