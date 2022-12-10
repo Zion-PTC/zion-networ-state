@@ -1,4 +1,3 @@
-import { Reader } from "../../../../FileSystem";
 import { Folder } from "../Folder";
 
 export enum treeNodeTypes {
@@ -42,8 +41,10 @@ export class TreeNode_v2<T = any>
   static get types() {
     return this.#types;
   }
-
-  static makeNodes(res: Reader, data: Folder | File) {
+  // TODO move this function somewhere in database
+  // was a Reader but had to put any cause it would make
+  // this package import from database
+  static makeNodes(res: any, data: Folder | File) {
     if (res.targetResult.length) {
       this.makeIndex(data);
     } else {

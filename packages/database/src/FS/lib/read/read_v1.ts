@@ -1,8 +1,7 @@
 import { readdirSync } from "fs";
-import { aggiungiPath } from "../../../RAM/DataStructures/Array";
 import { NoizPath } from "../../classes";
 import { system } from "../../classes/System";
-
+import { addPath } from "@zionstate/zionbase/zionbase";
 export function read_v1(folder: string): string[] {
   const workingDir = process.cwd();
   const dataFolder = "data";
@@ -14,7 +13,7 @@ export function read_v1(folder: string): string[] {
     const filesInFolder =
       system.arrayOfNamesOfFilesInFolder(path);
     let paths: string[] = [];
-    filesInFolder.forEach(aggiungiPath, paths);
+    filesInFolder.forEach(addPath, paths);
     return paths;
   })();
 }

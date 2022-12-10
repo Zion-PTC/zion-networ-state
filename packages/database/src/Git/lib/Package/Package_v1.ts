@@ -1,4 +1,4 @@
-import { Folder } from "../../../RAM";
+import { Folder } from "@zionstate/zionbase/zionbase";
 import { TreeNodeBasicProps } from "../Types";
 
 export interface IPackage_v1Props

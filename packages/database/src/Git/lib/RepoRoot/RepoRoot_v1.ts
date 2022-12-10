@@ -1,4 +1,4 @@
-import { Root } from "../../../RAM/DataStructures/Tree";
+import { Root } from "@zionstate/zionbase/zionbase";
 import { TreeNodeBasicProps } from "../Types";
 
 export interface RepoRootProps

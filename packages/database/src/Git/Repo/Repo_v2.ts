@@ -1,5 +1,5 @@
+import { Tree } from "@zionstate/zionbase/zionbase";
 import { FS } from "../..";
-import { Tree } from "../../RAM";
 import { ZionGit } from "../ZionGit";
 import { ZionGitHub } from "../ZionGitHub";
 

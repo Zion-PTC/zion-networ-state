@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Dati } from "@zionstate/database/Git";
-import { Factories } from "@zionstate/database/Blockchain";
 import { join } from "path";
 import styled from "styled-components";
 import Link from "next/link";
-console.log(Factories);
 
 const Div = styled.div`
   display: grid;

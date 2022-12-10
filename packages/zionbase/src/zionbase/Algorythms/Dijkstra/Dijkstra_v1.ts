@@ -16,4 +16,5 @@ export type Dijkstra_v1Ctor = {
   new (name: string): Dijkstra_v1;
 };
 
-export const Dijkstra_v1Ctor: Dijkstra_v1Ctor = Dijkstra_v1;
+export const Dijkstra_v1Ctor: Dijkstra_v1Ctor =
+  Dijkstra_v1;

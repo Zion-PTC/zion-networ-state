@@ -1,4 +1,4 @@
-import { File } from "../../../RAM";
+import { File } from "@zionstate/zionbase/zionbase";
 import { TreeNodeBasicProps } from "../Types";
 
 export interface RepoFile_v1Props

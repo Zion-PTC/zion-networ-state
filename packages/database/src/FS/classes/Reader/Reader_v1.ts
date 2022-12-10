@@ -1,8 +1,8 @@
 import { Dirent } from "fs";
 import {
-  Folder,
   File,
-} from "../../../RAM/DataStructures/Tree";
+  Folder,
+} from "@zionstate/zionbase/zionbase";
 import {
   readJSON,
   readPackageJSON,

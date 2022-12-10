@@ -42,6 +42,14 @@ export {
   AppGraphCtor,
   AppNode,
   AppNodeCtor,
+  File,
+  Folder,
+  Root,
+  Tree,
+  TreeNode,
+  FileSystemTree,
+  addPath,
+  add,
 } from "./DataStructures";
 export type { GraphProps, IGraph } from "./DataStructures";
 
