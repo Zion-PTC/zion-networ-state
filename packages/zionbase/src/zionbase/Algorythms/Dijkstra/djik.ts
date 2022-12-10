@@ -1,5 +1,5 @@
 // https://bytethisstore.com/articles/pg/dijkstras-algorithm
-
+export {};
 /**
  * Encapsulates a graph node/vertex
  * Holds references to connected nodes with weights
@@ -46,7 +46,7 @@ class ShortestPath {
 /**
  * Store the function in a class as a static method
  */
-class Dijkstra {
+export class Dijkstra {
   /**
    * Find the shortest path
    * Return an object which contains the path and sum of weights
