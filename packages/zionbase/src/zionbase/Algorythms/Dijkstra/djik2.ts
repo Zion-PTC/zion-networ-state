@@ -1,21 +1,31 @@
 class Djik {
+  vertices: any[];
+  adjacencyList: {};
   constructor() {
     this.vertices = [];
     this.adjacencyList = {};
   }
-  addVertex(vertex) {
+  addVertex(vertex: number) {
     this.vertices.push(vertex);
     this.adjacencyList[vertex] = {};
   }
 
-  addEdge(vertex1, vertex2, weight) {
+  addEdge(
+    vertex1: number,
+    vertex2: number,
+    weight: number
+  ) {
     this.adjacencyList[vertex1][vertex2] = weight;
   }
 
-  changeWeight(vertex1, vertex2, weight) {
+  changeWeight(
+    vertex1: number,
+    vertex2: number,
+    weight: number
+  ) {
     this.adjacencyList[vertex1][vertex2] = weight;
   }
-  dijkstra(source) {
+  dijkstra(source: number) {
     let distances = {},
       parents = {},
       visited = new Set();
@@ -53,9 +63,12 @@ class Djik {
     console.log(parents);
     console.log(distances);
   }
-  vertexWithMinDistance(distances, visited) {
+  vertexWithMinDistance(
+    distances: {},
+    visited: { has: Function }
+  ) {
     let minDistance = Infinity,
-      minVertex = null;
+      minVertex: string | null = null;
     for (let vertex in distances) {
       let distance = distances[vertex];
       if (distance < minDistance && !visited.has(vertex)) {
