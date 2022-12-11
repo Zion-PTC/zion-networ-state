@@ -31,6 +31,7 @@ export {
   Array,
   ArrayCtor,
   Graph,
+  Graph_v3,
   GraphCtor,
   ListGraph,
   ListGraphCtor,
@@ -38,6 +39,7 @@ export {
   MatrixGraphCtor,
   Node,
   NodeCtor,
+  Node_v2,
   AppGraph,
   AppGraphCtor,
   AppNode,
@@ -60,5 +62,12 @@ export type {
   NCtor,
 } from "./Types";
 export {};
-export * as Algorythms from "./Algorythms";
-export { Bfs, Dfs } from "./Algorythms";
+export * as Algorythms from "./Algo";
+export {
+  Bfs,
+  Dfs,
+  Dijkstra,
+  TestDijk,
+  DijkNode,
+  Algo,
+} from "./Algo";
