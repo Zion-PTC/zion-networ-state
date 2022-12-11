@@ -470,6 +470,8 @@ export class Card_v2 extends BaseNoiz<
 
   defaultStyle = styled(this.Html)`
     display: grid;
+    width: 100%;
+    height: 100%;
     grid-column: span 8;
     grid-row: span 14;
     ${this.StyledHead} {

@@ -191,16 +191,7 @@ export class Profile_v2 extends BaseNoiz<
         </div>
         <NavBarStyled />
         <ItemsArea avatarSize={4} height={100}>
-          <Card
-            bid_link=""
-            id={10}
-            item_id=""
-            likeCounts="200"
-            price=""
-            slug=""
-            src=""
-            title=""
-          ></Card>
+          <Card layout="main"></Card>
         </ItemsArea>
         {props.children}
       </div>
