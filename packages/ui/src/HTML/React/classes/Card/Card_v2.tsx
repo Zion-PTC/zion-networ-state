@@ -195,7 +195,8 @@ export class Card_v2 extends BaseNoiz<
     ${this.CardHeadDebug.value};
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid
+      ${props => props.theme.borderColor};
     border-top: none;
     display: grid;
     place-items: center;
@@ -254,8 +255,10 @@ export class Card_v2 extends BaseNoiz<
     place-items: center;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
-    border-top: 1px solid rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid
+      ${props => props.theme.borderColor};
+    border-top: 1px solid
+      ${props => props.theme.borderColor};
     grid-template-columns: 0.1fr 2fr 0.1fr;
     grid-template-rows: 0.2fr 3fr 0.2fr 1.5fr 0.2fr;
     ${this.InfosDebug.value}
@@ -483,7 +486,7 @@ export class Card_v2 extends BaseNoiz<
       height: 90%;
       width: 90%;
 
-      border: 1px solid rgba(0, 0, 0, 0.8);
+      border: 1px solid ${props => props.theme.borderColor};
       display: grid;
       place-self: center;
       background-color: transparent;
