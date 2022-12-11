@@ -5,7 +5,7 @@ import { Card } from "../../../HTML/React/classes";
 const AreaCard = styled.div`
   display: grid;
   height: 100%;
-  width: 100%;
+  width: 57cqh;
 `;
 
 export default function index() {
