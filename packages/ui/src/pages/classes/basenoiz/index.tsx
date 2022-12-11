@@ -97,8 +97,49 @@ export class BaseTest extends BaseNoiz<
   }
 }
 
+const StyledBaseTest = styled(BaseTest)`
+  background-color: green;
+  p {
+    text-align: center;
+  }
+`;
+
+/**
+ * @dev to be able to use a style which overrides the styles
+ * which are stored in the class, one **must** not call any
+ * style in the props in the `styled` component as this will
+ * cause a bug which makes the class rende the basenoiz component.
+ * This means that calling the `styled` class and passing
+ * any other previous stored style will cause the final
+ * style to be as the newly styled component while the
+ * content will render wrongly.
+ * @returns
+ */
 export default function index() {
   return (
-    <BaseTest layout="main" style="redback"></BaseTest>
+    <>
+      <BaseTest layout="main" style="redback"></BaseTest>
+      <StyledBaseTest layout="main"></StyledBaseTest>
+      <StyledBaseTest layout="main" style="redback">
+        <p>this one has an error in rendering:</p>
+        <p>
+          it renders correctly the children passed to it
+        </p>
+        <p>
+          {" "}
+          while it bugs as it received a props with a
+          layout
+        </p>
+        <p>
+          {" "}
+          and it doesn't render it. The expected behaviour
+        </p>
+        <p>
+          {" "}
+          should be of it not taking in account the passed
+          props
+        </p>
+      </StyledBaseTest>
+    </>
   );
 }
