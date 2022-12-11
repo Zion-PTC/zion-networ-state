@@ -5,8 +5,6 @@ import styled from "styled-components";
 import { Dati } from "@zionstate/database/Git";
 import type { FS as FsTypes } from "@zionstate/database";
 import "@zionstate/zionbase/utils";
-import "@zionstate/utils";
-import "@zionstate/blockchain";
 import IndexPage from "../components/IndexPage";
 import { filterMaker } from "../lib/filterMaker";
 import { FS } from "@zionstate/database";
@@ -14,7 +12,7 @@ import {
   Folder,
   File,
   TreeNode,
-} from "@zionstate/database/RAM";
+} from "@zionstate/zionbase/zionbase";
 
 const Reader = FS.Reader;
 
@@ -35,7 +33,8 @@ const newreader = new Reader("./src/pages/classes");
 const filesInDir = newreader.readFilesInDir_v2;
 const foldersInDir = newreader.readFoldersInDir_v2;
 
-const mapper =
+/**
+ * const mapper =
   (name: string, status: File["status"]) =>
   (
     e:
@@ -48,6 +47,7 @@ const mapper =
       }
     }
   };
+ */
 export function getStaticProps() {
   newreader.targetResult = [];
 

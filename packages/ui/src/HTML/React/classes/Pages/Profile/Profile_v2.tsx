@@ -82,6 +82,17 @@ export class Profile_v2 extends BaseNoiz<
   Profile_v2Props,
   Profile_v2State
 > {
+  static defaultProps: Profile_v2Props = {
+    description: "description",
+    followers: 100,
+    following: 200,
+    isShowMore: false,
+    setIsShowMore: () => {},
+    tracks: 1,
+    style: styles.defaultStyle,
+    layout: layouts.main,
+  };
+
   Icon: ComponentClass<IconProps, IconState> = Icon;
   StyledTwitter = styled(this.Icon)`
     place-self: end;
@@ -107,6 +118,9 @@ export class Profile_v2 extends BaseNoiz<
     super(props);
     let state = new Profile_v2State();
     state.isAvatarImageLoaded = false;
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
   }
 
   setIsAvatarImageLoaded = (isAvLoaded: boolean) => {
