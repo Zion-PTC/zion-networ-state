@@ -7,8 +7,8 @@ export * from "./findAdjacentNodes";
 ///////// isConnected
 export * from "./isConnected";
 
-///////// dfs
-export * from "./dfs";
+// ///////// dfs
+// export * from "./dfs";
 
-///////// dijkstra
-export * from "./dijkstra";
+// ///////// dijkstra
+// export * from "./dijkstra";
