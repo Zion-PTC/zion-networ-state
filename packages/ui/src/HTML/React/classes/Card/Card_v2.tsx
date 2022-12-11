@@ -358,18 +358,18 @@ export class Card_v2 extends BaseNoiz<
     return (
       <div id="social">
         <button>
-          <Icon arrowLeft />
+          <Icon logoZion />
         </button>
         <button>
-          <Icon />
+          <Icon logoZion />
         </button>
         <button>
-          <Icon />
+          <Icon logoZion />
         </button>
         <div></div>
         <button id="last">
           <div id="svg">
-            <Icon />
+            <Icon like />
           </div>
         </button>
       </div>
