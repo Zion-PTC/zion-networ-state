@@ -1,6 +1,17 @@
 import React from "react";
+import styled from "styled-components";
 import { Card } from "../../../HTML/React/classes";
 
+const AreaCard = styled.div`
+  display: grid;
+  height: 100%;
+  width: 100%;
+`;
+
 export default function index() {
-  return <Card></Card>;
+  return (
+    <AreaCard>
+      <Card layout="main"></Card>
+    </AreaCard>
+  );
 }
