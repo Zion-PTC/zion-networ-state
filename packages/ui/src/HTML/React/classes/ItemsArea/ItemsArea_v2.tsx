@@ -118,7 +118,8 @@ export class ItemsArea_v2 extends BaseNoiz<
 
   defaultStyle = styled(this.Html)`
     display: grid;
-    background-color: aliceblue;
+    background-color: ${props =>
+      props.theme.backgroundColor};
     grid-area: content;
     height: 100%;
     width: ${() => this.state.width}px;
