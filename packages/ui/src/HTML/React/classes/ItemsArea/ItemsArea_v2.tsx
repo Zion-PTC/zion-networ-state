@@ -119,7 +119,7 @@ export class ItemsArea_v2 extends BaseNoiz<
   defaultStyle = styled(this.Html)`
     display: grid;
     background-color: aliceblue;
-    /* grid-area: content; */
+    grid-area: content;
     height: 100%;
     width: ${() => this.state.width}px;
     grid-auto-rows: ${() => this.state.blockSize}px;
