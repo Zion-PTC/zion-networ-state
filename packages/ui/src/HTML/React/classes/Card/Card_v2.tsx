@@ -153,7 +153,7 @@ export class Card_v2 extends BaseNoiz<
     this.debug
   );
   debug = false;
-  debugState = true;
+  debugState = false;
   CardHeadDebug = new DebugColor("red", this.debug);
   titleDebug = new DebugColor("yellow", this.debug);
   floorPriceDebug = new DebugColor("#001eff", this.debug);
@@ -406,29 +406,46 @@ export class Card_v2 extends BaseNoiz<
     this.setState({ headHeight });
   };
 
-  // componentDidMount() {
-  //   this.chooseLayout();
-  //   setTimeout(
-  //     () =>
-  //       this.setState({
-  //         src: "https://ipfs.io/ipfs/QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R?filename=QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R",
-  //       }),
-  //     2000
-  //   );
-  //   const self = this.container;
-  //   if (self) {
-  //     if (self.current) {
-  //       if (self.current.firstChild) {
-  //         if (self.current.firstChild.firstChild) {
-  //           const head = self.current.firstChild
-  //             .firstChild as HTMLDivElement;
-  //           const height = head.clientHeight;
-  //           this.handleHeadHeight(height);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  didMount() {
+    setTimeout(
+      () =>
+        this.setState({
+          src: "https://ipfs.io/ipfs/QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R?filename=QmP3KGfuYFEcL7ALkoYRbqmLeLmdyMdTacq92rgSc8Su4R",
+        }),
+      2000
+    );
+    const self = this.container;
+
+    if (self) {
+      if (self.current) {
+        if (self.current.firstChild) {
+          if (self.current.firstChild.firstChild) {
+            const head = self.current.firstChild
+              .firstChild as HTMLDivElement;
+            const height = head.clientHeight;
+            this.handleHeadHeight(height);
+          }
+        }
+      }
+    }
+  }
+
+  didUpdate = (
+    _: Card_v2Props,
+    s: Card_v2State,
+    __: any
+  ) => {
+    const prevStyle = s.style;
+    const currentStyle = this.state.style;
+    const cond = prevStyle !== currentStyle;
+    if (cond) {
+      const self = this.container;
+      const head = self.current!.firstChild!
+        .firstChild as HTMLDivElement;
+      const height = head.clientHeight;
+      this.handleHeadHeight(height);
+    }
+  };
 
   test = (props: Card_v2Props) => {
     return <div>{props.item_id}</div>;
