@@ -185,7 +185,7 @@ export class Card_v2 extends BaseNoiz<
         <div id="circle" />
         <div></div>
         <button id="menu">
-          <Icon />
+          <Icon more_normal />
         </button>
       </div>
     );
