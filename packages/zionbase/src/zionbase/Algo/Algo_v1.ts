@@ -1,12 +1,14 @@
 import { FluidGraph } from "../DataStructures/Graph/Graph_v3";
 import type { BasicNode, graph, processor } from "./Types";
 
-type GraphTypes<Id, T, Node extends BasicNode<Id, T>> =
-  | graph<Node>
-  | FluidGraph<unknown, Id, Node, T>;
+type GraphTypes<
+  Id extends string | number | symbol,
+  T,
+  Node extends BasicNode<Id, T>
+> = graph<Node> | FluidGraph<unknown, Id, Node, T>;
 
 export interface Dfs_v1Props<
-  I = number,
+  I extends string | number | symbol = number,
   T = {},
   N extends BasicNode<I, T> = BasicNode<I, T>
 > {
@@ -18,7 +20,7 @@ export interface Dfs_v1Props<
 }
 
 export interface Bfs_v1Props<
-  I = number,
+  I extends string | number | symbol = number,
   T = {},
   N extends BasicNode<I, T> = BasicNode<I, T>
 > {
@@ -30,13 +32,13 @@ export interface Bfs_v1Props<
 }
 
 export type FluidAlgoProps<
-  I = number,
+  I extends string | number | symbol = number,
   T = {},
   N extends BasicNode<I, T> = BasicNode<I, T>
 > = Bfs_v1Props<I, T, N> | Dfs_v1Props<I, T, N>;
 
 export interface IAlgo_v1<
-  I = number,
+  I extends string | number | symbol = number,
   T = {},
   N extends BasicNode<I, T> = BasicNode<I, T>
 > {
@@ -48,7 +50,7 @@ export interface IAlgo_v1<
 }
 
 export interface Algo_v1<
-  I = number,
+  I extends string | number | symbol = number,
   T = {},
   N extends BasicNode<I, T> = BasicNode<I, T>
 > {
@@ -160,7 +162,7 @@ export class Algo_v1<
       }
       if (!curr) return;
       this.curr = curr as N;
-      const children = curr.children;
+      const children = curr.children as I[];
       children.forEach(this.pushInStack);
       // process
       if (this.processors) {
@@ -172,7 +174,7 @@ export class Algo_v1<
 }
 
 export type Algo_v1Ctor<
-  I = number,
+  I extends string | number | symbol = number,
   T = {},
   N extends BasicNode<I, T> = BasicNode<I, T>
 > = {
