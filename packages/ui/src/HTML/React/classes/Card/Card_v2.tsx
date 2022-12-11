@@ -515,17 +515,20 @@ export class Card_v2 extends BaseNoiz<
     #social {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 5fr 1fr;
+      grid-template-rows: 100%;
       align-items: center;
       border: none;
 
       button {
         display: grid;
+        height: 100%;
         width: 100%;
         border: none;
         background-color: transparent;
         cursor: pointer;
         #svg {
           place-self: end;
+          align-self: center;
           display: grid;
           place-items: center;
         }
