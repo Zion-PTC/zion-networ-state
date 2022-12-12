@@ -70,4 +70,5 @@ export {
   TestDijk,
   DijkNode,
   Algo,
+  dfs,
 } from "./Algo";
