@@ -32,16 +32,16 @@ describe("", () => {
   it("should report 1 as it is the key of node1", () => {
     expect(res[0]).to.be.equal("1");
   });
-  it("should report 1 as it is the key of node1", () => {
+  it("should report 2 as it is the key of node2", () => {
     expect(res[1]).to.be.equal("2");
   });
-  it("should report 1 as it is the key of node1", () => {
+  it("should report 3 as it is the key of node3", () => {
     expect(res[2]).to.be.equal("3");
   });
-  it("should report 1 as it is the key of node1", () => {
+  it("should report 4 as it is the key of node4", () => {
     expect(res[3]).to.be.equal("4");
   });
-  it("should report 1 as it is the key of node1", () => {
+  it("should report 5 as it is the key of node9", () => {
     expect(res[8]).to.be.equal("5");
   });
 });

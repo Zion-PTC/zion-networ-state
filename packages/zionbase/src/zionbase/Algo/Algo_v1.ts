@@ -137,7 +137,6 @@ export class Algo_v1<
 
       case "map":
         throw new Error("to be implemented");
-        break;
 
       default:
         var nodes = this.graph.nodes as N[];
