@@ -70,7 +70,7 @@ export class Bfs_v1<
       let curr = this.queue.shift();
       if (!curr) return;
       this.curr = curr;
-      const children = curr.children;
+      const children = curr.children as I[];
       children.forEach(this.pushInQueue);
       // process
       if (this.processors) {

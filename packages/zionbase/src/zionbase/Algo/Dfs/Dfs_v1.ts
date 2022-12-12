@@ -67,7 +67,7 @@ export class Dfs_v1<
       let curr = this.stack.pop();
       if (!curr) return;
       this.curr = curr;
-      const children = curr.children;
+      const children = curr.children as I[];
       children.forEach(this.pushInStack);
       // process
       if (this.processors) {
