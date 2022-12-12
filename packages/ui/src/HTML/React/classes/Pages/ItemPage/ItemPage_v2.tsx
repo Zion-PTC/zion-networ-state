@@ -27,9 +27,10 @@ export interface ItemPage_v2Props
     description: string;
     highestBid: string;
     info: string;
-    creatorField: string;
+    creator: string;
     royalties: string;
     currency: string;
+    collectionTitle: string;
   };
 }
 export class ItemPage_v2Props extends BaseNoizProps<
@@ -80,6 +81,7 @@ export class ItemPage_v2 extends BaseNoiz<
   ItemPage_v2State
 > {
   main = (props: ItemPage_v2Props) => {
+    const { data } = props;
     // const src = this.state.src;
     // const Image = this.Image;
     const COLLECTION = "Collection";
@@ -90,43 +92,48 @@ export class ItemPage_v2 extends BaseNoiz<
     return (
       <div className={props.className} css={props.css}>
         <div id="bg-upper"></div>
-        {/* <Image src={src} gridArea="image"></Image> */}
+        <Image
+          src={this.state.src}
+          gridArea="image"
+        ></Image>
         <div id="social">
           <button>
             <Icon like />
           </button>
           <button>
-            <Icon like />
+            <Icon more_normal />
           </button>
         </div>
         <div id="infos">
-          <h1>{props.data.title}</h1>
-          <p>{props.data.description}</p>
+          <h1>{data.title}</h1>
+          <p>{data.description}</p>
           <div id="infos-text">
             <p>{HIGHEST_BID}</p>
-            <p id="bold">{props.data.highestBid}</p>
-            <p id="bold">{props.data.currency}</p>
+            <p id="bold">{data.highestBid}</p>
+            <p id="bold">{data.currency}</p>
           </div>
         </div>
         <div id="links">
           <div id="sublink">
             <div id="sublink-text-area">
-              <p>{CREATOR}</p>
-              <p>{props.data.royalties}</p>
-              <p>{ROYALTIES}</p>
+              <p id="creator-field">{CREATOR}</p>
+              <p id="royalties">{data.royalties}</p>
+              <p id="royalties">{ROYALTIES}</p>
             </div>
             <div id="profile">
               <div id="avatar"></div>
-              <p id="profile-id">Profile Name</p>
+              <p id="profile-id">{data.creator}</p>
             </div>
           </div>
           <div id="sublink">
             <div id="sublink-text-area">
-              <p>{COLLECTION}</p>
+              <p id="collection-field">{COLLECTION}</p>
             </div>
             <div id="collection">
               <div id="avatar"></div>
-              <p id="collection-id">Collection Name</p>
+              <p id="collection-id">
+                {data.collectionTitle}
+              </p>
             </div>
           </div>
         </div>
@@ -212,7 +219,7 @@ export class ItemPage_v2 extends BaseNoiz<
     }
     #links {
       grid-area: links;
-      font-size: 60%;
+      font-size: 90%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       #sublink {
@@ -222,9 +229,25 @@ export class ItemPage_v2 extends BaseNoiz<
           display: inline-flex;
         }
         #sublink-text-area {
+          #creator-field,
+          #collection-field {
+            font-weight: bold;
+          }
+          #collection-id,
+          #profile-id {
+            font-weight: bold;
+          }
+          #royalties {
+            color: ${props =>
+              props.theme.palette.darkgrey};
+          }
           p {
             margin-right: 0.3rem;
           }
+        }
+        #collection-id,
+        #profile-id {
+          font-weight: bold;
         }
         #avatar {
           width: 24px;
