@@ -8,6 +8,7 @@ chai.use(promise);
 export type testEnvironmentReturn = {
   expect: Chai.ExpectStatic;
   log: DebugLogger;
+  debuglog: typeof debuglog;
 };
 
 /**
@@ -18,15 +19,23 @@ export const testEnvironment = (
   amount: number = 1000
 ): testEnvironmentReturn => {
   const testRunner = new Mocha({ slow: amount });
-  testRunner.suite.emit("pre-require", global, "nofile", testRunner);
+  testRunner.suite.emit(
+    "pre-require",
+    global,
+    "nofile",
+    testRunner
+  );
   var suiteRun = testRunner.run();
   process.on("exit", code => {
-    // FIX not sure of this one
-    process.exit(suiteRun.stats ? (suiteRun.stats.failures > 0 ? 1 : 0) : code);
+    const stats = suiteRun.stats;
+    const cond = stats!.failures > 0;
+    const message = stats ? (cond ? 1 : 0) : code;
+    process.exit(message);
   });
   let log = debuglog("log");
   return {
     expect,
     log,
+    debuglog,
   };
 };
