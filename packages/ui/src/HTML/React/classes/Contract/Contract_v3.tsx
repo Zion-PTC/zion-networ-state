@@ -33,18 +33,34 @@ export class Contract_v3State extends BaseNoizState<Contract_v3Props> {}
 
 export interface Contract_v3
   extends BaseNoiz<
-    Contract_v3Props,
-    Contract_v3State,
     layoutTypes,
-    styleTypes
+    styleTypes,
+    Contract_v3Props,
+    Contract_v3State
   > {}
 
 export class Contract_v3 extends BaseNoiz<
-  Contract_v3Props,
-  Contract_v3State,
   layoutTypes,
-  styleTypes
+  styleTypes,
+  Contract_v3Props,
+  Contract_v3State
 > {
+  static defaultProps: Contract_v3Props = {
+    layout: layouts.main,
+    style: styles.defaultStyle,
+    contractAddr: "",
+    owner: "",
+    price: 10,
+    supply: 1000,
+  };
+
+  constructor(props: Contract_v3Props) {
+    super(props);
+    let state = new Contract_v3State();
+    state.layout = () => <></>;
+    state.style = styled(this.Html)``;
+    this.state = state;
+  }
   useForm() {
     const [form, setForm] = useState({
       input1: { value: "string" },
@@ -163,6 +179,7 @@ export class Contract_v3 extends BaseNoiz<
       </div>
     );
   };
+
   Section = (props: {
     id: string;
     value: string | number;
@@ -182,6 +199,7 @@ export class Contract_v3 extends BaseNoiz<
       component: this.main,
     }),
   ];
+
   defaultStyle = styled(this.Html)`
     position: relative;
     text-align: center;
