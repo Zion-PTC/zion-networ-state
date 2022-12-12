@@ -186,7 +186,7 @@ export class NoizApp_v2 extends BaseNoiz<
                 : "dark"}
             </button>
           </header>
-          <section>
+          <section id="content">
             <props.Component
               {...props.pageProps}
             ></props.Component>
@@ -227,7 +227,7 @@ export class NoizApp_v2 extends BaseNoiz<
     header {
       background-color: ${this.bgcolor};
     }
-    section {
+    #content {
       container-type: size;
       grid-area: content;
       place-items: center;
