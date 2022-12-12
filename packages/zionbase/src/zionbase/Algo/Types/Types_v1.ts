@@ -9,7 +9,7 @@ export interface graph<N> {
 
 export interface BasicNode<I = number, T = {}> {
   id: I;
-  children: BasicNode<I, T>["id"][];
+  children: BasicNode["id"][];
   value: T;
 }
 
