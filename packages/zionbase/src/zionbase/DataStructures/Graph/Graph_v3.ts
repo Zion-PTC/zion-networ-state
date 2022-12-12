@@ -80,11 +80,6 @@ export class Graph_v3<
 {
   bfs;
   dfs;
-  constructor(props: ObjGraphProps<Id, NodeId, N, Value>);
-  constructor(
-    props: ArrayGraphProps<Id, NodeId, N, Value>
-  );
-  constructor(props: MapGraphProps<Id, NodeId, N, Value>);
   constructor(props: FluidGraph<Id, NodeId, N, Value>) {
     const self = this;
     this.id = props.id;
