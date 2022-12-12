@@ -1,7 +1,6 @@
 import { BinaryTree } from "../../DataStructures/Graph/Tree/Trees";
 // import { GraphTraverse } from "../../GraphTraverse";
-// @ts-expect-error
-export class DFS extends GraphTraverse {
+export class DFS {
   traverseDFS() {
     // @ts-expect-error
     let stack: BinaryTree[] = [this.root];
