@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { InputProps, LabelProps } from "../Basic";
+import { Label, LabelProps } from "../Basic";
+import { Form } from "../Form";
 
 enum layouts {
   main = "main",
@@ -81,33 +82,10 @@ export class Contract_v3 extends BaseNoiz<
   main = (props: Contract_v3Props) => {
     const { contractAddr, owner, supply, price } = props;
     const { currency } = props;
-    const {
-      // value,
-      // setValue,
-      // form,
-      // setForm,
-      amountToPay,
-      setAmountToPay,
-    } = this.useForm();
+    const { amountToPay, setAmountToPay } = this.useForm();
 
-    const input1: InputProps = {
-      placeholder: "quantity",
-      type: "number",
-      handleChange: e => {
-        let numberValue = new Number(
-          e.target.value
-        ).valueOf();
-        setAmountToPay(numberValue * price);
-      },
-      min: 50,
-      max: 100,
-      step: 50,
-    };
-
-    // const inputdatas1 = [input1];
     const label1: LabelProps = {
       name: "quantity:",
-      // Input: { datas: inputdatas1 },
       placeholder: "quantity",
       type: "number",
       handleChange: e => {
@@ -130,7 +108,6 @@ export class Contract_v3 extends BaseNoiz<
 
     return (
       <div className={props.className}>
-        {/* {props.age} */}
         <p>welcome to my contract</p>
         <h2>this is contract n°: {contractAddr}</h2>
         <div id="description">
@@ -164,18 +141,15 @@ export class Contract_v3 extends BaseNoiz<
             value={price}
             currency={currency}
           ></Section>
-          {/* <Form_v2 datas={datas}>
-            <Label ></Label>
-          </Form_v2> */}
+          <Form>
+            <Label {...label1}></Label>
+          </Form>
           <Section
             id="amount to pay:"
             value={amountToPay}
             currency={currency}
           ></Section>
         </div>
-        <footer>
-          sto in basso all sezione in qui sto dentro
-        </footer>
       </div>
     );
   };
@@ -236,17 +210,6 @@ export class Contract_v3 extends BaseNoiz<
       p {
         display: inline;
       }
-    }
-
-    footer {
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      display: flex;
-      justify-content: center;
-      padding: 5px;
-      background-color: rgb(69, 161, 255);
-      color: #fff;
     }
   `;
 
